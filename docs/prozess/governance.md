@@ -35,7 +35,7 @@ Nach einer Änderung werden die Constitution-Bezüge (`vX.Y.Z`) in offenen Specs
 
 ## Öffentlich vs. intern
 
-Öffentliche Repos (z. B. `codeslage/codeslage`) enthalten **nie**:
+Öffentliche Repos (z. B. `codeslage/werkstatt`) enthalten **nie**:
 - Secrets, Tokens, Passwörter, private Schlüssel
 - IP-Adressen und Hostnamen von Servern (außer den öffentlichen Domains)
 - persönliche Kontaktdaten (E-Mail-Adressen, Telefonnummern, Anschriften) – ausgenommen sind Rollenadressen, die ausdrücklich öffentlich sein sollen

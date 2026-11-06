@@ -20,3 +20,4 @@ Methode (festgelegt am 2026-11-05):
 | T-07 | 2026-11-05 16:37 | 2026-11-05 16:38 | 0:01 | secrets.md, kosten.md, dsgvo.md als Gerüst; AVV-Prüfung offen beim Inhaber (bis T-43) |
 | T-08 | 2026-11-05 16:38 | 2026-11-05 16:39 | 0:01 | Scan des Arbeitsstands ohne Sperrliste; Pause bis zur Sperrliste des Inhabers (zählt nicht) |
 | T-08 | 2026-11-06 10:22 | 2026-11-06 10:27 | 0:05 | Rohfassung Sperrliste, Entscheidungen Registrar und Commit-Name, Bootstrap-Commit lokal, Historien-Scan 0 Funde |
+| T-09 | 2026-11-06 10:26 | | | |

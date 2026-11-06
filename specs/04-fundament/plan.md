@@ -142,7 +142,7 @@ Konfiguration nur über Umgebungsvariablen: `DATABASE_URL`, `APP_VERSION`, `PORT
 - `.gitleaks.toml` mit eigenen Regeln für IPv4/IPv6, E-Mail-Adressen (Ausnahmen: freigegebene Rollenadressen, Dokumentations-IPs) und Sperrliste; `.githooks/pre-commit`, aktiviert per `prepare`-Skript (`git config core.hooksPath .githooks`)
 - `tools/public-scan` mit Negativ-Fixtures: Fake-Token, IP, E-Mail, Test-Sperrbegriff. Jede Fixture muss den Scan auslösen.
 - **Historien-Scan vor dem ersten Push**, Protokoll in `docs/protokolle/`
-- Erster Commit auf `main` (Bootstrap des leeren Repos, einzige Ausnahme von „nur per PR“). Danach Repo `codeslage/codeslage` öffentlich anlegen und ein Ruleset für `main` setzen: PR Pflicht, Status-Checks Pflicht, kein Force-Push, keine Löschung, keine Ausnahme für Admins.
+- Erster Commit auf `main` (Bootstrap des leeren Repos, einzige Ausnahme von „nur per PR“). Danach Repo `codeslage/werkstatt` öffentlich anlegen und ein Ruleset für `main` setzen: PR Pflicht, Status-Checks Pflicht, kein Force-Push, keine Löschung, keine Ausnahme für Admins.
 - Sperrliste als GitHub Secret `PUBLIC_BLOCKLIST`
 - `ci.yml` (vorerst: gitleaks + public-scan), `docs/secrets.md`, `docs/dsgvo.md`, `docs/kosten.md`
 - AK-17: neue Claude-Code-Sitzung ohne Hinweis fragen, Protokoll

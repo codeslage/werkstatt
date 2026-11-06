@@ -56,7 +56,7 @@ Zielbild ab Phase S:
 
 | Entscheidung | Begründung |
 |---|---|
-| **Ein öffentliches Monorepo** `github.com/codeslage/codeslage` | Schaufenster: Kunden sehen, wie gearbeitet wird |
+| **Ein öffentliches Monorepo** `github.com/codeslage/werkstatt` | Schaufenster: Kunden sehen, wie gearbeitet wird |
 | **GitHub-Organisation `codeslage` (Free-Plan)** | Trennung von privatem Account, Marke in der URL, später übertragbar/Team-fähig. Business-Plan nicht nötig. |
 | **Privates Repo `codeslage/internal`** (lokal `X:\Coding\codeslage-internal`) | Für alles, was nie öffentlich sein soll: **Ideenboard** (`ideen/`), Preise, Strategie, später Prompts mit Geschäftslogik und Kundendaten-Fixtures. Von Anfang an getrennt, weil einmal Veröffentlichtes in der Git-Historie öffentlich bleibt. Der „Premium“-Bereich der *Apps* ist dagegen eine Laufzeit-Frage (Login), keine Repo-Frage. |
 | pnpm-Workspace, TypeScript strict; Turborepo erst ab mehreren Apps (ADR 0008) | wie im Startprompt, Turborepo bei Bedarf |
