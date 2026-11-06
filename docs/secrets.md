@@ -5,7 +5,7 @@
 
 | Name | Wo hinterlegt | Wofür | Rechte (minimal) | Verwaltet von | Angelegt | Läuft ab |
 |---|---|---|---|---|---|---|
-| `PUBLIC_BLOCKLIST` | GitHub Secret (Repo); lokal Datei `.sperrliste` | Sperrliste für den Öffentlich-Scan (Ebene 2) | – (kein Token, vertraulicher Inhalt) | Inhaber | ⬜ (T-10) | – |
+| `PUBLIC_BLOCKLIST` | GitHub Secret (Repo `codeslage/werkstatt`); lokal Datei `.sperrliste` | Sperrliste für den Öffentlich-Scan (Ebene 2) | – (kein Token, vertraulicher Inhalt; nach jeder Änderung der Datei neu setzen) | Inhaber | 2026-11-06 | – |
 
 Geplant (werden mit der jeweiligen Task ergänzt, siehe `specs/04-fundament/plan.md`): `CF_API_TOKEN_RW`, `CF_API_TOKEN_RO`, `R2_STATE_RW`, `R2_STATE_RO`, `TF_ENCRYPTION_PASSPHRASE`.
 
