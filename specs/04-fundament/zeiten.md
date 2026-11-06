@@ -23,4 +23,4 @@ Methode (festgelegt am 2026-11-05):
 | T-09 | 2026-11-06 10:26 | 2026-11-06 10:28 | 0:02 | Veröffentlichung vorbereitet, Freigabe angefragt; danach Pause bis zur Antwort (zählt nicht) |
 | T-09 | 2026-11-06 17:14 | 2026-11-06 17:30 | 0:16 | Namensentscheidung (werkstatt) umgesetzt, Repo öffentlich angelegt, 3 Commits gepusht |
 | T-10 | 2026-11-06 17:30 | 2026-11-06 17:51 | 0:21 | Ruleset main-schutz aktiv und öffentlich lesbar; Secret durch Inhaber gesetzt (Wartezeit enthalten); CI erst rot ohne Sperrliste, nach Rerun grün; Direkt-Push auf main abgelehnt |
-| T-11 | 2026-11-06 17:53 | | | |
+| T-11 | 2026-11-06 17:53 | 2026-11-06 17:56 | 0:03 | Kanarienbegriff + Secret (Inhaber), Wegwerf-PR 1: CI rot mit 3 Funden, Review-Agent 3× 🔴; PR geschlossen, Branch gelöscht |
