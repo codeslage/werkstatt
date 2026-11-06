@@ -21,7 +21,7 @@ Soll in Stunden (Claude, konservativ, inkl. Abstimmung); Ist wird bei Abschluss 
 | T-05 | `.githooks/pre-commit` + `prepare`-Skript | AK-2, AK-24 | Vitest: Commit mit Fixture in einem Wegwerf-Repo wird abgelehnt | T-04 | Bootstrap | 1 | 0,25 | ✅ |
 | T-06 | `ci.yml` Grundversion: gitleaks-Binary gepinnt mit Prüfsumme, public-scan-Tests, Sperrliste aus Secret | AK-1, AK-2, AK-24 | läuft ab dem ersten PR; Negativtest in T-11 | T-04 | Bootstrap | 2 | 0,25 | ✅ |
 | T-07 | Doku-Gerüst: `docs/secrets.md`, `docs/kosten.md`, `docs/dsgvo.md`, `docs/protokolle/` | AK-14, AK-15, AK-28 | Review | T-02 | Bootstrap | 1 | 0,25 | ✅ |
-| T-08 | Historien-Scan über alle lokalen Commits vor dem ersten Push | AK-24 | gitleaks `--log-opts=--all`, Protokoll | T-05, T-06, T-07 | Bootstrap | 0,5 | | ⬜ |
+| T-08 | Historien-Scan über alle lokalen Commits vor dem ersten Push | AK-24 | gitleaks `--log-opts=--all`, Protokoll | T-05, T-06, T-07 | Bootstrap | 0,5 | 0,25 | ✅ |
 | T-09 | ⛔ Bootstrap-Commit auf `main`, Repo `codeslage/codeslage` öffentlich anlegen, Push (= Veröffentlichung) | AK-1 | T-20 | T-08 | Bootstrap | 0,5 | | ⬜ |
 | T-10 | Ruleset für `main` (PR + Status-Checks Pflicht, kein Force-Push, keine Löschung, keine Admin-Ausnahme); 👤 Secret `PUBLIC_BLOCKLIST` | AK-1, AK-24 | T-20; manuell: direkter Push auf `main` wird abgelehnt | T-09 | Einstellung | 0,5 | | ⬜ |
 | T-11 | Negativtest Ebene 2 und 3: Wegwerf-PR mit IP, E-Mail und Sperrbegriff außerhalb der Fixtures → CI rot, `code-reviewer` meldet 🔴; PR schließen | AK-24 | Protokoll | T-10 | PR-01 (wird nicht gemergt) | 1 | | ⬜ |
