@@ -1,0 +1,22 @@
+# Abhängigkeiten und Build-Ausgaben
+node_modules/
+dist/
+coverage/
+
+# Secrets und vertrauliche Listen (Constitution VI, governance.md „Öffentlich vs. intern“)
+.env
+.env.*
+!.env.example
+.sperrliste
+
+# OpenTofu: State und Provider-Cache gehören nie ins Repo
+*.tfstate
+*.tfstate.*
+.terraform/
+
+# Persönliche Einstellungen
+.claude/settings.local.json
+
+# Betriebssystem
+.DS_Store
+Thumbs.db

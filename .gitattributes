@@ -1,0 +1,7 @@
+# Einheitliche Zeilenenden zwischen Windows und macOS (02-architektur.md, A1)
+* text=auto eol=lf
+
+*.png binary
+*.jpg binary
+*.ico binary
+*.pdf binary

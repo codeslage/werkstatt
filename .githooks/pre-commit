@@ -1,0 +1,5 @@
+#!/bin/sh
+# Ebene 1 des Öffentlich-Scans (governance.md): prüft die vorgemerkten Änderungen vor jedem Commit.
+# Aktiviert durch `pnpm install` (prepare-Skript setzt core.hooksPath auf .githooks).
+cli="$(dirname "$0")/../tools/public-scan/src/cli.ts"
+exec node "$cli" staged "$(git rev-parse --show-toplevel)"
