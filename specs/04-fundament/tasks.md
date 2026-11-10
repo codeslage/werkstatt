@@ -25,7 +25,7 @@ Soll in Stunden (Claude, konservativ, inkl. Abstimmung); Ist wird bei Abschluss 
 | T-09 | ⛔ Bootstrap-Commit auf `main`, Repo `codeslage/werkstatt` öffentlich anlegen, Push (= Veröffentlichung) | AK-1 | T-20 | T-08 | Bootstrap | 0,5 | 0,25 | ✅ |
 | T-10 | Ruleset für `main` (PR + Status-Checks Pflicht, kein Force-Push, keine Löschung, keine Admin-Ausnahme); 👤 Secret `PUBLIC_BLOCKLIST` | AK-1, AK-24 | T-20; manuell: direkter Push auf `main` wird abgelehnt | T-09 | Einstellung | 0,5 | 0,25 | ✅ |
 | T-11 | Negativtest Ebene 2 und 3: Wegwerf-PR mit IP, E-Mail und Sperrbegriff außerhalb der Fixtures → CI rot, `code-reviewer` meldet 🔴; PR schließen | AK-24 | Protokoll | T-10 | PR-01 (wird nicht gemergt) | 1 | 0,25 | ✅ |
-| T-12 | Neue Claude-Code-Sitzung ohne Hinweis nach Constitution und SDD-Befehlen fragen; Protokolle T-08, T-11, T-12 einchecken | AK-17, AK-24 | Protokoll | T-11 | PR-02 | 0,25 | 0,25 | 🔄 |
+| T-12 | Neue Claude-Code-Sitzung ohne Hinweis nach Constitution und SDD-Befehlen fragen; Protokolle T-08, T-11, T-12 einchecken | AK-17, AK-24 | Protokoll | T-11 | PR-02 | 0,25 |  | 🔄 |
 
 ### Schritt 2 – CI-Qualität
 
