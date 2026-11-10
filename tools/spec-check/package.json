@@ -1,0 +1,11 @@
+{
+  "name": "@codeslage/spec-check",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p ."
+  },
+  "devDependencies": {
+    "@codeslage/config": "workspace:*"
+  }
+}
