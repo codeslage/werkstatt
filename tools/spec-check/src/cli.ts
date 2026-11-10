@@ -3,7 +3,10 @@ import { basename, join } from 'node:path';
 import { checkDocument, type DocumentKind } from './check.ts';
 
 const REPO_ROOT = join(import.meta.dirname, '..', '..', '..');
-const KINDS: Record<string, DocumentKind> = { 'spec.md': 'spec', 'plan.md': 'plan' };
+const KINDS = new Map<string, DocumentKind>([
+  ['spec.md', 'spec'],
+  ['plan.md', 'plan'],
+]);
 
 /** Die Artikelnummern aus den Überschriften der Constitution („## I. …“). */
 function constitutionNumerals(): string[] {
@@ -14,7 +17,7 @@ function constitutionNumerals(): string[] {
 /** Alle spec.md und plan.md unterhalb von dir, ohne die Vorlagen. */
 function documents(dir: string): string[] {
   return readdirSync(dir, { recursive: true, encoding: 'utf8' })
-    .filter((path) => basename(path) in KINDS && !path.split(/[\\/]/).includes('_vorlagen'))
+    .filter((path) => KINDS.has(basename(path)) && !path.split(/[\\/]/).includes('_vorlagen'))
     .map((path) => join(dir, path));
 }
 
@@ -30,7 +33,7 @@ function main(): void {
     process.exit(2);
   }
   const errors = documents(dir).flatMap((path) =>
-    checkDocument(KINDS[basename(path)] ?? 'spec', readFileSync(path, 'utf8'), numerals).map((error) => `${path}: ${error}`),
+    checkDocument(KINDS.get(basename(path)) ?? 'spec', readFileSync(path, 'utf8'), numerals).map((error) => `${path}: ${error}`),
   );
   for (const error of errors) console.error(error);
   process.exit(errors.length === 0 ? 0 : 1);

@@ -1,4 +1,6 @@
 import { spawnSync } from 'node:child_process';
+import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { describe, expect, it } from 'vitest';
 import { checkDocument } from '../src/check.ts';
@@ -42,5 +44,18 @@ describe('Spec-Check über das Repo', () => {
     const result = spawnSync(process.execPath, [CLI, join(REPO_ROOT, 'specs')], { encoding: 'utf8' });
     expect(result.stderr).toBe('');
     expect(result.status).toBe(0);
+  });
+
+  it('endet mit Exit 1 und nennt die Datei, wenn ein Dokument unvollständig ist', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'spec-check-'));
+    try {
+      mkdirSync(join(dir, '99-beispiel'));
+      writeFileSync(join(dir, '99-beispiel', 'spec.md'), withRow(validSpec, 'XII Offen dokumentieren', ''));
+      const result = spawnSync(process.execPath, [CLI, dir], { encoding: 'utf8' });
+      expect(result.status).toBe(1);
+      expect(result.stderr).toContain('artikel-fehlt: XII');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
   });
 });
