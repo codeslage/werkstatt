@@ -37,3 +37,5 @@ Methode (festgelegt am 2026-11-05):
 | T-19 | 2026-11-10 14:04 | 2026-11-10 14:06 | 0:02 | check.ts + cli.ts, Artikel aus CONSTITUTION.md; Tests grün, Gegenprobe am echten Plan; Pflicht-Check |
 | T-20 | 2026-11-10 14:11 | 2026-11-10 14:13 | 0:02 | repo.test.ts (öffentlich, Schutz von main, jeder CI-Job Pflicht); erst rot, nach Ruleset grün; Vitest-Projekte unit/infra |
 | T-21 | 2026-11-10 14:13 | 2026-11-10 14:13 | 0:00 | PR-Template mit Constitution-Checkliste inkl. Öffentlich vs. intern, Wartezeit-Ausnahme und Pflicht-Check-Regel |
+| T-22 | 2026-11-10 14:18 | 2026-11-10 14:18 | 0:00 | dependabot.yml (npm, github-actions, Cooldown 3 Tage, TypeScript-Ausnahme); Sicherheits-Updates aktiviert; Nachweis erster Dependabot-PR folgt nach dem Merge |
+| T-23 | 2026-11-10 14:18 | | | |

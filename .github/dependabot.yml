@@ -1,0 +1,26 @@
+# Automatische Abhängigkeits-Updates per PR (Constitution XI, AK-29).
+# Sicherheits-Updates sind zusätzlich in den Repo-Einstellungen aktiv (Protokoll T-22).
+# docker und terraform kommen dazu, sobald es Dockerfiles (T-27) bzw. OpenTofu-Code (T-35) gibt.
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+    # Wie die Wartezeit von pnpm: frisch veröffentlichte Versionen erst nach einigen Tagen vorschlagen.
+    cooldown:
+      default-days: 3
+    groups:
+      typescript-eslint:
+        patterns: ['typescript-eslint', '@typescript-eslint/*']
+    ignore:
+      # typescript-eslint unterstützt nur typescript < 6.1 (PR-04). Zurück auf neuere Versionen, sobald es das tut.
+      - dependency-name: typescript
+        versions: ['>=6.1']
+
+  - package-ecosystem: github-actions
+    directories: ['/', '/.github/actions/*']
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 3
