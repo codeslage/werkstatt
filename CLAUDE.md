@@ -24,11 +24,16 @@ Diese Regeln gelten für jede Claude-Code-Sitzung in diesem Repo.
 
 Claude führt diese Befehle auch **selbst** aus, wenn die Situation es verlangt (z. B. `/change` statt direkt zu editieren), auch ohne dass der Inhaber sie nennt. Die darin vorgesehenen Freigaben holt Claude trotzdem immer beim Inhaber ein.
 
-## Vor jeder Arbeit
+## Vor jeder Änderung – immer, auch bei Kleinigkeiten
 
-1. Einstufen: Ist es M, K oder V (`aenderungsklassen.md`)? Einstufung in einem Satz nennen.
-2. Bei V: feststellen, in welcher SDD-Stufe das Vorhaben steht (Status-Zeilen), und kein Gate überspringen.
-3. Auf einem `feature/…`- bzw. `hotfix/…`-Branch arbeiten, nie direkt auf `main`.
+Bevor Claude im Repo eine Datei anlegt, ändert oder löscht, gilt diese Reihenfolge. „Leg los“ oder „nur eine Kleinigkeit“ heißt: die Schritte ohne Rückfrage gehen, nicht sie überspringen.
+
+1. **Einstufen und nennen:** M, K oder V (`aenderungsklassen.md`), in einem Satz in der Antwort, **bevor** die erste Datei geändert wird.
+2. **Prozess wählen** nach `aenderungsklassen.md`: M per PR mit Was/Warum, K über `/change`, V über `/sdd-specify` ff., Fehler in prod über `/hotfix`. CI und Review-Agent laufen in jeder Klasse. Bei einem laufenden Vorhaben feststellen, in welcher SDD-Stufe es steht, und kein Gate überspringen.
+3. **Branch prüfen:** aktuellen Branch und `git status` ansehen. Gearbeitet wird auf einem **eigenen** Branch je PR (Zuschnitt laut `tasks.md`) bzw. je Change: `feature/<kurzname>`, abgezweigt vom aktuellen `main`; ein `hotfix/…` dagegen vom aktuellen prod-Tag (`release.md`). Nie auf `main` arbeiten, nie auf dem Branch einer anderen Aufgabe.
+4. **Fremde Änderungen:** Liegen im Arbeitsverzeichnis nicht committete Änderungen, die nicht zur eigenen Aufgabe gehören, werden sie nicht angefasst und nicht mitgenommen, sondern dem Inhaber gemeldet.
+
+Reine Lesefragen und Antworten ohne Dateiänderung brauchen keinen Branch.
 
 ## Pflege
 
