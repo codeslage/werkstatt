@@ -9,12 +9,12 @@ Täglich soll ein verschlüsseltes Backup außerhalb des Servers liegen, und ein
 
 ## Optionen
 
-| | Coolify nativ → R2 | restic (eigener Container) → R2 |
-|---|---|---|
-| Aufwand | Einstellung in Coolify | eigener Container, Zeitplan, Aufbewahrung, Monitoring |
-| Verschlüsselung | TLS beim Transport, R2 verschlüsselt ruhende Daten (AES-256, Schlüssel bei Cloudflare) | zusätzlich clientseitig, Schlüssel nur beim Inhaber |
-| Aufbewahrung | in Coolify einstellbar | `restic forget` |
-| Restore | Dump laden und einspielen | `restic restore` |
+|                 | Coolify nativ → R2                                                                     | restic (eigener Container) → R2                       |
+| --------------- | -------------------------------------------------------------------------------------- | ----------------------------------------------------- |
+| Aufwand         | Einstellung in Coolify                                                                 | eigener Container, Zeitplan, Aufbewahrung, Monitoring |
+| Verschlüsselung | TLS beim Transport, R2 verschlüsselt ruhende Daten (AES-256, Schlüssel bei Cloudflare) | zusätzlich clientseitig, Schlüssel nur beim Inhaber   |
+| Aufbewahrung    | in Coolify einstellbar                                                                 | `restic forget`                                       |
+| Restore         | Dump laden und einspielen                                                              | `restic restore`                                      |
 
 ## Entscheidung
 

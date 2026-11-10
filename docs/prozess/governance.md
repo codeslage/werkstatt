@@ -11,11 +11,11 @@ Bei Widersprüchen gilt das höhere Dokument. Der Widerspruch wird behoben, nich
 
 ## Änderungen
 
-| Was | Wie | Freigabe |
-|---|---|---|
-| Constitution | PR mit Begründung, Version und Stand im Kopf anpassen | Inhaber, ausdrücklich |
-| Prozessdokumente | PR mit Begründung | Inhaber |
-| Vorlagen, `/sdd-*`-Befehle | PR, Bezug auf das Prozessdokument, das sie umsetzen | Inhaber |
+| Was                        | Wie                                                   | Freigabe              |
+| -------------------------- | ----------------------------------------------------- | --------------------- |
+| Constitution               | PR mit Begründung, Version und Stand im Kopf anpassen | Inhaber, ausdrücklich |
+| Prozessdokumente           | PR mit Begründung                                     | Inhaber               |
+| Vorlagen, `/sdd-*`-Befehle | PR, Bezug auf das Prozessdokument, das sie umsetzen   | Inhaber               |
 
 Änderungsvorschläge entstehen meist in der Retro (SDD-Stufe 8) und werden dort festgehalten.
 
@@ -36,6 +36,7 @@ Nach einer Änderung werden die Constitution-Bezüge (`vX.Y.Z`) in offenen Specs
 ## Öffentlich vs. intern
 
 Öffentliche Repos (z. B. `codeslage/werkstatt`) enthalten **nie**:
+
 - Secrets, Tokens, Passwörter, private Schlüssel
 - IP-Adressen und Hostnamen von Servern (außer den öffentlichen Domains)
 - persönliche Kontaktdaten (E-Mail-Adressen, Telefonnummern, Anschriften) – ausgenommen sind Rollenadressen, die ausdrücklich öffentlich sein sollen
@@ -46,11 +47,11 @@ Diese Angaben gehören nach `codeslage/internal` (lokal `X:\Coding\codeslage-int
 
 **Geprüft wird dreifach** – jede Ebene allein muss den Verstoß finden können:
 
-| # | Ebene | Wann | Wie |
-|---|---|---|---|
-| 1 | **Lokal** | vor jedem Commit | Pre-Commit-Hook: gitleaks + eigene Regeln (IP-Adressen, E-Mail-Adressen, Sperrliste) |
-| 2 | **CI** | bei jedem PR, blockiert den Merge | dieselben Regeln; die Sperrliste kommt aus einem GitHub Secret |
-| 3 | **Review-Agent** | bei jedem PR | Checklistenpunkt 5 in `code-review.md` |
+| #   | Ebene            | Wann                              | Wie                                                                                  |
+| --- | ---------------- | --------------------------------- | ------------------------------------------------------------------------------------ |
+| 1   | **Lokal**        | vor jedem Commit                  | Pre-Commit-Hook: gitleaks + eigene Regeln (IP-Adressen, E-Mail-Adressen, Sperrliste) |
+| 2   | **CI**           | bei jedem PR, blockiert den Merge | dieselben Regeln; die Sperrliste kommt aus einem GitHub Secret                       |
+| 3   | **Review-Agent** | bei jedem PR                      | Checklistenpunkt 5 in `code-review.md`                                               |
 
 Zusätzlich: **Scan der gesamten Git-Historie** vor dem ersten Veröffentlichen eines Repos und danach monatlich.
 
@@ -60,8 +61,8 @@ Wird trotzdem etwas veröffentlicht: Secret sofort widerrufen bzw. neu erzeugen.
 
 ## Prüfung
 
-| Wo | Was |
-|---|---|
-| Specs und Pläne | Constitution-Check mit allen Artikeln |
-| PRs | Checkliste im PR-Template, Code-Review nach `code-review.md` |
-| CI | Pflichtabschnitte der Specs, Secret- und Öffentlich-Scan (s. o.), Code-Qualität nach Artikel XV |
+| Wo              | Was                                                                                             |
+| --------------- | ----------------------------------------------------------------------------------------------- |
+| Specs und Pläne | Constitution-Check mit allen Artikeln                                                           |
+| PRs             | Checkliste im PR-Template, Code-Review nach `code-review.md`                                    |
+| CI              | Pflichtabschnitte der Specs, Secret- und Öffentlich-Scan (s. o.), Code-Qualität nach Artikel XV |

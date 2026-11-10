@@ -23,7 +23,12 @@ function constitutionRows(body: string): CheckRow[] {
   return body
     .split('\n')
     .filter((line) => line.startsWith('|'))
-    .map((line) => line.split('|').slice(1, -1).map((cell) => cell.trim()))
+    .map((line) =>
+      line
+        .split('|')
+        .slice(1, -1)
+        .map((cell) => cell.trim()),
+    )
     .filter((cells) => /^[IVXL]+\s/.test(cells[0] ?? ''))
     .map(([article = '', rating = '', note = '']) => ({ numeral: article.split(/\s/)[0] ?? '', rating, note }));
 }

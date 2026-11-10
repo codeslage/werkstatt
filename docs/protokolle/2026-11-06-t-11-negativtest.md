@@ -10,10 +10,10 @@
 
 ## Ergebnis
 
-| Ebene | Ergebnis | Nachweis |
-|---|---|---|
-| 2 – CI | ✅ rot, 3 Funde: `codeslage-ipv4` (Zeile 5), `codeslage-email` (Zeile 6), `codeslage-blocklist` (Zeile 7). Ein Merge wäre durch das Ruleset gesperrt gewesen. | Run 42256600842 |
-| 3 – Review-Agent | ✅ 3 × 🔴, „nicht mergebar“. Der Agent bekam nur PR und Vorhaben genannt. | `specs/04-fundament/reviews/T-11.md` |
+| Ebene            | Ergebnis                                                                                                                                                      | Nachweis                             |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------ |
+| 2 – CI           | ✅ rot, 3 Funde: `codeslage-ipv4` (Zeile 5), `codeslage-email` (Zeile 6), `codeslage-blocklist` (Zeile 7). Ein Merge wäre durch das Ruleset gesperrt gewesen. | Run 42256600842                      |
+| 3 – Review-Agent | ✅ 3 × 🔴, „nicht mergebar“. Der Agent bekam nur PR und Vorhaben genannt.                                                                                     | `specs/04-fundament/reviews/T-11.md` |
 
 Danach wurde der PR ungemergt geschlossen und der Branch gelöscht, lokal und auf GitHub.
 

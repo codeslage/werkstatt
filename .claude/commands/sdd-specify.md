@@ -1,7 +1,8 @@
 ---
-description: "SDD Stufe 1 – Spec für ein neues Vorhaben anlegen (nur Was/Warum)"
-argument-hint: "<NN-name> <Kurzbeschreibung>"
+description: 'SDD Stufe 1 – Spec für ein neues Vorhaben anlegen (nur Was/Warum)'
+argument-hint: '<NN-name> <Kurzbeschreibung>'
 ---
+
 SDD-Stufe 1 **Specify** gemäß `docs/prozess/sdd-ablauf.md` (verbindlich über `CONSTITUTION.md`).
 
 Vorhaben: $ARGUMENTS

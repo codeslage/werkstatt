@@ -14,18 +14,19 @@ Phase 1 sah einen eigenen Cloud-Server vor, der rund um die Uhr läuft. Bei der 
 
 ## Optionen
 
-| | Server jetzt (Cloud) | Server lokal | Server erst bei Bedarf |
-|---|---|---|---|
-| Laufende Kosten bis zur ersten Demo | 14–24 €/Monat | Strom, ggf. Hardware | 0 € |
-| Demo-Links jederzeit erreichbar | ✅ | ❌ nur wenn der Rechner läuft | ✅ ab Phase S |
-| Reproduzierbar per IaC | ✅ | ❌ | ✅ ab Phase S |
-| Spätere Umzugskosten | – | hoch (anderes Setup) | gering, wenn Apps von Anfang an in Containern laufen |
+|                                     | Server jetzt (Cloud) | Server lokal                  | Server erst bei Bedarf                               |
+| ----------------------------------- | -------------------- | ----------------------------- | ---------------------------------------------------- |
+| Laufende Kosten bis zur ersten Demo | 14–24 €/Monat        | Strom, ggf. Hardware          | 0 €                                                  |
+| Demo-Links jederzeit erreichbar     | ✅                   | ❌ nur wenn der Rechner läuft | ✅ ab Phase S                                        |
+| Reproduzierbar per IaC              | ✅                   | ❌                            | ✅ ab Phase S                                        |
+| Spätere Umzugskosten                | –                    | hoch (anderes Setup)          | gering, wenn Apps von Anfang an in Containern laufen |
 
 ## Entscheidung
 
 **Der Server kommt erst, wenn er gebraucht wird**: spätestens vor der ersten echten Kunden-Demo, oder wenn eine Funktion mit Server-Anteil live gehen soll. Das wird eine eigene Phase „Server & Betrieb“ (Phase S) mit eigener Spec.
 
 Bis dahin gilt:
+
 - Entwicklung lokal. Postgres und Apps laufen über Docker Compose auf `localhost`, mit Seed-Daten. **dev = lokal.**
 - Jede App hat ein Dockerfile. Die CI baut und startet jedes Image bei jedem PR (AK-26), damit der spätere Umzug kein Umbau wird.
 - DNS (inkl. Google-Mail) liegt per OpenTofu bei Cloudflare. Die Webseite läuft in Phase 2 als Klick-Dummy auf Cloudflare Pages.

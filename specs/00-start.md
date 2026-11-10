@@ -2,12 +2,12 @@
 
 > **Historisch.** Das ist der ursprüngliche Start-Prompt. Die verbindlichen Regeln stehen jetzt in `CONSTITUTION.md`, Entscheidungen in den Specs 01 ff.
 
-
 ---
 
 ## Kontext
 
 Ich gründe codeslage (vorerst als Hobby-/Lernprojekt, noch nicht angemeldet), einen IT-Dienstleister für Startups. Mein Angebot:
+
 1. IT-Beratung und Setup für Startups (Infrastruktur, Tools, Prozesse)
 2. Custom-Software-Entwicklung (Webapps, Kundenportale, später auch Mobile Apps)
 
@@ -31,6 +31,7 @@ Mein Rechner: aktuell Windows (Gaming-PC), Mac ist bestellt
 ## Ziel-Architektur (Vorschlag, darf kritisch hinterfragt werden)
 
 ### Code: TypeScript-Monorepo
+
 - Paketmanager/Build: pnpm + Turborepo
 - `apps/web`: Marketing-Webseite (Next.js)
 - `apps/portal`: Kundenportal (Next.js), in dem Kunden Projektstatus sehen, Tickets erstellen und Rechnungen abrufen können
@@ -43,6 +44,7 @@ Mein Rechner: aktuell Windows (Gaming-PC), Mac ist bestellt
 - Bausteine sollen so gekapselt sein, dass ich sie später in Kundenprojekten wiederverwenden kann.
 
 ### Infrastruktur
+
 - **Hetzner Cloud** (Standort Deutschland), ein Server für den Anfang
 - **Coolify** als selbst gehostete Deployment-Plattform (Git-Push → Build → Deploy, SSL automatisch)
 - **Cloudflare** davor: DNS, Proxy/Caching, DDoS-Schutz (Free-Plan)
@@ -51,12 +53,14 @@ Mein Rechner: aktuell Windows (Gaming-PC), Mac ist bestellt
 - Kein Vercel (Hobby-Plan verbietet kommerzielle Nutzung)
 
 ### Company OS (selbst gehostet über Coolify)
+
 - **Outline**: Wiki und Dokumentation
 - **Plane**: Projekte und Aufgaben
 - **Twenty**: CRM
 - Später: eigene Integrationen per API (z. B. Kontaktformular der Webseite → CRM, Portal ↔ Plane)
 
 ### Sicherheit
+
 - Server: eigener Benutzer statt root, SSH nur per Key, Passwort-Login aus, Firewall (nur 22/80/443), automatische Sicherheitsupdates
 - API-Tokens mit minimalen Rechten (z. B. Cloudflare-Token nur für DNS der eigenen Zone)
 - DSGVO im Blick behalten (Datenstandort EU, Auftragsverarbeitung dokumentieren)

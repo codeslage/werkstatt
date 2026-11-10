@@ -11,11 +11,11 @@
 
 Alle öffentlich erreichbaren Namen liegen **eine Ebene** unter `codeslage.de`:
 
-| Umgebung | Schema | Beispiel |
-|---|---|---|
-| prod | `<app>.codeslage.de` (Webseite: `codeslage.de`) | `status.codeslage.de` |
-| int | `<app>-int.codeslage.de` (Webseite: `int.codeslage.de`) | `status-int.codeslage.de` |
-| dev | `<app>-dev.codeslage.de` (Webseite: `dev.codeslage.de`) | `status-dev.codeslage.de` |
+| Umgebung | Schema                                                  | Beispiel                  |
+| -------- | ------------------------------------------------------- | ------------------------- |
+| prod     | `<app>.codeslage.de` (Webseite: `codeslage.de`)         | `status.codeslage.de`     |
+| int      | `<app>-int.codeslage.de` (Webseite: `int.codeslage.de`) | `status-int.codeslage.de` |
+| dev      | `<app>-dev.codeslage.de` (Webseite: `dev.codeslage.de`) | `status-dev.codeslage.de` |
 
 Die Coolify-UI bekommt keinen öffentlichen Namen (nur Tailnet, ADR 0003).
 

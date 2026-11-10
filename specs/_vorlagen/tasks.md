@@ -6,13 +6,14 @@
 
 ## Tasks
 
-| ID | Task | AK | Test | Abhängig von | PR | Status |
-|---|---|---|---|---|---|---|
-| T-01 | | AK-1 | | – | | ⬜ |
+| ID   | Task | AK   | Test | Abhängig von | PR  | Status |
+| ---- | ---- | ---- | ---- | ------------ | --- | ------ |
+| T-01 |      | AK-1 |      | –            |     | ⬜     |
 
 Status: ⬜ offen · 🔄 in Arbeit · ✅ erledigt
 
 Regeln für die Umsetzung (Stufe 6):
+
 1. Test zur Task schreiben, der zunächst fehlschlägt
 2. Minimalen Code schreiben, bis der Test grün ist (Artikel XV)
 3. Aufräumen, Lint, Typecheck, alle Tests grün
@@ -20,13 +21,13 @@ Regeln für die Umsetzung (Stufe 6):
 
 ## Analyse (Stufe 5)
 
-| Prüfung | Ergebnis |
-|---|---|
-| Jedes AK hat mindestens eine Task | |
-| Jedes AK hat einen Test | |
-| Jede Task verweist auf ein AK (kein Code ohne Auftrag) | |
-| Kein Widerspruch zu Spec, Plan oder Constitution | |
-| Reihenfolge und Abhängigkeiten schlüssig | |
+| Prüfung                                                | Ergebnis |
+| ------------------------------------------------------ | -------- |
+| Jedes AK hat mindestens eine Task                      |          |
+| Jedes AK hat einen Test                                |          |
+| Jede Task verweist auf ein AK (kein Code ohne Auftrag) |          |
+| Kein Widerspruch zu Spec, Plan oder Constitution       |          |
+| Reihenfolge und Abhängigkeiten schlüssig               |          |
 
 Gefundene Lücken und ihre Behebung:
 

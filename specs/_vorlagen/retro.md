@@ -5,18 +5,18 @@
 
 ## Abnahme (Stufe 7)
 
-| AK | Nachweis | Ergebnis |
-|---|---|---|
-| AK-1 | Test / Protokoll | ✅ / ❌ |
+| AK   | Nachweis         | Ergebnis |
+| ---- | ---------------- | -------- |
+| AK-1 | Test / Protokoll | ✅ / ❌  |
 
 Abgenommen durch den Inhaber am: JJJJ-MM-TT
 
 ## Soll/Ist
 
-| | Soll | Ist |
-|---|---|---|
-| Zeit | | |
-| Kosten/Monat | | |
+|              | Soll | Ist |
+| ------------ | ---- | --- |
+| Zeit         |      |     |
+| Kosten/Monat |      |     |
 
 → Übertrag in die Soll/Ist-Tabelle in `specs/03-roadmap.md`
 

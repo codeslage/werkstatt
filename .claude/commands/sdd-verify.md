@@ -1,7 +1,8 @@
 ---
-description: "SDD Stufe 7 – prüfen, ob die Umsetzung die Spec erfüllt"
-argument-hint: "<NN-name>"
+description: 'SDD Stufe 7 – prüfen, ob die Umsetzung die Spec erfüllt'
+argument-hint: '<NN-name>'
 ---
+
 SDD-Stufe 7 **Verify** gemäß `docs/prozess/sdd-ablauf.md` (verbindlich über `CONSTITUTION.md`).
 
 Vorhaben: $ARGUMENTS

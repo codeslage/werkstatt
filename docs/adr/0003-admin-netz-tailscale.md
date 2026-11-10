@@ -9,15 +9,15 @@ SSH und die Coolify-UI dürfen nie öffentlich erreichbar sein. Zur Wahl stehen 
 
 ## Optionen
 
-| | Tailscale | Cloudflare Tunnel + Access |
-|---|---|---|
-| Eingehende Ports | keine für Admin; 80/443 nur aus Cloudflare-Netzen | gar keine, auch nicht 80/443 |
-| SSH | normales `ssh` über die Tailnet-Adresse | `cloudflared` als ProxyCommand auf jedem Client |
-| Coolify-UI | direkt über die Tailnet-Adresse | als Access-geschützte öffentliche Domain |
-| Ausfallunabhängigkeit | Admin-Zugang funktioniert auch, wenn Cloudflare oder der Proxy auf dem Server gestört ist | Admin-Zugang hängt am selben Dienst wie der öffentliche Verkehr |
-| CI-Zugriff (dev-Deploy) | ephemerer Knoten mit Tag, ACL auf einen Port | Service-Token für Access |
-| Kosten | kostenlos (Personal) | kostenlos (bis 50 Nutzer) |
-| Neue Komponente auf dem Server | `tailscaled` | `cloudflared` |
+|                                | Tailscale                                                                                 | Cloudflare Tunnel + Access                                      |
+| ------------------------------ | ----------------------------------------------------------------------------------------- | --------------------------------------------------------------- |
+| Eingehende Ports               | keine für Admin; 80/443 nur aus Cloudflare-Netzen                                         | gar keine, auch nicht 80/443                                    |
+| SSH                            | normales `ssh` über die Tailnet-Adresse                                                   | `cloudflared` als ProxyCommand auf jedem Client                 |
+| Coolify-UI                     | direkt über die Tailnet-Adresse                                                           | als Access-geschützte öffentliche Domain                        |
+| Ausfallunabhängigkeit          | Admin-Zugang funktioniert auch, wenn Cloudflare oder der Proxy auf dem Server gestört ist | Admin-Zugang hängt am selben Dienst wie der öffentliche Verkehr |
+| CI-Zugriff (dev-Deploy)        | ephemerer Knoten mit Tag, ACL auf einen Port                                              | Service-Token für Access                                        |
+| Kosten                         | kostenlos (Personal)                                                                      | kostenlos (bis 50 Nutzer)                                       |
+| Neue Komponente auf dem Server | `tailscaled`                                                                              | `cloudflared`                                                   |
 
 ## Entscheidung
 

@@ -66,11 +66,15 @@ describe(`Repo ${REPO} bei GitHub (AK-1)`, () => {
 
   it('schützt main: nur per PR, kein Force-Push, keine Löschung, Status-Checks Pflicht', () => {
     const types = rules.map((rule) => rule.type);
-    expect(types).toEqual(expect.arrayContaining(['pull_request', 'non_fast_forward', 'deletion', 'required_status_checks']));
+    expect(types).toEqual(
+      expect.arrayContaining(['pull_request', 'non_fast_forward', 'deletion', 'required_status_checks']),
+    );
   });
 
   it('verlangt jeden Job aus ci.yml als Pflicht-Check', () => {
-    const required = rules.flatMap((rule) => rule.parameters?.required_status_checks ?? []).map((check) => check.context);
+    const required = rules
+      .flatMap((rule) => rule.parameters?.required_status_checks ?? [])
+      .map((check) => check.context);
     expect(ciCheckNames().length).toBeGreaterThan(0);
     expect(required).toEqual(expect.arrayContaining(ciCheckNames()));
   });

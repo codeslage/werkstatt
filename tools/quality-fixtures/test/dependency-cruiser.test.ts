@@ -6,7 +6,14 @@ import { fileURLToPath } from 'node:url';
 import { afterEach, describe, expect, it } from 'vitest';
 
 // Paketwurzel über den Haupteinstieg (src/main/index.mjs) finden; „package.json“ ist nicht exportiert.
-const DEPCRUISE = join(fileURLToPath(import.meta.resolve('dependency-cruiser')), '..', '..', '..', 'bin', 'dependency-cruiser.mjs');
+const DEPCRUISE = join(
+  fileURLToPath(import.meta.resolve('dependency-cruiser')),
+  '..',
+  '..',
+  '..',
+  'bin',
+  'dependency-cruiser.mjs',
+);
 // Die Fixtures nutzen die echte Repo-Konfiguration: Wird sie gelockert, werden diese Tests rot.
 const REPO_CONFIG = join(import.meta.dirname, '..', '..', '..', '.dependency-cruiser.json');
 const tempDirs: string[] = [];
@@ -80,8 +87,14 @@ describe('dependency-cruiser prüft Modulgrenzen (AK-18)', () => {
   });
 
   it.each([
-    ['apps → packages', { 'apps/y/a.ts': importFrom('../../packages/x/c.ts'), 'packages/x/c.ts': 'export const c = 1;\n' }],
-    ['innerhalb eines Pakets', { 'tools/t/src/a.ts': importFrom('./c.ts'), 'tools/t/src/c.ts': 'export const c = 1;\n' }],
+    [
+      'apps → packages',
+      { 'apps/y/a.ts': importFrom('../../packages/x/c.ts'), 'packages/x/c.ts': 'export const c = 1;\n' },
+    ],
+    [
+      'innerhalb eines Pakets',
+      { 'tools/t/src/a.ts': importFrom('./c.ts'), 'tools/t/src/c.ts': 'export const c = 1;\n' },
+    ],
   ])('lässt erlaubte Richtung durch: %s', (_name, files) => {
     expect(cruise(project(files))).toEqual({ exitCode: 0, rules: [] });
   });

@@ -46,7 +46,10 @@ ${checkRows}
 `;
 
 /** Ein Plan braucht keine AK-Tabelle, sonst dieselben Pflichtteile. */
-export const validPlan = validSpec.replace(/## Akzeptanzkriterien[\s\S]*?(?=## Constitution-Check)/, '## Schritte\n\n### Schritt 1\n\n');
+export const validPlan = validSpec.replace(
+  /## Akzeptanzkriterien[\s\S]*?(?=## Constitution-Check)/,
+  '## Schritte\n\n### Schritt 1\n\n',
+);
 
 export const withRow = (text: string, article: string, row: string): string =>
   text.replace(new RegExp(`^\\| ${article} \\|.*$`, 'm'), row);

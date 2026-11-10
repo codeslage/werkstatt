@@ -20,21 +20,21 @@ hotfix/… (vom prod-Tag) ──▶ Tag vX.Y.Z+1 ──▶ int ──▶ prod
 
 ## Branches
 
-| Branch | Zweck | Lebensdauer |
-|---|---|---|
-| `main` | einziger dauerhafter Branch; Stand von **dev** | dauerhaft, geschützt |
-| `feature/<kurzname>` | Arbeit an einer Task, einem Change oder einer Mini-Änderung | bis zum Merge |
-| `hotfix/<kurzname>` | Fix für prod, wenn `main` nicht releasefähig ist | bis zum Merge zurück nach `main` |
+| Branch               | Zweck                                                       | Lebensdauer                      |
+| -------------------- | ----------------------------------------------------------- | -------------------------------- |
+| `main`               | einziger dauerhafter Branch; Stand von **dev**              | dauerhaft, geschützt             |
+| `feature/<kurzname>` | Arbeit an einer Task, einem Change oder einer Mini-Änderung | bis zum Merge                    |
+| `hotfix/<kurzname>`  | Fix für prod, wenn `main` nicht releasefähig ist            | bis zum Merge zurück nach `main` |
 
 Es gibt **keine** Branches `dev`, `int` oder `prod`. Umgebungen werden über **Tags und Images** befüllt, nicht über Merges.
 
 ## Umgebungen
 
-| Umgebung | Inhalt | Wie kommt etwas hin? | Zugriff | Daten |
-|---|---|---|---|---|
-| **dev** | aktueller `main` | automatisch bei jedem Merge | Inhaber (Cloudflare Access) | Seed-/Testdaten |
-| **int** | Release-Kandidat (Tag) | `/release`; wird dafür **eingeschaltet** und danach wieder **ausgeschaltet** | Inhaber, später eingeladene Tester (Cloudflare Access) | Seed-/Testdaten, nie Echtdaten aus prod |
-| **prod** | freigegebenes Release (Tag) | `/release` nach Freigabe | öffentlich (soweit die App es vorsieht) | Echtdaten |
+| Umgebung | Inhalt                      | Wie kommt etwas hin?                                                         | Zugriff                                                | Daten                                   |
+| -------- | --------------------------- | ---------------------------------------------------------------------------- | ------------------------------------------------------ | --------------------------------------- |
+| **dev**  | aktueller `main`            | automatisch bei jedem Merge                                                  | Inhaber (Cloudflare Access)                            | Seed-/Testdaten                         |
+| **int**  | Release-Kandidat (Tag)      | `/release`; wird dafür **eingeschaltet** und danach wieder **ausgeschaltet** | Inhaber, später eingeladene Tester (Cloudflare Access) | Seed-/Testdaten, nie Echtdaten aus prod |
+| **prod** | freigegebenes Release (Tag) | `/release` nach Freigabe                                                     | öffentlich (soweit die App es vorsieht)                | Echtdaten                               |
 
 - Alle drei laufen als getrennte Coolify-Umgebungen auf derselben VM, mit Ressourcen-Limits, damit dev und int prod nicht ausbremsen.
 - int und prod nutzen **dasselbe Image** (gleicher Digest) und dieselbe Konfigurationsstruktur; nur Secrets, Domains und Daten unterscheiden sich.
@@ -43,6 +43,7 @@ Es gibt **keine** Branches `dev`, `int` oder `prod`. Umgebungen werden über **T
 ## Merge-Regel nach `main` (= dev)
 
 Ein PR wird **automatisch** gemergt und nach dev deployt, wenn:
+
 1. die CI grün ist,
 2. das Review des Agents `code-reviewer` keine offenen 🔴-Befunde hat,
 3. bei Klasse K die Change-Seite freigegeben ist.
@@ -65,9 +66,9 @@ Versionen folgen SemVer: MAJOR = inkompatible Änderung für Nutzer, MINOR = neu
 
 Zuerst die Frage: **Ist `main` gerade releasefähig?**
 
-| Antwort | Weg |
-|---|---|
-| **ja** | Fix normal über `feature/…` nach `main`, dann `/release` als PATCH. |
+| Antwort  | Weg                                                                                                                                                                                                   |
+| -------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **ja**   | Fix normal über `feature/…` nach `main`, dann `/release` als PATCH.                                                                                                                                   |
 | **nein** | `hotfix/…` vom aktuellen prod-Tag, Fix, Tag `vX.Y.Z+1`, int → prod wie beim Release. **Danach derselbe Fix sofort nach `main`** (eigener PR), sonst kehrt der Fehler mit dem nächsten Release zurück. |
 
 In beiden Fällen: Klasse **K** (`aenderungsklassen.md`), zuerst ein Test, der den Fehler zeigt, Review-Agent, beide Freigaben. Bei einem akuten Notfall darf die Change-Seite nachgezogen werden.

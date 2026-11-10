@@ -21,8 +21,14 @@ function project(violation?: Violation): string {
   tempDirs.push(dir);
   mkdirSync(join(dir, 'src'));
   const dependencies = violation === 'dependencies' ? { 'left-pad': '1.3.0' } : {};
-  writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'fixture', private: true, type: 'module', dependencies }));
-  writeFileSync(join(dir, 'knip.json'), JSON.stringify({ ...REPO_KNIP_CONFIG, entry: ['src/index.ts'], project: ['src/**/*.ts'] }));
+  writeFileSync(
+    join(dir, 'package.json'),
+    JSON.stringify({ name: 'fixture', private: true, type: 'module', dependencies }),
+  );
+  writeFileSync(
+    join(dir, 'knip.json'),
+    JSON.stringify({ ...REPO_KNIP_CONFIG, entry: ['src/index.ts'], project: ['src/**/*.ts'] }),
+  );
   writeFileSync(join(dir, 'src', 'index.ts'), "import { used } from './used.ts';\nconsole.log(used);\n");
   const extraExport = violation === 'exports' ? 'export const unusedExport = 2;\n' : '';
   writeFileSync(join(dir, 'src', 'used.ts'), `export const used = 1;\n${extraExport}`);
@@ -37,10 +43,16 @@ interface KnipResult {
 }
 
 function knip(dir: string): KnipResult {
-  const result = spawnSync(process.execPath, [KNIP, '--reporter', 'json', '--no-progress'], { cwd: dir, encoding: 'utf8' });
+  const result = spawnSync(process.execPath, [KNIP, '--reporter', 'json', '--no-progress'], {
+    cwd: dir,
+    encoding: 'utf8',
+  });
   const issues: Record<Violation, { name: string }[]>[] = JSON.parse(result.stdout || '{"issues":[]}').issues;
   const names = (key: Violation) => issues.flatMap((issue) => issue[key].map((entry) => entry.name));
-  return { exitCode: result.status, found: { files: names('files'), exports: names('exports'), dependencies: names('dependencies') } };
+  return {
+    exitCode: result.status,
+    found: { files: names('files'), exports: names('exports'), dependencies: names('dependencies') },
+  };
 }
 
 describe('knip findet ungenutzten Code (AK-18)', () => {

@@ -9,17 +9,18 @@ Ein fehlgeschlagenes Backup und ein Ausfall von `status.codeslage.de` sollen inn
 
 ## Optionen
 
-| | Better Stack Free | UptimeRobot Free + Healthchecks.io | Uptime Kuma (selbst gehostet) |
-|---|---|---|---|
-| HTTP-Monitor | ✅ 10 Monitore, alle 3 min | ✅ UptimeRobot, alle 5 min | ✅ |
-| Heartbeat (Dead-Man-Switch) | ✅ 10 Heartbeats | ✅ Healthchecks.io | ✅ |
-| Mail | ✅ | ✅ | braucht eigenen SMTP |
-| Anzahl Dienste | 1 | 2 | 0, läuft aber auf dem überwachten Server |
-| Firmensitz | EU (Tschechien) | USA/EU | – |
+|                             | Better Stack Free          | UptimeRobot Free + Healthchecks.io | Uptime Kuma (selbst gehostet)            |
+| --------------------------- | -------------------------- | ---------------------------------- | ---------------------------------------- |
+| HTTP-Monitor                | ✅ 10 Monitore, alle 3 min | ✅ UptimeRobot, alle 5 min         | ✅                                       |
+| Heartbeat (Dead-Man-Switch) | ✅ 10 Heartbeats           | ✅ Healthchecks.io                 | ✅                                       |
+| Mail                        | ✅                         | ✅                                 | braucht eigenen SMTP                     |
+| Anzahl Dienste              | 1                          | 2                                  | 0, läuft aber auf dem überwachten Server |
+| Firmensitz                  | EU (Tschechien)            | USA/EU                             | –                                        |
 
 ## Entscheidung
 
 **Better Stack (Free)**:
+
 - HTTP-Monitor für `status.codeslage.de`, Intervall 3 min
 - Heartbeat „Backup“: Der tägliche Workflow `backup-check.yml` pingt bei Erfolg und meldet `/fail`, wenn das neueste Backup älter als 26 h ist. Bleibt der Ping aus (Workflow kaputt), schlägt der Heartbeat nach 24 h + 30 min Karenz an.
 

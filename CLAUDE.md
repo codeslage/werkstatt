@@ -15,12 +15,12 @@ Diese Regeln gelten für jede Claude-Code-Sitzung in diesem Repo.
 
 ## Befehle
 
-| Befehl | Wofür |
-|---|---|
-| `/sdd-specify` … `/sdd-retro` | die 8 Stufen eines Vorhabens (Klasse V) |
-| `/change` | kleine Änderung (Klasse K) mit Change-Seite |
-| `/release` | Release-Kandidat → int → prod |
-| `/hotfix` | Fehler in prod beheben, wählt den passenden Weg |
+| Befehl                        | Wofür                                           |
+| ----------------------------- | ----------------------------------------------- |
+| `/sdd-specify` … `/sdd-retro` | die 8 Stufen eines Vorhabens (Klasse V)         |
+| `/change`                     | kleine Änderung (Klasse K) mit Change-Seite     |
+| `/release`                    | Release-Kandidat → int → prod                   |
+| `/hotfix`                     | Fehler in prod beheben, wählt den passenden Weg |
 
 Claude führt diese Befehle auch **selbst** aus, wenn die Situation es verlangt (z. B. `/change` statt direkt zu editieren), auch ohne dass der Inhaber sie nennt. Die darin vorgesehenen Freigaben holt Claude trotzdem immer beim Inhaber ein.
 

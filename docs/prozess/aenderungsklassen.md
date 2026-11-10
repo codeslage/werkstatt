@@ -9,11 +9,11 @@ Der Prozessaufwand richtet sich nach dem **Risiko** einer Änderung, nicht nach 
 
 ## Die drei Klassen
 
-| Klasse | Typische Beispiele | Prozess | Doku | Freigabe |
-|---|---|---|---|---|
-| **M – Mini** | Tippfehler, Texte, Abhängigkeits-Updates (Renovate), Refactoring ohne Verhaltensänderung | CI + Review-Agent | PR-Beschreibung (Was/Warum) + Changelog-Eintrag | keine (Auto-Merge nach dev) |
+| Klasse                  | Typische Beispiele                                                                                                       | Prozess                                             | Doku                                                                                                 | Freigabe                                            |
+| ----------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
+| **M – Mini**            | Tippfehler, Texte, Abhängigkeits-Updates (Renovate), Refactoring ohne Verhaltensänderung                                 | CI + Review-Agent                                   | PR-Beschreibung (Was/Warum) + Changelog-Eintrag                                                      | keine (Auto-Merge nach dev)                         |
 | **K – Kleine Änderung** | Bugfix, Hotfix, kleine Infra-Änderung (Firewall-Regel, DNS-Eintrag, TTL), Konfiguration mit Wirkung auf Sicherheit/Daten | Change-Seite → Test → Umsetzung → CI + Review-Agent | `changes/JJJJ-MM-TT-name.md` (Vorlage `specs/_vorlagen/change.md`), bei Infra mit `tofu plan`-Auszug | **eine** Freigabe des Inhabers auf der Change-Seite |
-| **V – Vorhaben** | neues Feature, neue Komponente, neue AKs, mehr als ca. ein Tag Aufwand | voller SDD-Ablauf (`sdd-ablauf.md`) | Spec, Plan, Tasks, Reviews, Retro | Gates laut SDD-Ablauf |
+| **V – Vorhaben**        | neues Feature, neue Komponente, neue AKs, mehr als ca. ein Tag Aufwand                                                   | voller SDD-Ablauf (`sdd-ablauf.md`)                 | Spec, Plan, Tasks, Reviews, Retro                                                                    | Gates laut SDD-Ablauf                               |
 
 Befehle: M braucht keinen eigenen Befehl, K läuft über `/change`, V über `/sdd-specify` ff., Hotfixes über `/hotfix`.
 
@@ -29,6 +29,7 @@ Befehle: M braucht keinen eigenen Befehl, K läuft über `/change`, V über `/sd
 ## Was in jeder Klasse gilt
 
 Die Klassen verkürzen den **Prozess**, nie die Grundsätze:
+
 - Tests beweisen die Änderung (Artikel II) – bei Bugfixes zuerst ein Test, der den Fehler zeigt.
 - Review-Agent läuft immer (`code-review.md`).
 - Keine Secrets, keine zerstörerischen Aktionen ohne Freigabe (Artikel V, VI).

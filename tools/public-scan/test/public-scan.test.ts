@@ -55,8 +55,7 @@ describe('public-scan lässt Erlaubtes durch', () => {
 });
 
 describe('.gitignore hält Vertrauliches fern (AK-2)', () => {
-  const isIgnored = (path: string) =>
-    spawnSync('git', ['check-ignore', '-q', path], { cwd: REPO_ROOT }).status === 0;
+  const isIgnored = (path: string) => spawnSync('git', ['check-ignore', '-q', path], { cwd: REPO_ROOT }).status === 0;
 
   it.each(['.env', '.env.local', '.sperrliste', 'infra/x.tfstate', 'infra/x.tfstate.backup', 'infra/.terraform/a'])(
     'ignoriert %s',
