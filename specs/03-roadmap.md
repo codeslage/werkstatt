@@ -48,7 +48,7 @@ Spec-Ordner: `specs/05-projekt-plattform/`
 - PoC-Hosting (Domains, Coolify-Deploy je Projekt, Access für Friendly User) → Phase S
 - **Fertig, wenn:** ein neues Projekt aus der Vorlage mit grüner CI startet und seine Doku im Docs-Portal erscheint.
 
-### Phase 2 – Webseite (Click-Dummy)
+### Phase 2 – Webseite (Klick-Dummy)
 Spec-Ordner: `specs/06-webseite/`
 - `apps/web` als statische Seite auf **Cloudflare Pages** (kostenlos): Startseite, Leistungen, Projekte/Referenzen, Über mich, Kontakt
 - Ziel: herausfinden, ob die Seite Besucher und Klicks bekommt, bevor wir Geld in Betrieb stecken
