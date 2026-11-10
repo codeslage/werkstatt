@@ -41,7 +41,7 @@ Soll in Stunden (Claude, konservativ, inkl. Abstimmung); Ist wird bei Abschluss 
 | T-20 | `infra/tests/repo.test.ts`: Repo öffentlich, Ruleset auf `main` aktiv                                                                                                                        | AK-1  | Vitest in der CI                           | T-13         | PR-08 | 1    | 0,25 | ✅     |
 | T-21 | PR-Template mit Constitution-Checkliste (inkl. Punkt „Öffentlich vs. intern“)                                                                                                                | AK-24 | Review                                     | T-10         | PR-08 | 0,5  | 0,25 | ✅     |
 | T-22 | `dependabot.yml` (npm, github-actions, docker, terraform), Sicherheits-Updates aktivieren; Ausnahme: `typescript` bleibt bei 6.x, solange `typescript-eslint` nur `<6.1` unterstützt (PR-04) | AK-29 | erster Dependabot-PR beobachtet, Protokoll | T-13         | PR-09 | 0,5  |      | 🔄     |
-| T-23 | Prettier in `packages/config`, Job `format`                                                                                                                                                  | AK-30 | Fixture mit falscher Formatierung → rot    | T-13         | PR-09 | 0,5  |      | ⬜     |
+| T-23 | Prettier in `packages/config`, Job `format`                                                                                                                                                  | AK-30 | Fixture mit falscher Formatierung → rot    | T-13         | PR-09 | 0,5  | 0,25 | ✅     |
 
 ### Schritt 3 – Lokale Umgebung & Images
 
