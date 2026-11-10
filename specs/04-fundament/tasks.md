@@ -1,6 +1,6 @@
 # 04 – Phase 1 Fundament: Tasks
 
-> Stand: 2026-11-05
+> Stand: 2026-11-10
 > Bezug: `spec.md` (v2.1, Freigegeben am 2026-11-05), `plan.md` (v1.1, Freigegeben am 2026-11-05)
 > SDD-Stufen: 4 Tasks · 5 Analyze · 6 Implement
 
@@ -15,8 +15,8 @@ Soll in Stunden (Claude, konservativ, inkl. Abstimmung); Ist wird bei Abschluss 
 | ID | Task | AK | Test | Abhängig von | PR | Soll | Ist | Status |
 |---|---|---|---|---|---|---|---|---|
 | T-01 | Lokale Werkzeuge installieren (pnpm über corepack, OpenTofu, gh, gitleaks), Versionen ins Runbook `lokale-umgebung.md` | AK-25 | manuell: `--version`-Ausgaben im Protokoll | – | Bootstrap | 0,5 | 0,25 | ✅ |
-| T-02 | Grunddateien: `git init`, `.gitattributes` (LF), `.editorconfig`, `.gitignore`, `.env.example` | AK-2, AK-25 | T-03 prüft, dass `.env`, `.sperrliste`, `*.tfstate*` ignoriert werden | T-01 | Bootstrap | 0,5 | | ⬜ |
-| T-03 | `tools/public-scan`: Tests + Negativ-Fixtures (Fake-Token, IPv4, IPv6, E-Mail, Test-Sperrbegriff), zunächst rot; minimales Root-`package.json` mit Vitest | AK-2, AK-24 | Vitest | T-02 | Bootstrap | 2 | | ⬜ |
+| T-02 | Grunddateien: `git init`, `.gitattributes` (LF), `.editorconfig`, `.gitignore`, `.env.example` | AK-2, AK-25 | T-03 prüft, dass `.env`, `.sperrliste`, `*.tfstate*` ignoriert werden | T-01 | Bootstrap | 0,5 | 0,25 | ✅ |
+| T-03 | `tools/public-scan`: Tests + Negativ-Fixtures (Fake-Token, IPv4, IPv6, E-Mail, Test-Sperrbegriff), zunächst rot; minimales Root-`package.json` mit Vitest | AK-2, AK-24 | Vitest | T-02 | Bootstrap | 2 | 0,25 | ✅ |
 | T-04 | `.gitleaks.toml`: Standardregeln + eigene Regeln (IP, E-Mail mit Ausnahmen, Sperrliste), bis T-03 grün ist | AK-2, AK-24 | T-03 | T-03 | Bootstrap | 2 | 0,25 | ✅ |
 | T-05 | `.githooks/pre-commit` + `prepare`-Skript | AK-2, AK-24 | Vitest: Commit mit Fixture in einem Wegwerf-Repo wird abgelehnt | T-04 | Bootstrap | 1 | 0,25 | ✅ |
 | T-06 | `ci.yml` Grundversion: gitleaks-Binary gepinnt mit Prüfsumme, public-scan-Tests, Sperrliste aus Secret | AK-1, AK-2, AK-24 | läuft ab dem ersten PR; Negativtest in T-11 | T-04 | Bootstrap | 2 | 0,25 | ✅ |
@@ -25,7 +25,7 @@ Soll in Stunden (Claude, konservativ, inkl. Abstimmung); Ist wird bei Abschluss 
 | T-09 | ⛔ Bootstrap-Commit auf `main`, Repo `codeslage/werkstatt` öffentlich anlegen, Push (= Veröffentlichung) | AK-1 | T-20 | T-08 | Bootstrap | 0,5 | 0,25 | ✅ |
 | T-10 | Ruleset für `main` (PR + Status-Checks Pflicht, kein Force-Push, keine Löschung, keine Admin-Ausnahme); 👤 Secret `PUBLIC_BLOCKLIST` | AK-1, AK-24 | T-20; manuell: direkter Push auf `main` wird abgelehnt | T-09 | Einstellung | 0,5 | 0,25 | ✅ |
 | T-11 | Negativtest Ebene 2 und 3: Wegwerf-PR mit IP, E-Mail und Sperrbegriff außerhalb der Fixtures → CI rot, `code-reviewer` meldet 🔴; PR schließen | AK-24 | Protokoll | T-10 | PR-01 (wird nicht gemergt) | 1 | 0,25 | ✅ |
-| T-12 | Neue Claude-Code-Sitzung ohne Hinweis nach Constitution und SDD-Befehlen fragen; Protokolle T-08, T-11, T-12 einchecken | AK-17, AK-24 | Protokoll | T-11 | PR-02 | 0,25 | 0,25 | ⚠️ |
+| T-12 | Neue Claude-Code-Sitzung ohne Hinweis nach Constitution und SDD-Befehlen fragen; Protokolle T-08, T-11, T-12 einchecken | AK-17, AK-24 | Protokoll | T-11 | PR-02 | 0,25 | 0,25 | 🔄 |
 
 ### Schritt 2 – CI-Qualität
 
@@ -82,7 +82,7 @@ Content-Notizen und Soll/Ist der Phase entstehen in Stufe 8 (Retro), nicht als T
 
 **Summe Soll:** Schritt 1: 11,75 h · Schritt 2: 15 h · Schritt 3: 9,75 h · Schritt 4: 11 h · Schritt 5: 2,5 h · **gesamt ≈ 50 h**
 
-Status: ⬜ offen · 🔄 in Arbeit · ✅ erledigt · ⚠️ erledigt mit offenem Befund (siehe Nachträge unten)
+Status: ⬜ offen · 🔄 in Arbeit · ✅ erledigt
 
 Regeln für die Umsetzung (Stufe 6):
 1. Test zur Task schreiben, der zunächst fehlschlägt
@@ -115,4 +115,4 @@ Gefundene Lücken und ihre Behebung (erster Lauf am 2026-11-05, zweiter Lauf nac
 
 | Datum | Task | Befund | Vorschlag | Status |
 |---|---|---|---|---|
-| 2026-11-10 | T-12 | AK-17 nur teilweise erfüllt: Eine neue Sitzung wendet SDD bei einem Vorhaben korrekt an, ändert eine Kleinigkeit aber ohne Einstufung und ohne eigenen Branch (Protokoll `docs/protokolle/2026-11-10-t-12-neue-sitzung.md`). | Änderung der Klasse K an `CLAUDE.md`: Einstufung und Branch-Prüfung als harte erste Schritte formulieren, *bevor* eine Datei geändert wird, auch bei Kleinigkeiten. Danach den Test aus T-12 wiederholen. | offen, Entscheidung des Inhabers |
+| 2026-11-10 | T-12 | AK-17 nur teilweise erfüllt: Eine neue Sitzung wendet SDD bei einem Vorhaben korrekt an, ändert eine Kleinigkeit aber ohne Einstufung und ohne eigenen Branch (Protokoll `docs/protokolle/2026-11-10-t-12-neue-sitzung.md`). | Änderung der Klasse K an `CLAUDE.md`: Einstufung und Branch-Prüfung als harte erste Schritte formulieren, *bevor* eine Datei geändert wird, auch bei Kleinigkeiten. Danach den Test aus T-12 wiederholen. | offen, Entscheidung des Inhabers; T-12 bleibt 🔄, bis der Test nach der Änderung bestanden ist |
