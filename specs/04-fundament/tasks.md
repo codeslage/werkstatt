@@ -40,7 +40,7 @@ Soll in Stunden (Claude, konservativ, inkl. Abstimmung); Ist wird bei Abschluss 
 | T-19 | `tools/spec-check` umsetzen, bis T-18 grün; Job prüft alle `spec.md`/`plan.md` unter `specs/` | AK-16 | T-18; bestehende Specs grün | T-18 | PR-07 | 3 | | ⬜ |
 | T-20 | `infra/tests/repo.test.ts`: Repo öffentlich, Ruleset auf `main` aktiv | AK-1 | Vitest in der CI | T-13 | PR-08 | 1 | | ⬜ |
 | T-21 | PR-Template mit Constitution-Checkliste (inkl. Punkt „Öffentlich vs. intern“) | AK-24 | Review | T-10 | PR-08 | 0,5 | | ⬜ |
-| T-22 | `dependabot.yml` (npm, github-actions, docker, terraform), Sicherheits-Updates aktivieren | AK-29 | erster Dependabot-PR beobachtet, Protokoll | T-13 | PR-09 | 0,5 | | ⬜ |
+| T-22 | `dependabot.yml` (npm, github-actions, docker, terraform), Sicherheits-Updates aktivieren; Ausnahme: `typescript` bleibt bei 6.x, solange `typescript-eslint` nur `<6.1` unterstützt (PR-04) | AK-29 | erster Dependabot-PR beobachtet, Protokoll | T-13 | PR-09 | 0,5 | | ⬜ |
 | T-23 | Prettier in `packages/config`, Job `format` | AK-30 | Fixture mit falscher Formatierung → rot | T-13 | PR-09 | 0,5 | | ⬜ |
 
 ### Schritt 3 – Lokale Umgebung & Images
