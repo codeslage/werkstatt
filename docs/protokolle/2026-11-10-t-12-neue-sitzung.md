@@ -20,7 +20,7 @@
 | Arbeit auf eigenem `feature/…`-Branch | ❌ Sie hat direkt im Arbeitsverzeichnis geändert, auf dem gerade aktiven Branch `feature/t-10-t-12-protokolle` einer anderen Task. Einen eigenen Branch hat sie nicht angelegt. |
 | Sauberer Umfang, Fragen statt raten | ✅ Sie hat nur die Roadmap geändert, die drei weiteren Fundstellen gemeldet statt sie stillschweigend zu ändern, nichts committet und eine fremde Änderung in `zeiten.md` nicht angefasst. |
 
-Ihre Änderung an der Roadmap ist gesichert (`git stash`, „Testsitzung T-12: Click-Dummy -> Klick-Dummy in der Roadmap“). Über sie wird getrennt entschieden.
+Ihre Änderung an der Roadmap ist gesichert (`git stash`, „Testsitzung T-12: Click-Dummy -> Klick-Dummy in der Roadmap“). Über sie wird getrennt entschieden. **Nachtrag 2026-11-10:** Der Stash ist durch PR #4 ersetzt (dieselbe Änderung, regelkonform). Er wird nicht mehr eingespielt; verworfen wird er nur mit Freigabe des Inhabers.
 
 ## Ergebnis
 
