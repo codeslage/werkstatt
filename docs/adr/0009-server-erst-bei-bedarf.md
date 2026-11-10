@@ -28,7 +28,7 @@ Phase 1 sah einen eigenen Cloud-Server vor, der rund um die Uhr läuft. Bei der 
 Bis dahin gilt:
 - Entwicklung lokal. Postgres und Apps laufen über Docker Compose auf `localhost`, mit Seed-Daten. **dev = lokal.**
 - Jede App hat ein Dockerfile. Die CI baut und startet jedes Image bei jedem PR (AK-26), damit der spätere Umzug kein Umbau wird.
-- DNS (inkl. Google-Mail) liegt per OpenTofu bei Cloudflare. Die Webseite läuft in Phase 2 als Click-Dummy auf Cloudflare Pages.
+- DNS (inkl. Google-Mail) liegt per OpenTofu bei Cloudflare. Die Webseite läuft in Phase 2 als Klick-Dummy auf Cloudflare Pages.
 
 ## Folgen
 

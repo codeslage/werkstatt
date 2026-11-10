@@ -1,7 +1,7 @@
 # 03 – Roadmap
 
 > Status: **Entwurf** – wartet auf Freigabe
-> Stand: 2026-11-05 (Server erst bei Bedarf, ADR 0009; Webseite zuerst als Click-Dummy auf Cloudflare Pages)
+> Stand: 2026-11-05 (Server erst bei Bedarf, ADR 0009; Webseite zuerst als Klick-Dummy auf Cloudflare Pages)
 > Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md`, `02-architektur.md`
 
 ## Ziel
@@ -121,7 +121,7 @@ Spec-Ordner: `specs/08-portal/`
 | VIII Datenschutz & EU | ✅ | Impressum/Datenschutz vor dem Livegang der Webseite |
 | IX Mensch im Loop | ✅ | Phase 3: ohne Freigabe geht nichts raus |
 | X Reproduzierbar | ✅ | Fundament zuerst; Server-Phase mit IaC und getestetem Restore |
-| XI Einfach vor vollständig | ✅ | Server erst bei Bedarf (Phase S), Webseite zuerst als Click-Dummy; Company OS und Mobile in „Später“ |
+| XI Einfach vor vollständig | ✅ | Server erst bei Bedarf (Phase S), Webseite zuerst als Klick-Dummy; Company OS und Mobile in „Später“ |
 | XII Offen dokumentieren | ✅ | Case Study je Phase, `docs/content/` |
 | XIII Wiederverwendbar | ✅ | Projekt-Plattform mit Vorlage |
 | XIV Messen statt schätzen | ✅ | Soll/Ist-Tabelle, Budget-Check |
@@ -130,6 +130,6 @@ Spec-Ordner: `specs/08-portal/`
 
 ## Offene Fragen
 
-1. ~~Soll die Webseite schon vor Phase 1 als „Coming Soon“-Seite live gehen?~~ Beantwortet am 2026-11-05: Die Webseite kommt in Phase 2 als Click-Dummy auf Cloudflare Pages, nicht auf eigener Infrastruktur.
+1. ~~Soll die Webseite schon vor Phase 1 als „Coming Soon“-Seite live gehen?~~ Beantwortet am 2026-11-05: Die Webseite kommt in Phase 2 als Klick-Dummy auf Cloudflare Pages, nicht auf eigener Infrastruktur.
 2. Gibt es schon Friendly User, die man ab Phase 2 einbinden kann?
 3. Welche ersten Projekte kommen in Phase 1.5 dazu (Name, Stack, öffentlich oder privat)?
