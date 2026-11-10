@@ -28,4 +28,4 @@ Methode (festgelegt am 2026-11-05):
 | T-12 | 2026-11-10 11:08 | 2026-11-10 11:12 | 0:04 | Antworten ausgewertet (⚠️ AK-17 teilweise), Änderung der Testsitzung gesichert, Protokoll |
 | T-12 | 2026-11-10 11:22 | 2026-11-10 11:38 | 0:16 | Change an CLAUDE.md (K): Change-Seite, zwei Fassungen, zwei Review-Durchgänge; Wiederholungstest folgt nach dem Merge |
 | T-12 | 2026-11-10 12:17 | 2026-11-10 12:20 | 0:03 | Wiederholungstest ausgewertet (✅), Protokoll, Change-Seite auf Umgesetzt |
-| T-13 | 2026-11-10 13:06 | | | |
+| T-13 | 2026-11-10 13:06 | 2026-11-10 13:09 | 0:03 | Workspace, tsconfig strict, CI-Job Typecheck, Pflicht-Check im Ruleset; Review-Befunde behoben |
