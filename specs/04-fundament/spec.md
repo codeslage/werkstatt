@@ -20,7 +20,7 @@ Leitsatz: **Wir bauen erst, wenn wir es brauchen** (Artikel XI).
 ## Nicht im Umfang
 
 - **Server, Deployment-Plattform, Backups, Alarme, Umgebungen int/prod** → eigene Spec „Server & Betrieb“. Sie startet, sobald etwas dauerhaft öffentlich mit Server-Anteil laufen muss, spätestens vor der **ersten echten Kunden-Demo** (siehe ADR 0009 und offene Frage 7)
-- Webseite → Phase 2, zunächst als Click-Dummy auf Cloudflare Pages
+- Webseite → Phase 2, zunächst als Klick-Dummy auf Cloudflare Pages
 - Projekt-Vorlage, Docs-Portal → Phase 1.5; PoC-Hosting → Spec „Server & Betrieb“
 
 ## User Stories

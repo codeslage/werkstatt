@@ -14,7 +14,7 @@ Eine schlanke, reproduzierbare Architektur, die ins Budget (≤ ~10–15 €/Mon
 
 | Stufe | Was läuft wo | Laufende Kosten |
 |---|---|---|
-| Jetzt (Phase 1–2) | Entwicklung lokal (Docker Compose), CI auf GitHub, DNS und Webseite (Click-Dummy) auf Cloudflare Free / Pages | 0 € |
+| Jetzt (Phase 1–2) | Entwicklung lokal (Docker Compose), CI auf GitHub, DNS und Webseite (Klick-Dummy) auf Cloudflare Free / Pages | 0 € |
 | Ab Phase S (bei Bedarf, spätestens vor der ersten Kunden-Demo) | Zielbild unten: eigener Server mit Coolify | nach Anbieterwahl |
 
 Zielbild ab Phase S:
@@ -110,7 +110,7 @@ Bis Phase S gibt es nur Cloudflare (DNS, Pages, R2 für den Tofu-State) und GitH
 
 | Baustein | Entscheidung |
 |---|---|
-| Webseite (Phase 2) | **Cloudflare Pages** als statische Seite (Click-Dummy), Cloudflare Web Analytics |
+| Webseite (Phase 2) | **Cloudflare Pages** als statische Seite (Klick-Dummy), Cloudflare Web Analytics |
 | Server (ab Phase S) | **1× Cloud-Server in der EU (bevorzugt DE), ~4 vCPU / 8 GB RAM.** Anbieter wird in Phase S nach den dann gültigen Preisen gewählt (Recherche R1, ADR 0001 vertagt). Stand 2026-11-05: Hetzner CX33 nicht bestellbar, UpCloud Starter 8 GB ca. 20 € netto. |
 | Deployment | **Coolify** auf demselben Server; Merge nach `main` → Build → dev; Releases per Tag nach int/prod (A11) |
 | DNS/Proxy | **Cloudflare Free**; SSL-Modus **Full (strict)**; Origin-Zertifikat oder DNS-Challenge statt HTTP-Challenge |
