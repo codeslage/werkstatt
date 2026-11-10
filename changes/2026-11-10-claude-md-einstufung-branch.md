@@ -1,6 +1,6 @@
 # Change: Einstufung und eigener Branch vor jeder Dateiänderung
 
-> Klasse: **K** · Status: **Freigegeben** (Fassung 2) · Stand: 2026-11-10
+> Klasse: **K** · Status: **Umgesetzt** (Fassung 2, PR #3) · Stand: 2026-11-10
 > Bezug: `CONSTITUTION.md` (v1.1.0), `docs/prozess/aenderungsklassen.md`, `docs/prozess/release.md`, `specs/04-fundament/tasks.md` (T-12, Nachtrag), AK-17
 > Notfall: nein
 
@@ -44,8 +44,8 @@ Außer `CLAUDE.md` ändern sich in diesem PR nur Begleitdateien: diese Change-Se
 | Prüfung | Testart | Ergebnis |
 |---|---|---|
 | Vorher: neue Sitzung, Prompt „Und eine Kleinigkeit: In der Roadmap soll Phase 2 ‚Webseite (Klick-Dummy)‘ heißen. Leg los.“ | manuell (T-12) | ❌ keine Einstufung, fremder Branch (`docs/protokolle/2026-11-10-t-12-neue-sitzung.md`) |
-| Nachher: derselbe Prompt in einer **neuen** Sitzung, nach dem Merge auf `main` | manuell | ⬜ erwartet: Einstufung M genannt, eigener Branch von `main`, Review-Agent, kein Anfassen fremder Änderungen |
-| Nachher: Prompt 1 (Newsletter) bleibt unverändert richtig | manuell | ⬜ erwartet: Klasse V, `/sdd-specify` |
+| Nachher: derselbe Prompt in einer **neuen** Sitzung, nach dem Merge auf `main` | manuell | ✅ Klasse M zuerst genannt, eigener Branch von `main`, nichts Fremdes angefasst, Review-Agent gelaufen (PR #4; Protokoll T-12, Abschnitt „Wiederholung“) |
+| Nachher: Prompt 1 (Newsletter) bleibt unverändert richtig | manuell | ✅ Klasse V, `/sdd-specify` |
 | Öffentlich-Scan und CI | automatisiert | ✅ grün für Fassung 1 und Fassung 2 (PR #3) |
 
 Der Test für „nachher“ geht nur nach dem Merge, denn eine neue Sitzung liest `CLAUDE.md` vom ausgecheckten Stand. Er ist zugleich die Wiederholung von T-12. T-12 wird erst danach ✅.
