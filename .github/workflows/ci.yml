@@ -114,3 +114,14 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: pnpm test:infra
+
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: Einheitliche Formatierung (AK-30)
+        run: pnpm format
