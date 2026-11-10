@@ -32,3 +32,4 @@ Methode (festgelegt am 2026-11-05):
 | T-14 | 2026-11-10 13:36 | 2026-11-10 13:38 | 0:02 | Tests für 6 Regeln aus AK-18 + sauberer Fall, rot (keine Konfiguration); Wechsel auf TypeScript 6.0.3 wegen typescript-eslint |
 | T-15 | 2026-11-10 13:38 | 2026-11-10 13:40 | 0:02 | ESLint-Konfiguration, alle Tests im ersten Lauf grün; CI-Setup als lokale Action; Lint als Pflicht-Check |
 | T-16 | 2026-11-10 13:48 | 2026-11-10 13:50 | 0:02 | knip mit Tests und Repo-Konfiguration; echter Fund (toter Export) behoben; Pflicht-Check |
+| T-17 | 2026-11-10 13:54 | | | |
