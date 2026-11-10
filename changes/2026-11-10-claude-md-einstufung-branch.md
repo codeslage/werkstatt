@@ -1,6 +1,6 @@
 # Change: Einstufung und eigener Branch vor jeder Dateiänderung
 
-> Klasse: **K** · Status: **Entwurf (Fassung 2)** – Fassung 1 freigegeben am 2026-11-10, nach Review-Befunden überarbeitet, wartet auf erneute Freigabe · Stand: 2026-11-10
+> Klasse: **K** · Status: **Freigegeben** (Fassung 2) · Stand: 2026-11-10
 > Bezug: `CONSTITUTION.md` (v1.1.0), `docs/prozess/aenderungsklassen.md`, `docs/prozess/release.md`, `specs/04-fundament/tasks.md` (T-12, Nachtrag), AK-17
 > Notfall: nein
 
@@ -97,4 +97,4 @@ Die Änderung verschärft die Arbeitsregeln für Claude. Vor jeder Dateiänderun
 ## Freigabe
 
 - Fassung 1: freigegeben durch den Inhaber am 2026-11-10
-- Fassung 2: ⬜
+- Fassung 2: freigegeben durch den Inhaber am 2026-11-10
