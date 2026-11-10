@@ -17,7 +17,7 @@ Claude hat konservativ geschätzt (bei ~20 h/Woche). Der Inhaber wettet, dass es
 | 0 – Discovery | – | | 2026-11-04 | |
 | 1 – Fundament (lokal) | **2–3 Wochen** (≈ 50 h laut `tasks.md`; zuvor ~1 Woche, ursprünglich 1–2 Wochen mit Server) | | 2026-11-05 | |
 | 1.5 – Projekt-Plattform | ~1 Woche | | | |
-| 2 – Webseite (Click-Dummy) | 1–2 Wochen (vorher 2–3 Wochen mit Formular und Coolify) | | | |
+| 2 – Webseite (Klick-Dummy) | 1–2 Wochen (vorher 2–3 Wochen mit Formular und Coolify) | | | |
 | S – Server & Betrieb (bei Bedarf) | ~1 Woche | | | |
 | 3 – Erste KI-Automation | 2–4 Wochen | | | |
 | 4 – Demo-Kundenportal | 3–4 Wochen | | | |
