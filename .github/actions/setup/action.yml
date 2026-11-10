@@ -1,0 +1,16 @@
+name: Node und Abhängigkeiten
+description: Node 24, pnpm über Corepack und `pnpm install --frozen-lockfile` (gemeinsam für alle CI-Jobs)
+runs:
+  using: composite
+  steps:
+    - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+      with:
+        node-version: 24
+
+    - name: pnpm über Corepack
+      shell: bash
+      run: corepack enable
+
+    - name: Abhängigkeiten installieren
+      shell: bash
+      run: pnpm install --frozen-lockfile

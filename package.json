@@ -9,11 +9,14 @@
   "scripts": {
     "prepare": "git config core.hooksPath .githooks",
     "test": "vitest run",
-    "typecheck": "pnpm -r typecheck"
+    "typecheck": "pnpm -r typecheck",
+    "lint": "eslint ."
   },
   "devDependencies": {
     "@types/node": "24.19.2",
-    "typescript": "7.0.2",
-    "vitest": "^5.1.0"
+    "eslint": "10.14.0",
+    "typescript": "6.0.3",
+    "vitest": "^5.1.0",
+    "@codeslage/config": "workspace:*"
   }
 }
