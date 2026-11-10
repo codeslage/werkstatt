@@ -25,7 +25,7 @@ Soll in Stunden (Claude, konservativ, inkl. Abstimmung); Ist wird bei Abschluss 
 | T-09 | ⛔ Bootstrap-Commit auf `main`, Repo `codeslage/werkstatt` öffentlich anlegen, Push (= Veröffentlichung) | AK-1 | T-20 | T-08 | Bootstrap | 0,5 | 0,25 | ✅ |
 | T-10 | Ruleset für `main` (PR + Status-Checks Pflicht, kein Force-Push, keine Löschung, keine Admin-Ausnahme); 👤 Secret `PUBLIC_BLOCKLIST` | AK-1, AK-24 | T-20; manuell: direkter Push auf `main` wird abgelehnt | T-09 | Einstellung | 0,5 | 0,25 | ✅ |
 | T-11 | Negativtest Ebene 2 und 3: Wegwerf-PR mit IP, E-Mail und Sperrbegriff außerhalb der Fixtures → CI rot, `code-reviewer` meldet 🔴; PR schließen | AK-24 | Protokoll | T-10 | PR-01 (wird nicht gemergt) | 1 | 0,25 | ✅ |
-| T-12 | Neue Claude-Code-Sitzung ohne Hinweis nach Constitution und SDD-Befehlen fragen; Protokolle T-08, T-11, T-12 einchecken | AK-17, AK-24 | Protokoll | T-11 | PR-02 | 0,25 | | ⬜ |
+| T-12 | Neue Claude-Code-Sitzung ohne Hinweis nach Constitution und SDD-Befehlen fragen; Protokolle T-08, T-11, T-12 einchecken | AK-17, AK-24 | Protokoll | T-11 | PR-02 | 0,25 | 0,25 | ⚠️ |
 
 ### Schritt 2 – CI-Qualität
 
@@ -82,7 +82,7 @@ Content-Notizen und Soll/Ist der Phase entstehen in Stufe 8 (Retro), nicht als T
 
 **Summe Soll:** Schritt 1: 11,75 h · Schritt 2: 15 h · Schritt 3: 9,75 h · Schritt 4: 11 h · Schritt 5: 2,5 h · **gesamt ≈ 50 h**
 
-Status: ⬜ offen · 🔄 in Arbeit · ✅ erledigt
+Status: ⬜ offen · 🔄 in Arbeit · ✅ erledigt · ⚠️ erledigt mit offenem Befund (siehe Nachträge unten)
 
 Regeln für die Umsetzung (Stufe 6):
 1. Test zur Task schreiben, der zunächst fehlschlägt
@@ -110,3 +110,9 @@ Gefundene Lücken und ihre Behebung (erster Lauf am 2026-11-05, zweiter Lauf nac
 4. **Soll-Zeit** → Roadmap für Phase 1 auf „2–3 Wochen“ korrigiert, Korrektur dort vermerkt. ✅
 
 **Ergebnis:** Keine offenen Lücken. Spec v2.1 und Plan v1.1 freigegeben am 2026-11-05. Stufe 6 (Implement) kann starten.
+
+## Nachträge aus der Umsetzung
+
+| Datum | Task | Befund | Vorschlag | Status |
+|---|---|---|---|---|
+| 2026-11-10 | T-12 | AK-17 nur teilweise erfüllt: Eine neue Sitzung wendet SDD bei einem Vorhaben korrekt an, ändert eine Kleinigkeit aber ohne Einstufung und ohne eigenen Branch (Protokoll `docs/protokolle/2026-11-10-t-12-neue-sitzung.md`). | Änderung der Klasse K an `CLAUDE.md`: Einstufung und Branch-Prüfung als harte erste Schritte formulieren, *bevor* eine Datei geändert wird, auch bei Kleinigkeiten. Danach den Test aus T-12 wiederholen. | offen, Entscheidung des Inhabers |
