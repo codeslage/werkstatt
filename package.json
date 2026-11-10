@@ -8,12 +8,13 @@
   },
   "scripts": {
     "prepare": "git config core.hooksPath .githooks",
-    "test": "vitest run",
+    "test": "vitest run --project unit",
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint .",
     "knip": "knip",
     "depcruise": "depcruise --config .dependency-cruiser.json --output-type err .",
-    "spec-check": "node tools/spec-check/src/cli.ts specs"
+    "spec-check": "node tools/spec-check/src/cli.ts specs",
+    "test:infra": "vitest run --project infra"
   },
   "devDependencies": {
     "@codeslage/config": "workspace:*",
