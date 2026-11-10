@@ -1,0 +1,3 @@
+pnpm-lock.yaml
+# Reviews sind unveränderte Ausgaben des Review-Agents (code-review.md).
+specs/**/reviews/

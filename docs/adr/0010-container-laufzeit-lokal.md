@@ -9,13 +9,13 @@ Bis Phase S ist dev = lokal (ADR 0009). Postgres und die Apps laufen über Docke
 
 ## Optionen
 
-| | Docker Desktop | Podman Desktop |
-|---|---|---|
-| Lizenz | kostenlos für private Nutzung und Unternehmen mit < 250 Mitarbeitenden **und** < 10 Mio. $ Umsatz; darüber kostenpflichtig | Apache-2.0, ohne Einschränkung |
-| Compose | `docker compose` eingebaut | über `podman compose` (ruft `docker-compose` oder `podman-compose` auf), gelegentlich Abweichungen |
-| Verbreitung bei Kunden und in Doku | Standard | geringer |
-| Windows | WSL2-Backend | WSL2-Backend (Podman-Maschine) |
-| Gleichheit zur CI | GitHub-Runner nutzen Docker Engine, dieselben Befehle | Befehle weitgehend gleich, Details abweichend |
+|                                    | Docker Desktop                                                                                                             | Podman Desktop                                                                                     |
+| ---------------------------------- | -------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------- |
+| Lizenz                             | kostenlos für private Nutzung und Unternehmen mit < 250 Mitarbeitenden **und** < 10 Mio. $ Umsatz; darüber kostenpflichtig | Apache-2.0, ohne Einschränkung                                                                     |
+| Compose                            | `docker compose` eingebaut                                                                                                 | über `podman compose` (ruft `docker-compose` oder `podman-compose` auf), gelegentlich Abweichungen |
+| Verbreitung bei Kunden und in Doku | Standard                                                                                                                   | geringer                                                                                           |
+| Windows                            | WSL2-Backend                                                                                                               | WSL2-Backend (Podman-Maschine)                                                                     |
+| Gleichheit zur CI                  | GitHub-Runner nutzen Docker Engine, dieselben Befehle                                                                      | Befehle weitgehend gleich, Details abweichend                                                      |
 
 ## Entscheidung
 

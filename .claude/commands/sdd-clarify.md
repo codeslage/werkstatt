@@ -1,7 +1,8 @@
 ---
-description: "SDD Stufe 2 – offene Fragen einer Spec klären"
-argument-hint: "<NN-name>"
+description: 'SDD Stufe 2 – offene Fragen einer Spec klären'
+argument-hint: '<NN-name>'
 ---
+
 SDD-Stufe 2 **Clarify** gemäß `docs/prozess/sdd-ablauf.md` (verbindlich über `CONSTITUTION.md`).
 
 Vorhaben: $ARGUMENTS

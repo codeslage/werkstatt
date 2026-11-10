@@ -1,7 +1,8 @@
 ---
-description: "Release-Kandidat taggen, über int abnehmen lassen und nach prod bringen"
-argument-hint: "[Version, z. B. v0.3.0]"
+description: 'Release-Kandidat taggen, über int abnehmen lassen und nach prod bringen'
+argument-hint: '[Version, z. B. v0.3.0]'
 ---
+
 Release gemäß `docs/prozess/release.md`.
 
 Version (optional): $ARGUMENTS

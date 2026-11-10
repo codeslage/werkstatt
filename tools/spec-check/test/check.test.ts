@@ -19,7 +19,11 @@ describe('Spec-Check: gültige Dokumente (AK-16)', () => {
   });
 
   it('akzeptiert ⚠️ mit Anmerkung und – ohne Anmerkung', () => {
-    let text = withRow(validSpec, 'VIII Datenschutz & EU', '| VIII Datenschutz & EU | ⚠️ | US-Dienste, siehe dsgvo.md |');
+    let text = withRow(
+      validSpec,
+      'VIII Datenschutz & EU',
+      '| VIII Datenschutz & EU | ⚠️ | US-Dienste, siehe dsgvo.md |',
+    );
     text = withRow(text, 'IX Mensch im Loop', '| IX Mensch im Loop | – | |');
     expect(checkDocument('spec', text, NUMERALS)).toEqual([]);
   });

@@ -9,13 +9,13 @@
 
 ## Entscheidung
 
-| Thema | Gewählt | Statt | Warum |
-|---|---|---|---|
-| Monorepo | **pnpm-Workspace**, Skripte per `pnpm -r` | Turborepo | Caching und Task-Graph lohnen sich erst ab mehreren Apps. Turborepo kommt in Phase 2 dazu, wenn `apps/web` entsteht und die CI messbar langsam wird. |
-| Git-Hooks | **`.githooks/` + `core.hooksPath`**, gesetzt im `prepare`-Skript | husky, lefthook | Ein Shell-Skript mit wenigen Zeilen, keine Abhängigkeit. Läuft unter Git Bash (Windows) und macOS. |
-| Updates | **Dependabot** (Versionen + Sicherheits-Updates) | Renovate | in GitHub eingebaut, keine Drittanbieter-App mit Repo-Rechten; deckt npm, GitHub Actions, Docker und Terraform/OpenTofu ab |
-| Secret-Scan | **gitleaks**-Binary, in der CI gepinnt mit Prüfsumme | `gitleaks-action` | Die Action braucht für Organisationen einen Lizenzschlüssel. |
-| TypeScript in `apps/status` | **Node 24 Type-Stripping**, kein Build-Schritt | tsc-Build, tsx | Keine Build-Abhängigkeit für eine App aus wenigen Zeilen. `tsc --noEmit` prüft trotzdem die Typen. |
+| Thema                       | Gewählt                                                          | Statt             | Warum                                                                                                                                                |
+| --------------------------- | ---------------------------------------------------------------- | ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Monorepo                    | **pnpm-Workspace**, Skripte per `pnpm -r`                        | Turborepo         | Caching und Task-Graph lohnen sich erst ab mehreren Apps. Turborepo kommt in Phase 2 dazu, wenn `apps/web` entsteht und die CI messbar langsam wird. |
+| Git-Hooks                   | **`.githooks/` + `core.hooksPath`**, gesetzt im `prepare`-Skript | husky, lefthook   | Ein Shell-Skript mit wenigen Zeilen, keine Abhängigkeit. Läuft unter Git Bash (Windows) und macOS.                                                   |
+| Updates                     | **Dependabot** (Versionen + Sicherheits-Updates)                 | Renovate          | in GitHub eingebaut, keine Drittanbieter-App mit Repo-Rechten; deckt npm, GitHub Actions, Docker und Terraform/OpenTofu ab                           |
+| Secret-Scan                 | **gitleaks**-Binary, in der CI gepinnt mit Prüfsumme             | `gitleaks-action` | Die Action braucht für Organisationen einen Lizenzschlüssel.                                                                                         |
+| TypeScript in `apps/status` | **Node 24 Type-Stripping**, kein Build-Schritt                   | tsc-Build, tsx    | Keine Build-Abhängigkeit für eine App aus wenigen Zeilen. `tsc --noEmit` prüft trotzdem die Typen.                                                   |
 
 ## Folgen
 

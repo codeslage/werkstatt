@@ -23,29 +23,29 @@ Welche Apps, Pakete und Module werden angelegt oder geändert? Erlaubte Abhängi
 
 ## Teststrategie
 
-| AK | Testart | Wo |
-|---|---|---|
-| AK-1 | Unit / Integration / E2E / Infra / manuell | |
+| AK   | Testart                                    | Wo  |
+| ---- | ------------------------------------------ | --- |
+| AK-1 | Unit / Integration / E2E / Infra / manuell |     |
 
 ## Constitution-Check
 
-| Artikel | Bewertung | Anmerkung |
-|---|---|---|
-| I Spec zuerst | | |
-| II Tests beweisen die Spec | | |
-| III Kleine Schritte | | |
-| IV Fragen statt raten | | |
-| V Keine zerstörerischen Aktionen | | |
-| VI Secrets nie ins Repo | | |
-| VII Sicher als Standard | | |
-| VIII Datenschutz & EU | | |
-| IX Mensch im Loop | | |
-| X Reproduzierbar | | |
-| XI Einfach vor vollständig | | |
-| XII Offen dokumentieren | | |
-| XIII Wiederverwendbar | | |
-| XIV Messen statt schätzen | | |
-| XV Kein unnötiger Code | | |
-| XVI Fehler sind sichtbar | | |
+| Artikel                          | Bewertung | Anmerkung |
+| -------------------------------- | --------- | --------- |
+| I Spec zuerst                    |           |           |
+| II Tests beweisen die Spec       |           |           |
+| III Kleine Schritte              |           |           |
+| IV Fragen statt raten            |           |           |
+| V Keine zerstörerischen Aktionen |           |           |
+| VI Secrets nie ins Repo          |           |           |
+| VII Sicher als Standard          |           |           |
+| VIII Datenschutz & EU            |           |           |
+| IX Mensch im Loop                |           |           |
+| X Reproduzierbar                 |           |           |
+| XI Einfach vor vollständig       |           |           |
+| XII Offen dokumentieren          |           |           |
+| XIII Wiederverwendbar            |           |           |
+| XIV Messen statt schätzen        |           |           |
+| XV Kein unnötiger Code           |           |           |
+| XVI Fehler sind sichtbar         |           |           |
 
 ## Risiken

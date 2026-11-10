@@ -1,7 +1,8 @@
 ---
-description: "SDD Stufe 8 – Retro, Soll/Ist und Content-Notizen"
-argument-hint: "<NN-name>"
+description: 'SDD Stufe 8 – Retro, Soll/Ist und Content-Notizen'
+argument-hint: '<NN-name>'
 ---
+
 SDD-Stufe 8 **Retro** gemäß `docs/prozess/sdd-ablauf.md` (verbindlich über `CONSTITUTION.md`).
 
 Vorhaben: $ARGUMENTS

@@ -1,7 +1,8 @@
 ---
-description: "Fehler in prod beheben – wählt den passenden Hotfix-Weg"
-argument-hint: "<kurzname> <Fehlerbeschreibung>"
+description: 'Fehler in prod beheben – wählt den passenden Hotfix-Weg'
+argument-hint: '<kurzname> <Fehlerbeschreibung>'
 ---
+
 Hotfix gemäß `docs/prozess/release.md` (Abschnitt Hotfix) und `docs/prozess/aenderungsklassen.md` (Klasse K, ggf. Notfall).
 
 Fehler: $ARGUMENTS

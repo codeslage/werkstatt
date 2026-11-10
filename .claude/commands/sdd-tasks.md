@@ -1,7 +1,8 @@
 ---
-description: "SDD Stufe 4 – freigegebenen Plan in kleine Tasks zerlegen"
-argument-hint: "<NN-name>"
+description: 'SDD Stufe 4 – freigegebenen Plan in kleine Tasks zerlegen'
+argument-hint: '<NN-name>'
 ---
+
 SDD-Stufe 4 **Tasks** gemäß `docs/prozess/sdd-ablauf.md` (verbindlich über `CONSTITUTION.md`).
 
 Vorhaben: $ARGUMENTS

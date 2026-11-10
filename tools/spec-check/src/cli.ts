@@ -33,7 +33,9 @@ function main(): void {
     process.exit(2);
   }
   const errors = documents(dir).flatMap((path) =>
-    checkDocument(KINDS.get(basename(path)) ?? 'spec', readFileSync(path, 'utf8'), numerals).map((error) => `${path}: ${error}`),
+    checkDocument(KINDS.get(basename(path)) ?? 'spec', readFileSync(path, 'utf8'), numerals).map(
+      (error) => `${path}: ${error}`,
+    ),
   );
   for (const error of errors) console.error(error);
   process.exit(errors.length === 0 ? 0 : 1);

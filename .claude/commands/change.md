@@ -1,7 +1,8 @@
 ---
-description: "Kleine Änderung (Klasse K) mit Change-Seite durchführen"
-argument-hint: "<kurzname> <Beschreibung>"
+description: 'Kleine Änderung (Klasse K) mit Change-Seite durchführen'
+argument-hint: '<kurzname> <Beschreibung>'
 ---
+
 Kleine Änderung gemäß `docs/prozess/aenderungsklassen.md` (Klasse K).
 
 Änderung: $ARGUMENTS

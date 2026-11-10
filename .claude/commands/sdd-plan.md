@@ -1,7 +1,8 @@
 ---
-description: "SDD Stufe 3 – technischen Plan zu einer freigegebenen Spec erstellen"
-argument-hint: "<NN-name>"
+description: 'SDD Stufe 3 – technischen Plan zu einer freigegebenen Spec erstellen'
+argument-hint: '<NN-name>'
 ---
+
 SDD-Stufe 3 **Plan** gemäß `docs/prozess/sdd-ablauf.md` (verbindlich über `CONSTITUTION.md`).
 
 Vorhaben: $ARGUMENTS

@@ -12,10 +12,10 @@ Eine schlanke, reproduzierbare Architektur, die ins Budget (≤ ~10–15 €/Mon
 
 **Ausbaustufen** (ADR 0009, Leitsatz „Wir bauen erst, wenn wir es brauchen“):
 
-| Stufe | Was läuft wo | Laufende Kosten |
-|---|---|---|
-| Jetzt (Phase 1–2) | Entwicklung lokal (Docker Compose), CI auf GitHub, DNS und Webseite (Klick-Dummy) auf Cloudflare Free / Pages | 0 € |
-| Ab Phase S (bei Bedarf, spätestens vor der ersten Kunden-Demo) | Zielbild unten: eigener Server mit Coolify | nach Anbieterwahl |
+| Stufe                                                          | Was läuft wo                                                                                                  | Laufende Kosten   |
+| -------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------- | ----------------- |
+| Jetzt (Phase 1–2)                                              | Entwicklung lokal (Docker Compose), CI auf GitHub, DNS und Webseite (Klick-Dummy) auf Cloudflare Free / Pages | 0 €               |
+| Ab Phase S (bei Bedarf, spätestens vor der ersten Kunden-Demo) | Zielbild unten: eigener Server mit Coolify                                                                    | nach Anbieterwahl |
 
 Zielbild ab Phase S:
 
@@ -54,17 +54,17 @@ Zielbild ab Phase S:
 
 ### A1 – Repository & Code
 
-| Entscheidung | Begründung |
-|---|---|
-| **Ein öffentliches Monorepo** `github.com/codeslage/werkstatt` | Schaufenster: Kunden sehen, wie gearbeitet wird |
-| **GitHub-Organisation `codeslage` (Free-Plan)** | Trennung von privatem Account, Marke in der URL, später übertragbar/Team-fähig. Business-Plan nicht nötig. |
-| **Privates Repo `codeslage/internal`** (lokal `X:\Coding\codeslage-internal`) | Für alles, was nie öffentlich sein soll: **Ideenboard** (`ideen/`), Preise, Strategie, später Prompts mit Geschäftslogik und Kundendaten-Fixtures. Von Anfang an getrennt, weil einmal Veröffentlichtes in der Git-Historie öffentlich bleibt. Der „Premium“-Bereich der *Apps* ist dagegen eine Laufzeit-Frage (Login), keine Repo-Frage. |
-| pnpm-Workspace, TypeScript strict; Turborepo erst ab mehreren Apps (ADR 0008) | wie im Startprompt, Turborepo bei Bedarf |
-| Pakete **erst anlegen, wenn gebraucht** | vermeidet leere Hüllen |
-| Next.js für `web` und `portal` | ein Stack, ein Mental Model; Astro wäre für `web` schlanker, aber kein Muss |
-| Drizzle + PostgreSQL, Zod, Better Auth | wie im Startprompt |
-| Vitest + Playwright | Akzeptanzkriterien → Tests |
-| `.gitattributes` mit LF, `.editorconfig` | Windows ↔ Mac ohne Zeilenende-Chaos |
+| Entscheidung                                                                  | Begründung                                                                                                                                                                                                                                                                                                                                 |
+| ----------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **Ein öffentliches Monorepo** `github.com/codeslage/werkstatt`                | Schaufenster: Kunden sehen, wie gearbeitet wird                                                                                                                                                                                                                                                                                            |
+| **GitHub-Organisation `codeslage` (Free-Plan)**                               | Trennung von privatem Account, Marke in der URL, später übertragbar/Team-fähig. Business-Plan nicht nötig.                                                                                                                                                                                                                                 |
+| **Privates Repo `codeslage/internal`** (lokal `X:\Coding\codeslage-internal`) | Für alles, was nie öffentlich sein soll: **Ideenboard** (`ideen/`), Preise, Strategie, später Prompts mit Geschäftslogik und Kundendaten-Fixtures. Von Anfang an getrennt, weil einmal Veröffentlichtes in der Git-Historie öffentlich bleibt. Der „Premium“-Bereich der _Apps_ ist dagegen eine Laufzeit-Frage (Login), keine Repo-Frage. |
+| pnpm-Workspace, TypeScript strict; Turborepo erst ab mehreren Apps (ADR 0008) | wie im Startprompt, Turborepo bei Bedarf                                                                                                                                                                                                                                                                                                   |
+| Pakete **erst anlegen, wenn gebraucht**                                       | vermeidet leere Hüllen                                                                                                                                                                                                                                                                                                                     |
+| Next.js für `web` und `portal`                                                | ein Stack, ein Mental Model; Astro wäre für `web` schlanker, aber kein Muss                                                                                                                                                                                                                                                                |
+| Drizzle + PostgreSQL, Zod, Better Auth                                        | wie im Startprompt                                                                                                                                                                                                                                                                                                                         |
+| Vitest + Playwright                                                           | Akzeptanzkriterien → Tests                                                                                                                                                                                                                                                                                                                 |
+| `.gitattributes` mit LF, `.editorconfig`                                      | Windows ↔ Mac ohne Zeilenende-Chaos                                                                                                                                                                                                                                                                                                        |
 
 **Geplante Struktur:**
 
@@ -100,7 +100,7 @@ codeslage/
 ### A2 – Lokale Entwicklung
 
 - **Windows (jetzt):** native Entwicklung mit Node, pnpm, Git und OpenTofu direkt unter Windows im Repo `X:\Coding\codeslage`.
-  Begründung: WSL2 ist nur schnell, wenn das Repo *im* Linux-Dateisystem liegt; auf `X:\` (über `/mnt/x`) sind Builds und File-Watcher langsam. Da der Mac bald kommt, lohnt sich der WSL-Umweg nicht.
+  Begründung: WSL2 ist nur schnell, wenn das Repo _im_ Linux-Dateisystem liegt; auf `X:\` (über `/mnt/x`) sind Builds und File-Watcher langsam. Da der Mac bald kommt, lohnt sich der WSL-Umweg nicht.
 - **Mac (später):** Repo klonen, `pnpm install`, fertig. Keine Windows-spezifischen Skripte – nur plattformneutrale Node-Skripte.
 - **Dienste lokal in Containern:** Postgres und die Apps laufen über **Docker Compose**, nur auf `localhost`, mit Seed-Daten. Jede App hat ein Dockerfile; dasselbe Image baut und startet die CI bei jedem PR. So ist der spätere Umzug auf einen Server kein Umbau. Bis Phase S ist **dev = lokal** (ADR 0009).
 
@@ -108,37 +108,38 @@ codeslage/
 
 Bis Phase S gibt es nur Cloudflare (DNS, Pages, R2 für den Tofu-State) und GitHub. Alles, was einen Server betrifft, gilt ab Phase S.
 
-| Baustein | Entscheidung |
-|---|---|
-| Webseite (Phase 2) | **Cloudflare Pages** als statische Seite (Klick-Dummy), Cloudflare Web Analytics |
+| Baustein            | Entscheidung                                                                                                                                                                                                                                              |
+| ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Webseite (Phase 2)  | **Cloudflare Pages** als statische Seite (Klick-Dummy), Cloudflare Web Analytics                                                                                                                                                                          |
 | Server (ab Phase S) | **1× Cloud-Server in der EU (bevorzugt DE), ~4 vCPU / 8 GB RAM.** Anbieter wird in Phase S nach den dann gültigen Preisen gewählt (Recherche R1, ADR 0001 vertagt). Stand 2026-11-05: Hetzner CX33 nicht bestellbar, UpCloud Starter 8 GB ca. 20 € netto. |
-| Deployment | **Coolify** auf demselben Server; Merge nach `main` → Build → dev; Releases per Tag nach int/prod (A11) |
-| DNS/Proxy | **Cloudflare Free**; SSL-Modus **Full (strict)**; Origin-Zertifikat oder DNS-Challenge statt HTTP-Challenge |
-| IaC | **OpenTofu** (Empfehlung, s. ADR unten) mit dem Provider des gewählten Anbieters und `cloudflare`; Server, Firewall, SSH-Keys, DNS-Records, R2-Buckets |
-| Tofu-State | Remote in **Cloudflare R2** (S3-Backend) + **OpenTofu State Encryption** |
-| Server-Setup | **cloud-init** (von Tofu übergeben): User anlegen, SSH-Härtung, unattended-upgrades, Tailscale, Docker/Coolify |
-| Nicht in IaC | Coolify-Konfiguration (Apps, Env-Vars) → wird in `docs/runbooks/` dokumentiert; später prüfen, ob die Coolify-API automatisierbar ist |
-| Kein Vercel | wie im Startprompt |
+| Deployment          | **Coolify** auf demselben Server; Merge nach `main` → Build → dev; Releases per Tag nach int/prod (A11)                                                                                                                                                   |
+| DNS/Proxy           | **Cloudflare Free**; SSL-Modus **Full (strict)**; Origin-Zertifikat oder DNS-Challenge statt HTTP-Challenge                                                                                                                                               |
+| IaC                 | **OpenTofu** (Empfehlung, s. ADR unten) mit dem Provider des gewählten Anbieters und `cloudflare`; Server, Firewall, SSH-Keys, DNS-Records, R2-Buckets                                                                                                    |
+| Tofu-State          | Remote in **Cloudflare R2** (S3-Backend) + **OpenTofu State Encryption**                                                                                                                                                                                  |
+| Server-Setup        | **cloud-init** (von Tofu übergeben): User anlegen, SSH-Härtung, unattended-upgrades, Tailscale, Docker/Coolify                                                                                                                                            |
+| Nicht in IaC        | Coolify-Konfiguration (Apps, Env-Vars) → wird in `docs/runbooks/` dokumentiert; später prüfen, ob die Coolify-API automatisierbar ist                                                                                                                     |
+| Kein Vercel         | wie im Startprompt                                                                                                                                                                                                                                        |
 
 #### Recherche R1 – Hosting-Anbieter (erster Schritt in Phase S)
 
 Kandidaten (nicht abschließend): Hetzner Cloud, netcup, IONOS Cloud, OVHcloud, Scaleway, STACKIT.
 
-| Kriterium | Gewicht |
-|---|---|
-| Rechenzentrum in der EU (bevorzugt DE), AVV/DSGVO sauber | Muss |
-| Preis für ~4 vCPU / 8 GB inkl. IPv4 im Budget | Muss |
-| Gepflegter Terraform/OpenTofu-Provider (Server, Firewall, Keys) | Muss |
-| Cloud-Firewall vor dem Server | Soll |
-| Stundenweise Abrechnung (PoC-Server kurz hoch- und runterfahren) | Soll |
-| Snapshots/Images, Skalierung ohne Neuinstallation | Soll |
-| Bekanntheit bei DACH-Startups (Schaufenster-Wirkung, Kundenrelevanz) | Kann |
+| Kriterium                                                            | Gewicht |
+| -------------------------------------------------------------------- | ------- |
+| Rechenzentrum in der EU (bevorzugt DE), AVV/DSGVO sauber             | Muss    |
+| Preis für ~4 vCPU / 8 GB inkl. IPv4 im Budget                        | Muss    |
+| Gepflegter Terraform/OpenTofu-Provider (Server, Firewall, Keys)      | Muss    |
+| Cloud-Firewall vor dem Server                                        | Soll    |
+| Stundenweise Abrechnung (PoC-Server kurz hoch- und runterfahren)     | Soll    |
+| Snapshots/Images, Skalierung ohne Neuinstallation                    | Soll    |
+| Bekanntheit bei DACH-Startups (Schaufenster-Wirkung, Kundenrelevanz) | Kann    |
 
 Ergebnis: ADR `docs/adr/0001-hosting-anbieter.md` mit Vergleichstabelle und aktuellen Preisen.
 
 #### ADR-Vorschlag – OpenTofu statt Terraform
 
 Für mich (Claude) macht es praktisch keinen Unterschied: gleiche Sprache (HCL), gleiche Provider, gleiche Befehle. Wissen und Code lassen sich 1:1 übertragen. Entscheidend sind daher zwei Punkte:
+
 - **Für OpenTofu:** echte Open-Source-Lizenz (MPL) und eingebaute **State-Verschlüsselung**, die Terraform so nicht hat. Das ist gut für Secrets im State.
 - **Für Terraform:** bei Kunden und in Stellenanzeigen verbreiteter. Die Lizenz (BSL) ist für eigene Nutzung und Kundenprojekte unproblematisch.
 
@@ -169,13 +170,13 @@ Für mich (Claude) macht es praktisch keinen Unterschied: gleiche Sprache (HCL),
 
 Der Startprompt sah Outline + Plane + Twenty vor. Angepasst an Budget, „erst mal nur ich“ und den Fokus KI-Automation:
 
-| Zweck | Jetzt | Später (nach Bedarf) |
-|---|---|---|
-| Doku/Wiki | zentrales Docs-Portal aus allen Repos (siehe A10) + Google Docs | Outline |
-| Aufgaben | GitHub Issues + GitHub Projects | Plane |
-| CRM / Leads | eigene schlanke Lead-Tabelle in `packages/db` **oder** Twenty (siehe offene Frage 1) | Twenty |
-| Automation | eigener TypeScript-Code in `packages/automations` mit Claude API | ggf. n8n für visuelle Workflows |
-| Login | Google Workspace OAuth | – |
+| Zweck       | Jetzt                                                                                | Später (nach Bedarf)            |
+| ----------- | ------------------------------------------------------------------------------------ | ------------------------------- |
+| Doku/Wiki   | zentrales Docs-Portal aus allen Repos (siehe A10) + Google Docs                      | Outline                         |
+| Aufgaben    | GitHub Issues + GitHub Projects                                                      | Plane                           |
+| CRM / Leads | eigene schlanke Lead-Tabelle in `packages/db` **oder** Twenty (siehe offene Frage 1) | Twenty                          |
+| Automation  | eigener TypeScript-Code in `packages/automations` mit Claude API                     | ggf. n8n für visuelle Workflows |
+| Login       | Google Workspace OAuth                                                               | –                               |
 
 ### A7 – KI-Automationen (Phase 3)
 
@@ -212,6 +213,7 @@ Eigene Projekte und Kundenprojekte sind **eigenständige Repos** in der GitHub-O
 ### A10 – Zentrales Wiki / Doku
 
 Anforderungen:
+
 - **Eine zentrale Stelle** für die Doku aller Projekte und des Unternehmens
 - Für die KI lesbar und schreibbar (KI-getriebene Arbeitsweise)
 - Öffentliche Teile (Schaufenster) und interne Teile
@@ -219,11 +221,11 @@ Anforderungen:
 
 Optionen:
 
-| Option | Pro | Contra |
-|---|---|---|
-| **A: Docs-as-Code + zentrales Docs-Portal.** Jedes Repo hat `docs/` (Markdown), ein Build sammelt alle zu `docs.codeslage.de` (z. B. Astro Starlight) | Doku liegt beim Code und ist versioniert, Claude pflegt sie im selben PR mit. Kaum RAM nötig (statische Seite), selbst ein Schaufenster | Bearbeiten im Browser nur über GitHub, kein WYSIWYG |
-| **B: Outline selbst gehostet** | schönes Wiki mit WYSIWYG, Google-Login, API | ~1–2 GB RAM plus Wartung; Doku liegt getrennt vom Code und veraltet leichter |
-| **C: Google Docs/Drive** | schon vorhanden, kostet nichts | nicht strukturiert, für die KI schlechter zugänglich, kein Schaufenster |
+| Option                                                                                                                                                | Pro                                                                                                                                     | Contra                                                                       |
+| ----------------------------------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------- |
+| **A: Docs-as-Code + zentrales Docs-Portal.** Jedes Repo hat `docs/` (Markdown), ein Build sammelt alle zu `docs.codeslage.de` (z. B. Astro Starlight) | Doku liegt beim Code und ist versioniert, Claude pflegt sie im selben PR mit. Kaum RAM nötig (statische Seite), selbst ein Schaufenster | Bearbeiten im Browser nur über GitHub, kein WYSIWYG                          |
+| **B: Outline selbst gehostet**                                                                                                                        | schönes Wiki mit WYSIWYG, Google-Login, API                                                                                             | ~1–2 GB RAM plus Wartung; Doku liegt getrennt vom Code und veraltet leichter |
+| **C: Google Docs/Drive**                                                                                                                              | schon vorhanden, kostet nichts                                                                                                          | nicht strukturiert, für die KI schlechter zugänglich, kein Schaufenster      |
 
 → **Empfehlung: A** für Projekt- und Technik-Doku. Interne Bereiche schützt Cloudflare Access. Google Docs bleibt für Entwürfe und Nicht-Technisches. Outline kommt nur, wenn ein Browser-Editor wirklich fehlt; es lässt sich über die API auch mit den Repos synchronisieren.
 
@@ -231,15 +233,15 @@ Optionen:
 
 Details und Abläufe: `docs/prozess/release.md`, Änderungsklassen: `docs/prozess/aenderungsklassen.md`.
 
-| Entscheidung | Begründung |
-|---|---|
+| Entscheidung                                                                     | Begründung                                                                                                         |
+| -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------ |
 | **Drei Umgebungen dev · int · prod** als getrennte Coolify-Umgebungen auf der VM | klassische Trennung: aktiv gearbeitet wird nur auf dev, int ist prod-gleich zum Abnehmen und Testen, prod ist live |
-| **int wird bei Bedarf eingeschaltet** und nach dem Release wieder aus | spart RAM und Kosten; bei echten Testern später ggf. dauerhaft |
-| **Ein Branch (`main`) + Tags** statt Branches pro Umgebung | keine auseinanderlaufenden Branches, keine Merge-Konflikte zwischen Umgebungen |
-| **Build once, promote:** int und prod bekommen dasselbe Image | in prod läuft nachweislich das, was in int abgenommen wurde |
-| **Auto-Merge nach dev** bei grüner CI und Review ohne 🔴 | dev ist ein Entwicklungsstand; die menschliche Kontrolle sitzt bei Release-Kandidat und prod |
-| dev und int nur über **Cloudflare Access**, nur mit Seed-/Testdaten | Datenschutz (Artikel VIII), keine Echtdaten außerhalb von prod |
-| Ressourcen-Limits je Umgebung | dev und int dürfen prod nicht ausbremsen |
+| **int wird bei Bedarf eingeschaltet** und nach dem Release wieder aus            | spart RAM und Kosten; bei echten Testern später ggf. dauerhaft                                                     |
+| **Ein Branch (`main`) + Tags** statt Branches pro Umgebung                       | keine auseinanderlaufenden Branches, keine Merge-Konflikte zwischen Umgebungen                                     |
+| **Build once, promote:** int und prod bekommen dasselbe Image                    | in prod läuft nachweislich das, was in int abgenommen wurde                                                        |
+| **Auto-Merge nach dev** bei grüner CI und Review ohne 🔴                         | dev ist ein Entwicklungsstand; die menschliche Kontrolle sitzt bei Release-Kandidat und prod                       |
+| dev und int nur über **Cloudflare Access**, nur mit Seed-/Testdaten              | Datenschutz (Artikel VIII), keine Echtdaten außerhalb von prod                                                     |
+| Ressourcen-Limits je Umgebung                                                    | dev und int dürfen prod nicht ausbremsen                                                                           |
 
 Domains nach ADR 0004, nur eine Ebene unter `codeslage.de` (das kostenlose Cloudflare-Zertifikat deckt keine tieferen Namen ab): `codeslage.de` (prod), `int.codeslage.de`, `dev.codeslage.de`; je App `<app>.codeslage.de`, `<app>-int.codeslage.de`, `<app>-dev.codeslage.de`, z. B. `portal-int.codeslage.de`. PoC-Domains (A9) werden in Phase S nach demselben Prinzip festgelegt.
 
@@ -249,6 +251,7 @@ Domains nach ADR 0004, nur eine Ebene unter `codeslage.de` (das kostenlose Cloud
 
 **Empfehlung: nicht selbst bauen, sondern Lexoffice oder sevDesk per API anbinden.**
 Technisch ist eine Rechnung schnell gebaut – schwierig sind die rechtlichen Pflichten:
+
 - **GoBD:** Rechnungen müssen unveränderbar, lückenlos nummeriert und revisionssicher archiviert werden (mehrjährige Aufbewahrungspflicht).
 - **E-Rechnung:** Im B2B-Bereich wird die strukturierte E-Rechnung (XRechnung/ZUGFeRD) schrittweise Pflicht.
 - **Steuer:** Kleinunternehmerregelung, Umsatzsteuer usw.
@@ -265,28 +268,28 @@ Ein Buchhaltungstool erledigt das und bietet eine API.
 - [ ] Inhaber bestätigt das angepasste Company OS (A6).
 - [ ] Offene Fragen sind beantwortet oder bewusst vertagt.
 
-*(Technische Akzeptanzkriterien mit Tests folgen in den Phasen-Specs, z. B. `04-fundament.md`.)*
+_(Technische Akzeptanzkriterien mit Tests folgen in den Phasen-Specs, z. B. `04-fundament.md`.)_
 
 ## Constitution-Check
 
-| Artikel | Bewertung | Anmerkung |
-|---|---|---|
-| I Spec zuerst | ✅ | Phasen-Specs vor der Umsetzung |
-| II Tests beweisen die Spec | ✅ | Vitest/Playwright, Infra-Tests in `04-fundament.md` |
-| III Kleine Schritte | ✅ | Pakete erst bei Bedarf, `main` geschützt |
-| IV Fragen statt raten | ✅ | Anbieter offen (R1), offene Fragen unten |
-| V Keine zerstörerischen Aktionen | ✅ | kein `tofu apply` ohne geprüften Plan |
-| VI Secrets nie ins Repo | ✅ | A4, verschlüsselter State |
-| VII Sicher als Standard | ✅ | A4: Tailscale, Cloud-Firewall, Cloudflare Access, Least Privilege |
-| VIII Datenschutz & EU | ⚠️ | US-Anbieter (Cloudflare, Google, GitHub, Anthropic, Tailscale) nötig; abgesichert über Data Privacy Framework und AVV, dokumentiert in `docs/dsgvo.md` (A8) |
-| IX Mensch im Loop | ✅ | A7: Status `zur_prüfung`, Freigabe durch den Inhaber |
-| X Reproduzierbar | ⚠️ | Coolify-Konfiguration nicht als IaC → Runbook, API-Automatisierung später prüfen |
-| XI Einfach vor vollständig | ✅ | A6: Company-OS-Tools nur nach Bedarf |
-| XII Offen dokumentieren | ✅ | öffentliches Monorepo, ADRs, Docs-Portal |
-| XIII Wiederverwendbar | ✅ | Pakete, Projekt-Vorlage (A9) |
-| XIV Messen statt schätzen | ✅ | Kosten- und Budget-Check, Analytics |
-| XV Kein unnötiger Code | ✅ | Pakete erst bei Bedarf; CI-Prüfung (knip, dependency-cruiser, ESLint-Grenzen) ab Phase 1 |
-| XVI Fehler sind sichtbar | ✅ | strukturierte Logs über Coolify; Werkzeug für Benachrichtigungen je Phase im Plan |
+| Artikel                          | Bewertung | Anmerkung                                                                                                                                                   |
+| -------------------------------- | --------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| I Spec zuerst                    | ✅        | Phasen-Specs vor der Umsetzung                                                                                                                              |
+| II Tests beweisen die Spec       | ✅        | Vitest/Playwright, Infra-Tests in `04-fundament.md`                                                                                                         |
+| III Kleine Schritte              | ✅        | Pakete erst bei Bedarf, `main` geschützt                                                                                                                    |
+| IV Fragen statt raten            | ✅        | Anbieter offen (R1), offene Fragen unten                                                                                                                    |
+| V Keine zerstörerischen Aktionen | ✅        | kein `tofu apply` ohne geprüften Plan                                                                                                                       |
+| VI Secrets nie ins Repo          | ✅        | A4, verschlüsselter State                                                                                                                                   |
+| VII Sicher als Standard          | ✅        | A4: Tailscale, Cloud-Firewall, Cloudflare Access, Least Privilege                                                                                           |
+| VIII Datenschutz & EU            | ⚠️        | US-Anbieter (Cloudflare, Google, GitHub, Anthropic, Tailscale) nötig; abgesichert über Data Privacy Framework und AVV, dokumentiert in `docs/dsgvo.md` (A8) |
+| IX Mensch im Loop                | ✅        | A7: Status `zur_prüfung`, Freigabe durch den Inhaber                                                                                                        |
+| X Reproduzierbar                 | ⚠️        | Coolify-Konfiguration nicht als IaC → Runbook, API-Automatisierung später prüfen                                                                            |
+| XI Einfach vor vollständig       | ✅        | A6: Company-OS-Tools nur nach Bedarf                                                                                                                        |
+| XII Offen dokumentieren          | ✅        | öffentliches Monorepo, ADRs, Docs-Portal                                                                                                                    |
+| XIII Wiederverwendbar            | ✅        | Pakete, Projekt-Vorlage (A9)                                                                                                                                |
+| XIV Messen statt schätzen        | ✅        | Kosten- und Budget-Check, Analytics                                                                                                                         |
+| XV Kein unnötiger Code           | ✅        | Pakete erst bei Bedarf; CI-Prüfung (knip, dependency-cruiser, ESLint-Grenzen) ab Phase 1                                                                    |
+| XVI Fehler sind sichtbar         | ✅        | strukturierte Logs über Coolify; Werkzeug für Benachrichtigungen je Phase im Plan                                                                           |
 
 ## Offene Fragen
 

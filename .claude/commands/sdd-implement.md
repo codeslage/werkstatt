@@ -1,7 +1,8 @@
 ---
-description: "SDD Stufe 6 – nächste Task(s) testgetrieben umsetzen"
-argument-hint: "<NN-name> [T-xx]"
+description: 'SDD Stufe 6 – nächste Task(s) testgetrieben umsetzen'
+argument-hint: '<NN-name> [T-xx]'
 ---
+
 SDD-Stufe 6 **Implement** gemäß `docs/prozess/sdd-ablauf.md` (verbindlich über `CONSTITUTION.md`).
 
 Vorhaben/Task: $ARGUMENTS
