@@ -11,11 +11,13 @@
     "test": "vitest run",
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint .",
-    "knip": "knip"
+    "knip": "knip",
+    "depcruise": "depcruise --config .dependency-cruiser.json --output-type err ."
   },
   "devDependencies": {
     "@codeslage/config": "workspace:*",
     "@types/node": "24.19.2",
+    "dependency-cruiser": "18.7.2",
     "eslint": "10.14.0",
     "knip": "6.44.2",
     "typescript": "6.0.3",

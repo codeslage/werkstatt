@@ -35,7 +35,7 @@ Soll in Stunden (Claude, konservativ, inkl. Abstimmung); Ist wird bei Abschluss 
 | T-14 | `tools/quality-fixtures`: Tests für ESLint-Regeln (Komplexität, Tiefe, Funktions- und Dateilänge, `TODO`, leerer `catch`), zunächst rot | AK-18 | Vitest | T-13 | PR-04 | 1,5 | 0,25 | ✅ |
 | T-15 | ESLint-Konfiguration in `packages/config`, bis T-14 grün; Job `lint` | AK-18 | T-14 | T-14 | PR-04 | 1,5 | 0,25 | ✅ |
 | T-16 | knip: Fixtures (ungenutzte Datei, ungenutzter Export, ungenutzte Abhängigkeit) + Konfiguration + Job | AK-18 | Vitest | T-13 | PR-05 | 2 | 0,25 | ✅ |
-| T-17 | dependency-cruiser: Fixtures (Zyklus, `packages` → `apps`) + Regeln + Job | AK-18 | Vitest | T-13 | PR-06 | 2 | | ⬜ |
+| T-17 | dependency-cruiser: Fixtures (Zyklus, `packages` → `apps`) + Regeln + Job | AK-18 | Vitest | T-13 | PR-06 | 2 | 0,25 | ✅ |
 | T-18 | `tools/spec-check`: Tests mit Fixtures (fehlender Artikel, ⚠️ ohne Anmerkung, fehlende Status-Zeile, fehlender Constitution-Bezug, fehlende AK-Tabelle), zunächst rot | AK-16 | Vitest | T-13 | PR-07 | 1,5 | | ⬜ |
 | T-19 | `tools/spec-check` umsetzen, bis T-18 grün; Job prüft alle `spec.md`/`plan.md` unter `specs/` | AK-16 | T-18; bestehende Specs grün | T-18 | PR-07 | 3 | | ⬜ |
 | T-20 | `infra/tests/repo.test.ts`: Repo öffentlich, Ruleset auf `main` aktiv | AK-1 | Vitest in der CI | T-13 | PR-08 | 1 | | ⬜ |
