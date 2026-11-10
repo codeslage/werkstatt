@@ -20,7 +20,7 @@
   },
   "devDependencies": {
     "@codeslage/config": "workspace:*",
-    "@types/node": "24.19.2",
+    "@types/node": "26.6.6",
     "dependency-cruiser": "18.7.2",
     "eslint": "10.14.0",
     "knip": "6.44.2",
