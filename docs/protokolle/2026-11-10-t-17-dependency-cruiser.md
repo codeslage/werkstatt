@@ -12,3 +12,9 @@
 6. **Fund versteckter Fehler:** Zwischendurch ließ sich die Testdatei nicht laden (`package.json` von dependency-cruiser ist nicht exportiert). „Tests 41 passed“ sah grün aus, nur „Test Files 1 failed“ zeigte den Fehler. Lösung: Pfad über `import.meta.resolve`, das knip auch als Nutzung der Abhängigkeit erkennt. **Lehre:** immer „Test Files“ und „Tests“ prüfen.
 7. Ergebnis: 5 Testdateien / 46 Tests grün, `lint`, `typecheck`, `knip`, `depcruise` mit Exit 0, alle fünf CI-Jobs grün.
 8. Ruleset `main-schutz`: Pflicht-Checks sind jetzt **„Secret- und Öffentlich-Scan“, „Typecheck“, „Lint“, „Knip“, „Modulgrenzen“**.
+
+## Nach dem Review (🟡 1–2)
+
+9. **Prüfumfang:** Das Skript prüfte nur `packages tools`. Ein Zyklus in `apps/` wäre durchgerutscht. Jetzt prüft `pnpm depcruise` das ganze Repo (`.`). Neue Ordner sind so automatisch dabei, ohne dass jemand das Skript anfassen muss. Neuer Test: Zyklus in `apps/y` wird gemeldet.
+10. **Erlaubte Richtungen vollständig:** Neue Regel `nur-nach-packages`. Apps, Tools und `infra/tests` importieren nur aus dem eigenen Paket und aus `packages/`. Neue Tests: apps → tools, tools → apps, infra → tools, tools → anderes Tool. Sie waren erst rot (4 Tests) und mit der Regel grün. Imports innerhalb eines Pakets bleiben erlaubt (eigener Test).
+11. Ergebnis: 5 Testdateien / 52 Tests grün, alle Prüfungen mit Exit 0, `depcruise` über 21 Module ohne Verstoß.

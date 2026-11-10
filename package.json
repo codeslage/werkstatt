@@ -12,7 +12,7 @@
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint .",
     "knip": "knip",
-    "depcruise": "depcruise --config .dependency-cruiser.json --output-type err packages tools"
+    "depcruise": "depcruise --config .dependency-cruiser.json --output-type err ."
   },
   "devDependencies": {
     "@codeslage/config": "workspace:*",

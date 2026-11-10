@@ -14,6 +14,13 @@
       "severity": "error",
       "from": { "path": "^packages/" },
       "to": { "path": "^(apps|tools|infra)/" }
+    },
+    {
+      "name": "nur-nach-packages",
+      "comment": "Apps, Tools und infra/tests importieren nur aus dem eigenen Paket und aus packages/, nie voneinander (Plan 04-fundament, Erlaubte Abhängigkeiten).",
+      "severity": "error",
+      "from": { "path": "^(apps|tools|infra)/([^/]+)/" },
+      "to": { "path": "^(apps|tools|infra)/", "pathNot": "^$1/$2/" }
     }
   ],
   "options": {
