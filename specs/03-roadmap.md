@@ -17,7 +17,7 @@ Claude hat konservativ geschätzt (bei ~20 h/Woche). Der Inhaber wettet, dass es
 | 0 – Discovery | – | | 2026-11-04 | |
 | 1 – Fundament (lokal) | **2–3 Wochen** (≈ 50 h laut `tasks.md`; zuvor ~1 Woche, ursprünglich 1–2 Wochen mit Server) | | 2026-11-05 | |
 | 1.5 – Projekt-Plattform | ~1 Woche | | | |
-| 2 – Webseite (Click-Dummy) | 1–2 Wochen (vorher 2–3 Wochen mit Formular und Coolify) | | | |
+| 2 – Webseite (Klick-Dummy) | 1–2 Wochen (vorher 2–3 Wochen mit Formular und Coolify) | | | |
 | S – Server & Betrieb (bei Bedarf) | ~1 Woche | | | |
 | 3 – Erste KI-Automation | 2–4 Wochen | | | |
 | 4 – Demo-Kundenportal | 3–4 Wochen | | | |
@@ -48,7 +48,7 @@ Spec-Ordner: `specs/05-projekt-plattform/`
 - PoC-Hosting (Domains, Coolify-Deploy je Projekt, Access für Friendly User) → Phase S
 - **Fertig, wenn:** ein neues Projekt aus der Vorlage mit grüner CI startet und seine Doku im Docs-Portal erscheint.
 
-### Phase 2 – Webseite (Click-Dummy)
+### Phase 2 – Webseite (Klick-Dummy)
 Spec-Ordner: `specs/06-webseite/`
 - `apps/web` als statische Seite auf **Cloudflare Pages** (kostenlos): Startseite, Leistungen, Projekte/Referenzen, Über mich, Kontakt
 - Ziel: herausfinden, ob die Seite Besucher und Klicks bekommt, bevor wir Geld in Betrieb stecken
