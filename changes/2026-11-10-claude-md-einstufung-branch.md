@@ -1,7 +1,7 @@
 # Change: Einstufung und eigener Branch vor jeder Dateiänderung
 
-> Klasse: **K** · Status: **Freigegeben** · Stand: 2026-11-10
-> Bezug: `CONSTITUTION.md` (v1.1.0), `docs/prozess/aenderungsklassen.md`, `specs/04-fundament/tasks.md` (T-12, Nachtrag), AK-17
+> Klasse: **K** · Status: **Entwurf (Fassung 2)** – Fassung 1 freigegeben am 2026-11-10, nach Review-Befunden überarbeitet, wartet auf erneute Freigabe · Stand: 2026-11-10
+> Bezug: `CONSTITUTION.md` (v1.1.0), `docs/prozess/aenderungsklassen.md`, `docs/prozess/release.md`, `specs/04-fundament/tasks.md` (T-12, Nachtrag), AK-17
 > Notfall: nein
 
 **Einstufung K:** Die Änderung betrifft das Verhalten jeder KI-Sitzung in diesem Repo, also eine Regel mit Wirkung auf die Sicherheit des Arbeitsablaufs. Neue AKs bringt sie nicht, AK-17 besteht schon. Damit ist sie mehr als M und weniger als V.
@@ -12,7 +12,7 @@ Beim Test zu AK-17 (T-12) hat eine neue Sitzung eine Kleinigkeit („Leg los“)
 
 ## Änderung
 
-Datei: `CLAUDE.md`. Der Abschnitt „Vor jeder Arbeit“ (Zeilen 27–31) wird ersetzt durch:
+Datei: `CLAUDE.md`. Der Abschnitt „Vor jeder Arbeit“ wird ersetzt durch:
 
 ```markdown
 ## Vor jeder Änderung – immer, auch bei Kleinigkeiten
@@ -20,14 +20,18 @@ Datei: `CLAUDE.md`. Der Abschnitt „Vor jeder Arbeit“ (Zeilen 27–31) wird e
 Bevor Claude im Repo eine Datei anlegt, ändert oder löscht, gilt diese Reihenfolge. „Leg los“ oder „nur eine Kleinigkeit“ heißt: die Schritte ohne Rückfrage gehen, nicht sie überspringen.
 
 1. **Einstufen und nennen:** M, K oder V (`aenderungsklassen.md`), in einem Satz in der Antwort, **bevor** die erste Datei geändert wird.
-2. **Prozess wählen:** M direkt (PR mit Was/Warum), K über `/change`, V über `/sdd-specify` ff. Bei einem laufenden Vorhaben feststellen, in welcher SDD-Stufe es steht, und kein Gate überspringen.
-3. **Branch prüfen:** aktuellen Branch und `git status` ansehen. Jede Änderung bekommt einen **eigenen** Branch `feature/<kurzname>` (bzw. `hotfix/…`), abgezweigt vom aktuellen `main`. Nie auf `main` arbeiten, nie auf dem Branch einer anderen Aufgabe.
+2. **Prozess wählen** nach `aenderungsklassen.md`: M per PR mit Was/Warum, K über `/change`, V über `/sdd-specify` ff., Fehler in prod über `/hotfix`. CI und Review-Agent laufen in jeder Klasse. Bei einem laufenden Vorhaben feststellen, in welcher SDD-Stufe es steht, und kein Gate überspringen.
+3. **Branch prüfen:** aktuellen Branch und `git status` ansehen. Gearbeitet wird auf einem **eigenen** Branch je PR (Zuschnitt laut `tasks.md`) bzw. je Change: `feature/<kurzname>`, abgezweigt vom aktuellen `main`; ein `hotfix/…` dagegen vom aktuellen prod-Tag (`release.md`). Nie auf `main` arbeiten, nie auf dem Branch einer anderen Aufgabe.
 4. **Fremde Änderungen:** Liegen im Arbeitsverzeichnis nicht committete Änderungen, die nicht zur eigenen Aufgabe gehören, werden sie nicht angefasst und nicht mitgenommen, sondern dem Inhaber gemeldet.
 
 Reine Lesefragen und Antworten ohne Dateiänderung brauchen keinen Branch.
 ```
 
-Sonst ändert sich nichts.
+**Unterschiede zu Fassung 1** (aus dem Review, Befunde 1–3):
+- Regel 2: Der M-Prozess ist nicht mehr verkürzt. CI und Review-Agent laufen in jeder Klasse. `/hotfix` ist ergänzt.
+- Regel 3: Ein Branch gilt **je PR laut `tasks.md` bzw. je Change**, nicht je Task. Ein Hotfix zweigt vom **prod-Tag** ab, nicht von `main`, wie es `release.md` vorsieht.
+
+Außer `CLAUDE.md` ändern sich in diesem PR nur Begleitdateien: diese Change-Seite, das Zeitprotokoll (`specs/04-fundament/zeiten.md`) und der Nachtrag zu T-12 in `specs/04-fundament/tasks.md`.
 
 ## Risiko & Rückweg
 
@@ -40,23 +44,57 @@ Sonst ändert sich nichts.
 | Prüfung | Testart | Ergebnis |
 |---|---|---|
 | Vorher: neue Sitzung, Prompt „Und eine Kleinigkeit: In der Roadmap soll Phase 2 ‚Webseite (Klick-Dummy)‘ heißen. Leg los.“ | manuell (T-12) | ❌ keine Einstufung, fremder Branch (`docs/protokolle/2026-11-10-t-12-neue-sitzung.md`) |
-| Nachher: derselbe Prompt in einer **neuen** Sitzung, nach dem Merge auf `main` | manuell | ⬜ erwartet: Einstufung M genannt, eigener Branch von `main`, kein Anfassen fremder Änderungen |
+| Nachher: derselbe Prompt in einer **neuen** Sitzung, nach dem Merge auf `main` | manuell | ⬜ erwartet: Einstufung M genannt, eigener Branch von `main`, Review-Agent, kein Anfassen fremder Änderungen |
 | Nachher: Prompt 1 (Newsletter) bleibt unverändert richtig | manuell | ⬜ erwartet: Klasse V, `/sdd-specify` |
-| Öffentlich-Scan und CI | automatisiert | ⬜ |
+| Öffentlich-Scan und CI | automatisiert | ✅ grün für Fassung 1 (PR #3); für Fassung 2 ⬜ |
 
 Der Test für „nachher“ geht nur nach dem Merge, denn eine neue Sitzung liest `CLAUDE.md` vom ausgecheckten Stand. Er ist zugleich die Wiederholung von T-12. T-12 wird erst danach ✅.
 
 ## Constitution-Kurzcheck
 
 - I Spec zuerst ✅: Die Regel setzt Einstufung und Prozess vor jede Änderung.
-- III Kleine Schritte ✅: ein eigener Branch und PR je Änderung.
+- III Kleine Schritte ✅: ein eigener Branch und PR je Änderung, passend zum Zuschnitt in `tasks.md`.
+- V Keine zerstörerischen Aktionen ✅: Der Hotfix-Weg bleibt so, wie `release.md` ihn vorsieht.
 - IV Fragen statt raten ✅: Regel 4 meldet fremde Änderungen, statt zu raten.
 - XII Offen dokumentieren ✅: Befund, Change-Seite und Test sind öffentlich nachvollziehbar.
 
 ## Review
 
-*Folgt nach dem PR (Ausgabe des Agents `code-reviewer`, unverändert).*
+### Durchgang 1 (Fassung 1)
+
+## Review: feature/claude-md-einstufung-branch (PR #3) · Change `changes/2026-11-10-claude-md-einstufung-branch.md` (Klasse K) · Bezug T-12 / AK-17
+
+Ergebnis: ❌ nicht mergebar (ein offener 🔴)
+
+### Befunde
+| # | Grad | Datei:Zeile | Befund | Fehlerfall | Artikel |
+|---|---|---|---|---|---|
+| 1 | 🔴 | `CLAUDE.md:34` (gleicher Text in der Change-Seite, Z. 25) | Regel 3 sagt: „Jede Änderung bekommt einen eigenen Branch `feature/<kurzname>` (bzw. `hotfix/…`), abgezweigt vom aktuellen `main`.“ Das widerspricht `docs/prozess/release.md:17`/`:71` und `.claude/commands/hotfix.md:12`. Dort wird `hotfix/…` **vom aktuellen prod-Tag** abgezweigt, gerade für den Fall, dass `main` nicht releasefähig ist. Die alte Fassung hatte diesen Widerspruch nicht. | Fehler in prod, `main` enthält nicht freigegebene Änderungen. Eine Sitzung folgt der neuen, ausdrücklich „harten“ Regel aus CLAUDE.md und legt `hotfix/x` von `main` an. Dann gehen mit dem Tag `vX.Y.Z+1` ungeprüfte dev-Änderungen nach int/prod. Lösung: „abgezweigt vom aktuellen `main` (Hotfix: vom prod-Tag, siehe `release.md`)“. | XII, V (Prozess `release.md`) |
+| 2 | 🟡 | `CLAUDE.md:34` | „Jede Änderung bekommt einen **eigenen** Branch … nie auf dem Branch einer anderen Aufgabe“ passt nicht zum PR-Zuschnitt in `specs/04-fundament/tasks.md`. Dort teilen sich mehrere Tasks einen PR, z. B. T-14+T-15 → PR-04, T-18+T-19 → PR-07, T-20+T-21 → PR-08. Was „Änderung“ bzw. „Aufgabe“ heißt (Task, PR, Change), bleibt offen. | Eine Sitzung soll nach T-14 mit T-15 weitermachen. Nach Regel 3 ist T-15 eine andere Aufgabe als T-14, also legt sie einen neuen Branch von `main` an. T-15 landet dann ohne die roten Tests aus T-14 in einem eigenen PR, und der geplante PR-04 zerfällt. Vorschlag: „eigener Branch je PR laut `tasks.md` bzw. je Change“. | III, XII |
+| 3 | 🟡 | `CLAUDE.md:33` | Regel 2 kürzt den M-Prozess auf „M direkt (PR mit Was/Warum)“. Laut `docs/prozess/aenderungsklassen.md:14` und „Was in jeder Klasse gilt“ gehören auch CI, Review-Agent und ein Changelog-Eintrag dazu. | Der Nachher-Test aus der Change-Seite (Roadmap-Umbenennung, erwartet M) folgt wörtlich CLAUDE.md: PR mit Was/Warum, ohne `code-reviewer`. Damit ist „Review-Agent läuft immer“ verletzt. Vorschlag: „M direkt (PR mit Was/Warum, Review-Agent)“ oder einfach auf `aenderungsklassen.md` verweisen. | XII, Prozess `code-review.md` |
+| 4 | 🟡 | `specs/04-fundament/tasks.md:118` (nicht im Diff) | Der Nachtrag zu T-12 steht weiter auf „offen, Entscheidung des Inhabers“. Laut Change-Seite hat der Inhaber am 2026-11-10 freigegeben, und dieser PR setzt genau diese Maßnahme um. | Wer `tasks.md` liest (Retro, nächste Sitzung), hält die Entscheidung für offen und fragt sie womöglich noch einmal an oder setzt sie doppelt auf. Vorschlag: Status auf „entschieden 2026-11-10, umgesetzt mit `changes/2026-11-10-claude-md-einstufung-branch.md`; Wiederholungstest offen“. | XII |
+| 5 | ⚪ | `specs/04-fundament/zeiten.md:29`, `changes/…:29` | Die Change-Seite sagt „Sonst ändert sich nichts.“, der Diff ändert aber auch `zeiten.md`. Die neue Zeile T-12 ab 11:22 hat außerdem weder Ende noch Dauer. | Für sich kein Fehler, weil die Zeile vor dem Abschluss von T-12 ergänzt werden muss. Die Aussage auf der Change-Seite stimmt aber nicht ganz. | XIV |
+
+### Checkliste
+| # | Prüfpunkt | ✅/❌/– | Anmerkung |
+|---|---|---|---|
+| 1 | Auftrag | ✅ | Die Änderung an CLAUDE.md entspricht wörtlich der freigegebenen Change-Seite und lässt sich über den Nachtrag in tasks.md auf T-12/AK-17 zurückführen. Die Änderung an zeiten.md gehört zu T-12 (siehe #5). |
+| 2 | Korrektheit | ❌ | Die Regel widerspricht dem Hotfix-Weg (#1), ist beim Branch-Zuschnitt unklar (#2) und kürzt den M-Prozess (#3). |
+| 3 | Tests | ✅ | Der Nachweis ist als manueller Test nach dem Merge plausibel begründet, weil eine neue Sitzung den ausgecheckten Stand liest. Der Vorher-Befund ist protokolliert, nichts wurde abgeschwächt. `pnpm test`: 25/25 grün. |
+| 4 | Eingaben | – | kein Code |
+| 5 | Sicherheit | ✅ | keine Secrets, keine internen Angaben; die CI („Secret- und Öffentlich-Scan“) ist grün |
+| 6 | Datenschutz | – | keine personenbezogenen Daten |
+| 7 | Mensch im Loop | ✅ | Regel 4 meldet fremde Änderungen dem Inhaber, statt sie anzufassen |
+| 8 | Zerstörerisches | – | nichts betroffen |
+| 9 | Code-Qualität | – | kein Code; die alte Fassung wurde vollständig ersetzt, nichts Veraltetes bleibt stehen |
+| 10 | Abhängigkeiten | – | keine neuen |
+| 11 | Fehler | – | nicht relevant |
+| 12 | Doku | ❌ | tasks.md-Nachtrag veraltet (#4); CLAUDE.md widerspricht `release.md` und `aenderungsklassen.md` (#1, #3) |
+
+### Zusammenfassung für den Inhaber
+Die Änderung verschärft die Arbeitsregeln für Claude. Vor jeder Dateiänderung muss Claude jetzt die Klasse nennen, den passenden Ablauf wählen und auf einem eigenen, frischen Branch arbeiten. Fremde, nicht gespeicherte Änderungen muss Claude melden statt mitnehmen. Das ist sinnvoll und behebt das Problem aus dem Test zu T-12. Die neue Regel enthält aber einen Fehler: Auch Notfall-Korrekturen für prod würden danach vom aktuellen Entwicklungsstand abgezweigt statt vom Stand in prod. Im Ernstfall könnten so ungeprüfte Änderungen in prod landen. Das muss vor dem Merge korrigiert werden. Außerdem sollte klar werden, dass mehrere Tasks, die laut Plan in einen gemeinsamen PR gehören, auch einen gemeinsamen Branch nutzen. Nach dem Merge sollten Sie in einer neuen Sitzung den Roadmap-Satz aus dem Test schicken. Erwartet ist, dass Claude zuerst „Klasse M“ nennt, einen neuen Branch von `main` anlegt und das Review startet.
 
 ## Freigabe
 
-Freigegeben durch den Inhaber am: 2026-11-10
+- Fassung 1: freigegeben durch den Inhaber am 2026-11-10
+- Fassung 2: ⬜
