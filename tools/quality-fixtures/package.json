@@ -9,6 +9,7 @@
     "@codeslage/config": "workspace:*",
     "dependency-cruiser": "18.7.2",
     "eslint": "10.14.0",
-    "knip": "6.44.2"
+    "knip": "6.44.2",
+    "prettier": "3.9.10"
   }
 }
