@@ -25,15 +25,7 @@ jobs:
         with:
           fetch-depth: 0
 
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: 24
-
-      - name: pnpm über Corepack
-        run: corepack enable
-
-      - name: Abhängigkeiten installieren
-        run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
 
       # Kein gitleaks-action: braucht für Organisationen einen Lizenzschlüssel (ADR 0008).
       - name: gitleaks installieren (gepinnt, Prüfsumme)
@@ -46,7 +38,7 @@ jobs:
           tar -xzf "$RUNNER_TEMP/$archive" -C "$RUNNER_TEMP/bin" gitleaks
           echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
 
-      - name: Tests des Scans
+      - name: Tests (alle Pakete; die Scan-Tests brauchen gitleaks)
         run: pnpm test
 
       # Ebene 2 (governance.md): gesamte Historie inkl. dieses PRs, Sperrliste aus dem Secret.
@@ -61,15 +53,18 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
-        with:
-          node-version: 24
-
-      - name: pnpm über Corepack
-        run: corepack enable
-
-      - name: Abhängigkeiten installieren
-        run: pnpm install --frozen-lockfile
+      - uses: ./.github/actions/setup
 
       - name: Typecheck (alle Pakete)
         run: pnpm typecheck
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: ESLint (Komplexitäts- und Größengrenzen, Artikel XV)
+        run: pnpm lint

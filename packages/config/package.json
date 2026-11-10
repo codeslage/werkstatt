@@ -3,10 +3,16 @@
   "private": true,
   "type": "module",
   "exports": {
+    "./eslint": "./eslint.config.js",
     "./tsconfig.json": "./tsconfig.json"
   },
   "peerDependencies": {
     "@types/node": ">=24",
-    "typescript": ">=7"
+    "eslint": ">=10",
+    "typescript": ">=6"
+  },
+  "dependencies": {
+    "@eslint/js": "10.0.1",
+    "typescript-eslint": "8.72.2"
   }
 }

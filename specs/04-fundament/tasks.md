@@ -32,7 +32,7 @@ Soll in Stunden (Claude, konservativ, inkl. Abstimmung); Ist wird bei Abschluss 
 | ID | Task | AK | Test | Abhängig von | PR | Soll | Ist | Status |
 |---|---|---|---|---|---|---|---|---|
 | T-13 | pnpm-Workspace, `packages/config` mit tsconfig strict, Job `typecheck` in der CI | AK-1 | CI-Job grün | T-10 | PR-03 | 1 | 0,25 | ✅ |
-| T-14 | `tools/quality-fixtures`: Tests für ESLint-Regeln (Komplexität, Tiefe, Funktions- und Dateilänge, `TODO`, leerer `catch`), zunächst rot | AK-18 | Vitest | T-13 | PR-04 | 1,5 | | ⬜ |
+| T-14 | `tools/quality-fixtures`: Tests für ESLint-Regeln (Komplexität, Tiefe, Funktions- und Dateilänge, `TODO`, leerer `catch`), zunächst rot | AK-18 | Vitest | T-13 | PR-04 | 1,5 | 0,25 | ✅ |
 | T-15 | ESLint-Konfiguration in `packages/config`, bis T-14 grün; Job `lint` | AK-18 | T-14 | T-14 | PR-04 | 1,5 | | ⬜ |
 | T-16 | knip: Fixtures (ungenutzte Datei, ungenutzter Export, ungenutzte Abhängigkeit) + Konfiguration + Job | AK-18 | Vitest | T-13 | PR-05 | 2 | | ⬜ |
 | T-17 | dependency-cruiser: Fixtures (Zyklus, `packages` → `apps`) + Regeln + Job | AK-18 | Vitest | T-13 | PR-06 | 2 | | ⬜ |

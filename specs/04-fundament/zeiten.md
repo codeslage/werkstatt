@@ -29,3 +29,5 @@ Methode (festgelegt am 2026-11-05):
 | T-12 | 2026-11-10 11:22 | 2026-11-10 11:38 | 0:16 | Change an CLAUDE.md (K): Change-Seite, zwei Fassungen, zwei Review-Durchgänge; Wiederholungstest folgt nach dem Merge |
 | T-12 | 2026-11-10 12:17 | 2026-11-10 12:20 | 0:03 | Wiederholungstest ausgewertet (✅), Protokoll, Change-Seite auf Umgesetzt |
 | T-13 | 2026-11-10 13:06 | 2026-11-10 13:09 | 0:03 | Workspace, tsconfig strict, CI-Job Typecheck, Pflicht-Check im Ruleset; Review-Befunde behoben |
+| T-14 | 2026-11-10 13:36 | 2026-11-10 13:38 | 0:02 | Tests für 6 Regeln aus AK-18 + sauberer Fall, rot (keine Konfiguration); Wechsel auf TypeScript 6.0.3 wegen typescript-eslint |
+| T-15 | 2026-11-10 13:38 | | | |
