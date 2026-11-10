@@ -1,0 +1,4 @@
+{
+  "extends": "@codeslage/config/tsconfig.json",
+  "include": ["."]
+}

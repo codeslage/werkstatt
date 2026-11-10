@@ -101,3 +101,16 @@ jobs:
 
       - name: Pflichtteile aller spec.md und plan.md (Artikel I, AK-16)
         run: pnpm spec-check
+
+  repo-settings:
+    name: Repo-Einstellungen
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: Sichtbarkeit und Schutz von main bei GitHub (AK-1)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: pnpm test:infra
