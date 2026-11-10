@@ -217,6 +217,9 @@ importers:
       eslint:
         specifier: 10.14.0
         version: 10.14.0(jiti@2.7.0)
+      knip:
+        specifier: 6.44.2
+        version: 6.44.2
 
 packages:
 

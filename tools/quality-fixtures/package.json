@@ -7,6 +7,7 @@
   },
   "devDependencies": {
     "@codeslage/config": "workspace:*",
-    "eslint": "10.14.0"
+    "eslint": "10.14.0",
+    "knip": "6.44.2"
   }
 }

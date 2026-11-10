@@ -1,10 +1,12 @@
 import { spawnSync } from 'node:child_process';
-import { mkdirSync, mkdtempSync, rmSync, writeFileSync } from 'node:fs';
+import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
 
-const KNIP = join(import.meta.dirname, '..', '..', '..', 'node_modules', 'knip', 'bin', 'knip.js');
+const KNIP = join(import.meta.dirname, '..', 'node_modules', 'knip', 'bin', 'knip.js');
+// Die Fixtures nutzen die echte Repo-Konfiguration: Wird sie gelockert, werden diese Tests rot.
+const REPO_KNIP_CONFIG = JSON.parse(readFileSync(join(import.meta.dirname, '..', '..', '..', 'knip.json'), 'utf8'));
 const tempDirs: string[] = [];
 
 afterEach(() => {
@@ -20,7 +22,7 @@ function project(violation?: Violation): string {
   mkdirSync(join(dir, 'src'));
   const dependencies = violation === 'dependencies' ? { 'left-pad': '1.3.0' } : {};
   writeFileSync(join(dir, 'package.json'), JSON.stringify({ name: 'fixture', private: true, type: 'module', dependencies }));
-  writeFileSync(join(dir, 'knip.json'), JSON.stringify({ entry: ['src/index.ts'], project: ['src/**/*.ts'] }));
+  writeFileSync(join(dir, 'knip.json'), JSON.stringify({ ...REPO_KNIP_CONFIG, entry: ['src/index.ts'], project: ['src/**/*.ts'] }));
   writeFileSync(join(dir, 'src', 'index.ts'), "import { used } from './used.ts';\nconsole.log(used);\n");
   const extraExport = violation === 'exports' ? 'export const unusedExport = 2;\n' : '';
   writeFileSync(join(dir, 'src', 'used.ts'), `export const used = 1;\n${extraExport}`);
