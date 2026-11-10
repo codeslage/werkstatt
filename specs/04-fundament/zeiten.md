@@ -33,3 +33,5 @@ Methode (festgelegt am 2026-11-05):
 | T-15 | 2026-11-10 13:38 | 2026-11-10 13:40 | 0:02 | ESLint-Konfiguration, alle Tests im ersten Lauf grün; CI-Setup als lokale Action; Lint als Pflicht-Check |
 | T-16 | 2026-11-10 13:48 | 2026-11-10 13:50 | 0:02 | knip mit Tests und Repo-Konfiguration; echter Fund (toter Export) behoben; Pflicht-Check |
 | T-17 | 2026-11-10 13:54 | 2026-11-10 13:59 | 0:05 | dependency-cruiser mit Tests (rot → grün, Gegenprobe); Funde Exit-Code bei json und verdeckter Ladefehler; Pflicht-Check |
+| T-18 | 2026-11-10 14:04 | 2026-11-10 14:04 | 0:00 | Tests für 7 Fehlerarten, 3 gültige Fälle und Lauf über specs/; rot (Modul fehlt) |
+| T-19 | 2026-11-10 14:04 | | | |

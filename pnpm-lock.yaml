@@ -227,6 +227,12 @@ importers:
         specifier: 6.44.2
         version: 6.44.2
 
+  tools/spec-check:
+    devDependencies:
+      '@codeslage/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+
 packages:
 
   '@cacheable/memory@2.2.0':

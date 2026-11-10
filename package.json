@@ -12,7 +12,8 @@
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint .",
     "knip": "knip",
-    "depcruise": "depcruise --config .dependency-cruiser.json --output-type err ."
+    "depcruise": "depcruise --config .dependency-cruiser.json --output-type err .",
+    "spec-check": "node tools/spec-check/src/cli.ts specs"
   },
   "devDependencies": {
     "@codeslage/config": "workspace:*",
