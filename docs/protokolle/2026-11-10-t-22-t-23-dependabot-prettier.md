@@ -22,7 +22,7 @@
 
 ## Nach dem Review (🔴 1, 🟡 2–4, ⚪ 5–6)
 
-10. **🔴 Governance:** Die einmalige Formatierung hat auch `CONSTITUTION.md`, `docs/prozess/`, `.claude/commands/` und `specs/_vorlagen/` berührt. Es ändert sich nur Leerraum, Kursivschrift (`*…*` → `_…_`) und Anführungszeichen im YAML-Frontmatter, der Wortlaut bleibt gleich. Für diese Dateien braucht es laut `governance.md` die Freigabe des Inhabers, deshalb wird dieser PR nicht selbst gemergt. **Entscheidung des Inhabers:** ⬜
+10. **🔴 Governance:** Die einmalige Formatierung hat auch `CONSTITUTION.md`, `docs/prozess/`, `.claude/commands/` und `specs/_vorlagen/` berührt. Es ändert sich nur Leerraum, Kursivschrift (`*…*` → `_…_`) und Anführungszeichen im YAML-Frontmatter, der Wortlaut bleibt gleich. Für diese Dateien braucht es laut `governance.md` die Freigabe des Inhabers, deshalb wird dieser PR nicht selbst gemergt. **Entscheidung des Inhabers am 2026-11-10: freigegeben.** Keine Versionserhöhung der Constitution, weil sich nicht einmal die Formulierung ändert (PATCH wäre „nur Formulierung“); Vermerk im Changelog.
 11. T-22: Die Ist-Zeit bleibt leer, solange T-22 🔄 ist (Regel aus Review T-12-2: Ist erst bei Abschluss). Die bisherige Zeit steht in `zeiten.md`.
 12. T-23 war zum Zeitpunkt des Reviews noch nicht nachgetragen. Das ist inzwischen erledigt (✅, Ist 0,25).
 13. T-27 und T-37 nennen jetzt ausdrücklich, dass das Dependabot-Ökosystem `docker` bzw. `terraform` ergänzt wird (AK-29).
