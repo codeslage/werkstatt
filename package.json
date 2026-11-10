@@ -10,13 +10,15 @@
     "prepare": "git config core.hooksPath .githooks",
     "test": "vitest run",
     "typecheck": "pnpm -r typecheck",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "knip": "knip"
   },
   "devDependencies": {
+    "@codeslage/config": "workspace:*",
     "@types/node": "24.19.2",
     "eslint": "10.14.0",
+    "knip": "6.44.2",
     "typescript": "6.0.3",
-    "vitest": "^5.1.0",
-    "@codeslage/config": "workspace:*"
+    "vitest": "^5.1.0"
   }
 }
