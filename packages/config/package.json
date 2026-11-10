@@ -1,0 +1,12 @@
+{
+  "name": "@codeslage/config",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./tsconfig.json": "./tsconfig.json"
+  },
+  "peerDependencies": {
+    "@types/node": ">=24",
+    "typescript": ">=7"
+  }
+}
