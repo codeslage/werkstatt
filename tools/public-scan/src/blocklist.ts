@@ -1,6 +1,6 @@
 import { existsSync, readFileSync } from 'node:fs';
 
-export const BLOCKLIST_RULE_ID = 'codeslage-blocklist';
+const BLOCKLIST_RULE_ID = 'codeslage-blocklist';
 
 /**
  * Liest die vertrauliche Sperrliste: in der CI aus der Umgebungsvariable
