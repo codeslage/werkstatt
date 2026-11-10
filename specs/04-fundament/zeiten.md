@@ -26,3 +26,4 @@ Methode (festgelegt am 2026-11-05):
 | T-11 | 2026-11-06 17:53 | 2026-11-06 17:56 | 0:03 | Kanarienbegriff + Secret (Inhaber), Wegwerf-PR 1: CI rot mit 3 Funden, Review-Agent 3× 🔴; PR geschlossen, Branch gelöscht |
 | T-12 | 2026-11-06 17:56 | 2026-11-06 17:57 | 0:01 | Anleitung für den Test in neuer Sitzung; danach Pause bis zur Antwort (zählt nicht) |
 | T-12 | 2026-11-10 11:08 | 2026-11-10 11:12 | 0:04 | Antworten ausgewertet (⚠️ AK-17 teilweise), Änderung der Testsitzung gesichert, Protokoll |
+| T-12 | 2026-11-10 11:22 | | | |
