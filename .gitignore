@@ -12,6 +12,7 @@ coverage/
 # OpenTofu: State und Provider-Cache gehören nie ins Repo
 *.tfstate
 *.tfstate.*
+*.tfplan
 .terraform/
 
 # Persönliche Einstellungen
