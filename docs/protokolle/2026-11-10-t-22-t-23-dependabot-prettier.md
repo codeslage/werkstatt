@@ -34,3 +34,6 @@
 16. Dabei sind zwei Lücken aufgefallen:
     - **`@types/node` 26 passt nicht zu Node 24.** Major-Updates von `@types/node` sind jetzt ausgenommen, Updates innerhalb von 24.x kommen weiter. PR #15 wird ungemergt geschlossen.
     - **Secret-Scan auf Dependabot-PRs rot:** Workflows, die Dependabot auslöst, bekommen aus Sicherheitsgründen keine normalen Actions-Secrets, also auch nicht `PUBLIC_BLOCKLIST`. Der Scan bricht dann absichtlich ab. Abhilfe: Das Secret wird zusätzlich als **Dependabot-Secret** gesetzt (Schritt des Inhabers, `docs/secrets.md`).
+17. Nach dem Review: Laut Plan wird AK-29 **je Ökosystem** nachgewiesen. Belegt ist bisher nur npm (#15). T-22 bleibt deshalb 🔄, bis für `github-actions` ein Update-PR oder ein beobachteter Lauf ohne Updates belegt ist. `docker` und `terraform` werden in T-27 bzw. T-37 ergänzt und dort beobachtet.
+18. `docs/secrets.md` nennt das Dependabot-Secret jetzt richtig als **noch offen**.
+19. PR #15 ist noch offen. Das Schließen per CLI hat die Rechteprüfung der Sitzung blockiert. Es übernimmt der Inhaber, oder Dependabot schließt den PR selbst, sobald die Ausnahme auf `main` ist.
