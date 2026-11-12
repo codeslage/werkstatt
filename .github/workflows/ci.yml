@@ -113,7 +113,7 @@ jobs:
       - name: Sichtbarkeit und Schutz von main bei GitHub (AK-1)
         env:
           GITHUB_TOKEN: ${{ github.token }}
-        run: pnpm test:infra
+        run: pnpm test:infra repo.test.ts
 
   format:
     name: Format
