@@ -23,6 +23,7 @@ export const violations = {
 /** Inhalte, die der Scan durchlassen muss (keine Fehlalarme). */
 export const allowed = {
   documentationIpv4: 'Beispiele: 192.0.2.10, 198.51.100.7, 203.0.113.5',
+  publicResolvers: 'Resolver: 1.1.1.1, 1.0.0.1, 8.8.8.8, 8.8.4.4, 9.9.9.9',
   localhost: 'ports: ["127.0.0.1:5432:5432"], listen 0.0.0.0',
   documentationIpv6: 'Beispiele: 2001:db8::1 und ::1',
   exampleEmail: 'Platzhalter: info@example.com, test@example.org',
