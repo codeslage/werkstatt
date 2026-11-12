@@ -5,7 +5,8 @@ provider "cloudflare" {
 # Speicher für die verschlüsselten States aller Tofu-Wurzeln (bootstrap, live).
 # EU-Rechtsraum: Daten bleiben in der EU (Constitution VIII).
 resource "cloudflare_r2_bucket" "state" {
-  account_id   = var.account_id
+  account_id = var.account_id
+  # Derselbe Name steht in backend.tf (dort sind keine Variablen möglich): bei einer Umbenennung beide ändern.
   name         = "codeslage-tofu-state"
   jurisdiction = "eu"
   location     = "weur"

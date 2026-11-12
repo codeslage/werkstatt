@@ -122,15 +122,15 @@ Konfiguration nur über Umgebungsvariablen: `DATABASE_URL`, `APP_VERSION`, `PORT
 
 **Externe Schnittstellen und Tokens** (alle in `docs/secrets.md` ohne Werte, AK-14):
 
-| Schnittstelle         | Wer                        | Token                      | Rechte                                                                                                                   |
-| --------------------- | -------------------------- | -------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| Cloudflare API        | Tofu lokal                 | `CF_API_TOKEN_RW`          | Zone `codeslage.de`: DNS Edit, Zone Settings Edit, Zone Read; Account: R2 Edit (nur für den Bootstrap, danach entziehen) |
-| Cloudflare API        | Drift-Check (CI)           | `CF_API_TOKEN_RO`          | Zone `codeslage.de`: DNS Read, Zone Settings Read, Zone Read                                                             |
-| R2 (S3-API)           | Tofu-State lokal           | `R2_STATE_RW`              | Object Read & Write, nur Bucket `codeslage-tofu-state`                                                                   |
-| R2 (S3-API)           | Drift-Check (CI)           | `R2_STATE_RO`              | Object Read, nur dieser Bucket                                                                                           |
-| State-Verschlüsselung | lokal + CI                 | `TF_ENCRYPTION_PASSPHRASE` | – (zusätzlich im Passwort-Manager)                                                                                       |
-| Sperrliste            | CI                         | `PUBLIC_BLOCKLIST`         | –                                                                                                                        |
-| GitHub API            | `infra/tests/repo.test.ts` | keiner                     | öffentliche Endpunkte (Repo-Sichtbarkeit, Rulesets)                                                                      |
+| Schnittstelle         | Wer                        | Token                                        | Rechte                                                                                                                                                        |
+| --------------------- | -------------------------- | -------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Cloudflare API        | Tofu lokal                 | `CLOUDFLARE_API_TOKEN` (`codeslage-tofu-rw`) | Zone `codeslage.de`: DNS Edit, Zone Settings Edit, Zone DNS Settings Edit (für DNSSEC), Zone Read; Account: R2 Edit (nur für den Bootstrap, danach entziehen) |
+| Cloudflare API        | Drift-Check (CI)           | `CF_API_TOKEN_RO`                            | Zone `codeslage.de`: DNS Read, Zone Settings Read, Zone Read                                                                                                  |
+| R2 (S3-API)           | Tofu-State lokal           | `R2_STATE_RW`                                | Object Read & Write, nur Bucket `codeslage-tofu-state`                                                                                                        |
+| R2 (S3-API)           | Drift-Check (CI)           | `R2_STATE_RO`                                | Object Read, nur dieser Bucket                                                                                                                                |
+| State-Verschlüsselung | lokal + CI                 | `TF_ENCRYPTION_PASSPHRASE`                   | – (zusätzlich im Passwort-Manager)                                                                                                                            |
+| Sperrliste            | CI                         | `PUBLIC_BLOCKLIST`                           | –                                                                                                                                                             |
+| GitHub API            | `infra/tests/repo.test.ts` | keiner                                       | öffentliche Endpunkte (Repo-Sichtbarkeit, Rulesets)                                                                                                           |
 
 `main` wird über ein **Repository-Ruleset** geschützt statt über die klassische Branch-Protection. Rulesets lassen sich ohne Admin-Token lesen, deshalb kann der AK-1-Test in der CI ohne Sonderrechte laufen.
 
@@ -171,7 +171,7 @@ Konfiguration nur über Umgebungsvariablen: `DATABASE_URL`, `APP_VERSION`, `PORT
 
 - Voraussetzung: V2 ✅, **V8** (Zahlungsmethode in Cloudflare hinterlegen, nötig für R2, offene Frage 9), Tokens (V5)
 - Bestandsaufnahme aller Records beim Registrar → `docs/runbooks/dns-bestand.md`; Angaben, die nicht öffentlich sein dürfen, nach `codeslage-internal`
-- `infra/tofu/bootstrap`: State-Bucket anlegen, danach den eigenen State in den Bucket verschieben; R2-Edit-Recht danach aus `CF_API_TOKEN_RW` entfernen
+- `infra/tofu/bootstrap`: State-Bucket anlegen, danach den eigenen State in den Bucket verschieben; R2-Edit-Recht danach aus `CLOUDFLARE_API_TOKEN` (`codeslage-tofu-rw`) entfernen
 - `infra/tofu/live`: Zone, alle bestehenden Records 1:1 (zuerst MX, SPF, DKIM, DMARC, Google-Verifizierung). `tofu plan` prüfen wir gemeinsam, erst danach folgt `apply`.
 - Zonen-Einstellungen: SSL Full (strict), Always HTTPS, min. TLS 1.2, DNSSEC; DMARC mindestens `p=none` mit Reporting
 - `infra/tests/dns.test.ts` (AK-3) zuerst gegen die Cloudflare-Nameserver, **bevor** V6 umgestellt wird; TTL beim Registrar vorher senken

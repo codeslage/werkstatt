@@ -40,4 +40,4 @@ Für den Erstaufbau hat der Token `codeslage-tofu-rw` das Recht „Workers R2 St
 ## Notfall
 
 - **Passphrase verloren:** Der State ist nicht mehr lesbar. Die Ressourcen bestehen weiter, OpenTofu muss sie mit einer neuen Passphrase per `import` neu übernehmen.
-- **Bucket gelöscht:** Er ist mit `prevent_destroy` geschützt. Löschen nur nach ausdrücklicher Freigabe (Constitution V).
+- **Bucket gelöscht:** `prevent_destroy` schützt nur vor OpenTofu, nicht vor einem Löschen im Dashboard oder per API. Wiederherstellung: In `bootstrap` vorübergehend `backend.tf` entfernen und den Bucket wie beim Erstaufbau neu anlegen (Plan zeigen, Freigabe, `apply`, Migration). Danach übernimmt jede Wurzel ihre bestehenden Ressourcen per `tofu import` wieder in einen neuen State. Die Ressourcen selbst (Zone, DNS) sind von einem verlorenen State nicht betroffen. Löschen nur nach ausdrücklicher Freigabe (Constitution V).

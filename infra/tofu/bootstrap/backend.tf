@@ -3,7 +3,7 @@
 #   tofu init -backend-config="endpoints={s3=\"$R2_ENDPOINT\"}"
 terraform {
   backend "s3" {
-    bucket       = "codeslage-tofu-state"
+    bucket       = "codeslage-tofu-state" # muss zu cloudflare_r2_bucket.state in main.tf passen
     key          = "bootstrap.tfstate"
     region       = "auto"
     use_lockfile = true

@@ -27,3 +27,10 @@
    - Das Objekt `bootstrap.tfstate` im Bucket, roh über die API gelesen, enthält nur `encrypted_data`. **Kein Klartext.**
 10. Lokale Reste gelöscht (leere `terraform.tfstate`, verschlüsselte `.backup` mit Serial 1, Plan-Datei). `*.tfplan` steht jetzt in der `.gitignore`.
 11. Runbook `docs/runbooks/tofu-state.md`, `docs/secrets.md`, `.env.example` und `docs/dsgvo.md` (R2 im EU-Rechtsraum) aktualisiert.
+
+## Nach dem Review (🟡 1–3, ⚪ 4–5)
+
+12. `secrets.md`: `PUBLIC_BLOCKLIST` ist für Actions und Dependabot gesetzt, der Widerspruch zu `tasks.md` ist behoben.
+13. Plan und Tasks verwenden jetzt den echten Tokennamen `CLOUDFLARE_API_TOKEN` (`codeslage-tofu-rw`). Das Recht „Zone DNS Settings Edit“ steht jetzt im Plan, mit Begründung: Es wird für DNSSEC in T-36 gebraucht.
+14. T-32: PR-14 statt PR-13. Die Ist-Zeit ist nachgetragen, der Beginn der Messung ist aber erst die Anlage der `.env`. Die Schritte davor sind nicht erfasst, der Wert ist deshalb zu niedrig. Das ist in `zeiten.md` vermerkt.
+15. Runbook: Wiederherstellung, falls der Bucket außerhalb von OpenTofu gelöscht wird. Gegenseitige Hinweise auf den doppelten Bucketnamen stehen jetzt in `main.tf` und `backend.tf`.
