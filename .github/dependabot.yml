@@ -17,6 +17,9 @@ updates:
       # typescript-eslint unterstützt nur typescript < 6.1 (PR-04). Zurück auf neuere Versionen, sobald es das tut.
       - dependency-name: typescript
         versions: ['>=6.1']
+      # Die Typen müssen zur Node-Version der Laufzeit passen (Node 24): nur Updates innerhalb von 24.x.
+      - dependency-name: '@types/node'
+        update-types: ['version-update:semver-major']
 
   - package-ecosystem: github-actions
     directories: ['/', '/.github/actions/*']
