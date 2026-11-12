@@ -27,3 +27,10 @@
 12. T-23 war zum Zeitpunkt des Reviews noch nicht nachgetragen. Das ist inzwischen erledigt (✅, Ist 0,25).
 13. T-27 und T-37 nennen jetzt ausdrücklich, dass das Dependabot-Ökosystem `docker` bzw. `terraform` ergänzt wird (AK-29).
 14. ⚪ Change-Seiten in `changes/` werden mit formatiert, auch die darin zitierten Reviews. Der Wortlaut bleibt erhalten, nur Leerraum kann sich ändern. Das wird bewusst so gelassen, weil die Change-Seiten auch eigenen Text enthalten.
+
+## Nachweis AK-29 (2026-11-12)
+
+15. **Erster Dependabot-PR:** codeslage/werkstatt#15 „Bump @types/node from 24.19.2 to 26.6.6“, erstellt am 2026-11-10 um 13:49 UTC, also wenige Minuten nach dem Merge von `dependabot.yml`. Damit ist belegt, dass Updates automatisch als PR kommen.
+16. Dabei sind zwei Lücken aufgefallen:
+    - **`@types/node` 26 passt nicht zu Node 24.** Major-Updates von `@types/node` sind jetzt ausgenommen, Updates innerhalb von 24.x kommen weiter. PR #15 wird ungemergt geschlossen.
+    - **Secret-Scan auf Dependabot-PRs rot:** Workflows, die Dependabot auslöst, bekommen aus Sicherheitsgründen keine normalen Actions-Secrets, also auch nicht `PUBLIC_BLOCKLIST`. Der Scan bricht dann absichtlich ab. Abhilfe: Das Secret wird zusätzlich als **Dependabot-Secret** gesetzt (Schritt des Inhabers, `docs/secrets.md`).
