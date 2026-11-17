@@ -4,7 +4,7 @@
 
 ## Überblick
 
-- Alle Tofu-Wurzeln (`infra/tofu/bootstrap`, später `infra/tofu/live`) speichern ihren State im R2-Bucket **`codeslage-tofu-state`**, ein Objekt je Wurzel (`bootstrap.tfstate`, `live.tfstate`).
+- Alle Tofu-Wurzeln (`infra/tofu/bootstrap`, `infra/tofu/live`) speichern ihren State im R2-Bucket **`codeslage-tofu-state`**, ein Objekt je Wurzel (`bootstrap.tfstate`, `live.tfstate`).
 - Der Bucket liegt im **EU-Rechtsraum** von R2 (Constitution VIII). Dafür gibt es einen eigenen Endpoint: `https://<konto-id>.eu.r2.cloudflarestorage.com`.
 - State und Pläne sind **immer verschlüsselt** (AES-GCM, Schlüssel per PBKDF2 aus `TF_ENCRYPTION_PASSPHRASE`). Ohne Passphrase sind sie unlesbar, deshalb liegt sie zusätzlich im Passwortmanager des Inhabers.
 - `tofu apply` führt nur der Inhaber lokal aus, nach einem gemeinsam geprüften `plan` (ADR 0002, Constitution V).
@@ -16,7 +16,7 @@ Voraussetzung: die lokale `.env` (Namen in `.env.example`, Register in `docs/sec
 ```bash
 set -a; . ./.env; set +a
 export TF_VAR_account_id="$CLOUDFLARE_ACCOUNT_ID" TF_VAR_state_passphrase="$TF_ENCRYPTION_PASSPHRASE"
-cd infra/tofu/bootstrap
+cd infra/tofu/bootstrap   # bzw. infra/tofu/live
 tofu init -backend-config="endpoints={s3=\"$R2_ENDPOINT\"}"
 tofu plan
 ```
