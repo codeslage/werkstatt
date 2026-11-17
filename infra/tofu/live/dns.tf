@@ -38,12 +38,12 @@ resource "cloudflare_dns_record" "dkim_google" {
 }
 
 # Neu (AK-3). Erst beobachten (p=none), verschärft wird nach Auswertung der Berichte.
-# Die Berichtsadresse (rua) von Cloudflare DMARC Management kommt mit T-38: Das gibt es erst für aktive Zonen.
+# Die Berichte gehen an Cloudflare DMARC Management (Dashboard → Email); die Adresse hat Cloudflare beim Einschalten vergeben.
 resource "cloudflare_dns_record" "dmarc" {
   zone_id = cloudflare_zone.main.id
   name    = "_dmarc.${local.zone_name}"
   type    = "TXT"
-  content = "\"v=DMARC1; p=none\""
+  content = "\"v=DMARC1; p=none; rua=mailto:8fdd6a6b7ce0432c87fcd165f80827f7@dmarc-reports.cloudflare.net;\""
   ttl     = 1
   proxied = false
 }
