@@ -34,12 +34,18 @@ OpenTofu übernimmt die Zone und ihre Einträge danach per Import (T-36). Ab dan
 
 - `infra/tofu/live` verwaltet die Zone, MX, SPF, DKIM, DMARC (`p=none`), die Einstellungen (SSL Full strict, Always HTTPS, Mindest-TLS 1.2) und DNSSEC. Arbeiten damit wie in `docs/runbooks/tofu-state.md`, nur im Ordner `live`.
 - Der A-Eintrag der Parkseite ist gelöscht (einmaliger API-Aufruf mit Freigabe, Protokoll `docs/protokolle/2026-11-17-t-36-tofu-live.md`).
-- Offen für T-38: DMARC-Berichtsadresse über Cloudflare DMARC Management (erst bei aktiver Zone verfügbar) und der DS-Eintrag für DNSSEC. Bis dahin ignoriert OpenTofu den DNSSEC-Status (`ignore_changes`), ein Abschalten im Dashboard fiele also nicht auf: DNSSEC dort nicht anfassen.
+- DMARC-Berichtsadresse und DS-Eintrag kamen mit T-38 dazu (Abschnitt 3). Seitdem prüft OpenTofu auch den DNSSEC-Status: Ein Abschalten im Dashboard zeigt `tofu plan` als Änderung.
 
 ## 3. Umzug (T-38)
 
-Wird mit T-38 ausgefüllt: TTL beim Registrar senken, DNS-Test gegen die Cloudflare-Nameserver, Nameserver umstellen, DS-Eintrag für DNSSEC, Testmail in beide Richtungen.
+Erledigt am 2026-11-17 (Protokoll `docs/protokolle/2026-11-17-t-38-ns-umzug.md`). Ablauf für einen erneuten Umzug:
+
+1. DNS-Test gegen den neuen Nameserver: `DNS_SERVER=<ns> pnpm test:infra dns.test.ts` muss grün sein, bevor umgestellt wird.
+2. Beim Registrar ein Nameserver-Set mit den neuen Nameservern anlegen (ohne Glue Records) und der Domain zuweisen.
+3. Warten, bis die Registry (`nslookup -type=NS codeslage.de a.nic.de`) die neuen Nameserver meldet und die Zone bei Cloudflare `active` ist.
+4. DNSSEC: Beim Registrar den DNSKEY eintragen (Flags 257, Algorithmus 13, öffentlicher Schlüssel aus `cloudflare_zone_dnssec` bzw. der API). Bei einem Wechsel weg von Cloudflare **zuerst** den DNSSEC-Eintrag beim Registrar löschen und den Ablauf der TTL abwarten, sonst ist die Domain für prüfende Resolver nicht erreichbar. Prüfen, ob der DS-Eintrag steht und die Signatur gilt: `curl -s -H "accept: application/dns-json" "https://cloudflare-dns.com/dns-query?name=codeslage.de&type=DS"` muss einen Eintrag und `"AD":true` liefern (`nslookup` unter Windows kennt den Typ DS nicht).
+5. DNS-Test über die öffentliche Auflösung, Testmail in beide Richtungen.
 
 ## 4. Rückweg
 
-Bis die Nameserver beim Registrar umgestellt sind, hat nichts davon eine Wirkung nach außen. Danach gilt: Beim Registrar wieder die alten Nameserver eintragen. Die alten Einträge sind dort unverändert und greifen nach Ablauf der TTL wieder.
+Beim Registrar zuerst den DNSSEC-Eintrag löschen, dann wieder die netcup-Nameserver eintragen. Ob netcup die alte Zone behalten hat, ist offen: Der Reiter „CloudDNS“ ist nach dem Wechsel aus dem Kundenbereich verschwunden. Fehlen die Einträge, sie nach der Tabelle in Abschnitt 1 neu anlegen (MX, SPF, DKIM, dazu DMARC).
