@@ -23,6 +23,16 @@ tofu plan
 
 Die Konto-ID steht nie im Code. Sie kommt nur über `TF_VAR_account_id` und den Endpoint herein (`governance.md`, „Öffentlich vs. intern“).
 
+## Prüfen vor dem PR
+
+Dieselben Prüfungen wie der CI-Job „Infra (OpenTofu)“ (tflint 0.66.0 aus den Releases von `terraform-linters/tflint`, Prüfsumme vergleichen):
+
+```bash
+tofu fmt -check -recursive infra/tofu
+tflint --chdir=infra/tofu/live --config="$PWD/.tflint.hcl"   # je Wurzel
+pnpm test:infra tflint.test.ts
+```
+
 ## Erstaufbau (Henne-Ei, einmalig am 2026-11-12 erledigt)
 
 Der Bucket für den State muss existieren, bevor ein State darin liegen kann. Deshalb:
