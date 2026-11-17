@@ -29,8 +29,12 @@ Dieselben Prüfungen wie der CI-Job „Infra (OpenTofu)“ (tflint 0.66.0 aus de
 
 ```bash
 tofu fmt -check -recursive infra/tofu
-tflint --chdir=infra/tofu/live --config="$PWD/.tflint.hcl"   # je Wurzel
-pnpm test:infra tflint.test.ts
+for root in infra/tofu/*/; do
+  tofu -chdir="$root" init -backend=false -input=false
+  tofu -chdir="$root" validate
+  tflint --chdir="$root" --config="$PWD/.tflint.hcl"
+done
+pnpm test:infra hcl.test.ts
 ```
 
 ## Erstaufbau (Henne-Ei, einmalig am 2026-11-12 erledigt)

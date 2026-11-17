@@ -166,5 +166,5 @@ jobs:
             echo "::endgroup::"
           done
 
-      - name: tflint erkennt toten Code (Negativtest, AK-18)
-        run: pnpm test:infra tflint.test.ts
+      - name: Gegenbeispiele für fmt und tflint (Negativtests, AK-18, AK-30)
+        run: pnpm test:infra hcl.test.ts
