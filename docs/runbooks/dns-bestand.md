@@ -41,11 +41,13 @@ OpenTofu übernimmt die Zone und ihre Einträge danach per Import (T-36). Ab dan
 Erledigt am 2026-11-17 (Protokoll `docs/protokolle/2026-11-17-t-38-ns-umzug.md`). Ablauf für einen erneuten Umzug:
 
 1. DNS-Test gegen den neuen Nameserver: `DNS_SERVER=<ns> pnpm test:infra dns.test.ts` muss grün sein, bevor umgestellt wird.
-2. Beim Registrar ein Nameserver-Set mit den neuen Nameservern anlegen (ohne Glue Records) und der Domain zuweisen.
+2. Beim Registrar die neuen Nameserver eintragen (ohne Glue Records). Besonderheiten des Registrars: `codeslage-internal/betrieb/konten.md`.
 3. Warten, bis die Registry (`nslookup -type=NS codeslage.de a.nic.de`) die neuen Nameserver meldet und die Zone bei Cloudflare `active` ist.
 4. DNSSEC: Beim Registrar den DNSKEY eintragen (Flags 257, Algorithmus 13, öffentlicher Schlüssel aus `cloudflare_zone_dnssec` bzw. der API). Bei einem Wechsel weg von Cloudflare **zuerst** den DNSSEC-Eintrag beim Registrar löschen und den Ablauf der TTL abwarten, sonst ist die Domain für prüfende Resolver nicht erreichbar. Prüfen, ob der DS-Eintrag steht und die Signatur gilt: `curl -s -H "accept: application/dns-json" "https://cloudflare-dns.com/dns-query?name=codeslage.de&type=DS"` muss einen Eintrag und `"AD":true` liefern (`nslookup` unter Windows kennt den Typ DS nicht).
 5. DNS-Test über die öffentliche Auflösung, Testmail in beide Richtungen.
 
 ## 4. Rückweg
 
-Beim Registrar zuerst den DNSSEC-Eintrag löschen, dann wieder die netcup-Nameserver eintragen. Ob netcup die alte Zone behalten hat, ist offen: Der Reiter „CloudDNS“ ist nach dem Wechsel aus dem Kundenbereich verschwunden. Fehlen die Einträge, sie nach der Tabelle in Abschnitt 1 neu anlegen (MX, SPF, DKIM, dazu DMARC).
+1. Beim Registrar den DNSSEC-Eintrag löschen.
+2. **Warten**, bis der DS-Eintrag bei der Registry verschwunden und seine TTL (derzeit 86400 s, also 24 h) abgelaufen ist. Prüfen wie in Abschnitt 3, Schritt 4: Die Abfrage darf keinen DS-Eintrag mehr liefern. Wer früher umstellt, riskiert SERVFAIL bei prüfenden Resolvern, auch für MX, und damit Ausfall der Mail.
+3. Erst dann wieder die Nameserver des Registrars eintragen. Ob die alte Zone dort noch existiert, ist offen (siehe intern `betrieb/konten.md`). Fehlen die Einträge, sie nach der Tabelle in Abschnitt 1 neu anlegen (MX, SPF, DKIM, dazu DMARC).

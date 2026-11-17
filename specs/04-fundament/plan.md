@@ -174,7 +174,7 @@ Konfiguration nur über Umgebungsvariablen: `DATABASE_URL`, `APP_VERSION`, `PORT
 - `infra/tofu/bootstrap`: State-Bucket anlegen, danach den eigenen State in den Bucket verschieben; R2-Edit-Recht danach aus `CLOUDFLARE_API_TOKEN` (`codeslage-tofu-rw`) entfernen
 - `infra/tofu/live`: Zone, alle bestehenden Records 1:1 (zuerst MX, SPF, DKIM, DMARC, Google-Verifizierung). `tofu plan` prüfen wir gemeinsam, erst danach folgt `apply`.
 - Zonen-Einstellungen: SSL Full (strict), Always HTTPS, min. TLS 1.2, DNSSEC; DMARC mindestens `p=none` mit Reporting (Berichtsadresse erst mit T-38: Cloudflare DMARC Management gibt es nur für aktive Zonen)
-- `infra/tests/dns.test.ts` (AK-3) zuerst gegen die Cloudflare-Nameserver, **bevor** V6 umgestellt wird; TTL beim Registrar vorher senken
+- `infra/tests/dns.test.ts` (AK-3) zuerst gegen die Cloudflare-Nameserver, **bevor** V6 umgestellt wird; TTL beim Registrar vorher senken (bei T-38 auf Entscheidung des Inhabers entfallen: Einträge waren auf beiden Seiten nachweislich gleich, Begründung im Protokoll T-38; für einen Rückweg siehe `dns-bestand.md` Abschnitt 4)
 - V6: Inhaber stellt die Nameserver um, danach AK-3 gegen die öffentliche Auflösung; Testmail in beide Richtungen (AK-4) mit Protokoll; DS-Record für DNSSEC beim Registrar
 - CI für `infra/`: `tofu validate`, `tofu fmt -check` (AK-30), tflint (AK-18)
 - `drift.yml` mit Read-only-Tokens (AK-5)
