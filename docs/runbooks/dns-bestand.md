@@ -30,6 +30,12 @@ Diesen Schritt hat der Inhaber am 2026-11-12 im Dashboard erledigt. Grund: So ka
 
 OpenTofu übernimmt die Zone und ihre Einträge danach per Import (T-36). Ab dann ändert sich nichts mehr im Dashboard.
 
+## 2a. Übernahme in OpenTofu (T-36, erledigt am 2026-11-17)
+
+- `infra/tofu/live` verwaltet die Zone, MX, SPF, DKIM, DMARC (`p=none`), die Einstellungen (SSL Full strict, Always HTTPS, Mindest-TLS 1.2) und DNSSEC. Arbeiten damit wie in `docs/runbooks/tofu-state.md`, nur im Ordner `live`.
+- Der A-Eintrag der Parkseite ist gelöscht (einmaliger API-Aufruf mit Freigabe, Protokoll `docs/protokolle/2026-11-17-t-36-tofu-live.md`).
+- Offen für T-38: DMARC-Berichtsadresse über Cloudflare DMARC Management (erst bei aktiver Zone verfügbar) und der DS-Eintrag für DNSSEC.
+
 ## 3. Umzug (T-38)
 
 Wird mit T-38 ausgefüllt: TTL beim Registrar senken, DNS-Test gegen die Cloudflare-Nameserver, Nameserver umstellen, DS-Eintrag für DNSSEC, Testmail in beide Richtungen.
