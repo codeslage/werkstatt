@@ -15,6 +15,11 @@ concurrency:
 env:
   GITLEAKS_VERSION: 8.30.1
   GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+  # Gleiche Version wie lokal (fmt-Ergebnisse sollen nicht abweichen); Prüfsummen aus den offiziellen Releases.
+  TOFU_VERSION: 1.13.1
+  TOFU_SHA256: 378ada19d4bc70c43732004e8159be771b23b9a5afdf059e5f8a2b3fa2c70a69
+  TFLINT_VERSION: 0.66.0
+  TFLINT_SHA256: 22be11cadc25cd02401e94c0ccc91aa63467debb8485c2a755d98f4c0a9d1e2e
 
 jobs:
   public-scan:
@@ -125,3 +130,41 @@ jobs:
 
       - name: Einheitliche Formatierung (AK-30)
         run: pnpm format
+
+  infra:
+    name: Infra (OpenTofu)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      # Wie bei gitleaks: Binaries direkt aus den Releases, gepinnt und mit Prüfsumme (keine zusätzlichen Actions).
+      - name: OpenTofu und tflint installieren (gepinnt, Prüfsumme)
+        run: |
+          mkdir -p "$RUNNER_TEMP/bin"
+          tofu="tofu_${TOFU_VERSION}_linux_amd64.tar.gz"
+          curl -sSfL -o "$RUNNER_TEMP/$tofu"             "https://github.com/opentofu/opentofu/releases/download/v${TOFU_VERSION}/$tofu"
+          echo "${TOFU_SHA256}  $RUNNER_TEMP/$tofu" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/$tofu" -C "$RUNNER_TEMP/bin" tofu
+          curl -sSfL -o "$RUNNER_TEMP/tflint.zip"             "https://github.com/terraform-linters/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip"
+          echo "${TFLINT_SHA256}  $RUNNER_TEMP/tflint.zip" | sha256sum -c -
+          unzip -q "$RUNNER_TEMP/tflint.zip" -d "$RUNNER_TEMP/bin"
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+
+      - name: Formatierung (AK-30)
+        run: tofu fmt -check -recursive -diff infra/tofu
+
+      # Ohne Backend und ohne Zugangsdaten: prüft nur die Konfiguration, liest keinen State (ADR 0002).
+      - name: Validierung und tflint je Wurzel (AK-5, AK-18)
+        run: |
+          for root in infra/tofu/*/; do
+            echo "::group::$root"
+            tofu -chdir="$root" init -backend=false -input=false
+            tofu -chdir="$root" validate
+            tflint --chdir="$root" --config="$GITHUB_WORKSPACE/.tflint.hcl"
+            echo "::endgroup::"
+          done
+
+      - name: Gegenbeispiele für fmt und tflint (Negativtests, AK-18, AK-30)
+        run: pnpm test:infra hcl.test.ts

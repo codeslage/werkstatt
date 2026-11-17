@@ -154,7 +154,7 @@ Konfiguration nur über Umgebungsvariablen: `DATABASE_URL`, `APP_VERSION`, `PORT
 - `tools/spec-check`: Jede `spec.md`/`plan.md` hat eine Status-Zeile und einen Constitution-Bezug mit Version. Specs haben eine AK-Tabelle. Der Constitution-Check enthält alle 16 Artikel mit ✅/⚠️/–; ⚠️ nur mit Anmerkung. Der Check läuft über `specs/` und gegen Fixtures.
 - knip, dependency-cruiser mit den Regeln oben; Negativ-Fixtures in `tools/quality-fixtures` (ungenutzter Export, ungenutzte Abhängigkeit, Zyklus, verbotener Import packages → apps, zu komplexe Funktion, leerer `catch`), aus den normalen Läufen ausgenommen
 - `infra/tests/repo.test.ts`: Repo ist öffentlich, Ruleset auf `main` aktiv (AK-1)
-- `ci.yml` für alles außer `infra/tofu` (das folgt in Schritt 4); `dependabot.yml` (npm, github-actions, docker, terraform) mit Sicherheits-Updates (AK-29); Prettier-Prüfung (AK-30); PR-Template mit Constitution-Checkliste
+- `ci.yml` für alles außer `infra/tofu` (das folgt in Schritt 4); `dependabot.yml` (npm, github-actions, docker, opentofu) mit Sicherheits-Updates (AK-29); Prettier-Prüfung (AK-30); PR-Template mit Constitution-Checkliste
 
 ### Schritt 3 – Lokale Umgebung & Images (AK-25, AK-26)
 
