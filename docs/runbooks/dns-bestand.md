@@ -1,6 +1,6 @@
 # Runbook: DNS-Bestand und Umzug von `codeslage.de` zu Cloudflare
 
-> Stand: 2026-11-12 · Bezug: `specs/04-fundament/spec.md` (AK-3, AK-4), `plan.md` Schritt 4, Tasks T-33 bis T-38
+> Stand: 2026-11-17 · Bezug: `specs/04-fundament/spec.md` (AK-3, AK-4), `plan.md` Schritt 4, Tasks T-33 bis T-38
 > Angaben zum Registrar und zu Konten stehen nur im internen Repo (`codeslage-internal/betrieb/konten.md`).
 
 ## 1. Bestand vor dem Umzug (2026-11-12)
@@ -34,7 +34,7 @@ OpenTofu übernimmt die Zone und ihre Einträge danach per Import (T-36). Ab dan
 
 - `infra/tofu/live` verwaltet die Zone, MX, SPF, DKIM, DMARC (`p=none`), die Einstellungen (SSL Full strict, Always HTTPS, Mindest-TLS 1.2) und DNSSEC. Arbeiten damit wie in `docs/runbooks/tofu-state.md`, nur im Ordner `live`.
 - Der A-Eintrag der Parkseite ist gelöscht (einmaliger API-Aufruf mit Freigabe, Protokoll `docs/protokolle/2026-11-17-t-36-tofu-live.md`).
-- Offen für T-38: DMARC-Berichtsadresse über Cloudflare DMARC Management (erst bei aktiver Zone verfügbar) und der DS-Eintrag für DNSSEC.
+- Offen für T-38: DMARC-Berichtsadresse über Cloudflare DMARC Management (erst bei aktiver Zone verfügbar) und der DS-Eintrag für DNSSEC. Bis dahin ignoriert OpenTofu den DNSSEC-Status (`ignore_changes`), ein Abschalten im Dashboard fiele also nicht auf: DNSSEC dort nicht anfassen.
 
 ## 3. Umzug (T-38)
 
