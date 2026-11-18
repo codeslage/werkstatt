@@ -12,14 +12,14 @@ Manuell starten: Actions → „Historien-Scan“ → Run workflow. Lokal: `node
 
 ## 2. Wenn er rot ist
 
-GitHub schickt bei einem fehlgeschlagenen geplanten Lauf eine Mail (AK-27). Im Log stehen Regel, Datei und Commit; der Treffer selbst ist geschwärzt.
+GitHub schickt bei einem fehlgeschlagenen geplanten Lauf eine Mail (AK-27, Nachweis mit T-41). Im Log stehen Regel, Datei und Commit; der Treffer selbst ist geschwärzt.
 
 1. **Fehlalarm?** Lokal mit demselben Befehl nachvollziehen. Ist der Treffer harmlos (z. B. eine Rollenadresse), die Ausnahme in `.gitleaks.toml` per PR ergänzen, mit Begründung.
 2. **Secret oder Token:** sofort widerrufen bzw. rollen (`docs/runbooks/token-erneuerung.md`), dann `docs/secrets.md` anpassen. Was öffentlich war, gilt als bekannt.
 3. **Interne Angabe** (Konto, Registrar, IP, Kontaktdaten): Angabe aus dem aktuellen Stand entfernen und nach `codeslage/internal` verschieben (PR). Ob die Historie umgeschrieben wird, entscheidet der Inhaber ausdrücklich für genau diesen Fall (Constitution V); vorher zeigen, welche Commits und Branches betroffen sind.
 4. Im Protokoll (`docs/protokolle/`) festhalten, was gefunden und was getan wurde.
 
-## 3. Wenn er gar nicht läuft
+## 3. Wenn er ohne Scan abbricht oder ausbleibt
 
-- `Sperrliste fehlt … Abbruch` (Exit 2): Secret `PUBLIC_BLOCKLIST` fehlt oder ist leer, aus `.sperrliste` neu setzen.
+- Rot mit `Sperrliste fehlt … Abbruch` (Exit 2): Secret `PUBLIC_BLOCKLIST` fehlt oder ist leer, aus `.sperrliste` neu setzen.
 - GitHub pausiert geplante Workflows in Repos ohne Aktivität seit 60 Tagen; dann im Actions-Tab wieder aktivieren.
