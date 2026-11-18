@@ -7,7 +7,7 @@ Release gemäß `docs/prozess/release.md`.
 
 Version (optional): $ARGUMENTS
 
-1. Prüfe: `main` ist grün, keine offenen 🔴-Reviews, alle enthaltenen Vorhaben stehen mindestens in SDD-Stufe 7. Zeige den Inhalt seit dem letzten Tag (Changelog-Entwurf) und schlage eine SemVer-Version vor.
+1. Prüfe: `main` ist grün, keine offenen 🔴-Reviews, alle enthaltenen Vorhaben stehen mindestens in SDD-Stufe 7. Trage gemergte Dependabot-Updates ohne Changelog-Eintrag als Sammeleintrag nach (`aenderungsklassen.md`, „Abhängigkeits-Updates per Dependabot“). Zeige den Inhalt seit dem letzten Tag (Changelog-Entwurf) und schlage eine SemVer-Version vor.
 2. **Freigabe 1:** Inhaber bestätigt Version und Inhalt. Ohne Bestätigung abbrechen.
 3. Tag setzen, Image einmal bauen lassen.
 4. int einschalten, Image deployen, Migrationen ausführen, E2E-, Härtungs- und Smoke-Tests ausführen und Ergebnisse zeigen. Löschende Migrationen gesondert freigeben lassen (Artikel V).

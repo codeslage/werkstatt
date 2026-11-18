@@ -1,6 +1,6 @@
 # Branches, Umgebungen & Releases
 
-> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-05
+> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-18 (Dependabot-Sammeleintrag vor Freigabe 1)
 > Verbindlich über `CONSTITUTION.md`, Artikel III, V und X. Änderungen nach `docs/prozess/governance.md`.
 
 ## Auf einen Blick
@@ -53,7 +53,7 @@ Ausnahme: Änderungen an `CONSTITUTION.md` und `docs/prozess/` brauchen immer di
 ## Release (`/release`)
 
 1. **Auslöser:** Ein Vorhaben hat SDD-Stufe 7 erreicht, oder der Inhaber will Changes bündeln.
-2. **Freigabe 1 – Release-Kandidat:** Inhaber bestätigt Version und Inhalt (Changelog).
+2. **Freigabe 1 – Release-Kandidat:** Inhaber bestätigt Version und Inhalt (Changelog). Vorher trägt Claude gemergte Dependabot-Updates ohne Eintrag als Sammeleintrag nach (`aenderungsklassen.md`).
 3. Tag `vX.Y.Z` auf `main`, Image wird **einmal** gebaut.
 4. int einschalten, Image deployen, Migrationen ausführen, E2E-, Härtungs- und Smoke-Tests laufen lassen.
 5. **Abnahme auf int** durch den Inhaber (= SDD-Stufe 7).

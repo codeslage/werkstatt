@@ -2,7 +2,7 @@
 
 Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen oben.
 
-- **Pflege:** Bei Klasse M ist ein Eintrag unter „Unveröffentlicht“ im selben PR Pflicht (`docs/prozess/aenderungsklassen.md`). K- und V-Änderungen werden spätestens beim `/release` nachgetragen, gern schon im eigenen PR. Ein Eintrag besteht aus Datum, Kurzbeschreibung und PR-Nummer.
+- **Pflege:** Bei Klasse M ist ein Eintrag unter „Unveröffentlicht“ im selben PR Pflicht (`docs/prozess/aenderungsklassen.md`). K- und V-Änderungen werden spätestens beim `/release` nachgetragen, gern schon im eigenen PR. Ein Eintrag besteht aus Datum, Kurzbeschreibung und PR-Nummer. Ausnahme Dependabot: Die Updates sammelt Claude in einem Eintrag im nächsten eigenen PR, spätestens beim `/release` (`aenderungsklassen.md`).
 - **Release:** `/release` macht aus „Unveröffentlicht“ einen Abschnitt mit Versionsnummer und Datum (`docs/prozess/release.md`). Der Release-Ablauf mit int und prod greift erst ab Phase S (ADR 0009).
 - **Rubriken:** Hinzugefügt · Geändert · Behoben · Entfernt · Sicherheit
 
@@ -18,6 +18,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Geändert
 
+- 2026-11-18 – `aenderungsklassen.md`: Abschnitt „Abhängigkeits-Updates per Dependabot“ (Klasse, Sammeleintrag im Changelog), „Renovate“ durch „Dependabot“ ersetzt; Schritt im `/release`-Ablauf und Pflege-Hinweis im Changelog; Freigabe des Inhabers (#40).
 - 2026-11-18 – Cloudflare-Provider 5.28.1 → 5.29.0 in `bootstrap` (#21) und `live` (#22), Klasse K (Change `changes/2026-11-18-cloudflare-provider-5-29.md`): `live` mit `tofu plan` ohne Änderungen; `bootstrap` nur `validate`, weil der `plan` dort mit 401 scheitert (siehe Protokoll); Freigabe des Inhabers.
 - 2026-11-18 – Windows-Bezüge nach dem Wechsel auf den Mac bereinigt: Risiko in Spec 04, Rechner in der Vision, lokaler Pfad zu `codeslage/internal` in Architektur und `governance.md`, alter Ordnername `codeslage-internal` in Spec, Plan, Tasks und DNS-Runbook, Kommentar in `.gitattributes`; ADRs und Protokolle bleiben als Historie unverändert (#39).
 - 2026-11-18 – Abhängigkeits-Updates per Dependabot (Sammeleintrag, Dependabot schreibt keinen Changelog): typescript-eslint 8.72.1 → 8.72.2 (#23), knip 6.44.2 → 6.45.1 (#24), eslint 10.14.0 → 10.15.0 (#25), prettier 3.9.10 → 3.10.1 (#26).
