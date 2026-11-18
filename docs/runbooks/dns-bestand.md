@@ -1,7 +1,7 @@
 # Runbook: DNS-Bestand und Umzug von `codeslage.de` zu Cloudflare
 
-> Stand: 2026-11-17 · Bezug: `specs/04-fundament/spec.md` (AK-3, AK-4), `plan.md` Schritt 4, Tasks T-33 bis T-38
-> Angaben zum Registrar und zu Konten stehen nur im internen Repo (`codeslage-internal/betrieb/konten.md`).
+> Stand: 2026-11-18 (Verweis auf `codeslage/internal`) · Bezug: `specs/04-fundament/spec.md` (AK-3, AK-4), `plan.md` Schritt 4, Tasks T-33 bis T-38
+> Angaben zum Registrar und zu Konten stehen nur im internen Repo (`codeslage/internal` (`betrieb/konten.md`)).
 
 ## 1. Bestand vor dem Umzug (2026-11-12)
 
@@ -41,7 +41,7 @@ OpenTofu übernimmt die Zone und ihre Einträge danach per Import (T-36). Ab dan
 Erledigt am 2026-11-17 (Protokoll `docs/protokolle/2026-11-17-t-38-ns-umzug.md`). Ablauf für einen erneuten Umzug:
 
 1. DNS-Test gegen den neuen Nameserver: `DNS_SERVER=<ns> pnpm test:infra dns.test.ts` muss grün sein, bevor umgestellt wird.
-2. Beim Registrar die neuen Nameserver eintragen (ohne Glue Records). Besonderheiten des Registrars: `codeslage-internal/betrieb/konten.md`.
+2. Beim Registrar die neuen Nameserver eintragen (ohne Glue Records). Besonderheiten des Registrars: `codeslage/internal` (`betrieb/konten.md`).
 3. Warten, bis die Registry (`nslookup -type=NS codeslage.de a.nic.de`) die neuen Nameserver meldet und die Zone bei Cloudflare `active` ist.
 4. DNSSEC: Beim Registrar den DNSKEY eintragen (Flags 257, Algorithmus 13, öffentlicher Schlüssel aus `cloudflare_zone_dnssec` bzw. der API). Bei einem Wechsel weg von Cloudflare **zuerst** den DNSSEC-Eintrag beim Registrar löschen und den Ablauf der TTL abwarten, sonst ist die Domain für prüfende Resolver nicht erreichbar. Prüfen, ob der DS-Eintrag steht und die Signatur gilt: `curl -s -H "accept: application/dns-json" "https://cloudflare-dns.com/dns-query?name=codeslage.de&type=DS"` muss einen Eintrag und `"AD":true` liefern (`nslookup` unter Windows kennt den Typ DS nicht).
 5. DNS-Test über die öffentliche Auflösung, Testmail in beide Richtungen.

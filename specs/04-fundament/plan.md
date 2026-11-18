@@ -170,7 +170,7 @@ Konfiguration nur über Umgebungsvariablen: `DATABASE_URL`, `APP_VERSION`, `PORT
 ### Schritt 4 – Cloudflare DNS & State (AK-3, AK-4, AK-5, AK-14)
 
 - Voraussetzung: V2 ✅, **V8** (Zahlungsmethode in Cloudflare hinterlegen, nötig für R2, offene Frage 9), Tokens (V5)
-- Bestandsaufnahme aller Records beim Registrar → `docs/runbooks/dns-bestand.md`; Angaben, die nicht öffentlich sein dürfen, nach `codeslage-internal`
+- Bestandsaufnahme aller Records beim Registrar → `docs/runbooks/dns-bestand.md`; Angaben, die nicht öffentlich sein dürfen, nach `codeslage/internal`
 - `infra/tofu/bootstrap`: State-Bucket anlegen, danach den eigenen State in den Bucket verschieben; R2-Edit-Recht danach aus `CLOUDFLARE_API_TOKEN` (`codeslage-tofu-rw`) entfernen
 - `infra/tofu/live`: Zone, alle bestehenden Records 1:1 (zuerst MX, SPF, DKIM, DMARC, Google-Verifizierung). `tofu plan` prüfen wir gemeinsam, erst danach folgt `apply`.
 - Zonen-Einstellungen: SSL Full (strict), Always HTTPS, min. TLS 1.2, DNSSEC; DMARC mindestens `p=none` mit Reporting (Berichtsadresse erst mit T-38: Cloudflare DMARC Management gibt es nur für aktive Zonen)

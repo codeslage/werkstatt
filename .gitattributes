@@ -1,4 +1,4 @@
-# Einheitliche Zeilenenden zwischen Windows und macOS (02-architektur.md, A1)
+# Gleiche Zeilenenden (LF) auf jedem Rechner und in der CI (02-architektur.md, A1)
 * text=auto eol=lf
 
 *.png binary
