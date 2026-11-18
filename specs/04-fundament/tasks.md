@@ -1,6 +1,6 @@
 # 04 – Phase 1 Fundament: Tasks
 
-> Stand: 2026-11-10
+> Stand: 2026-11-18
 > Bezug: `spec.md` (v2.1, Freigegeben am 2026-11-05), `plan.md` (v1.1, Freigegeben am 2026-11-05)
 > SDD-Stufen: 4 Tasks · 5 Analyze · 6 Implement
 
