@@ -13,7 +13,18 @@
 | `CLOUDFLARE_ACCOUNT_ID`, `R2_ENDPOINT`                                                    | lokal `.env`, GitHub Secret (Actions und Dependabot)                                                                                    | Konto-ID und Endpoint für Tofu                                                        | – (kein Token; intern, deshalb nicht im Repo)                                                                                                                             | Inhaber       | 2026-11-18                      | –          |
 | `TF_ENCRYPTION_PASSPHRASE`                                                                | lokal `.env`, Passwortmanager, GitHub Secret (Actions und Dependabot)                                                                   | Verschlüsselung von Tofu-State und -Plänen                                            | –                                                                                                                                                                         | Inhaber       | 2026-11-12                      | –          |
 
+| `GITHUB_TOKEN` (automatisch) | von GitHub je Lauf erzeugt, nirgends gespeichert | CI: Job Repo-Einstellungen liest Sichtbarkeit und Ruleset (AK-1) | `permissions: contents: read` in allen Workflows | GitHub | je Lauf | Ende des Laufs |
+| gh-Login (GitHub CLI, OAuth-Token des Inhaberkontos) | lokal im Schlüsselbund des Rechners (`gh auth`) | lokal: PRs anlegen und mergen, Secrets setzen, Workflows starten; auch Claude Code nutzt ihn | Scopes `repo`, `workflow`, `read:org`, `gist` (`gist` wird nicht gebraucht) | Inhaber | – | – (OAuth-Token ohne Ablauf; widerrufen unter Settings → Applications) |
+| Claude GitHub App | GitHub-App-Installation in der Organisation `codeslage` und im Konto des Inhabers | Claude-Code-Cloud-Sitzungen (Repos lesen, Branches und PRs) | von der App festgelegt: u. a. Contents, Pull requests, Workflows, Webhooks Write; Repo-Auswahl in der Organisation: alle (bewusst, Entscheidung des Inhabers 2026-11-18) | Inhaber | – | – (Deinstallieren unter Settings → GitHub Apps) |
 Die Secrets stehen auch für Dependabot bereit, damit der Drift-Check bei dessen PRs auf `infra/` (Provider-Updates) laufen kann. Dependabot bekommt dabei nur die Lese-Tokens.
+
+## Abgleich (T-42, 2026-11-18)
+
+- GitHub Secrets des Repos (Actions und Dependabot, je 7): stimmen mit der Tabelle überein, keine übrigen.
+- Cloudflare Account API Tokens: genau die 4 Tokens der Tabelle, alle aktiv; Rechte laut Übersicht wie oben. `codeslage-tofu-rw` per `tokens/verify`: aktiv, Ablauf 2027-05-12 00:00 (Berlin).
+- Cloudflare User API Tokens: keine. Der Global API Key des Inhaberkontos existiert (lässt sich nicht löschen, nur neu erzeugen); er wird nirgends verwendet und steht in keiner `.env`.
+- GitHub-Organisation `codeslage`: keine Organisations-Secrets.
+- GitHub-Konto des Inhabers: keine Personal Access Tokens (classic); als OAuth-App nur GitHub CLI (der gh-Login oben); als GitHub App nur Claude.
 
 ## Regeln
 
