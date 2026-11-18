@@ -20,7 +20,7 @@
     "dev:down": "docker compose down",
     "format": "prettier --check .",
     "format:write": "prettier --write .",
-    "spellcheck": "cspell --no-progress ."
+    "spellcheck": "cspell --no-progress --dot ."
   },
   "devDependencies": {
     "@codeslage/config": "workspace:*",

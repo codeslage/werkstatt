@@ -11,8 +11,10 @@ DNSKEY
 DNSSEC
 DSGVO
 Deployt
+Dockerfiles
 Echtdaten
 Evals
+GITHUB
 HEALTHCHECK
 Healthcheck
 Healthchecks
@@ -23,6 +25,7 @@ IVXL
 Ignorier
 Integrationen
 Kanarienbegriff
+Knip
 Konnektoren
 Konsistenzbericht
 Lexoffice
@@ -55,6 +58,7 @@ claude
 cloudflare
 codeslage
 committen
+committest
 committete
 cookielos
 coolify
@@ -67,7 +71,9 @@ deployt
 dmarc
 dnssec
 domainkey
+drüberschauen
 dsgvo
+endgroup
 eucloudcost
 gehostet
 gehostete
@@ -75,17 +81,20 @@ gemergt
 gemergte
 gemergten
 gemockter
+github
 gitignoriert
 gitignorierten
 gitleaks
 healthcheck
 hetzner
 hetznercloud
+historien
 hosten
 ideen
 interviewst
 ionoscloud
 isready
+knip
 konten
 lexoffice
 linux
@@ -96,6 +105,7 @@ nslookup
 nutzungsbasiert
 opentofu
 pingt
+pipefail
 podman
 porsager
 postgres
@@ -110,6 +120,7 @@ restic
 revisionssicher
 runterfahren
 shellenv
+taggen
 tailscale
 tailscaled
 tflint
@@ -117,6 +128,7 @@ tfstate
 tftpl
 tmpfs
 trackt
+unkodiert
 upcloud
 usagepricing
 versioniert
