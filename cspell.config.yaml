@@ -12,6 +12,7 @@ dictionaries:
   - project-words
 useGitignore: true
 ignorePaths:
+  - .git/**
   - pnpm-lock.yaml
   - '**/.terraform.lock.hcl'
   - project-words.txt

@@ -17,7 +17,7 @@ Specs, Doku und Commit-Texte sind auf Deutsch, Code und Bezeichner auf Englisch 
 1. **Abhängigkeiten** (Root, exakt gepinnt wie die übrigen): `cspell` 10.5.1 (MIT) und `@cspell/dict-de-de` 4.1.3 (LGPL-3.0). Beide sind aktiv gepflegt, älter als die Wartezeit von 3 Tagen (`dependabot.yml`) und als Entwicklungswerkzeug auch kommerziell nutzbar. Die neueste Version 10.5.2 ist vom 2026-11-18 und wird deshalb noch nicht genommen.
 2. **Konfiguration** `cspell.config.yaml`: Sprachen `en,de-DE`, deutsches Wörterbuch, `.gitignore` beachten, ausgenommen `pnpm-lock.yaml` und `.terraform.lock.hcl`. Projektwörter in `project-words.txt` (Fachbegriffe, Anbieter, Hostnamen wie `codeslage`, `gitleaks`, `DNSSEC`, `gemergt`). Probelauf am 2026-11-18: 180 unbekannte Wörter, fast alle Fachbegriffe oder Eigennamen.
 3. **Ausnahmen für Protokolle und Reviews:** `docs/protokolle/**` und `specs/**/reviews/**` werden nicht geprüft. Sie sind Aufzeichnungen und bleiben unverändert (wie beim Change „Klick-Dummy“, #7).
-4. **Befehl** `pnpm spellcheck` (`cspell --no-progress --dot .`). `--dot` nimmt auch `.claude/`, `.github/` und `.env.example` mit (Review, Befund 1); `.env` und `.sperrliste` bleiben über `.gitignore` außen vor.
+4. **Befehl** `pnpm spellcheck` (`cspell --no-progress --dot .`). `--dot` nimmt auch `.claude/`, `.github/` und `.env.example` mit (Review, Befund 1), `.git/` ist ausgenommen; `.env` und `.sperrliste` bleiben über `.gitignore` außen vor.
 5. **CI-Job** „Rechtschreibung“ in `ci.yml`, aufgebaut wie der Job „Format“.
 6. **Ruleset (Inhaber):** „Rechtschreibung“ als Pflicht-Check für `main` eintragen. Sonst schlägt der Test „verlangt jeden Job aus ci.yml als Pflicht-Check“ fehl (`repo.test.ts`).
 7. **Gefundene Fehler beheben:** `specs/00-start.md`: „Jede Akzeptanzkriterie“ → „Jedes Akzeptanzkriterium“; `docs/dsgvo.md`: „Connectoren“ → „Konnektoren“. Die übrigen Funde waren korrekte Fachbegriffe; `project-words.txt` hat 138 Einträge.
@@ -38,7 +38,7 @@ Nicht Teil dieser Änderung: Prüfung im Pre-Commit-Hook (er bleibt schnell) und
 | --------------------------------------------------------------------------------------------------- | ------------- | ------------------------------------------------------------------------------------------------------ |
 | Zuerst: Test in `tools/quality-fixtures`, ein Tippfehler auf Deutsch und auf Englisch wird gemeldet | automatisiert | ✅ vor der Umsetzung rot (3 von 3), danach grün                                                        |
 | Korrektes Deutsch (mit Umlauten und ß) und Englisch werden nicht gemeldet                           | automatisiert | ✅ grün                                                                                                |
-| `pnpm spellcheck` auf dem ganzen Repo: 0 Befunde                                                    | automatisiert | ✅ 138 Dateien (mit `--dot`), 0 Befunde                                                                |
+| `pnpm spellcheck` auf dem ganzen Repo: 0 Befunde                                                    | automatisiert | ✅ 136 Dateien (mit `--dot`, ohne `.git/`), 0 Befunde                                                  |
 | Alle übrigen Prüfungen lokal (test, typecheck, lint, format, knip, depcruise, spec-check)           | automatisiert | ✅ grün, 103 Tests                                                                                     |
 | CI-Job „Rechtschreibung“ grün; Pflicht-Check im Ruleset (`repo.test.ts`)                            | automatisiert | ✅ zuerst rot („Rechtschreibung“ fehlte im Ruleset), nach dem Eintrag durch den Inhaber grün (3 von 3) |
 
@@ -89,7 +89,7 @@ Die Änderung führt eine automatische Rechtschreibprüfung für Deutsch und Eng
 
 **Umgang mit den Befunden** (im selben PR):
 
-- Befund 1 🟡: behoben. `--dot` gesetzt, 12 Wörter ergänzt; jetzt 138 Dateien, 0 Befunde. `.env` und `.sperrliste` bleiben über `.gitignore` außen vor.
+- Befund 1 🟡: behoben. `--dot` gesetzt, 12 Wörter ergänzt; jetzt 136 Dateien, 0 Befunde. `.git/` ist ausgenommen (sonst prüft cspell z. B. die letzte Commit-Nachricht). `.env` und `.sperrliste` bleiben über `.gitignore` außen vor.
 - Befund 2 ⚪: behoben. Lizenz und Pflege unter „Änderung“, Nr. 1; XI im Kurzcheck.
 - Befund 3 ⚪: nicht übernommen. Mit `cspell` in `tools/quality-fixtures/package.json` meldet knip den Eintrag als ungenutzt (der Test ruft nur die Binary auf, importiert nichts). Eine knip-Ausnahme wäre mehr Aufwand als der Nutzen; der Test nutzt deshalb weiter die Binary aus dem Root, wo `cspell` ohnehin für `pnpm spellcheck` steht.
 - Ruleset: „Rechtschreibung“ vom Inhaber als Pflicht-Check eingetragen; `repo.test.ts` grün.
