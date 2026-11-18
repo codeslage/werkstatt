@@ -171,4 +171,4 @@ jobs:
 
       # Geplante Workflows (AK-5, AK-24): Auslöser, Rechte, gleiche Tool-Versionen wie hier.
       - name: Geplante Workflows
-        run: pnpm test:infra drift.test.ts history-scan.test.ts
+        run: pnpm test:infra drift.test.ts history-scan.test.ts simulate-failure.test.ts
