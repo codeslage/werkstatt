@@ -168,3 +168,7 @@ jobs:
 
       - name: Gegenbeispiele für fmt und tflint (Negativtests, AK-18, AK-30)
         run: pnpm test:infra hcl.test.ts
+
+      # Geplante Workflows (AK-5, AK-24): Auslöser, Rechte, gleiche Tool-Versionen wie hier.
+      - name: Geplante Workflows
+        run: pnpm test:infra drift.test.ts history-scan.test.ts simulate-failure.test.ts
