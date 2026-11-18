@@ -47,9 +47,21 @@ Der Bucket für den State muss existieren, bevor ein State darin liegen kann. De
 4. Prüfen: `tofu state list` zeigt den Bucket, `tofu plan -detailed-exitcode` endet mit 0, das Objekt im Bucket enthält nur `encrypted_data`.
 5. Lokale Reste (`terraform.tfstate`, `.backup`, `*.tfplan`) löschen. Ab dann gibt es nur noch die Kopie in R2.
 
-## Rechte und nächster Schritt
+## Rechte
 
-Für den Erstaufbau hat der Token `codeslage-tofu-rw` das Recht „Workers R2 Storage: Edit“ auf das ganze Konto. Mit T-39 bekommt der State-Zugriff eigene, auf diesen Bucket beschränkte R2-Tokens (lesen und schreiben lokal, nur lesen in der CI), und `codeslage-tofu-rw` verliert das R2-Recht (`docs/secrets.md`).
+Seit T-39 (`docs/secrets.md`):
+
+- Der State-Zugriff läuft über R2-Tokens, die nur für den Bucket `codeslage-tofu-state` gelten: `codeslage-tofu-state-rw` lokal (`AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY` in der `.env`), `codeslage-tofu-state-ro` in der CI.
+- `codeslage-tofu-rw` hat kein R2-Recht mehr. Für den Erstaufbau hatte er „Workers R2 Storage: Edit“ auf das ganze Konto.
+- Folge: `tofu plan` in `bootstrap` liest den Bucket über die Cloudflare-API und braucht dafür dieses Recht; ohne es scheitert er mit `401` (so erwartet, geprüft 2026-11-18). Muss am Bucket etwas geändert werden, dem Token das Recht vorübergehend wieder geben, danach wieder entziehen und beides im Protokoll festhalten.
+
+## Drift-Check (AK-5)
+
+`.github/workflows/drift.yml` führt jeden Montag, bei jedem PR auf `infra/` und auf Knopfdruck (Actions → Drift-Check → Run workflow) `tofu plan -detailed-exitcode` für `live` aus, dazu den DNS-Test. Nur mit Read-only-Tokens und ohne Lock, `apply` bleibt lokal (ADR 0002).
+
+- **Rot im PR auf `infra/`:** erwartet, solange der geprüfte `plan` noch nicht lokal angewendet ist. Nach dem `apply` den Lauf neu starten, er muss grün sein, bevor gemergt wird.
+- **Rot im wöchentlichen Lauf:** Jemand hat im Dashboard etwas geändert, oder ein Token ist abgelaufen. Im Log steht, welche Ressource abweicht (IDs sind maskiert). Entweder die Änderung im Dashboard zurücknehmen oder in den Code übernehmen (eigener PR).
+- `bootstrap` prüft der Drift-Check nicht: Der Read-only-Token hat bewusst keine Rechte auf Kontoebene.
 
 ## Notfall
 
