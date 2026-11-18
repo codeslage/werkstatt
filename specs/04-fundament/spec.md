@@ -1,7 +1,7 @@
 # 04 – Phase 1 Fundament: Spec
 
 > Status: **Freigegeben** am 2026-11-05 (v2.1: AK-28 bis AK-30 aus der Analyse ergänzt)
-> Stand: 2026-11-05
+> Stand: 2026-11-18 (Risiko „Docker unter Windows“ durch das Mac-Risiko aus Plan v1.2 ersetzt, keine AK-Änderung)
 > Historie: v1 freigegeben am 2026-11-05 (mit eigenem Server). Am 2026-11-05 in Stufe 3 zurück nach Stufe 1: Der Server kommt erst, wenn er gebraucht wird (ADR 0009); die Server-AKs sind in eine spätere Spec „Server & Betrieb“ verschoben.
 > Bezug: `CONSTITUTION.md` (v1.1.0), `02-architektur.md` (A1–A3, A8), `03-roadmap.md`
 > SDD-Stufe: 1 Specify · 2 Clarify
@@ -118,13 +118,13 @@ Bis dahin ist **dev = lokal** (AK-25), int und prod gibt es noch nicht. `docs/pr
 
 ## Risiken
 
-| Risiko                                                  | Gegenmaßnahme                                                                                                                              |
-| ------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| Mail-Ausfall beim Umzug der Nameserver                  | Records zuerst nachbauen und vergleichen, Umstellung mit niedriger TTL, AK-3/AK-4 direkt danach                                            |
-| Deploy-Probleme fallen erst spät auf                    | AK-26: jedes Image wird in der CI gebaut und gestartet; in der Server-Spec ein Probe-Aufbau auf Stundenbasis vor dem ersten echten Einsatz |
-| Kunden-Demo kommt kurzfristig, Server fehlt             | Server-Spec rechtzeitig anstoßen; Aufbau mit Vorlauf (geschätzt ~1 Woche) einplanen                                                        |
-| Docker unter Windows ist langsam (WSL2, Laufwerk `X:\`) | nur Datenbank und Test-App in Containern; Entwicklung selbst nativ; mit dem Mac entfällt das                                               |
-| Secrets im IaC-State                                    | State-Verschlüsselung + privater Speicher (ADR 0002)                                                                                       |
+| Risiko                                                   | Gegenmaßnahme                                                                                                                              |
+| -------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------ |
+| Mail-Ausfall beim Umzug der Nameserver                   | Records zuerst nachbauen und vergleichen, Umstellung mit niedriger TTL, AK-3/AK-4 direkt danach                                            |
+| Deploy-Probleme fallen erst spät auf                     | AK-26: jedes Image wird in der CI gebaut und gestartet; in der Server-Spec ein Probe-Aufbau auf Stundenbasis vor dem ersten echten Einsatz |
+| Kunden-Demo kommt kurzfristig, Server fehlt              | Server-Spec rechtzeitig anstoßen; Aufbau mit Vorlauf (geschätzt ~1 Woche) einplanen                                                        |
+| Images laufen lokal auf arm64 (Mac), in der CI auf amd64 | Basis-Images als Multi-Arch-Digest gepinnt; die CI baut und startet jedes Image (AK-26, Plan v1.2)                                         |
+| Secrets im IaC-State                                     | State-Verschlüsselung + privater Speicher (ADR 0002)                                                                                       |
 
 ## Offene Fragen
 
