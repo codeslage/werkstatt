@@ -1,6 +1,5 @@
 # Automatische Abhängigkeits-Updates per PR (Constitution XI, AK-29).
 # Sicherheits-Updates sind zusätzlich in den Repo-Einstellungen aktiv (Protokoll T-22).
-# docker kommt dazu, sobald es Dockerfiles gibt (T-27).
 version: 2
 updates:
   - package-ecosystem: npm
@@ -31,6 +30,21 @@ updates:
   # Provider-Versionen in versions.tf und .terraform.lock.hcl (eigenes Ökosystem „opentofu“, Registry von OpenTofu).
   - package-ecosystem: opentofu
     directories: ['/infra/tofu/*']
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 3
+
+  # Basis-Images (per Digest gepinnt): Dockerfiles der Apps und die Images in compose.yaml.
+  - package-ecosystem: docker
+    directories: ['/apps/*']
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 3
+
+  - package-ecosystem: docker-compose
+    directory: /
     schedule:
       interval: weekly
     cooldown:
