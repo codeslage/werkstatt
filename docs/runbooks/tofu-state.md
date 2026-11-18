@@ -61,6 +61,7 @@ Seit T-39 (`docs/secrets.md`):
 
 - **Rot im PR auf `infra/`:** erwartet, solange der geprüfte `plan` noch nicht lokal angewendet ist. Nach dem `apply` den Lauf neu starten, er muss grün sein, bevor gemergt wird.
 - **Rot im wöchentlichen Lauf:** Jemand hat im Dashboard etwas geändert, oder ein Token ist abgelaufen. Im Log steht, welche Ressource abweicht (IDs sind maskiert). Entweder die Änderung im Dashboard zurücknehmen oder in den Code übernehmen (eigener PR).
+- **Benachrichtigung testen (AK-27):** Run workflow mit Haken bei `simulate_failure`. Der Lauf bricht im ersten Schritt ab, GitHub schickt die Fehler-Mail. Nicht starten, während ein echter Drift-Lauf auf demselben Branch läuft: Der neue Lauf bricht ihn ab (`cancel-in-progress`).
 - `bootstrap` prüft der Drift-Check nicht: Der Read-only-Token hat bewusst keine Rechte auf Kontoebene.
 
 ## Notfall

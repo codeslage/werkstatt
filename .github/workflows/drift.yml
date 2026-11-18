@@ -11,6 +11,11 @@ on:
       - 'infra/**'
       - '.github/workflows/drift.yml'
   workflow_dispatch:
+    inputs:
+      simulate_failure:
+        description: 'Absichtlich fehlschlagen (Test der Mail-Benachrichtigung, AK-27)'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
@@ -39,6 +44,10 @@ jobs:
       TF_VAR_account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
       TF_VAR_state_passphrase: ${{ secrets.TF_ENCRYPTION_PASSPHRASE }}
     steps:
+      - name: Absichtlicher Fehlschlag (AK-27)
+        if: inputs.simulate_failure
+        run: echo "::error::Absichtlicher Fehlschlag über simulate_failure (AK-27)" && exit 1
+
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - uses: ./.github/actions/setup
