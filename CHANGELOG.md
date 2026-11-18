@@ -18,6 +18,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Geändert
 
+- 2026-11-18 – Phase 1, Schritt 3: erster Dependabot-Lauf für `docker` und `docker-compose` nachgewiesen, T-27 abgeschlossen (#42).
 - 2026-11-18 – Plan 04 v1.3: AK-25 durch die Ersteinrichtung des neuen Mac nachgewiesen; `aenderungsklassen.md`: Updates von GitHub Actions bleiben M (Entscheidungen des Inhabers, #41).
 - 2026-11-18 – `aenderungsklassen.md`: Abschnitt „Abhängigkeits-Updates per Dependabot“ (Klasse, Sammeleintrag im Changelog), „Renovate“ durch „Dependabot“ ersetzt; Schritt im `/release`-Ablauf und Pflege-Hinweis im Changelog; Freigabe des Inhabers (#40).
 - 2026-11-18 – Cloudflare-Provider 5.28.1 → 5.29.0 in `bootstrap` (#21) und `live` (#22), Klasse K (Change `changes/2026-11-18-cloudflare-provider-5-29.md`): `live` mit `tofu plan` ohne Änderungen; `bootstrap` nur `validate`, weil der `plan` dort mit 401 scheitert (siehe Protokoll); Freigabe des Inhabers.
