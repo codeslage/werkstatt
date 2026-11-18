@@ -22,7 +22,7 @@ Mein Rechner: aktuell Windows (Gaming-PC), Mac ist bestellt
 
 - **Erst planen, dann bauen.** Schreibe keinen Code, bevor die zugehörige Spec existiert und ich sie freigegeben habe.
 - **Specs liegen in `/specs`** als Markdown, nummeriert (`01-vision.md`, `02-architektur.md`, …). Jede Spec enthält Ziel, Anforderungen, Akzeptanzkriterien und offene Fragen.
-- **Tests sind die Absicherung**, dass der Code der Spec entspricht. Jede Akzeptanzkriterie sollte durch einen Test abgedeckt sein.
+- **Tests sind die Absicherung**, dass der Code der Spec entspricht. Jedes Akzeptanzkriterium sollte durch einen Test abgedeckt sein.
 - **Kleine, überprüfbare Schritte.** Lieber mehrere kleine Commits/PRs als einen großen.
 - **Frag nach, statt zu raten**, wenn etwas unklar ist.
 - **Keine zerstörerischen Aktionen ohne meine ausdrückliche Bestätigung:** Löschen von Servern, Datenbanken, DNS-Einträgen, Volumes, `tofu destroy`, Force-Pushes usw.

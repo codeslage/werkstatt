@@ -10,6 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
+- 2026-11-18 – Rechtschreibprüfung mit cspell (Deutsch und Englisch) als Befehl `pnpm spellcheck` und Pflicht-Check „Rechtschreibung“; Wortliste `project-words.txt`, Protokolle und Reviews ausgenommen (Change `changes/2026-11-18-rechtschreibung-cspell.md`).
 - 2026-11-18 – Phase 1, Schritt 3 (Lokale Umgebung & Images): `apps/status` als Container-Image mit Compose, Seed und Smoke-Test (#36); CI-Job „Image (Compose + Smoke)“ mit Gegenprobe, Runbook `lokale-umgebung.md` für den Mac (#37).
 - 2026-11-10 – Phase 1, Schritt 2 (CI-Qualität): Pflicht-Checks Typecheck, Lint, Knip, Modulgrenzen, Spec-Check, Repo-Einstellungen, Format; Dependabot und automatische Sicherheits-Updates (#8 bis #14).
 - 2026-11-10 – `CHANGELOG.md` mit Regeln zur Pflege angelegt (#6).
