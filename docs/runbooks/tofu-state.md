@@ -53,7 +53,7 @@ Seit T-39 (`docs/secrets.md`):
 
 - Der State-Zugriff läuft über R2-Tokens, die nur für den Bucket `codeslage-tofu-state` gelten: `codeslage-tofu-state-rw` lokal (`AWS_ACCESS_KEY_ID`/`AWS_SECRET_ACCESS_KEY` in der `.env`), `codeslage-tofu-state-ro` in der CI.
 - `codeslage-tofu-rw` hat kein R2-Recht mehr. Für den Erstaufbau hatte er „Workers R2 Storage: Edit“ auf das ganze Konto.
-- Folge: `tofu plan` in `bootstrap` liest den Bucket über die Cloudflare-API und braucht dafür dieses Recht. Muss am Bucket etwas geändert werden, dem Token das Recht vorübergehend wieder geben, danach wieder entziehen und beides im Protokoll festhalten.
+- Folge: `tofu plan` in `bootstrap` liest den Bucket über die Cloudflare-API und braucht dafür dieses Recht; ohne es scheitert er mit `401` (so erwartet, geprüft 2026-11-18). Muss am Bucket etwas geändert werden, dem Token das Recht vorübergehend wieder geben, danach wieder entziehen und beides im Protokoll festhalten.
 
 ## Drift-Check (AK-5)
 
