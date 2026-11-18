@@ -19,11 +19,14 @@
     "dev:up": "APP_VERSION=$(git rev-parse --short HEAD) docker compose up -d --build --wait",
     "dev:down": "docker compose down",
     "format": "prettier --check .",
-    "format:write": "prettier --write ."
+    "format:write": "prettier --write .",
+    "spellcheck": "cspell --no-progress --dot ."
   },
   "devDependencies": {
     "@codeslage/config": "workspace:*",
+    "@cspell/dict-de-de": "4.1.3",
     "@types/node": "24.19.2",
+    "cspell": "10.5.1",
     "dependency-cruiser": "18.7.2",
     "eslint": "10.15.0",
     "knip": "6.45.1",
