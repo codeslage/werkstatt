@@ -32,7 +32,7 @@ describe(`DNS von ${DOMAIN} über ${server} (AK-3)`, () => {
     expect(await txt(`google._domainkey.${DOMAIN}`)).toContainEqual(expect.stringMatching(/^v=DKIM1;/));
   });
 
-  it('DMARC ist vorhanden', async () => {
-    expect(await txt(`_dmarc.${DOMAIN}`)).toContainEqual(expect.stringMatching(/^v=DMARC1;/));
+  it('DMARC ist vorhanden und schickt Berichte (rua)', async () => {
+    expect(await txt(`_dmarc.${DOMAIN}`)).toContainEqual(expect.stringMatching(/^v=DMARC1;.*\brua=mailto:/));
   });
 });

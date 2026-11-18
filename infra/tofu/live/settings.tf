@@ -18,14 +18,8 @@ resource "cloudflare_zone_setting" "min_tls_version" {
   value      = "1.2"
 }
 
-# Den DS-Eintrag trägt der Inhaber nach dem Nameserver-Wechsel beim Registrar ein (T-38).
+# Der DS-Eintrag steht seit T-38 beim Registrar (DNSKEY, Flags 257, Algorithmus 13).
 resource "cloudflare_zone_dnssec" "main" {
   zone_id = cloudflare_zone.main.id
   status  = "active"
-
-  # Cloudflare meldet „pending“, bis der DS-Eintrag beim Registrar steht. Sonst zeigt jeder plan eine Änderung.
-  # Mit T-38 (DS-Eintrag gesetzt, Status „active“) wird dieser Block entfernt.
-  lifecycle {
-    ignore_changes = [status]
-  }
 }

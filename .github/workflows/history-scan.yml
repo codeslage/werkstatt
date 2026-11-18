@@ -1,0 +1,58 @@
+name: Historien-Scan
+
+# AK-24: gitleaks und Sperrliste über die gesamte Historie aller Branches. Der PR-Scan in ci.yml prüft dasselbe,
+# läuft aber nur bei Änderungen; dieser Lauf greift auch dann, wenn sich Regeln oder Sperrliste geändert haben.
+# Rot heißt: Runbook docs/runbooks/historien-scan.md.
+on:
+  schedule:
+    - cron: '23 4 1 * *'
+  workflow_dispatch:
+    inputs:
+      simulate_failure:
+        description: 'Absichtlich fehlschlagen (Test der Mail-Benachrichtigung, AK-27)'
+        type: boolean
+        default: false
+
+permissions:
+  contents: read
+
+concurrency:
+  group: history-scan
+  cancel-in-progress: false
+
+env:
+  # Gleich wie in ci.yml (infra/tests/history-scan.test.ts prüft das).
+  GITLEAKS_VERSION: 8.30.1
+  GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
+
+jobs:
+  history-scan:
+    name: Historien-Scan (gitleaks, Sperrliste)
+    runs-on: ubuntu-latest
+    steps:
+      - name: Absichtlicher Fehlschlag (AK-27)
+        if: inputs.simulate_failure
+        run: echo "::error::Absichtlicher Fehlschlag über simulate_failure (AK-27)" && exit 1
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/actions/setup
+
+      # Kein gitleaks-action: braucht für Organisationen einen Lizenzschlüssel (ADR 0008).
+      - name: gitleaks installieren (gepinnt, Prüfsumme)
+        run: |
+          archive="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
+          curl -sSfL -o "$RUNNER_TEMP/$archive" \
+            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/$archive"
+          echo "${GITLEAKS_SHA256}  $RUNNER_TEMP/$archive" | sha256sum -c -
+          mkdir -p "$RUNNER_TEMP/bin"
+          tar -xzf "$RUNNER_TEMP/$archive" -C "$RUNNER_TEMP/bin" gitleaks
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+
+      # Die Logs sind öffentlich: Treffer erscheinen nur geschwärzt (--redact in cli.ts).
+      - name: Scan
+        env:
+          PUBLIC_BLOCKLIST: ${{ secrets.PUBLIC_BLOCKLIST }}
+        run: node tools/public-scan/src/cli.ts git . --require-blocklist
