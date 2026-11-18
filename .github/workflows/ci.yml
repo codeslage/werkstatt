@@ -131,6 +131,17 @@ jobs:
       - name: Einheitliche Formatierung (AK-30)
         run: pnpm format
 
+  spellcheck:
+    name: Rechtschreibung
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: Rechtschreibung Deutsch und Englisch (Change 2026-11-18-rechtschreibung-cspell)
+        run: pnpm spellcheck
+
   infra:
     name: Infra (OpenTofu)
     runs-on: ubuntu-latest

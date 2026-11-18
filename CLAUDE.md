@@ -39,3 +39,4 @@ Reine Lesefragen und Antworten ohne Dateiänderung brauchen keinen Branch.
 
 - Wenn sich die Constitution ändert: Version und Stand im Kopf anpassen, Bezüge in den Specs prüfen.
 - Soll/Ist-Tabelle in `specs/03-roadmap.md` bei Phasenstart und -ende aktualisieren.
+- Rechtschreibung (`pnpm spellcheck`, Pflicht-Check): Meldet cspell einen korrekten Fachbegriff, kommt er in `project-words.txt`. Echte Fehler werden korrigiert, die Prüfung wird nicht abgeschaltet.
