@@ -1,0 +1,7 @@
+# Nur ausdrücklich Benötigtes gelangt in den Build-Kontext: nie .env, .sperrliste, .git oder node_modules.
+*
+!package.json
+!pnpm-lock.yaml
+!pnpm-workspace.yaml
+!apps/status/package.json
+!apps/status/src/

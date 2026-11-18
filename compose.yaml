@@ -1,0 +1,38 @@
+# Lokale Umgebung (Plan 04, T-28; Runbook docs/runbooks/lokale-umgebung.md).
+# Start: pnpm dev:up · Prüfung: pnpm test:smoke · Stopp: pnpm dev:down
+# Ports nur auf 127.0.0.1. Die DB liegt im Arbeitsspeicher (tmpfs): Jeder Start beginnt frisch mit dem Seed,
+# und beim Stoppen bleibt kein Volume zurück.
+name: codeslage
+
+services:
+  db:
+    image: postgres:17-alpine@sha256:a77aa70e641402a21411b92b721c58d10f23b50ae5fdd2333efd22d166e1e5f7
+    environment:
+      POSTGRES_USER: status
+      POSTGRES_DB: status
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?POSTGRES_PASSWORD fehlt, siehe .env.example}
+    volumes:
+      - ./infra/local/seed.sql:/docker-entrypoint-initdb.d/seed.sql:ro
+    tmpfs:
+      - /var/lib/postgresql/data
+    ports:
+      - 127.0.0.1:5432:5432
+    healthcheck:
+      test: ['CMD', 'pg_isready', '-U', 'status', '-d', 'status']
+      interval: 2s
+      timeout: 3s
+      retries: 15
+
+  status:
+    build:
+      context: .
+      dockerfile: apps/status/Dockerfile
+    environment:
+      DATABASE_URL: postgres://status:${POSTGRES_PASSWORD}@db:5432/status
+      APP_VERSION: ${APP_VERSION:-dev}
+      PORT: 3000
+    ports:
+      - 127.0.0.1:3000:3000
+    depends_on:
+      db:
+        condition: service_healthy

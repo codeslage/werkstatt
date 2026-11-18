@@ -15,6 +15,9 @@
     "depcruise": "depcruise --config .dependency-cruiser.json --output-type err .",
     "spec-check": "node tools/spec-check/src/cli.ts specs",
     "test:infra": "vitest run --project infra",
+    "test:smoke": "vitest run --project smoke",
+    "dev:up": "APP_VERSION=$(git rev-parse --short HEAD) docker compose up -d --build --wait",
+    "dev:down": "docker compose down",
     "format": "prettier --check .",
     "format:write": "prettier --write ."
   },
@@ -22,9 +25,9 @@
     "@codeslage/config": "workspace:*",
     "@types/node": "24.19.2",
     "dependency-cruiser": "18.7.2",
-    "eslint": "10.14.0",
-    "knip": "6.44.2",
-    "prettier": "3.9.10",
+    "eslint": "10.15.0",
+    "knip": "6.45.1",
+    "prettier": "3.10.1",
     "typescript": "6.0.3",
     "vitest": "^5.1.0"
   }

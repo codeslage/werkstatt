@@ -1,6 +1,5 @@
 # Automatische Abhängigkeits-Updates per PR (Constitution XI, AK-29).
 # Sicherheits-Updates sind zusätzlich in den Repo-Einstellungen aktiv (Protokoll T-22).
-# docker kommt dazu, sobald es Dockerfiles gibt (T-27).
 version: 2
 updates:
   - package-ecosystem: npm
@@ -35,3 +34,26 @@ updates:
       interval: weekly
     cooldown:
       default-days: 3
+
+  # Basis-Images (per Digest gepinnt): Dockerfiles der Apps und die Images in compose.yaml.
+  - package-ecosystem: docker
+    directories: ['/apps/*']
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 3
+    ignore:
+      # Node 24 laut Plan, passend zu @types/node 24.x: nur neue Digests und Versionen innerhalb von 24.
+      - dependency-name: node
+        update-types: ['version-update:semver-major']
+
+  - package-ecosystem: docker-compose
+    directory: /
+    schedule:
+      interval: weekly
+    cooldown:
+      default-days: 3
+    ignore:
+      # Ab Postgres 18 liegen die Daten an anderer Stelle; das tmpfs in compose.yaml müsste mitwandern. Major nur bewusst.
+      - dependency-name: postgres
+        update-types: ['version-update:semver-major']

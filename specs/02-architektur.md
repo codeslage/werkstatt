@@ -1,7 +1,7 @@
 # 02 – Architektur
 
 > Status: **Entwurf** – wartet auf Freigabe
-> Stand: 2026-11-05 (Server erst bei Bedarf, ADR 0009; Domains nach ADR 0004; pnpm ohne Turborepo nach ADR 0008)
+> Stand: 2026-11-18 (A2: Entwicklung auf dem Mac; Server erst bei Bedarf, ADR 0009; Domains nach ADR 0004; pnpm ohne Turborepo nach ADR 0008)
 > Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md`
 
 ## Ziel
@@ -99,9 +99,8 @@ codeslage/
 
 ### A2 – Lokale Entwicklung
 
-- **Windows (jetzt):** native Entwicklung mit Node, pnpm, Git und OpenTofu direkt unter Windows im Repo `X:\Coding\codeslage`.
-  Begründung: WSL2 ist nur schnell, wenn das Repo _im_ Linux-Dateisystem liegt; auf `X:\` (über `/mnt/x`) sind Builds und File-Watcher langsam. Da der Mac bald kommt, lohnt sich der WSL-Umweg nicht.
-- **Mac (später):** Repo klonen, `pnpm install`, fertig. Keine Windows-spezifischen Skripte – nur plattformneutrale Node-Skripte.
+- **Mac (seit 2026-11-18):** native Entwicklung mit Node, pnpm, Git und OpenTofu direkt unter macOS (Apple Silicon). Repo klonen, `pnpm install`, fertig; Schritte im Runbook `docs/runbooks/lokale-umgebung.md`. Keine plattformspezifischen Skripte, nur plattformneutrale Node-Skripte.
+- **Windows (bis 2026-11-18):** native Entwicklung unter Windows. WSL2 hätte sich nur gelohnt, wenn das Repo im Linux-Dateisystem liegt; mit dem Mac entfiel der Umweg.
 - **Dienste lokal in Containern:** Postgres und die Apps laufen über **Docker Compose**, nur auf `localhost`, mit Seed-Daten. Jede App hat ein Dockerfile; dasselbe Image baut und startet die CI bei jedem PR. So ist der spätere Umzug auf einen Server kein Umbau. Bis Phase S ist **dev = lokal** (ADR 0009).
 
 ### A3 – Infrastruktur
