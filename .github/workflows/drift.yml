@@ -1,0 +1,66 @@
+name: Drift-Check
+
+# AK-5: main zeigt keine Abweichung zur echten Infrastruktur (Cloudflare). ADR 0002: die CI liest nur, apply bleibt lokal.
+# Rot heißt: Dashboard und Code passen nicht zusammen. Bei einem PR auf infra/ ist das erwartet, bis der Inhaber
+# den geprüften plan lokal angewendet hat (docs/runbooks/tofu-state.md); danach den Lauf neu starten.
+on:
+  schedule:
+    - cron: '17 5 * * 1'
+  pull_request:
+    paths:
+      - 'infra/**'
+      - '.github/workflows/drift.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: drift-${{ github.ref }}
+  cancel-in-progress: true
+
+env:
+  # Gleich wie in ci.yml (infra/tests/drift.test.ts prüft das).
+  TOFU_VERSION: 1.13.1
+  TOFU_SHA256: 378ada19d4bc70c43732004e8159be771b23b9a5afdf059e5f8a2b3fa2c70a69
+
+jobs:
+  drift:
+    name: Drift (OpenTofu live)
+    # PRs aus Forks bekommen keine Secrets; dort gibt es nichts zu prüfen.
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    env:
+      # Nur Read-only-Tokens (AK-14, docs/secrets.md). Konto-ID und Endpoint sind intern und deshalb ebenfalls Secrets.
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CF_API_TOKEN_RO }}
+      AWS_ACCESS_KEY_ID: ${{ secrets.R2_STATE_RO_ACCESS_KEY_ID }}
+      AWS_SECRET_ACCESS_KEY: ${{ secrets.R2_STATE_RO_SECRET_ACCESS_KEY }}
+      R2_ENDPOINT: ${{ secrets.R2_ENDPOINT }}
+      TF_VAR_account_id: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+      TF_VAR_state_passphrase: ${{ secrets.TF_ENCRYPTION_PASSPHRASE }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: OpenTofu installieren (gepinnt, Prüfsumme)
+        run: |
+          mkdir -p "$RUNNER_TEMP/bin"
+          tofu="tofu_${TOFU_VERSION}_linux_amd64.tar.gz"
+          curl -sSfL -o "$RUNNER_TEMP/$tofu" "https://github.com/opentofu/opentofu/releases/download/v${TOFU_VERSION}/$tofu"
+          echo "${TOFU_SHA256}  $RUNNER_TEMP/$tofu" | sha256sum -c -
+          tar -xzf "$RUNNER_TEMP/$tofu" -C "$RUNNER_TEMP/bin" tofu
+          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+
+      # Die Logs sind öffentlich: Zonen- und Datensatz-IDs (32 Hex-Zeichen) werden maskiert.
+      - name: plan gegen Cloudflare (AK-5)
+        shell: bash
+        run: |
+          set -o pipefail
+          tofu -chdir=infra/tofu/live init -input=false -no-color \
+            -backend-config="endpoints={s3=\"$R2_ENDPOINT\"}" | sed -E 's/[0-9a-f]{32}/<id>/g'
+          tofu -chdir=infra/tofu/live plan -input=false -no-color -lock=false -detailed-exitcode \
+            2>&1 | sed -E 's/[0-9a-f]{32}/<id>/g'
+
+      - name: DNS über die öffentliche Auflösung (AK-3)
+        run: pnpm test:infra dns.test.ts
