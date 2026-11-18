@@ -23,10 +23,18 @@ function home(version: string) {
   );
 }
 
-async function route(request: IncomingMessage, response: ServerResponse, deps: StatusDeps, logger: Logger) {
-  const path = new URL(request.url ?? '/', 'http://localhost').pathname;
+// HEAD wie GET, ohne Rumpf (node:http lässt ihn weg): Uptime-Monitore und Healthchecks nutzen oft HEAD.
+const READ_METHODS = new Set(['GET', 'HEAD']);
+
+async function route(
+  path: string,
+  request: IncomingMessage,
+  response: ServerResponse,
+  deps: StatusDeps,
+  logger: Logger,
+) {
   if (path !== '/' && path !== '/health') return send(response, 404, 'text/plain', 'Not found');
-  if (request.method !== 'GET') return send(response, 405, 'text/plain', 'Method not allowed');
+  if (!READ_METHODS.has(request.method ?? '')) return send(response, 405, 'text/plain', 'Method not allowed');
   if (path === '/') return send(response, 200, 'text/html', home(deps.version));
 
   const result = await checkHealth(deps.query, deps.version, (cause) =>
@@ -39,14 +47,16 @@ async function route(request: IncomingMessage, response: ServerResponse, deps: S
 export function createStatusServer(deps: StatusDeps): Server {
   const logger = createLogger(deps.log);
   return createServer((request, response) => {
-    route(request, response, deps, logger)
+    // Nur der Pfad ins Log, nie der Query-String: Was Aufrufer anhängen, kann vertraulich sein.
+    const path = new URL(request.url ?? '/', 'http://localhost').pathname;
+    route(path, request, response, deps, logger)
       .catch((error: unknown) => {
         logger('error', 'Anfrage fehlgeschlagen', { cause: error instanceof Error ? error.message : String(error) });
         if (!response.headersSent) send(response, 500, 'text/plain', 'Internal error');
       })
       .finally(() => {
         const status = response.statusCode;
-        logger(status >= 500 ? 'warn' : 'info', 'Anfrage', { method: request.method, path: request.url, status });
+        logger(status >= 500 ? 'warn' : 'info', 'Anfrage', { method: request.method, path, status });
       });
   });
 }

@@ -54,6 +54,24 @@ describe('apps/status', () => {
     expect((await fetch(`${base}/health`, { method: 'POST' })).status).toBe(405);
   });
 
+  it('HEAD wird wie GET beantwortet, ohne Rumpf', async () => {
+    const { base } = await start(async () => [{ message: 'Hello codeslage' }]);
+    const response = await fetch(`${base}/health`, { method: 'HEAD' });
+    expect(response.status).toBe(200);
+    expect(await response.text()).toBe('');
+  });
+});
+
+describe('apps/status: Logs', () => {
+  it('protokolliert nur den Pfad, nie den Query-String', async () => {
+    const { base, lines } = await start(async () => [{ message: 'Hello codeslage' }]);
+    await fetch(`${base}/health?token=geheim`);
+    expect(lines.join(' ')).not.toContain('geheim');
+    expect(lines.map((line) => JSON.parse(line) as Record<string, unknown>)).toContainEqual(
+      expect.objectContaining({ path: '/health', status: 200 }),
+    );
+  });
+
   it('protokolliert jede Anfrage als JSON-Zeile, Fehlergrund inklusive', async () => {
     const { base, lines } = await start(async () => {
       throw new Error('connect ECONNREFUSED');

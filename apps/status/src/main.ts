@@ -22,6 +22,11 @@ const sql = postgres(config.databaseUrl, { max: 2, connect_timeout: 3, idle_time
 const query = () => sql`select message from status_check where id = 1`;
 
 const server = createStatusServer({ version: config.version, query, log: write });
+// Artikel XVI: auch ein Startfehler (z. B. Port belegt) endet mit einer JSON-Zeile statt einem Stacktrace.
+server.on('error', (error) => {
+  log('error', 'Server konnte nicht starten', { cause: error.message });
+  process.exit(1);
+});
 server.listen(config.port, () => log('info', 'gestartet', { port: config.port, version: config.version }));
 
 for (const signal of ['SIGTERM', 'SIGINT'] as const) {
