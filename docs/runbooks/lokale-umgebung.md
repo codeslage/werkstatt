@@ -5,15 +5,15 @@
 
 ## 1. Werkzeuge
 
-| Werkzeug             | Wofür                                  | Windows                                              | macOS                    | Geprüfte Version |
-| -------------------- | -------------------------------------- | ---------------------------------------------------- | ------------------------ | ---------------- |
-| Git                  | Versionskontrolle                      | vorinstalliert bzw. `winget install --id Git.Git -e` | `xcode-select --install` | 2.47.0           |
-| Node.js 24           | Laufzeit, Skripte, Tests               | `winget install --id OpenJS.NodeJS -e`               | `brew install node@24`   | 24.18.0          |
-| pnpm (über Corepack) | Paketverwaltung                        | `corepack enable` (als Administrator)                | `corepack enable`        | 12.16.1          |
-| OpenTofu             | DNS als Code                           | `winget install --id OpenTofu.Tofu -e`               | `brew install opentofu`  | 1.13.1           |
-| GitHub CLI           | Repo, PRs, Secrets                     | `winget install --id GitHub.cli -e`                  | `brew install gh`        | 2.103.3          |
-| gitleaks             | Secret- und Öffentlich-Scan (Git-Hook) | `winget install --id Gitleaks.Gitleaks -e`           | `brew install gitleaks`  | 8.30.1           |
-| Docker Desktop       | lokale Container (ab Schritt 3)        | von docker.com, Lizenz selbst akzeptieren            | dto.                     | – (T-24)         |
+| Werkzeug             | Wofür                                  | Windows                                                                                                            | macOS                    | Geprüfte Version |
+| -------------------- | -------------------------------------- | ------------------------------------------------------------------------------------------------------------------ | ------------------------ | ---------------- |
+| Git                  | Versionskontrolle                      | vorinstalliert bzw. `winget install --id Git.Git -e`                                                               | `xcode-select --install` | 2.47.0           |
+| Node.js 24           | Laufzeit, Skripte, Tests               | `winget install --id OpenJS.NodeJS -e`                                                                             | `brew install node@24`   | 24.18.0          |
+| pnpm (über Corepack) | Paketverwaltung                        | `corepack enable` (als Administrator)                                                                              | `corepack enable`        | 12.16.1          |
+| OpenTofu             | DNS als Code                           | `winget install --id OpenTofu.Tofu -e`                                                                             | `brew install opentofu`  | 1.13.1           |
+| GitHub CLI           | Repo, PRs, Secrets                     | `winget install --id GitHub.cli -e`                                                                                | `brew install gh`        | 2.103.3          |
+| gitleaks             | Secret- und Öffentlich-Scan (Git-Hook) | `winget install --id Gitleaks.Gitleaks -e`                                                                         | `brew install gitleaks`  | 8.30.1           |
+| Docker Desktop       | lokale Container (ab Schritt 3)        | von docker.com, Lizenz selbst akzeptieren; danach in den Einstellungen die Telemetrie abschalten (`docs/dsgvo.md`) | dto.                     | – (T-24)         |
 
 Hinweise:
 

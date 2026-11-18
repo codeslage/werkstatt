@@ -43,4 +43,6 @@ regexes = [
   '''@users\.noreply\.github\.com$''',
   '''^git@github\.com$''',
   '''^noreply@anthropic\.com$''',
+  # Berichtsadresse für DMARC: von Cloudflare vergeben, steht ohnehin öffentlich im DNS (T-38).
+  '''@dmarc-reports\.cloudflare\.net$''',
 ]
