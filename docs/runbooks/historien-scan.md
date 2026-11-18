@@ -12,7 +12,7 @@ Manuell starten: Actions → „Historien-Scan“ → Run workflow. Mit Haken be
 
 ## 2. Wenn er rot ist
 
-GitHub schickt bei einem fehlgeschlagenen geplanten Lauf eine Mail (AK-27, Nachweis mit T-41). Im Log stehen Regel, Datei und Commit; der Treffer selbst ist geschwärzt.
+GitHub schickt bei einem fehlgeschlagenen geplanten Lauf eine Mail (AK-27, nachgewiesen am 2026-11-18, Protokoll T-41). Im Log stehen Regel, Datei und Commit; der Treffer selbst ist geschwärzt.
 
 1. **Fehlalarm?** Lokal mit demselben Befehl nachvollziehen. Ist der Treffer harmlos (z. B. eine Rollenadresse), die Ausnahme in `.gitleaks.toml` per PR ergänzen, mit Begründung.
 2. **Secret oder Token:** sofort widerrufen bzw. rollen (`docs/runbooks/token-erneuerung.md`), dann `docs/secrets.md` anpassen. Was öffentlich war, gilt als bekannt.
