@@ -17,7 +17,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Geändert
 
-- 2026-11-18 – Abhängigkeits-Updates per Dependabot (Sammeleintrag, Dependabot schreibt keinen Changelog): Cloudflare-Provider 5.28.1 → 5.29.0 in `infra/tofu/bootstrap` und `infra/tofu/live` (#21, #22), typescript-eslint 8.72.1 → 8.72.2 (#23), knip 6.44.2 → 6.45.1 (#24), eslint 10.14.0 → 10.15.0 (#25), prettier 3.9.10 → 3.10.1 (#26).
+- 2026-11-18 – Abhängigkeits-Updates per Dependabot (Sammeleintrag, Dependabot schreibt keinen Changelog): typescript-eslint 8.72.1 → 8.72.2 (#23), knip 6.44.2 → 6.45.1 (#24), eslint 10.14.0 → 10.15.0 (#25), prettier 3.9.10 → 3.10.1 (#26).
 - 2026-11-10 – Einheitliche Formatierung mit Prettier für das ganze Repo, auch Constitution und Prozessdokumente. Nur Leerraum, Kursivschrift und Anführungszeichen, kein geänderter Wortlaut, deshalb keine neue Constitution-Version. Freigabe des Inhabers am 2026-11-10 (#14).
 - 2026-11-10 – Schreibweise „Klick-Dummy“ einheitlich in Architektur, Roadmap, Spec 04 und ADR 0009; Protokolle bleiben unverändert (#7).
 - 2026-11-10 – Roadmap: Phase 2 heißt „Webseite (Klick-Dummy)“ (#4).

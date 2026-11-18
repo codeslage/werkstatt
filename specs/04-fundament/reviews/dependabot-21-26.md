@@ -1,0 +1,48 @@
+## Review: Dependabot-PRs #21–#26 · Vorhaben 04-fundament (AK-29) · Tasks T-22, T-37 · Klasse M
+
+Geprüfte Head-SHAs: #21 `bff2893`, #22 `576d56b`, #23 `c7ee7b3`, #24 `cb9644d`, #25 `55e02a2`, #26 `c140150`. Alle basieren auf dem aktuellen `origin/main` (`fab808d`, 0 Commits zurück).
+
+Ergebnis: ✅ mergebar (keine 🔴). Vor dem Merge müssen aber Befund 1 (Changelog) und Befund 2 (Einstufung von #21/#22, Entscheidung des Inhabers) geklärt sein.
+
+### Befunde
+
+| # | Grad | Datei:Zeile | Befund | Fehlerfall | Artikel |
+|---|---|---|---|---|---|
+| 1 | 🟡 | `CHANGELOG.md:3` (alle sechs PRs) | Keiner der PRs trägt etwas unter „Unveröffentlicht“ ein. Für Klasse M schreiben `aenderungsklassen.md:14` und die Pflegeregel in `CHANGELOG.md:3` das im selben PR vor. | Nach dem Auto-Merge fehlen die Updates im Changelog, darunter der Provider-Sprung mit Breaking Changes (5.29.0). Der nächste `/release` erzeugt dann einen unvollständigen Release-Kandidaten. Vorschlag: einen Sammeleintrag (Rubrik „Geändert“ bzw. „Sicherheit“ für minimatch über ESLint) in einem eigenen PR, oder der Inhaber entscheidet ausdrücklich, Dependabot-PRs von der Pflicht auszunehmen. Commits auf Dependabot-Branches würden dessen automatisches Rebase stoppen. | XII |
+| 2 | 🟡 | `infra/tofu/live/versions.tf:10`, `infra/tofu/bootstrap/versions.tf:10` (#21, #22) | Die Einstufung als M widerspricht der festen Untergrenze in `aenderungsklassen.md:26`: „Alles, was Infrastruktur … berührt, ist mindestens K.“ Der Provider steuert die Zone codeslage.de (DNS inkl. MX/DKIM, DNSSEC) und den State-Bucket. Herunterstufen darf Claude nicht selbst (`aenderungsklassen.md:24`). | Als M würden #21/#22 ohne Freigabe des Inhabers automatisch gemergt. Der nächste lokale `tofu apply` läuft dann mit 5.29.0. Laut Release Notes hat sich dort u. a. die State-Migration für `cloudflare_zone` geändert. Eine Freigabe hat niemand gegeben. Für live liegt der von K verlangte Plan-Auszug faktisch vor (Drift-Check #22: „No changes“). Die Freigabe des Inhabers fehlt aber, und für bootstrap fehlt auch der Plan (Befund 3). | I, IV, V |
+| 3 | 🟡 | `infra/tofu/bootstrap/versions.tf:10` (#21) | Gegen den echten State wird nur `live` geprüft (`.github/workflows/drift.yml:65–68`). Der Drift-Lauf auf #21 hat laut Log `cloudflare v5.28.1` für live installiert, also den Bootstrap-Provider gar nicht getestet. Für bootstrap gibt es nur `init -backend=false` + `validate` + tflint (lokal nachgeprüft: grün). | Würde 5.29.0 `cloudflare_r2_bucket` anders lesen (z. B. `jurisdiction`/`location`), fiele das erst beim nächsten manuellen `tofu plan` in bootstrap auf, nach dem Merge. Vorschlag: Der Inhaber führt vor dem Merge von #21 einmal `tofu plan` in `infra/tofu/bootstrap` aus (`docs/runbooks/tofu-state.md`) und legt den Auszug bei. | X, II |
+| 4 | ⚪ | `infra/tofu/{bootstrap,live}/.terraform.lock.hcl:6` (#21, #22) | Dependabot setzt `version = "5.29.0"`, lässt aber `constraints = "5.28.1"` stehen. Nachgeprüft mit OpenTofu 1.13.1 auf einer Kopie von #21/#22: `tofu init -backend=false -lockfile=readonly` läuft durch und schreibt die Datei **nicht** um. Die veraltete Zeile bleibt also dauerhaft stehen. | Wer das Lockfile liest, sieht die Einschränkung 5.28.1, obwohl `versions.tf` 5.29.0 verlangt. Funktional ohne Folgen. Bereinigt sich beim nächsten `tofu init -upgrade`. | XV |
+| 5 | ⚪ | `pnpm-lock.yaml:1874` (Stand #25) | ESLint 10.15.0 hebt `minimatch` laut Release Notes wegen CVE-2026-118764 auf ≥ 11.0.1 an. `@typescript-eslint/typescript-estree` 8.72.x (auch mit #23) hängt weiter an `minimatch@10.2.6`. Erst typescript-eslint 8.73.0 verlangt `^11.0.1`. Ein offener Dependabot-Alert existiert nicht (API-Abfrage leer). | Nach #23 und #25 bleibt die anfällige minimatch-Version als Entwicklungsabhängigkeit im Lockfile, bis Dependabot 8.73.0 vorschlägt (nach der Wartezeit von 3 Tagen ab 16.11.). Kein Laufzeitrisiko, weil nur Lint-Werkzeug. | VII |
+| 6 | ⚪ | `package.json`, `tools/quality-fixtures/package.json`, `pnpm-lock.yaml` (#25, #26) | Simuliert mit `git merge-tree` und der Merge-Reihenfolge 21→26: #21–#24 lassen sich konfliktfrei mergen. Danach kollidieren #25 (package.json, quality-fixtures/package.json, pnpm-lock.yaml) und #26 (beide package.json). | Mergt man nacheinander, braucht #25/#26 ein Rebase durch Dependabot und einen **neuen** grünen CI-Lauf. Der jetzige grüne Lauf gilt dann nicht mehr für das, was gemergt wird. | III |
+| 7 | ⚪ | `docs/protokolle/2026-11-17-t-37-infra-ci.md`, `specs/04-fundament/tasks.md:68` | #21/#22 sind die ersten Dependabot-PRs im Ökosystem `opentofu`. T-37 verlangt, diesen „ersten Lauf [zu] beobachten (AK-29)“. Protokolliert ist das noch nicht. Kein Mangel dieser PRs, aber der Nachweis liegt jetzt vor. | Bleibt der Nachweis aus, lässt sich AK-29 für OpenTofu-Provider bei Verify (Stufe 7) nicht belegen. Vorschlag: Nachtrag im T-37-Protokoll mit Verweis auf #21/#22. | II, XII |
+
+### Checkliste
+
+| # | Prüfpunkt | ✅/❌/– | Anmerkung |
+|---|---|---|---|
+| 1 | Auftrag | ✅ | Jeder PR ändert nur Versionsangabe + Lockfile seines Pakets bzw. Providers (AK-29, Dependabot-Konfiguration aus T-22/T-37). Nichts darüber hinaus. Einstufung #21/#22 siehe Befund 2. |
+| 2 | Korrektheit | ✅ | CI auf allen sechs Head-SHAs grün (Lint, Typecheck, Tests im Job „Secret- und Öffentlich-Scan“, Knip, Modulgrenzen, Format, Infra, Spec-Check, Repo-Einstellungen). Drift-Check #22 mit 5.29.0: „No changes. Your infrastructure matches the configuration.“, DNS-Test 4/4. Breaking Changes in 5.29.0 betreffen keine genutzte Ressource (`r2_bucket`, `zone`, `dns_record`, `zone_setting`, `zone_dnssec`). Die neue Pflicht `content` bei MX/TXT ist überall erfüllt. typescript-eslint 8.72.2, knip 6.45.x, ESLint 10.15.0 und Prettier 3.10.x ohne Breaking Changes. Format-Check mit Prettier 3.10.1 grün, also keine Umformatierung nötig. |
+| 3 | Tests | ✅ | Keine Tests geändert oder abgeschwächt. Lokal zusätzlich auf Kopien von #21/#22 geprüft: `tofu validate`, `tflint`, `tofu fmt -check` grün. Lücke beim Bootstrap-Plan siehe Befund 3. |
+| 4 | Eingaben | – | Keine Systemgrenzen betroffen. |
+| 5 | Sicherheit | ✅ | Keine Secrets im Diff. Alle `zh:`-Hashes im Lockfile stimmen mit den offiziellen `SHA256SUMS` von terraform-provider-cloudflare 5.29.0 für alle 8 Plattformen überein (auch `darwin_arm64` für den Mac). Weggefallen ist nur der Hash der `manifest.json`, der kein Provider-Paket ist. Provider laut Drift-Log signiert (Key C76001609EE3B136). Drift lief mit Read-only-Tokens. Siehe Befund 5. |
+| 6 | Datenschutz | – | Keine personenbezogenen Daten, kein neuer Dienstleister. |
+| 7 | Mensch im Loop | – | Keine KI-Ausgaben. Freigabe für Infra siehe Befund 2. |
+| 8 | Zerstörerisches | ✅ | Kein `destroy`, keine Löschungen. Der Plan für live zeigt keine Änderungen, `prevent_destroy` an Zone und Bucket bleibt. Die neuen Ersetzungs-Regeln (`organization`) betreffen keine genutzte Ressource. |
+| 9 | Code-Qualität | ✅ | #24 entfernt `zod` transitiv (knip 6.45.0 ersetzt Zod), also weniger Abhängigkeiten. Knip grün. Veraltete Constraint-Zeile siehe Befund 4. |
+| 10 | Abhängigkeiten | ✅ | Neu, transitiv über ESLint (#25): `minimatch@11.0.8` und `@isaacs/nonrecursive-glob-match@1.1.0`, beide BlueOak-1.0.0 (permissiv, kommerziell nutzbar), Maintainer isaacs. `@eslint/config-array@0.23.6` Apache-2.0. Direkte Pakete: typescript-eslint, eslint, prettier MIT, knip ISC, Cloudflare-Provider MPL-2.0. Alle aktiv gepflegt. Alle Versionen wurden mindestens 4 Tage vor heute veröffentlicht (Wartezeit 3 Tage eingehalten). Sonst keine unerwarteten neuen Pakete im Lockfile. |
+| 11 | Fehler | – | Kein Laufzeit-Code betroffen. |
+| 12 | Doku | ❌ | Changelog-Eintrag fehlt (Befund 1). AK-29-Nachweis für `opentofu` noch nicht protokolliert (Befund 7). |
+
+### Zusammenfassung für den Inhaber
+
+Die sechs PRs heben automatisch Versionen von Werkzeugen an: vier Prüfwerkzeuge für den Code (ESLint, typescript-eslint, Knip, Prettier) und den Cloudflare-Baustein, mit dem OpenTofu Ihre Domain, die DNS-Einträge und den Speicher für den Infrastruktur-Zustand verwaltet. Alle automatischen Prüfungen sind grün. Bei der Domain hat ein Probelauf gegen das echte Cloudflare bestätigt, dass die neue Version nichts verändern würde. Für den Speicher-Bucket (#21) gab es diesen Probelauf nicht. Bitte führen Sie ihn vor dem Merge einmal lokal aus. Nach den festen Regeln gilt alles, was Infrastruktur berührt, mindestens als „kleine Änderung“. Für #21 und #22 braucht es deshalb Ihre ausdrückliche Freigabe statt eines automatischen Merges. Außerdem fehlt bei allen sechs der vorgeschriebene Changelog-Eintrag. Ausprobieren müssen Sie sonst nichts: Ihre Webseite und Ihre Mails sind durch die Updates nicht betroffen.
+
+### Umsetzung der Befunde (Nachtrag)
+
+- 1 🟡: Sammeleintrag im Changelog über PR #34 (Abschluss T-22/T-37), dort zunächst nur für die tatsächlich gemergten PRs. Die Regel für Dependabot-PRs liegt dem Inhaber zur Entscheidung vor (Nachtrag in `tasks.md`).
+- 2 🟡: #21/#22 als Klasse K behandelt: nicht automatisch gemergt, Freigabe des Inhabers eingeholt.
+- 3 🟡: Vor dem Merge von #21 läuft `tofu plan` in `infra/tofu/bootstrap` lokal. Dafür fehlt auf dem Mac noch die `.env` (Schritt des Inhabers).
+- 4 ⚪: Bereinigt sich beim nächsten `tofu init -upgrade`; kein eigener PR.
+- 5 ⚪: Wird mit dem Dependabot-Vorschlag für typescript-eslint 8.73.0 erledigt.
+- 6 ⚪: #23 und #24 am 2026-11-18 gemergt (CI grün auf dem Head-SHA). #25 hatte durch „Update branch“ einen fremden Commit; Dependabot wurde per `@dependabot recreate` gebeten, ihn neu aufzusetzen. #26 rebased Dependabot selbst. Beide werden erst nach einem neuen grünen Lauf gemergt.
+- 7 ⚪: Bereits im Protokoll T-37, Schritt 7 (PR #34).
