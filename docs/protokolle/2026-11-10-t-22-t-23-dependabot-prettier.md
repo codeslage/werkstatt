@@ -37,3 +37,7 @@
 17. Nach dem Review: Laut Plan wird AK-29 **je Ökosystem** nachgewiesen. Belegt ist bisher nur npm (#15). T-22 bleibt deshalb 🔄, bis für `github-actions` ein Update-PR oder ein beobachteter Lauf ohne Updates belegt ist. `docker` und `terraform` werden in T-27 bzw. T-37 ergänzt und dort beobachtet.
 18. `docs/secrets.md` nennt das Dependabot-Secret jetzt richtig als **noch offen**.
 19. PR #15 ist noch offen. Das Schließen per CLI hat die Rechteprüfung der Sitzung blockiert. Es übernimmt der Inhaber, oder Dependabot schließt den PR selbst, sobald die Ausnahme auf `main` ist.
+
+## Nachtrag 2026-11-18
+
+20. **`github-actions`:** Dependabot-Läufe „github_actions in /., /.github/actions/*“ am 2026-11-10, 2026-11-12 und 2026-11-17 erfolgreich, jeweils ohne Update-PR (alle Actions aktuell). Das ist der in Schritt 17 genannte „beobachtete Lauf ohne Updates“. PR #15 ist geschlossen. `docker` folgt mit T-27, `opentofu` ist in T-37 belegt. T-22 ✅.
