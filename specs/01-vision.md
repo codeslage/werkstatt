@@ -1,7 +1,7 @@
 # 01 – Vision
 
 > Status: **Entwurf** – wartet auf Freigabe
-> Stand: 2026-11-04
+> Stand: 2026-11-18 (Rechner: Mac)
 > Bezug: `CONSTITUTION.md` (v1.1.0)
 
 ## Ziel
@@ -26,7 +26,7 @@ Der Kern des Schaufensters ist **KI-getriebene Automatisierung von Geschäftspro
 | Domain       | `codeslage.de`                                                                                                                    |
 | Konten       | Google Workspace (Mail, Docs, Drive, Login), GitHub                                                                               |
 | Arbeitsweise | 100 % KI-getrieben, spec-driven (Spec → Plan → Umsetzung → Tests)                                                                 |
-| Rechner      | jetzt Windows, demnächst Mac (auch für iOS)                                                                                       |
+| Rechner      | Mac (seit 2026-11-18, auch für iOS); vorher Windows                                                                               |
 
 ## Was Erfolg bedeutet (in 6–12 Monaten)
 
