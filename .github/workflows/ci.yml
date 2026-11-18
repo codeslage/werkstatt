@@ -190,10 +190,6 @@ jobs:
       - name: Smoke-Test – /health gegen das Schema, Container gesund, nur 127.0.0.1, ohne Root (AK-26)
         run: pnpm test:smoke
 
-      - name: Container-Logs bei Fehler
-        if: failure()
-        run: docker compose logs
-
       # Gegenprobe (T-30): Ohne Seed-Zeile darf die Umgebung nicht gesund starten.
       - name: Gegenprobe – kaputter Seed muss scheitern
         run: |
@@ -204,6 +200,11 @@ jobs:
             exit 1
           fi
           curl -s http://127.0.0.1:3000/health | grep -q '"seed missing"'
+
+      # Nach der Gegenprobe, damit auch ihr Scheitern Logs liefert.
+      - name: Container-Logs bei Fehler
+        if: failure()
+        run: docker compose logs
 
       - name: Compose stoppen
         if: always()
