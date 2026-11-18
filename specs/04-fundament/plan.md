@@ -165,7 +165,7 @@ Konfiguration nur über Umgebungsvariablen: `DATABASE_URL`, `APP_VERSION`, `PORT
 - Skripte: `pnpm dev:up` (`docker compose up -d --wait`), `pnpm dev:down`, `pnpm test:smoke` (prüft `/health` gegen das Schema)
 - CI-Job `image`: Compose bauen und starten, `test:smoke`, Compose stoppen (AK-26)
 - `docs/runbooks/lokale-umgebung.md`: Schritte vom frischen Rechner bis zur laufenden App
-- AK-25 manuell: einmal in einem frischen macOS-Benutzerkonto nach Runbook, Protokoll. Das Runbook kommt dort ohne Administratorrechte aus (Homebrew gehört dem ersten Konto); Docker Desktop wird je Konto eingerichtet.
+- AK-25 manuell: einmal in einem frischen macOS-Benutzerkonto (Standardkonto ohne Administratorrechte) nach Runbook, Protokoll. Die Werkzeuge (Abschnitt 1 des Runbooks: Homebrew, Node 24, Corepack, Docker Desktop) installiert das Admin-Konto einmal je Rechner, denn Homebrew und das Node-Verzeichnis gehören dem ersten Konto. Das frische Konto richtet nur den `PATH` ein, startet Docker Desktop einmal für sich, klont das Repo und führt `pnpm install` und `pnpm dev:up` aus. Diese Einschränkung steht im Protokoll: Belegt ist der Weg vom Klonen bis zur laufenden App, die Installation der Werkzeuge belegt das Protokoll T-01.
 
 ### Schritt 4 – Cloudflare DNS & State (AK-3, AK-4, AK-5, AK-14)
 
