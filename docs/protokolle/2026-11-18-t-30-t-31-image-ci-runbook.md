@@ -14,8 +14,10 @@
 
 5. `docs/runbooks/lokale-umgebung.md` neu für den Mac (Plan v1.2): Werkzeuge einmal je Rechner im Admin-Konto, `PATH` und Docker Desktop je Konto, dann Klonen, `pnpm install`, `.env` mit `POSTGRES_PASSWORD`, `pnpm dev:up`, Browser, `pnpm test:smoke`, `pnpm dev:down`. Übernommen aus Review und Protokoll T-27–T-29: Passwort nur aus Buchstaben, Ziffern und Bindestrich; geänderte `seed.sql` wirkt erst nach `dev:down`; Fehlerbilder als Tabelle.
 6. **Offen (AK-25 manuell):** einmal in einem frischen macOS-Standardkonto nach dem Runbook durchspielen. Das Konto anzulegen ist eine Einstellung am Rechner des Inhabers; der Lauf folgt mit ihm und wird hier nachgetragen.
+   **Nachtrag (Plan v1.3, Entscheidung des Inhabers):** AK-25 ist durch die Ersteinrichtung des neuen Mac am 2026-11-18 nachgewiesen. Auf dem frischen Rechner liefen die Schritte aus Runbook-Abschnitt 1 bis 3: Werkzeuge (Protokoll T-01, Nachtrag Mac), `PATH` in `~/.zprofile`, Docker Desktop mit abgeschalteter Telemetrie, Klonen, `pnpm install`, `.env` mit `POSTGRES_PASSWORD`. Danach `pnpm dev:up` (beide Container gesund), `pnpm test:smoke` 9/9 grün, `pnpm dev:down`. Das Runbook ist aus diesem Ablauf entstanden und wurde danach nicht noch einmal blind befolgt. Die CI deckt davon nur Abschnitt 3 ab `pnpm install` ab, nicht Abschnitt 1 und 2 und nicht `cp .env.example .env`. Diese Lücke nimmt der Inhaber bewusst an (Plan v1.3).
 
 ## T-24: Docker Desktop
 
 7. Installiert vom Inhaber: Docker Desktop 4.99.0, Client und Engine 29.9.3, `linux/arm64`, Kontext `desktop-linux`. **Offen:** Telemetrie abschalten (Settings → General → „Send usage statistics“). In den Einstellungen ist der Schalter bisher nicht gesetzt, also gilt die Voreinstellung (an).
    **Nachtrag:** Laut Inhaber ist die Telemetrie jetzt aus. In `~/Library/Group Containers/group.com.docker/settings-store.json` ist aber kein geänderter Wert gespeichert (Datei zuletzt 17:11 geändert). Vermutlich wurde „Apply“ nicht gedrückt. T-24 bleibt 🔄, bis der Wert in der Datei steht.
+   **Nachtrag:** Gespeichert, `AnalyticsEnabled: false` (Datei 20:29 geändert). T-24 ✅.

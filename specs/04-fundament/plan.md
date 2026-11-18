@@ -1,6 +1,6 @@
 # 04 – Phase 1 Fundament: Plan
 
-> Status: **Freigegeben** am 2026-11-05 (v1.1 nach Analyse: PR-Zuschnitt, tflint/`tofu`-Prüfungen erst in Schritt 4, AK-28 bis AK-30); v1.2 am 2026-11-18: lokale Entwicklung auf dem Mac statt unter Windows, vom Inhaber im Chat freigegeben
+> Status: **Freigegeben** am 2026-11-05 (v1.1 nach Analyse: PR-Zuschnitt, tflint/`tofu`-Prüfungen erst in Schritt 4, AK-28 bis AK-30); v1.2 am 2026-11-18: lokale Entwicklung auf dem Mac statt unter Windows, vom Inhaber im Chat freigegeben; v1.3 am 2026-11-18: AK-25 manuell durch die Ersteinrichtung des neuen Mac nachgewiesen, Entscheidung des Inhabers im Chat
 > Stand: 2026-11-18
 > Bezug: `spec.md` (v2.1), `tasks.md`, `CONSTITUTION.md` (v1.1.0), `02-architektur.md`
 > SDD-Stufe: 3 Plan
@@ -165,7 +165,7 @@ Konfiguration nur über Umgebungsvariablen: `DATABASE_URL`, `APP_VERSION`, `PORT
 - Skripte: `pnpm dev:up` (`docker compose up -d --wait`), `pnpm dev:down`, `pnpm test:smoke` (prüft `/health` gegen das Schema)
 - CI-Job `image`: Compose bauen und starten, `test:smoke`, Compose stoppen (AK-26)
 - `docs/runbooks/lokale-umgebung.md`: Schritte vom frischen Rechner bis zur laufenden App
-- AK-25 manuell: einmal in einem frischen macOS-Benutzerkonto (Standardkonto ohne Administratorrechte) nach Runbook, Protokoll. Die Werkzeuge (Abschnitt 1 des Runbooks: Homebrew, Node 24, Corepack, Docker Desktop) installiert das Admin-Konto einmal je Rechner, denn Homebrew und das Node-Verzeichnis gehören dem ersten Konto. Das frische Konto richtet nur den `PATH` ein, startet Docker Desktop einmal für sich, klont das Repo und führt `pnpm install` und `pnpm dev:up` aus. Diese Einschränkung steht im Protokoll: Belegt ist der Weg vom Klonen bis zur laufenden App, die Installation der Werkzeuge belegt das Protokoll T-01.
+- AK-25 manuell: einmal auf einem frischen Rechner, Protokoll. Erfüllt mit der Ersteinrichtung des neuen Mac am 2026-11-18 (v1.3, Entscheidung des Inhabers); ein zusätzliches frisches Benutzerkonto entfällt. Bewusst angenommene Lücke: Das Runbook ist aus dieser Einrichtung entstanden und wurde danach nicht noch einmal Schritt für Schritt befolgt. Die CI (Job `image`) prüft bei jedem PR auf einer frischen Maschine nur Abschnitt 3 ab `pnpm install` bis `dev:up`/`test:smoke`; Abschnitt 1 (Werkzeuge, Docker Desktop), Abschnitt 2 (`PATH`, Docker je Konto) und `cp .env.example .env` prüft sie nicht. Ein Fehler dort fiele erst beim nächsten neuen Rechner oder Konto auf; dann wird das Runbook im selben Zug korrigiert.
 
 ### Schritt 4 – Cloudflare DNS & State (AK-3, AK-4, AK-5, AK-14)
 
@@ -203,7 +203,7 @@ Die Schritte 1 → 2 → 3 bauen aufeinander auf. Schritt 4 (DNS) braucht nur Sc
 | AK-16 | Unit: spec-check gegen Fixtures (fehlender Artikel, ⚠️ ohne Anmerkung, fehlende Status-Zeile, fehlende AK-Tabelle)                    | `tools/spec-check`                                                  |
 | AK-17 | manuell: neue Sitzung ohne Hinweis fragen                                                                                             | `docs/protokolle/`                                                  |
 | AK-18 | Unit: knip, dependency-cruiser, ESLint gegen je eine fehlerhafte Fixture                                                              | `tools/quality-fixtures`                                            |
-| AK-25 | Smoke: `dev:up` + `test:smoke` in der CI; manuell einmal auf frischem Benutzerkonto                                                   | `ci.yml` (Job `image`), Protokoll                                   |
+| AK-25 | Smoke: `dev:up` + `test:smoke` in der CI; manuell einmal auf frischem Mac                                                             | `ci.yml` (Job `image`), Protokoll                                   |
 | AK-26 | CI: Image bauen, starten, `/health` gegen das Schema prüfen                                                                           | `ci.yml` (Job `image`)                                              |
 | AK-27 | manuell, provozierter Fehler: Mail-Eingang                                                                                            | `docs/protokolle/`                                                  |
 | AK-28 | Review: `docs/dsgvo.md` gegen die genutzten Dienste (GitHub, Cloudflare, Google, Docker)                                              | Code-Review Schritt 5                                               |
