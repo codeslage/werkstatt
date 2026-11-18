@@ -32,10 +32,10 @@
 | AK-26 | CI-Job „Image (Compose + Smoke)“ baut, startet und prüft das Image bei jedem PR, mit Gegenprobe (kaputter Seed → rot); dasselbe Image läuft lokal; Basis-Images als Multi-Arch-Digest gepinnt                                                                                                                                                                                  | ✅       |
 | AK-27 | Provozierter Fehler in Drift-Check und Historien-Scan, beide Fehler-Mails angekommen (Protokoll T-41); Schalter `simulate_failure` per Test (`infra/tests/simulate-failure.test.ts`)                                                                                                                                                                                           | ✅       |
 | AK-28 | `docs/dsgvo.md` erfasst alle Dienstleister der Phase (Protokoll T-43, `reviews/T-43.md`)                                                                                                                                                                                                                                                                                       | ✅       |
-| AK-29 | Update-PRs: npm (#15, #23–#26), OpenTofu-Provider (#21, #22). Für GitHub Actions, `docker` und `docker-compose` gab es bisher nur erfolgreiche Läufe ohne Updates (Protokolle T-22/T-23, T-27–T-29). Abweichung vom Wortlaut „erster Update-PR“: Der erste echte PR dieser Ökosysteme wird nachgetragen; Klärung in der Retro                                                  | ⚠️       |
+| AK-29 | Update-PRs: npm (#15, #23–#26), OpenTofu-Provider (#21, #22). Für GitHub Actions, `docker` und `docker-compose` gab es bisher nur erfolgreiche Läufe ohne Updates (Protokolle T-22/T-23, T-27–T-29). Abweichung vom Wortlaut „erster Update-PR“: Der erste echte PR dieser Ökosysteme wird nachgetragen (offener Punkt in `tasks.md`, Nachträge); Klärung in der Retro         | ⚠️       |
 | AK-30 | `tools/quality-fixtures/test/prettier.test.ts` (TS, JSON, YAML, Markdown) und `infra/tests/hcl.test.ts` (`tofu fmt`): falsch formatiert → rot; CI-Jobs Format und Infra                                                                                                                                                                                                        | ✅       |
 
-**Reviews:** Für jeden gemergten PR (#2 bis #42) liegt ein Review vor, kein 🔴 ist offen. Bei #4, #6 und #7 (Klasse M) steht der Review im PR bzw. im Protokoll T-12, nicht als eigene Datei unter `reviews/`.
+**Reviews:** Für jeden gemergten PR (#2 bis #42) liegt ein Review vor, kein 🔴 ist offen. Drei frühe PRs der Klasse M haben keine eigene Datei unter `reviews/`: Bei #6 (zwei 🟡, im PR behoben) und #7 (keine Befunde) steht der Review als Kommentar im PR. Bei #4 belegt ihn nur eine Zeile im Protokoll T-12 („sein 🟡-Befund wurde im selben PR behoben“); den Wortlaut gibt es nicht mehr.
 
 **Hinweis Historien-Scan lokal:** Ein lokaler Scan über alle Refs findet die drei absichtlichen Verstöße des Negativtests (Commit `83e43b6`). Lokal liegt er unter `origin/pr/1`, GitHub behält ihn als Ref des geschlossenen PR #1. Er ist auf keinem Branch, und der Historien-Scan auf GitHub ist grün.
 
@@ -62,7 +62,8 @@ Folgt in Stufe 8. Gesammelte Punkte:
 
 - Wie zählt Arbeitszeit, wenn Tasks parallel laufen?
 - AK-29: Reicht ein Lauf ohne Updates als Nachweis, oder braucht es je Ökosystem einen ersten echten PR?
-- Verify ohne int: Stufe 7 und `/sdd-verify` setzen int voraus, das es bis Phase S nicht gibt.
+- Verify ohne int: Stufe 7 und `/sdd-verify` setzen int voraus, das es bis Phase S nicht gibt. Das Gate in `sdd-ablauf.md` ist dafür noch nicht angepasst.
+- Reviews bei Klasse M: Bei #4 ist der Wortlaut des Reviews verloren. Ab #8 liegt jeder Review als Datei unter `reviews/`.
 
 ## Was ändern wir? (ggf. Constitution, Vorlagen, Befehle)
 
