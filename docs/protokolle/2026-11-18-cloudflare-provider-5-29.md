@@ -1,6 +1,6 @@
 # Protokoll: Cloudflare-Provider 5.29.0 (#21, #22)
 
-> Datum: 2026-11-18 · Task: T-37 (Nachweis Ökosystem `opentofu`, AK-29) · Klasse K (Infrastruktur, Review `reviews/dependabot-21-26.md`)
+> Datum: 2026-11-18 · Task: T-37 (Nachweis Ökosystem `opentofu`, AK-29) · Klasse K (Infrastruktur, Review `reviews/dependabot-21-26.md`, Change `changes/2026-11-18-cloudflare-provider-5-29.md`)
 
 1. **Freigabe:** vom Inhaber im Chat erteilt (2026-11-18).
 2. **`live`:** Branch von #22 mit `.env` initialisiert (Provider 5.29.0 installiert, signiert), `tofu plan -lock=false -detailed-exitcode`: „No changes“, Exit 0.
