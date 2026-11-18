@@ -1,6 +1,6 @@
 # Änderungsklassen
 
-> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-05
+> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-18 (Abschnitt „Abhängigkeits-Updates per Dependabot“)
 > Verbindlich über `CONSTITUTION.md`, Artikel I. Änderungen nach `docs/prozess/governance.md`.
 
 ## Ziel
@@ -11,7 +11,7 @@ Der Prozessaufwand richtet sich nach dem **Risiko** einer Änderung, nicht nach 
 
 | Klasse                  | Typische Beispiele                                                                                                       | Prozess                                             | Doku                                                                                                 | Freigabe                                            |
 | ----------------------- | ------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------- | ---------------------------------------------------------------------------------------------------- | --------------------------------------------------- |
-| **M – Mini**            | Tippfehler, Texte, Abhängigkeits-Updates (Renovate), Refactoring ohne Verhaltensänderung                                 | CI + Review-Agent                                   | PR-Beschreibung (Was/Warum) + Changelog-Eintrag                                                      | keine (Auto-Merge nach dev)                         |
+| **M – Mini**            | Tippfehler, Texte, Abhängigkeits-Updates (Dependabot), Refactoring ohne Verhaltensänderung                               | CI + Review-Agent                                   | PR-Beschreibung (Was/Warum) + Changelog-Eintrag                                                      | keine (Auto-Merge nach dev)                         |
 | **K – Kleine Änderung** | Bugfix, Hotfix, kleine Infra-Änderung (Firewall-Regel, DNS-Eintrag, TTL), Konfiguration mit Wirkung auf Sicherheit/Daten | Change-Seite → Test → Umsetzung → CI + Review-Agent | `changes/JJJJ-MM-TT-name.md` (Vorlage `specs/_vorlagen/change.md`), bei Infra mit `tofu plan`-Auszug | **eine** Freigabe des Inhabers auf der Change-Seite |
 | **V – Vorhaben**        | neues Feature, neue Komponente, neue AKs, mehr als ca. ein Tag Aufwand                                                   | voller SDD-Ablauf (`sdd-ablauf.md`)                 | Spec, Plan, Tasks, Reviews, Retro                                                                    | Gates laut SDD-Ablauf                               |
 
@@ -25,6 +25,11 @@ Befehle: M braucht keinen eigenen Befehl, K läuft über `/change`, V über `/sd
    - Alles, was **Infrastruktur, Sicherheit, Auth, personenbezogene Daten oder Löschungen** berührt, ist **mindestens K**.
    - Alles mit **neuen Akzeptanzkriterien** oder neuem Verhalten für Nutzer ist **V**.
 4. Stellt sich während der Arbeit heraus, dass die Klasse zu niedrig war: anhalten, hochstufen, im neuen Prozess weitermachen.
+
+## Abhängigkeits-Updates per Dependabot
+
+- **Klasse:** Ein Dependabot-PR ist M. Berührt er Infrastruktur (z. B. einen OpenTofu-Provider unter `infra/`), gilt die Untergrenze K: Change-Seite mit `tofu plan`-Auszug und Freigabe des Inhabers vor dem Merge.
+- **Changelog:** Dependabot kann keinen Changelog-Eintrag schreiben. Claude fasst die gemergten Dependabot-Updates im nächsten eigenen PR zu **einem** Sammeleintrag zusammen, mit Paket, Versionen und allen PR-Nummern; spätestens beim `/release`. Das ersetzt den Eintrag im selben PR.
 
 ## Was in jeder Klasse gilt
 
