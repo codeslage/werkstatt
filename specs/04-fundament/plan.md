@@ -1,7 +1,7 @@
 # 04 – Phase 1 Fundament: Plan
 
-> Status: **Freigegeben** am 2026-11-05 (v1.1 nach Analyse: PR-Zuschnitt, tflint/`tofu`-Prüfungen erst in Schritt 4, AK-28 bis AK-30)
-> Stand: 2026-11-05
+> Status: **Freigegeben** am 2026-11-05 (v1.1 nach Analyse: PR-Zuschnitt, tflint/`tofu`-Prüfungen erst in Schritt 4, AK-28 bis AK-30); v1.2 am 2026-11-18: lokale Entwicklung auf dem Mac statt unter Windows, vom Inhaber im Chat freigegeben
+> Stand: 2026-11-18
 > Bezug: `spec.md` (v2.1), `tasks.md`, `CONSTITUTION.md` (v1.1.0), `02-architektur.md`
 > SDD-Stufe: 3 Plan
 > Der Plan zur Spec v1 (mit Server) liegt als Archiv in `plan-v1-server.md` und dient als Vorlage für Phase S.
@@ -138,7 +138,7 @@ Konfiguration nur über Umgebungsvariablen: `DATABASE_URL`, `APP_VERSION`, `PORT
 
 ### Schritt 1 – Repo & Schutz (AK-1, AK-2, AK-24, AK-17)
 
-- Lokal: `corepack enable` (pnpm), `winget install OpenTofu.Tofu GitHub.cli Gitleaks.Gitleaks`
+- Lokal: `corepack enable` (pnpm), `winget install OpenTofu.Tofu GitHub.cli Gitleaks.Gitleaks` (damals unter Windows; seit v1.2 macOS, Befehle im Runbook `lokale-umgebung.md`)
 - `git init`; `.gitattributes` (LF), `.editorconfig`, `.gitignore` (u. a. `.env`, `.sperrliste`, `*.tfstate*`, `.terraform/`), `.env.example`
 - `.gitleaks.toml` mit eigenen Regeln für IPv4/IPv6, E-Mail-Adressen (Ausnahmen: freigegebene Rollenadressen, Dokumentations-IPs) und Sperrliste; `.githooks/pre-commit`, aktiviert per `prepare`-Skript (`git config core.hooksPath .githooks`)
 - `tools/public-scan` mit Negativ-Fixtures: Fake-Token, IP, E-Mail, Test-Sperrbegriff. Jede Fixture muss den Scan auslösen.
@@ -165,7 +165,7 @@ Konfiguration nur über Umgebungsvariablen: `DATABASE_URL`, `APP_VERSION`, `PORT
 - Skripte: `pnpm dev:up` (`docker compose up -d --wait`), `pnpm dev:down`, `pnpm test:smoke` (prüft `/health` gegen das Schema)
 - CI-Job `image`: Compose bauen und starten, `test:smoke`, Compose stoppen (AK-26)
 - `docs/runbooks/lokale-umgebung.md`: Schritte vom frischen Rechner bis zur laufenden App
-- AK-25 manuell: einmal in einem frischen Windows-Benutzerkonto nach Runbook, Protokoll (später auf dem Mac wiederholen)
+- AK-25 manuell: einmal in einem frischen macOS-Benutzerkonto nach Runbook, Protokoll. Das Runbook kommt dort ohne Administratorrechte aus (Homebrew gehört dem ersten Konto); Docker Desktop wird je Konto eingerichtet.
 
 ### Schritt 4 – Cloudflare DNS & State (AK-3, AK-4, AK-5, AK-14)
 
@@ -238,7 +238,7 @@ Die Schritte 1 → 2 → 3 bauen aufeinander auf. Schritt 4 (DNS) braucht nur Sc
 | Mail-Ausfall beim Nameserver-Wechsel                                  | Records 1:1 nachbauen, AK-3 gegen die Cloudflare-Nameserver vor V6, niedrige TTL, AK-4 direkt danach                                                                            |
 | R2 ohne Zahlungsmethode nicht nutzbar (V8 abgelehnt)                  | Ausweichweg: verschlüsselter State im privaten Repo `codeslage/internal`; dann läuft der Drift-Check nur lokal, und AK-5 wird manuell nachgewiesen. Entscheidung vor Schritt 4. |
 | Ungewollte Kosten bei R2                                              | State ist wenige KB, weit unter dem Gratis-Kontingent; Abrechnung in AK-15 geprüft                                                                                              |
-| Docker Desktop unter Windows langsam oder hakelig (WSL2, `X:\`)       | Container nur für DB und Test-App, keine Bind-Mounts für Quellcode; Entwicklung nativ                                                                                           |
+| Lokal Apple Silicon (arm64), in der CI amd64                          | Basis-Images mit Multi-Arch-Index, per Digest des Index gepinnt; `test:smoke` läuft lokal und in der CI (Job `image`); Container nur für DB und Test-App, Entwicklung nativ     |
 | Benachrichtigung bei geplanten Workflows geht an den falschen Account | GitHub mailt an den, der den Cron zuletzt geändert hat; Commits laufen unter dem Konto des Inhabers; AK-27 prüft es real                                                        |
 | Rulesets lassen sich doch nicht ohne Token lesen                      | AK-1-Test dann lokal mit `gh` des Inhabers statt in der CI; im Test vermerken                                                                                                   |
 | Zu strenge Lint-Grenzen                                               | Werte zentral in `packages/config`, Änderung per ADR                                                                                                                            |
