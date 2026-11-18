@@ -71,12 +71,12 @@ Soll in Stunden (Claude, konservativ, inkl. Abstimmung); Ist wird bei Abschluss 
 
 ### Schritt 5 – Alarme & Abschluss
 
-| ID   | Task                                                                                                           | AK           | Test                                  | Abhängig von | PR    | Soll | Ist | Status |
-| ---- | -------------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------- | ------------ | ----- | ---- | --- | ------ |
-| T-40 | `history-scan.yml` (monatlich + manuell startbar)                                                              | AK-24        | manueller Start grün                  | T-10         | PR-17 | 0,5  |     | ⬜     |
-| T-41 | Eingang `simulate_failure` für die geplanten Workflows; einen Fehlschlag auslösen, Mail-Eingang protokollieren | AK-27        | Protokoll                             | T-39, T-40   | PR-17 | 1    |     | ⬜     |
-| T-42 | `docs/secrets.md` vollständig mit Rechten und Ablaufdaten                                                      | AK-14        | Review gegen die tatsächlichen Tokens | T-39         | PR-18 | 0,5  |     | ⬜     |
-| T-43 | `docs/kosten.md` mit Nachweis 0 €; `docs/dsgvo.md` abschließen                                                 | AK-15, AK-28 | Review, Abrechnungsseiten             | T-39         | PR-18 | 0,5  |     | ⬜     |
+| ID   | Task                                                                                                           | AK           | Test                                  | Abhängig von | PR     | Soll | Ist  | Status |
+| ---- | -------------------------------------------------------------------------------------------------------------- | ------------ | ------------------------------------- | ------------ | ------ | ---- | ---- | ------ |
+| T-40 | `history-scan.yml` (monatlich + manuell startbar)                                                              | AK-24        | manueller Start grün                  | T-10         | PR-17a | 0,5  | 0,25 | 🔄     |
+| T-41 | Eingang `simulate_failure` für die geplanten Workflows; einen Fehlschlag auslösen, Mail-Eingang protokollieren | AK-27        | Protokoll                             | T-39, T-40   | PR-17b | 1    |      | ⬜     |
+| T-42 | `docs/secrets.md` vollständig mit Rechten und Ablaufdaten                                                      | AK-14        | Review gegen die tatsächlichen Tokens | T-39         | PR-18  | 0,5  |      | ⬜     |
+| T-43 | `docs/kosten.md` mit Nachweis 0 €; `docs/dsgvo.md` abschließen                                                 | AK-15, AK-28 | Review, Abrechnungsseiten             | T-39         | PR-18  | 0,5  |      | ⬜     |
 
 Content-Notizen und Soll/Ist der Phase entstehen in Stufe 8 (Retro), nicht als Task.
 
