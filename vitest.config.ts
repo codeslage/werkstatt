@@ -5,7 +5,7 @@ import { defineConfig } from 'vitest/config';
 export default defineConfig({
   test: {
     projects: [
-      { test: { name: 'unit', include: ['{packages,tools}/**/*.test.ts'], exclude: ['**/node_modules/**'] } },
+      { test: { name: 'unit', include: ['{apps,packages,tools}/**/*.test.ts'], exclude: ['**/node_modules/**'] } },
       { test: { name: 'infra', include: ['infra/tests/**/*.test.ts'] } },
     ],
   },
