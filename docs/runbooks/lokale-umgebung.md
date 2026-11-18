@@ -1,6 +1,6 @@
 # Runbook: Lokale Umgebung einrichten
 
-> Stand: 2026-11-18 · Bezug: `specs/04-fundament/spec.md` (AK-25), Plan v1.2, ADR 0009, ADR 0010
+> Stand: 2026-11-18 · Bezug: `specs/04-fundament/spec.md` (AK-25), Plan v1.3, ADR 0009, ADR 0010
 > Ziel: vom frischen Mac bis zur laufenden Test-App mit Datenbank. Bis Phase S ist **dev = lokal**.
 > Bis 2026-11-18 lief die Entwicklung unter Windows; die damaligen Schritte stehen in der Git-Historie dieser Datei und im Protokoll T-01.
 

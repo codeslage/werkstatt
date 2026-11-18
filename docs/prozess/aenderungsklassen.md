@@ -28,7 +28,7 @@ Befehle: M braucht keinen eigenen Befehl, K läuft über `/change`, V über `/sd
 
 ## Abhängigkeits-Updates per Dependabot
 
-- **Klasse:** Ein Dependabot-PR ist M. Berührt er Infrastruktur oder Sicherheit (Untergrenzen unter „Einstufung“, Nr. 3; z. B. einen OpenTofu-Provider unter `infra/`), gilt die Untergrenze K: Change-Seite mit `tofu plan`-Auszug und Freigabe des Inhabers vor dem Merge. Updates von GitHub Actions bleiben M (Entscheidung des Inhabers vom 2026-11-18): Sie sind per Version festgeschrieben, kommen mit Wartezeit (`cooldown`) und gehen durch den Review-Agent.
+- **Klasse:** Ein Dependabot-PR ist M. Berührt er Infrastruktur oder Sicherheit (Untergrenzen unter „Einstufung“, Nr. 3; z. B. einen OpenTofu-Provider unter `infra/`), gilt die Untergrenze K: Change-Seite mit `tofu plan`-Auszug und Freigabe des Inhabers vor dem Merge. Updates von GitHub Actions bleiben M (Entscheidung des Inhabers vom 2026-11-18): Sie sind per Commit-SHA gepinnt (ein Pin auf ein Tag wie `@v7` reicht dafür nicht), kommen mit Wartezeit (`cooldown`) und gehen durch den Review-Agent.
 - **Changelog:** Dependabot kann keinen Changelog-Eintrag schreiben. Claude fasst die gemergten Dependabot-Updates im nächsten eigenen PR zu **einem** Sammeleintrag zusammen, mit Paket, Versionen und allen PR-Nummern; spätestens beim `/release`. Das ersetzt den Eintrag im selben PR.
 
 ## Was in jeder Klasse gilt
