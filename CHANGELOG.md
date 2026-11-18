@@ -19,6 +19,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 ### Geändert
 
 - 2026-11-18 – Cloudflare-Provider 5.28.1 → 5.29.0 in `bootstrap` (#21) und `live` (#22), Klasse K (Change `changes/2026-11-18-cloudflare-provider-5-29.md`): `live` mit `tofu plan` ohne Änderungen; `bootstrap` nur `validate`, weil der `plan` dort mit 401 scheitert (siehe Protokoll); Freigabe des Inhabers.
+- 2026-11-18 – Windows-Bezüge nach dem Wechsel auf den Mac bereinigt: Risiko in Spec 04, Rechner in der Vision, lokaler Pfad zu `codeslage/internal` in Architektur und `governance.md`, alter Ordnername `codeslage-internal` in Spec, Plan, Tasks und DNS-Runbook, Kommentar in `.gitattributes`; ADRs und Protokolle bleiben als Historie unverändert (#39).
 - 2026-11-18 – Abhängigkeits-Updates per Dependabot (Sammeleintrag, Dependabot schreibt keinen Changelog): typescript-eslint 8.72.1 → 8.72.2 (#23), knip 6.44.2 → 6.45.1 (#24), eslint 10.14.0 → 10.15.0 (#25), prettier 3.9.10 → 3.10.1 (#26).
 - 2026-11-18 – Plan 04 v1.2: lokale Entwicklung auf dem Mac; AK-25 wird in einem frischen macOS-Benutzerkonto nachgewiesen (T-31); Architektur A2 beschreibt den Mac als aktuelle Umgebung (#35).
 - 2026-11-10 – Einheitliche Formatierung mit Prettier für das ganze Repo, auch Constitution und Prozessdokumente. Nur Leerraum, Kursivschrift und Anführungszeichen, kein geänderter Wortlaut, deshalb keine neue Constitution-Version. Freigabe des Inhabers am 2026-11-10 (#14).

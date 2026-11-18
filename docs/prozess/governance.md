@@ -1,6 +1,6 @@
 # Governance
 
-> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-05 (Abschnitt „Öffentlich vs. intern“ ergänzt)
+> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-18 (lokaler Pfad zu `codeslage/internal` für den Mac)
 > Verbindlich über `CONSTITUTION.md`, Abschnitt „Verbindliche Prozesse“.
 
 ## Rangfolge
@@ -43,7 +43,7 @@ Nach einer Änderung werden die Constitution-Bezüge (`vX.Y.Z`) in offenen Specs
 - Angaben zu Konten: Kontonamen oder -IDs, Registrar, Zugangswege
 - persönliche Rahmenbedingungen: Arbeitgeber, private Finanzen
 
-Diese Angaben gehören nach `codeslage/internal` (lokal `X:\Coding\codeslage-internal`), z. B. `betrieb/konten.md`.
+Diese Angaben gehören nach `codeslage/internal` (lokal `~/Developer/codeslage/internal`), z. B. `betrieb/konten.md`.
 
 **Geprüft wird dreifach** – jede Ebene allein muss den Verstoß finden können:
 
