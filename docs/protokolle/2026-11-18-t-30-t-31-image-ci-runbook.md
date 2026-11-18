@@ -8,6 +8,7 @@
 2. **Gegenprobe im Job:** Nach dem grünen Smoke-Test startet der Job die Umgebung mit auskommentierter Seed-Zeile neu. `pnpm dev:up` muss scheitern, und `/health` muss `seed missing` melden; sonst ist der Job rot.
 3. Erster Lauf (PR #37, Runner amd64): Smoke-Test 9/9 grün, Gegenprobe wie erwartet. Damit laufen dieselben Images lokal auf arm64 und in der CI auf amd64.
 4. **Rot-Phase Repo-Einstellungen:** `infra/tests/repo.test.ts` verlangt jeden CI-Job als Pflicht-Check. Mit dem neuen Job ist der Test rot (lokal und im CI-Lauf von #37), bis „Image (Compose + Smoke)“ im Ruleset `main-schutz` steht. Die Ruleset-Änderung per API wurde in dieser Sitzung von der Rechteprüfung abgelehnt; sie liegt beim Inhaber (Settings → Rules → `main-schutz` → Require status checks → „Image (Compose + Smoke)“ hinzufügen).
+   **Nachtrag:** Vom Inhaber eingetragen. „Repo-Einstellungen“ neu gestartet: grün. Alle Pflicht-Checks auf Head `7361060` grün, #37 gemergt (`3b378de`).
 
 ## T-31: Runbook
 
@@ -17,3 +18,4 @@
 ## T-24: Docker Desktop
 
 7. Installiert vom Inhaber: Docker Desktop 4.99.0, Client und Engine 29.9.3, `linux/arm64`, Kontext `desktop-linux`. **Offen:** Telemetrie abschalten (Settings → General → „Send usage statistics“). In den Einstellungen ist der Schalter bisher nicht gesetzt, also gilt die Voreinstellung (an).
+   **Nachtrag:** Laut Inhaber ist die Telemetrie jetzt aus. In `~/Library/Group Containers/group.com.docker/settings-store.json` ist aber kein geänderter Wert gespeichert (Datei zuletzt 17:11 geändert). Vermutlich wurde „Apply“ nicht gedrückt. T-24 bleibt 🔄, bis der Wert in der Datei steht.
