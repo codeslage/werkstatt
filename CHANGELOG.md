@@ -17,6 +17,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Geändert
 
+- 2026-11-18 – Plan 04 v1.2: lokale Entwicklung auf dem Mac; AK-25 wird in einem frischen macOS-Benutzerkonto nachgewiesen (T-31); Architektur A2 beschreibt den Mac als aktuelle Umgebung (#35).
 - 2026-11-10 – Einheitliche Formatierung mit Prettier für das ganze Repo, auch Constitution und Prozessdokumente. Nur Leerraum, Kursivschrift und Anführungszeichen, kein geänderter Wortlaut, deshalb keine neue Constitution-Version. Freigabe des Inhabers am 2026-11-10 (#14).
 - 2026-11-10 – Schreibweise „Klick-Dummy“ einheitlich in Architektur, Roadmap, Spec 04 und ADR 0009; Protokolle bleiben unverändert (#7).
 - 2026-11-10 – Roadmap: Phase 2 heißt „Webseite (Klick-Dummy)“ (#4).
