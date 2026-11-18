@@ -172,3 +172,40 @@ jobs:
       # Geplante Workflows (AK-5, AK-24): Auslöser, Rechte, gleiche Tool-Versionen wie hier.
       - name: Geplante Workflows
         run: pnpm test:infra drift.test.ts history-scan.test.ts simulate-failure.test.ts
+
+  image:
+    name: Image (Compose + Smoke)
+    runs-on: ubuntu-latest
+    env:
+      # Nur für die Wegwerf-DB dieses Laufs (Seed-Daten, tmpfs), kein Secret.
+      POSTGRES_PASSWORD: ci-nur-zum-testen
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: Compose bauen und starten (AK-25, AK-26)
+        run: pnpm dev:up
+
+      - name: Smoke-Test – /health gegen das Schema, Container gesund, nur 127.0.0.1, ohne Root (AK-26)
+        run: pnpm test:smoke
+
+      # Gegenprobe (T-30): Ohne Seed-Zeile darf die Umgebung nicht gesund starten.
+      - name: Gegenprobe – kaputter Seed muss scheitern
+        run: |
+          pnpm dev:down
+          sed -i 's/^insert/-- insert/' infra/local/seed.sql
+          if pnpm dev:up; then
+            echo "::error::Umgebung trotz fehlender Seed-Zeile gesund"
+            exit 1
+          fi
+          curl -s http://127.0.0.1:3000/health | grep -q '"seed missing"'
+
+      # Nach der Gegenprobe, damit auch ihr Scheitern Logs liefert.
+      - name: Container-Logs bei Fehler
+        if: failure()
+        run: docker compose logs
+
+      - name: Compose stoppen
+        if: always()
+        run: pnpm dev:down
