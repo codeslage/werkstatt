@@ -28,7 +28,7 @@ Methode:
 | Plan    | Arbeit    | 2026-11-19 15:55 | 2026-11-19 15:56 | 0:01  | Branch, Vorlage und Bezüge lesen, Fragen zu Framework, Deploy und Image                                                             |
 | Plan    | Arbeit    | 2026-11-19 19:25 | 2026-11-19 19:39 | 0:14  | `plan.md`, ADR 0014 und 0015, `02-architektur.md`, PR, zwei Reviews umgesetzt                                                       |
 | Plan    | Wartezeit | 2026-11-19 19:39 | 2026-11-19 19:47 | 0:08  | Freigabe des Plans; Ende = erste Ablesung nach der Antwort                                                                          |
-| Plan    | Arbeit    | 2026-11-19 19:47 | 2026-11-19 19:48 | 0:01  | Freigabe eintragen, Merge                                                                                                           |
+| Plan    | Arbeit    | 2026-11-19 19:47 | 2026-11-19 19:47 | 0:00  | Freigabe eintragen, Merge                                                                                                           |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -40,4 +40,4 @@ Zwischen 15:56 und 19:25 lag eine Pause des Inhabers. Sie zählt nicht und steht
 | ------- | ------ | --------- | ------ |
 | Spec    | 0:11   | 0:57      | 1:08   |
 | Clarify | 0:14   | 0:04      | 0:18   |
-| Plan    | 0:16   | 0:08      | 0:24   |
+| Plan    | 0:15   | 0:08      | 0:23   |
