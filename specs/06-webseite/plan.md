@@ -1,6 +1,6 @@
 # 06 – Phase 2 Webseite (Klick-Dummy): Plan
 
-> Status: **Entwurf**
+> Status: **Freigegeben** am 2026-11-19 (Freigabe des Inhabers im Chat)
 > Stand: 2026-11-19
 > Bezug: `spec.md` (Status: Geklärt, freigegeben am 2026-11-19), `leistungen.md`, `gestaltung.md`, `CONSTITUTION.md` (v1.1.0), `02-architektur.md`, ADR 0002, 0004, 0009, 0014, 0015
 > SDD-Stufe: 3 Plan
