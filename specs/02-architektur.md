@@ -1,7 +1,7 @@
 # 02 – Architektur
 
 > Status: **Entwurf** – wartet auf Freigabe
-> Stand: 2026-11-18 (A2: Entwicklung auf dem Mac; Server erst bei Bedarf, ADR 0009; Domains nach ADR 0004; pnpm ohne Turborepo nach ADR 0008)
+> Stand: 2026-11-19 (A1: Astro für `web`, ADR 0014; A3: Deploy der Webseite, ADR 0015); 2026-11-18 (A2: Entwicklung auf dem Mac; Server erst bei Bedarf, ADR 0009; Domains nach ADR 0004; pnpm ohne Turborepo nach ADR 0008)
 > Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md`
 
 ## Ziel
@@ -61,7 +61,7 @@ Zielbild ab Phase S:
 | **Privates Repo `codeslage/internal`** (lokal `~/Developer/codeslage/internal`) | Für alles, was nie öffentlich sein soll: **Ideenboard** (`ideen/`), Preise, Strategie, später Prompts mit Geschäftslogik und Kundendaten-Fixtures. Von Anfang an getrennt, weil einmal Veröffentlichtes in der Git-Historie öffentlich bleibt. Der „Premium“-Bereich der _Apps_ ist dagegen eine Laufzeit-Frage (Login), keine Repo-Frage. |
 | pnpm-Workspace, TypeScript strict; Turborepo erst ab mehreren Apps (ADR 0008)   | wie im Startprompt, Turborepo bei Bedarf                                                                                                                                                                                                                                                                                                   |
 | Pakete **erst anlegen, wenn gebraucht**                                         | vermeidet leere Hüllen                                                                                                                                                                                                                                                                                                                     |
-| Next.js für `web` und `portal`                                                  | ein Stack, ein Mental Model; Astro wäre für `web` schlanker, aber kein Muss                                                                                                                                                                                                                                                                |
+| **Astro** für `web` (ADR 0014), Next.js für `portal`                            | `web` ist rein statisch: Astro liefert HTML ohne JS (Lighthouse, strenge CSP) und teilt sich den Stack mit dem Docs-Portal (A10); das Portal braucht Next.js                                                                                                                                                                               |
 | Drizzle + PostgreSQL, Zod, Better Auth                                          | wie im Startprompt                                                                                                                                                                                                                                                                                                                         |
 | Vitest + Playwright                                                             | Akzeptanzkriterien → Tests                                                                                                                                                                                                                                                                                                                 |
 | `.gitattributes` mit LF, `.editorconfig`                                        | gleiche Zeilenenden (LF) auf jedem Rechner und in der CI                                                                                                                                                                                                                                                                                   |
@@ -101,7 +101,7 @@ codeslage/
 
 - **Mac (seit 2026-11-18):** native Entwicklung mit Node, pnpm, Git und OpenTofu direkt unter macOS (Apple Silicon). Repo klonen, `pnpm install`, fertig; Schritte im Runbook `docs/runbooks/lokale-umgebung.md`. Keine plattformspezifischen Skripte, nur plattformneutrale Node-Skripte.
 - **Windows (bis 2026-11-18):** native Entwicklung unter Windows. WSL2 hätte sich nur gelohnt, wenn das Repo im Linux-Dateisystem liegt; mit dem Mac entfiel der Umweg.
-- **Dienste lokal in Containern:** Postgres und die Apps laufen über **Docker Compose**, nur auf `localhost`, mit Seed-Daten. Jede App hat ein Dockerfile; dasselbe Image baut und startet die CI bei jedem PR. So ist der spätere Umzug auf einen Server kein Umbau. Bis Phase S ist **dev = lokal** (ADR 0009).
+- **Dienste lokal in Containern:** Postgres und die Apps laufen über **Docker Compose**, nur auf `localhost`, mit Seed-Daten. Jede App hat ein Dockerfile (Ausnahme: die rein statische Webseite `apps/web`, ADR 0015); dasselbe Image baut und startet die CI bei jedem PR. So ist der spätere Umzug auf einen Server kein Umbau. Bis Phase S ist **dev = lokal** (ADR 0009).
 
 ### A3 – Infrastruktur
 
@@ -109,7 +109,7 @@ Bis Phase S gibt es nur Cloudflare (DNS, Pages, R2 für den Tofu-State) und GitH
 
 | Baustein            | Entscheidung                                                                                                                                                                                                                                              |
 | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Webseite (Phase 2)  | **Cloudflare Pages** als statische Seite (Klick-Dummy), Cloudflare Web Analytics                                                                                                                                                                          |
+| Webseite (Phase 2)  | **Cloudflare Pages** als statische Seite (Klick-Dummy), Upload aus der CI nur von `main` (ADR 0015), Cloudflare Web Analytics                                                                                                                             |
 | Server (ab Phase S) | **1× Cloud-Server in der EU (bevorzugt DE), ~4 vCPU / 8 GB RAM.** Anbieter wird in Phase S nach den dann gültigen Preisen gewählt (Recherche R1, ADR 0001 vertagt). Stand 2026-11-05: Hetzner CX33 nicht bestellbar, UpCloud Starter 8 GB ca. 20 € netto. |
 | Deployment          | **Coolify** auf demselben Server; Merge nach `main` → Build → dev; Releases per Tag nach int/prod (A11)                                                                                                                                                   |
 | DNS/Proxy           | **Cloudflare Free**; SSL-Modus **Full (strict)**; Origin-Zertifikat oder DNS-Challenge statt HTTP-Challenge                                                                                                                                               |
