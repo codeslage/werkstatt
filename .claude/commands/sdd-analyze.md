@@ -16,4 +16,4 @@ Lies `CONSTITUTION.md` sowie `spec.md`, `plan.md` und `tasks.md` in `specs/<NN-n
 
 Trage das Ergebnis in den Abschnitt „Analyse“ von `tasks.md` ein. Behebe Lücken (bei Spec- oder Plan-Änderungen: zurück zur Stufe und deren Gate). Melde dem Inhaber das Ergebnis.
 
-Zeit: Trage die Zeit dieser Stufe in `specs/<NN-name>/zeiten.md` ein (Systemuhr, Wartezeit auf den Inhaber in der Bemerkung).
+Zeit: Trage die Zeit dieser Stufe in `specs/<NN-name>/zeiten.md` ein (Systemuhr, Wartezeit auf den Inhaber in eigenen Zeilen, Spalte „Art“).

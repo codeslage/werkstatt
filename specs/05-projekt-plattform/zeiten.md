@@ -5,25 +5,32 @@
 Methode:
 
 - **Ab Stufe 1:** Jede Stufe und jede Task bekommt Zeilen, auch Specify, Plan, Analyze, Verify und Retro. In der Spalte „Was“ steht die Task (`T-xx`) oder der Name der Stufe (z. B. `Spec`, `Plan`, `Verify`, `Retro`).
+- **Art:** `Arbeit` oder `Wartezeit`. Wartezeit auf den Inhaber (Antworten, Freigaben, Schritte 👤) zählt mit, so wie in einem echten Projekt, steht aber in **eigenen Zeilen**. Eine Zeile enthält nie beides: Die Wartezeit endet mit der ersten Ablesung der Systemuhr nach der Antwort, danach beginnt eine neue Zeile `Arbeit`.
 - **Start und Ende** nach der Systemuhr (`date`), nicht geschätzt. Ende heißt: Test grün, Protokoll geschrieben bzw. Stufe abgeschlossen.
-- **Wartezeit auf den Inhaber** (Freigaben, Schritte 👤) zählt mit, so wie in einem echten Projekt; sie steht in der Bemerkung.
 - **Pausen** zwischen Sitzungen zählen nicht: Eine Task oder Stufe kann mehrere Zeilen haben.
 - **Parallele Tasks:** Die Zeit zählt nur einmal. Sie gehört der Task, an der die Sitzung gerade arbeitet; die Zeilen überlappen sich nicht.
-- **Auswertung:** Die Summe je Task wird auf Viertelstunden gerundet (mindestens 0,25 h) und in `tasks.md` als Ist eingetragen. Für die Retro und eine spätere Abrechnung zählen die genauen Minuten aus dieser Tabelle.
+- **Summen:** Unter der Tabelle stehen je Stufe bzw. Task Arbeit, Wartezeit und Gesamt.
+- **Auswertung:** Das **Ist ist die Gesamtzeit** (Arbeit + Wartezeit), weil auch das Soll die Abstimmung enthält. Die Summe je Task wird auf Viertelstunden gerundet (mindestens 0,25 h) und in `tasks.md` als Ist eingetragen. Retro und eine spätere Abrechnung weisen Arbeit und Wartezeit zusätzlich getrennt aus; dafür zählen die genauen Minuten aus dieser Tabelle.
 
-| Was           | Start            | Ende             | Dauer | Bemerkung                                                                                                                           |
-| ------------- | ---------------- | ---------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Spec          | 2026-11-19 13:04 | 2026-11-19 13:06 | 0:02  | Prozess, Roadmap und Vorlagen gelesen; Branch, `spec.md` (21 AKs, 12 offene Fragen), `zeiten.md`, Roadmap-Start; lokale Checks grün |
-| Spec          | 2026-11-19 13:06 | 2026-11-19 13:10 | 0:04  | PR #48, Review durch `code-reviewer` (kein 🔴, 5 × 🟡), Befunde umgesetzt, Review-Bericht und Protokoll                             |
-| Spec (Warten) | 2026-11-19 13:10 | 2026-11-19 14:17 | 1:07  | Wartezeit auf die Antworten des Inhabers zu den offenen Fragen                                                                      |
-| Spec          | 2026-11-19 14:17 | 2026-11-19 14:19 | 0:02  | Antworten eingearbeitet (Kit-Sync, AK-17 entfällt, AK-24 und Frage 14 neu), Roadmap-Frage 3 beantwortet                             |
-| Spec (Warten) | 2026-11-19 14:19 | 2026-11-19 15:12 | 0:53  | Wartezeit auf die Freigabe der überarbeiteten Spec                                                                                  |
-| Spec          | 2026-11-19 15:12 | 2026-11-19 15:14 | 0:02  | Freigabe eingetragen (Status Freigegeben), CI abgewartet, Wartezeit in eigene Zeilen getrennt, Merge                                |
+| Was   | Art       | Start            | Ende             | Dauer | Bemerkung                                                                                                                           |
+| ----- | --------- | ---------------- | ---------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
+| Spec  | Arbeit    | 2026-11-19 13:04 | 2026-11-19 13:06 | 0:02  | Prozess, Roadmap und Vorlagen gelesen; Branch, `spec.md` (21 AKs, 12 offene Fragen), `zeiten.md`, Roadmap-Start; lokale Checks grün |
+| Spec  | Arbeit    | 2026-11-19 13:06 | 2026-11-19 13:10 | 0:04  | PR #48, Review durch `code-reviewer` (kein 🔴, 5 × 🟡), Befunde umgesetzt, Review-Bericht und Protokoll                             |
+| Spec  | Wartezeit | 2026-11-19 13:10 | 2026-11-19 14:17 | 1:07  | Antworten des Inhabers zu den offenen Fragen                                                                                        |
+| Spec  | Arbeit    | 2026-11-19 14:17 | 2026-11-19 14:19 | 0:02  | Antworten eingearbeitet (Kit-Sync, AK-17 entfällt, AK-24 und Frage 14 neu), Roadmap-Frage 3 beantwortet                             |
+| Spec  | Wartezeit | 2026-11-19 14:19 | 2026-11-19 15:12 | 0:53  | Freigabe der überarbeiteten Spec                                                                                                    |
+| Spec  | Arbeit    | 2026-11-19 15:12 | 2026-11-19 15:14 | 0:02  | Freigabe eingetragen (Status Freigegeben), CI abgewartet, Wartezeit getrennt, Merge #48                                             |
+| M #50 | Wartezeit | 2026-11-19 15:14 | 2026-11-19 15:18 | 0:04  | Entscheidung des Inhabers, die getrennte Wartezeit in Vorlage und Prozess aufzunehmen                                               |
+| M #50 | Arbeit    | 2026-11-19 15:18 | 2026-11-19 15:20 | 0:02  | Vorlage, `sdd-ablauf.md`, Befehle, Changelog; PR #50, Review (kein 🔴, 2 × 🟡), Format an Phase 2 (Spalte „Art“) angeglichen        |
+| M #50 | Arbeit    | 2026-11-19 15:20 | 2026-11-19 15:21 | 0:01  | Review-Bericht abgelegt, PR-Text neu gesetzt, Push                                                                                  |
+| M #50 | Wartezeit | 2026-11-19 15:21 | 2026-11-19 15:26 | 0:05  | Freigabe des Inhabers zum Merge (Ist = Gesamtzeit)                                                                                  |
+| M #50 | Arbeit    | 2026-11-19 15:26 | 2026-11-19 15:26 | 0:00  | Freigabe eingetragen, CI geprüft, Merge                                                                                             |
 
 ## Summen
 
-Wartezeit auf den Inhaber steht in eigenen Zeilen („Warten“). Sie zählt mit, wird aber getrennt ausgewiesen, weil der Inhaber in dieser Zeit an anderem arbeitet.
+| Was   | Arbeit | Wartezeit | Gesamt |
+| ----- | ------ | --------- | ------ |
+| Spec  | 0:10   | 2:00      | 2:10   |
+| M #50 | 0:03   | 0:09      | 0:12   |
 
-| Stufe | Arbeit | Warten | Gesamt |
-| ----- | ------ | ------ | ------ |
-| Spec  | 0:10   | 2:00   | 2:10   |
+`M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus dieser Stufe entstand.

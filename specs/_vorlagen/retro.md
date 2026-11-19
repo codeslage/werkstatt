@@ -13,10 +13,12 @@ Abgenommen durch den Inhaber am: JJJJ-MM-TT
 
 ## Soll/Ist
 
-|              | Soll | Ist |
-| ------------ | ---- | --- |
-| Zeit         |      |     |
-| Kosten/Monat |      |     |
+|                 | Soll | Ist |
+| --------------- | ---- | --- |
+| Zeit (gesamt)   |      |     |
+| davon Arbeit    | –    |     |
+| davon Wartezeit | –    |     |
+| Kosten/Monat    |      |     |
 
 → Übertrag in die Soll/Ist-Tabelle in `specs/03-roadmap.md`
 

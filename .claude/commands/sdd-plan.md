@@ -14,4 +14,4 @@ Vorhaben: $ARGUMENTS
 5. Lege für jede Architekturentscheidung ein ADR in `docs/adr/` an.
 6. Fülle den Constitution-Check aus. Ende mit der Bitte um Freigabe (Gate ⛔).
 
-Zeit: Trage die Zeit dieser Stufe in `specs/<NN-name>/zeiten.md` ein (Systemuhr, Wartezeit auf den Inhaber in der Bemerkung).
+Zeit: Trage die Zeit dieser Stufe in `specs/<NN-name>/zeiten.md` ein (Systemuhr, Wartezeit auf den Inhaber in eigenen Zeilen, Spalte „Art“).
