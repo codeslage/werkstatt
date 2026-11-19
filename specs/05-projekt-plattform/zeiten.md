@@ -28,6 +28,8 @@ Methode:
 | Clarify | Arbeit    | 2026-11-19 15:56 | 2026-11-19 15:56 | 0:00  | Spec auf Lücken geprüft, 3 neue Fragen und Frage 14 mit Vorschlägen gestellt; Zeit von 15:28 bis 15:56 ist Pause bis zum Start durch den Inhaber (zählt nicht) |
 | Clarify | Wartezeit | 2026-11-19 15:56 | 2026-11-19 16:08 | 0:12  | Antworten des Inhabers auf die Fragen 14–17                                                                                                                    |
 | Clarify | Arbeit    | 2026-11-19 16:08 | 2026-11-19 16:12 | 0:04  | Antworten eingetragen, AK-25 bis AK-27, Status Geklärt, PR #52, Review (kein 🔴, 3 × 🟡) umgesetzt, Bericht und Protokoll                                      |
+| Clarify | Arbeit    | 2026-11-19 16:12 | 2026-11-19 16:14 | 0:02  | CI abgewartet, Merge #52 (nachgetragen, Ende = Ablesung nach dem Merge)                                                                                        |
+| Plan    | Arbeit    | 2026-11-19 16:31 | 2026-11-19 16:37 | 0:06  | Grundlagen gelesen (CI, Infra, ADRs); `plan.md`, ADR 0011–0013; Bezeichner auf Englisch; 16:14 bis 16:31 Pause bis zum Start durch den Inhaber (zählt nicht)   |
 
 ## Summen
 
@@ -35,6 +37,7 @@ Methode:
 | ------- | ------ | --------- | ------ |
 | Spec    | 0:10   | 2:00      | 2:10   |
 | M #50   | 0:05   | 0:09      | 0:14   |
-| Clarify | 0:04   | 0:12      | 0:16   |
+| Clarify | 0:06   | 0:12      | 0:18   |
+| Plan    | 0:06   | 0:00      | 0:06   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.
