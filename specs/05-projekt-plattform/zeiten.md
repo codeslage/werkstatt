@@ -12,25 +12,29 @@ Methode:
 - **Summen:** Unter der Tabelle stehen je Stufe bzw. Task Arbeit, Wartezeit und Gesamt.
 - **Auswertung:** Das **Ist ist die Gesamtzeit** (Arbeit + Wartezeit), weil auch das Soll die Abstimmung enthält. Die Summe je Task wird auf Viertelstunden gerundet (mindestens 0,25 h) und in `tasks.md` als Ist eingetragen. Retro und eine spätere Abrechnung weisen Arbeit und Wartezeit zusätzlich getrennt aus; dafür zählen die genauen Minuten aus dieser Tabelle.
 
-| Was   | Art       | Start            | Ende             | Dauer | Bemerkung                                                                                                                           |
-| ----- | --------- | ---------------- | ---------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
-| Spec  | Arbeit    | 2026-11-19 13:04 | 2026-11-19 13:06 | 0:02  | Prozess, Roadmap und Vorlagen gelesen; Branch, `spec.md` (21 AKs, 12 offene Fragen), `zeiten.md`, Roadmap-Start; lokale Checks grün |
-| Spec  | Arbeit    | 2026-11-19 13:06 | 2026-11-19 13:10 | 0:04  | PR #48, Review durch `code-reviewer` (kein 🔴, 5 × 🟡), Befunde umgesetzt, Review-Bericht und Protokoll                             |
-| Spec  | Wartezeit | 2026-11-19 13:10 | 2026-11-19 14:17 | 1:07  | Antworten des Inhabers zu den offenen Fragen                                                                                        |
-| Spec  | Arbeit    | 2026-11-19 14:17 | 2026-11-19 14:19 | 0:02  | Antworten eingearbeitet (Kit-Sync, AK-17 entfällt, AK-24 und Frage 14 neu), Roadmap-Frage 3 beantwortet                             |
-| Spec  | Wartezeit | 2026-11-19 14:19 | 2026-11-19 15:12 | 0:53  | Freigabe der überarbeiteten Spec                                                                                                    |
-| Spec  | Arbeit    | 2026-11-19 15:12 | 2026-11-19 15:14 | 0:02  | Freigabe eingetragen (Status Freigegeben), CI abgewartet, Wartezeit getrennt, Merge #48                                             |
-| M #50 | Wartezeit | 2026-11-19 15:14 | 2026-11-19 15:18 | 0:04  | Entscheidung des Inhabers, die getrennte Wartezeit in Vorlage und Prozess aufzunehmen                                               |
-| M #50 | Arbeit    | 2026-11-19 15:18 | 2026-11-19 15:20 | 0:02  | Vorlage, `sdd-ablauf.md`, Befehle, Changelog; PR #50, Review (kein 🔴, 2 × 🟡), Format an Phase 2 (Spalte „Art“) angeglichen        |
-| M #50 | Arbeit    | 2026-11-19 15:20 | 2026-11-19 15:21 | 0:01  | Review-Bericht abgelegt, PR-Text neu gesetzt, Push                                                                                  |
-| M #50 | Wartezeit | 2026-11-19 15:21 | 2026-11-19 15:26 | 0:05  | Freigabe des Inhabers zum Merge (Ist = Gesamtzeit)                                                                                  |
-| M #50 | Arbeit    | 2026-11-19 15:26 | 2026-11-19 15:26 | 0:00  | Freigabe eingetragen, CI geprüft, Merge                                                                                             |
+| Was     | Art       | Start            | Ende             | Dauer | Bemerkung                                                                                                                                                      |
+| ------- | --------- | ---------------- | ---------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Spec    | Arbeit    | 2026-11-19 13:04 | 2026-11-19 13:06 | 0:02  | Prozess, Roadmap und Vorlagen gelesen; Branch, `spec.md` (21 AKs, 12 offene Fragen), `zeiten.md`, Roadmap-Start; lokale Checks grün                            |
+| Spec    | Arbeit    | 2026-11-19 13:06 | 2026-11-19 13:10 | 0:04  | PR #48, Review durch `code-reviewer` (kein 🔴, 5 × 🟡), Befunde umgesetzt, Review-Bericht und Protokoll                                                        |
+| Spec    | Wartezeit | 2026-11-19 13:10 | 2026-11-19 14:17 | 1:07  | Antworten des Inhabers zu den offenen Fragen                                                                                                                   |
+| Spec    | Arbeit    | 2026-11-19 14:17 | 2026-11-19 14:19 | 0:02  | Antworten eingearbeitet (Kit-Sync, AK-17 entfällt, AK-24 und Frage 14 neu), Roadmap-Frage 3 beantwortet                                                        |
+| Spec    | Wartezeit | 2026-11-19 14:19 | 2026-11-19 15:12 | 0:53  | Freigabe der überarbeiteten Spec                                                                                                                               |
+| Spec    | Arbeit    | 2026-11-19 15:12 | 2026-11-19 15:14 | 0:02  | Freigabe eingetragen (Status Freigegeben), CI abgewartet, Wartezeit getrennt, Merge #48                                                                        |
+| M #50   | Wartezeit | 2026-11-19 15:14 | 2026-11-19 15:18 | 0:04  | Entscheidung des Inhabers, die getrennte Wartezeit in Vorlage und Prozess aufzunehmen                                                                          |
+| M #50   | Arbeit    | 2026-11-19 15:18 | 2026-11-19 15:20 | 0:02  | Vorlage, `sdd-ablauf.md`, Befehle, Changelog; PR #50, Review (kein 🔴, 2 × 🟡), Format an Phase 2 (Spalte „Art“) angeglichen                                   |
+| M #50   | Arbeit    | 2026-11-19 15:20 | 2026-11-19 15:21 | 0:01  | Review-Bericht abgelegt, PR-Text neu gesetzt, Push                                                                                                             |
+| M #50   | Wartezeit | 2026-11-19 15:21 | 2026-11-19 15:26 | 0:05  | Freigabe des Inhabers zum Merge (Ist = Gesamtzeit)                                                                                                             |
+| M #50   | Arbeit    | 2026-11-19 15:26 | 2026-11-19 15:28 | 0:02  | Freigabe eingetragen, CI geprüft, Merge (Ende nachträglich auf die Ablesung nach dem Merge korrigiert)                                                         |
+| Clarify | Arbeit    | 2026-11-19 15:56 | 2026-11-19 15:56 | 0:00  | Spec auf Lücken geprüft, 3 neue Fragen und Frage 14 mit Vorschlägen gestellt; Zeit von 15:28 bis 15:56 ist Pause bis zum Start durch den Inhaber (zählt nicht) |
+| Clarify | Wartezeit | 2026-11-19 15:56 | 2026-11-19 16:08 | 0:12  | Antworten des Inhabers auf die Fragen 14–17                                                                                                                    |
+| Clarify | Arbeit    | 2026-11-19 16:08 | 2026-11-19 16:12 | 0:04  | Antworten eingetragen, AK-25 bis AK-27, Status Geklärt, PR #52, Review (kein 🔴, 3 × 🟡) umgesetzt, Bericht und Protokoll                                      |
 
 ## Summen
 
-| Was   | Arbeit | Wartezeit | Gesamt |
-| ----- | ------ | --------- | ------ |
-| Spec  | 0:10   | 2:00      | 2:10   |
-| M #50 | 0:03   | 0:09      | 0:12   |
+| Was     | Arbeit | Wartezeit | Gesamt |
+| ------- | ------ | --------- | ------ |
+| Spec    | 0:10   | 2:00      | 2:10   |
+| M #50   | 0:05   | 0:09      | 0:14   |
+| Clarify | 0:04   | 0:12      | 0:16   |
 
-`M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus dieser Stufe entstand.
+`M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.

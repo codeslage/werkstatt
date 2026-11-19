@@ -47,7 +47,7 @@ Spec-Ordner: `specs/04-fundament/`
 Spec-Ordner: `specs/05-projekt-plattform/`
 
 - Projekt-Vorlage `codeslage/project-template` (CONSTITUTION.md, CLAUDE.md, specs mit Vorlage, docs, CI, PR-Template, Dockerfile)
-- Constitution-Sync: Änderungen am Kit (Constitution, Prozesse, Vorlagen, Befehle, CI-Bausteine) erzeugen automatisch PRs in allen Projekt-Repos
+- Constitution-Sync: Änderungen am CodeslageWerkzeugKasten (CWK: Constitution, Prozesse, Vorlagen, Befehle, CI-Bausteine) erzeugen automatisch PRs in allen Projekt-Repos
 - Zentrales Docs-Portal `docs.codeslage.de` als statische Seite auf Cloudflare Pages, das die `docs/` aller Repos einsammelt (öffentliche Bereiche; interne Bereiche hinter Cloudflare Access)
 - ~~Erste eigene Projekte in die Org übernehmen~~ entfällt, es gibt noch keine (Spec 05, Frage 1)
 - PoC-Hosting (Domains, Coolify-Deploy je Projekt, Access für Friendly User) → Phase S
