@@ -79,7 +79,7 @@ Leitsatz der ersten Case Study: **Wir bauen erst, wenn wir es brauchen.**
 | Artikel                          | Bewertung | Anmerkung                                                                                                                        |
 | -------------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | I Spec zuerst                    | ✅        | diese Spec, SDD-Ablauf ab Stufe 1                                                                                                |
-| II Tests beweisen die Spec       | ✅        | 17 AKs, davon 11 automatisiert; die übrigen mit Protokoll oder Review                                                            |
+| II Tests beweisen die Spec       | ✅        | 17 AKs: 9 automatisiert, 3 teils automatisiert (AK-13, AK-16, AK-17), 5 mit Protokoll oder Review                                |
 | III Kleine Schritte              | ✅        | Zuschnitt in einzelne PRs im Plan                                                                                                |
 | IV Fragen statt raten            | ✅        | Annahmen A1–A7, offene Fragen unten, blockierende vor dem Plan klären                                                            |
 | V Keine zerstörerischen Aktionen | ✅        | DNS-Änderungen nur nach geprüftem Plan und Freigabe; Mail bleibt unberührt (AK-13)                                               |
