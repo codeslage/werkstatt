@@ -45,4 +45,6 @@ regexes = [
   '''^noreply@anthropic\.com$''',
   # Berichtsadresse für DMARC: von Cloudflare vergeben, steht ohnehin öffentlich im DNS (T-38).
   '''@dmarc-reports\.cloudflare\.net$''',
+  # Öffentliche Rollenadresse der Webseite, vom Inhaber freigegeben (Spec 06, Frage 6).
+  '''^kontakt@codeslage\.de$''',
 ]

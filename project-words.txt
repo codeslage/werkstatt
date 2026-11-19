@@ -147,3 +147,15 @@ Impressumsangaben
 Impressumsadresse
 mergt
 Platzhalterseite
+Consolas
+Menlo
+Segoe
+Signalgelb
+WCAG
+fonttools
+gestaltung
+leistungen
+linecap
+linejoin
+seite
+tspan
