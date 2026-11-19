@@ -22,6 +22,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Geändert
 
+- 2026-11-19 – Zeiterfassung: Wartezeit auf den Inhaber steht in eigenen Zeilen „(Warten)“, `zeiten.md` hat Summen für Arbeit, Warten und Gesamt (Vorlage, `sdd-ablauf.md`, `/sdd-*`-Befehle; Wunsch des Inhabers, #PR).
 - 2026-11-19 – `sdd-ablauf.md` und `/sdd-verify`: Abnahme auf `main`, solange es kein int gibt; Zeiterfassung zählt parallele Tasks nur einmal; Hinweise in `release.md`, `code-review.md` und `/release` (Retro 04, Entscheidung des Inhabers, #46).
 - 2026-11-18 – Phase 1, Schritt 3: erster Dependabot-Lauf für `docker` und `docker-compose` nachgewiesen, T-27 abgeschlossen (#42).
 - 2026-11-18 – Plan 04 v1.3: AK-25 durch die Ersteinrichtung des neuen Mac nachgewiesen; `aenderungsklassen.md`: Updates von GitHub Actions bleiben M (Entscheidungen des Inhabers, #41).
