@@ -169,3 +169,7 @@ lhci
 lighthouserc
 projekte
 Frontmatter
+herausgeprägt
+slage
+Formatfehler
+Planfreigabe

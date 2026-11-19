@@ -29,15 +29,28 @@ Methode:
 | Plan    | Arbeit    | 2026-11-19 19:25 | 2026-11-19 19:39 | 0:14  | `plan.md`, ADR 0014 und 0015, `02-architektur.md`, PR, zwei Reviews umgesetzt                                                       |
 | Plan    | Wartezeit | 2026-11-19 19:39 | 2026-11-19 19:47 | 0:08  | Freigabe des Plans; Ende = erste Ablesung nach der Antwort                                                                          |
 | Plan    | Arbeit    | 2026-11-19 19:47 | 2026-11-19 19:47 | 0:00  | Freigabe eintragen, Merge                                                                                                           |
+| Clarify | Arbeit    | 2026-11-19 16:32 | 2026-11-19 16:34 | 0:02  | Nachtrag Gestaltung: Runde 3 bauen                                                                                                  |
+| Clarify | Wartezeit | 2026-11-19 16:34 | 2026-11-19 16:52 | 0:18  | Nachtrag Gestaltung: Auswahl Runde 3                                                                                                |
+| Clarify | Arbeit    | 2026-11-19 16:52 | 2026-11-19 16:54 | 0:02  | Nachtrag Gestaltung: Variante 5 als SVG, Runde 4 bauen                                                                              |
+| Clarify | Wartezeit | 2026-11-19 16:54 | 2026-11-19 16:57 | 0:03  | Nachtrag Gestaltung: Auswahl Runde 4                                                                                                |
+| Clarify | Arbeit    | 2026-11-19 16:57 | 2026-11-19 16:58 | 0:01  | Nachtrag Gestaltung: Runde 4 als SVG                                                                                                |
+| Clarify | Wartezeit | 2026-11-19 19:47 | 2026-11-19 19:48 | 0:01  | Nachtrag Gestaltung: Auswahl Runde 5 (Teil nach der Zeile „Plan“, Beginn 19:28 zählt dort)                                          |
+| Clarify | Arbeit    | 2026-11-19 19:48 | 2026-11-19 19:50 | 0:02  | Nachtrag Gestaltung: Relief-Fassung, Runde 6 bauen                                                                                  |
+| Clarify | Wartezeit | 2026-11-19 19:50 | 2026-11-19 19:55 | 0:05  | Nachtrag Gestaltung: Auswahl Farbe                                                                                                  |
+| Clarify | Arbeit    | 2026-11-19 19:55 | 2026-11-19 19:57 | 0:02  | Nachtrag Gestaltung: Runde 7 bauen, Endfassung; darin 0:44 min Warten auf die Auswahl (unter einer Minute, nicht getrennt)          |
+| Tasks   | Arbeit    | 2026-11-19 22:30 | 2026-11-19 22:33 | 0:03  | Branch, Vorlage, finale Gestaltung übernehmen, `tasks.md`                                                                           |
+| Analyze | Arbeit    | 2026-11-19 22:33 | 2026-11-19 22:38 | 0:05  | Analyse in `tasks.md`, PR, Review                                                                                                   |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
-Zwischen 15:56 und 19:25 lag eine Pause des Inhabers. Sie zählt nicht und steht deshalb in keiner Zeile (Bestätigung des Inhabers am 2026-11-19).
+Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). Ihre Zeiten sind als „Clarify, Nachtrag Gestaltung“ auf die Minute übernommen, nur wo keine andere Zeile läuft; ihre eigenen Pausen 15:34–16:32 und 16:58–19:27 zählen nicht. Zwischen 15:56 und 19:25 lag eine Pause in der Hauptsitzung. Die Gestaltungs-Sitzung lief in dieser Zeit von 16:32 bis 16:58 weiter; diese Zeilen stehen als Nachtrag hinter „Plan“. Sie zählt nicht und steht deshalb in keiner Zeile (Bestätigung des Inhabers am 2026-11-19).
 
 ## Summen
 
 | Was     | Arbeit | Wartezeit | Gesamt |
 | ------- | ------ | --------- | ------ |
 | Spec    | 0:11   | 0:57      | 1:08   |
-| Clarify | 0:14   | 0:04      | 0:18   |
+| Clarify | 0:23   | 0:31      | 0:54   |
 | Plan    | 0:15   | 0:08      | 0:23   |
+| Tasks   | 0:03   | 0:00      | 0:03   |
+| Analyze | 0:05   | 0:00      | 0:05   |
