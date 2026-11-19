@@ -1,0 +1,123 @@
+# 06 – Phase 2 Webseite (Klick-Dummy): Spec
+
+> Status: **Entwurf**
+> Stand: 2026-11-19
+> Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md` (Erfolg 2 und 6), `02-architektur.md`, `03-roadmap.md` (Phase 2), ADR 0004 (Domain-Schema), ADR 0009 (Server erst bei Bedarf)
+> SDD-Stufe: 1 Specify · 2 Clarify
+
+<!-- Nur WAS und WARUM. Keine Technik – die gehört in plan.md. -->
+
+## Ziel
+
+`codeslage.de` bekommt eine erste öffentliche Webseite. Sie zeigt, wer codeslage ist, was codeslage anbietet und woran gearbeitet wird. Interessenten können per Mail Kontakt aufnehmen.
+
+Warum jetzt und warum so klein:
+
+- **Herausfinden, ob Interesse besteht, bevor Geld in den Betrieb fließt** (Roadmap Phase 2, ADR 0009). Die Seite misst datenschutzfreundlich, ob sie Besucher und Klicks bekommt.
+- **Schaufenster:** Die Seite ist der Ort, an dem Case Studies, später der Talk und der Podcast erscheinen (Vision, Erfolg 2 und 6).
+- **Ohne laufende Kosten und ohne Server:** Die Seite braucht kein eigenes Backend. Das Kontaktformular mit Speicherung kommt erst mit Phase 3.
+
+Leitsatz der ersten Case Study: **Wir bauen erst, wenn wir es brauchen.**
+
+## Nicht im Umfang
+
+- **Kontaktformular mit Speicherung** und jede Verarbeitung von Anfragen → Phase 3 (setzt Phase S voraus)
+- Server, eigene Umgebungen int/prod → Phase S (ADR 0009)
+- Englische Fassung (Markt DACH, Webseite zunächst Deutsch, siehe Vision)
+- Blog, Podcast-Bereich, Newsletter, Login, Kundenportal → spätere Phasen
+- Bearbeiten der Inhalte im Browser (Redaktionssystem)
+- Werbung, bezahlte Reichweite, Suchmaschinen-Kampagnen
+- Docs-Portal `docs.codeslage.de` → Phase 1.5
+
+## User Stories / Anforderungen
+
+- Als **Interessent** (Gründerin, Startup) möchte ich auf einen Blick sehen, was codeslage anbietet, damit ich entscheiden kann, ob sich eine Anfrage lohnt.
+- Als **Interessent** möchte ich sehen, woran codeslage gearbeitet hat (Projekte, Case Study), damit ich die Arbeitsweise einschätzen kann.
+- Als **Interessent** möchte ich mit einem Klick eine Mail an codeslage schreiben können, ohne ein Formular auszufüllen.
+- Als **Interessent** möchte ich die Seite auf dem Handy genauso gut nutzen können wie am Rechner.
+- Als **Besucher** möchte ich nicht getrackt werden und keinen Cookie-Banner wegklicken müssen.
+- Als **Inhaber** möchte ich sehen, wie viele Besuche jede Seite bekommt und wie oft jemand Kontakt aufnehmen will, damit ich entscheiden kann, ob sich der weitere Ausbau lohnt.
+- Als **Inhaber** möchte ich jeden Text freigeben, bevor er öffentlich erscheint, weil die Entwürfe von einer KI stammen (Artikel IX).
+- Als **Inhaber** möchte ich die rechtlichen Pflichtangaben (Impressum, Datenschutz) erfüllen, auch wenn codeslage ein Hobbyprojekt ist.
+- Als **Inhaber** möchte ich, dass meine Mail bei der Umstellung der Domain auf die Webseite ununterbrochen funktioniert.
+- Als **Inhaber** möchte ich keine zusätzlichen laufenden Kosten haben.
+
+## Akzeptanzkriterien
+
+| ID    | Kriterium                                                                                                                                                                                                                           | Nachweis (Testart)                                     |
+| ----- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------ |
+| AK-1  | Die Seiten **Startseite, Leistungen, Projekte, Über mich, Kontakt, Impressum und Datenschutz** sind erreichbar; von jeder Seite führt die Navigation zu jeder Hauptseite, Impressum und Datenschutz sind mit einem Klick erreichbar | automatisiert (E2E)                                    |
+| AK-2  | Die Seite ist unter `https://codeslage.de` live; `http://` und `www.` leiten dauerhaft auf `https://codeslage.de` um                                                                                                                | automatisiert (Abruf der Live-Seite)                   |
+| AK-3  | Auf der Kontaktseite und auf der Startseite öffnet ein Kontakt-Link eine neue Mail an eine öffentliche Rollenadresse von codeslage; es gibt kein Formular und es werden keine Eingaben gespeichert                                  | automatisiert (E2E)                                    |
+| AK-4  | Die Seite setzt keine Cookies, nutzt keinen Speicher im Browser und bindet außer der Besuchsmessung keine Dienste Dritter ein (keine externen Schriften, Karten, Videos); es erscheint kein Cookie-Banner                           | automatisiert (E2E)                                    |
+| AK-5  | Besuche werden je Seite cookielos gezählt, ebenso Klicks auf den Kontakt-Link; nach dem Livegang ist mindestens ein echter Besuch und ein Kontakt-Klick in der Auswertung sichtbar                                                  | manuell (Screenshot der Auswertung), protokolliert     |
+| AK-6  | Jede Seite erreicht in einer Lighthouse-Messung (mobil) in allen vier Kategorien (Performance, Barrierefreiheit, Best Practices, SEO) mindestens **90**                                                                             | automatisiert (CI)                                     |
+| AK-7  | Jede Seite ist bei 375 px Breite ohne waagerechtes Scrollen nutzbar, ebenso am Desktop                                                                                                                                              | automatisiert (E2E, zwei Bildschirmgrößen)             |
+| AK-8  | Jede Seite hat einen eigenen Titel, eine Beschreibung für Suchmaschinen und ist als deutschsprachig ausgezeichnet; die Seite enthält keine toten internen Links; unbekannte Adressen zeigen eine eigene Fehlerseite (404)           | automatisiert (E2E)                                    |
+| AK-9  | Die Seite wird nur verschlüsselt ausgeliefert und setzt übliche Sicherheits-Header (u. a. HSTS, Content-Security-Policy, kein Einbetten in fremde Seiten)                                                                           | automatisiert (Abruf der Live-Seite)                   |
+| AK-10 | Die E2E-Tests laufen bei jedem PR in der CI und sind Pflicht-Check für den Merge                                                                                                                                                    | automatisiert (CI-Status)                              |
+| AK-11 | Jeder Text auf der Seite (inkl. Impressum und Datenschutz) ist vor dem Livegang vom Inhaber freigegeben; jede Änderung lässt sich vor dem Livegang als Vorschau ansehen                                                             | manuell (Freigabe im PR), Review                       |
+| AK-12 | Impressum und Datenschutzerklärung enthalten die Pflichtangaben für ein Angebot dieser Art; die Datenschutzerklärung nennt die Besuchsmessung und das Hosting                                                                       | manuell (Prüfung durch den Inhaber), protokolliert     |
+| AK-13 | MX, SPF, DKIM und DMARC von `codeslage.de` sind nach dem Livegang unverändert; eine Testmail an und von einer `@codeslage.de`-Adresse kommt an                                                                                      | automatisiert (DNS-Lookup) + manuell, protokolliert    |
+| AK-14 | Jeder Dienstleister, der für die Seite Daten verarbeitet (Hosting, Besuchsmessung), ist in `docs/dsgvo.md` erfasst (Zweck, Daten, Standort, AVV/DPF)                                                                                | Review                                                 |
+| AK-15 | Die Seite verursacht **0 €/Monat** zusätzliche laufende Kosten (ausgenommen die bestehende Domain und Google Workspace)                                                                                                             | Kostenübersicht                                        |
+| AK-16 | Mindestens eine Case Study ist auf der Seite veröffentlicht („Wir bauen erst, wenn wir es brauchen“, Grundlage: `docs/content/`)                                                                                                    | automatisiert (E2E: Seite erreichbar) + Freigabe AK-11 |
+
+## Annahmen
+
+- **A1:** Die Seite ist nur auf Deutsch (Vision: Markt DACH, Webseite zunächst Deutsch).
+- **A2:** Zielgruppe sind Gründerinnen, Gründer und kleine Startups im DACH-Raum (Vision).
+- **A3:** Auch als Hobbyprojekt braucht die Seite Impressum und Datenschutzerklärung, sobald sie Leistungen anbietet (`02-architektur.md`). Claude entwirft die Texte, ersetzt aber keine Rechtsberatung; verantwortlich bleibt der Inhaber.
+- **A4:** Die Webseite liegt auf der Hauptdomain `codeslage.de`, `www.codeslage.de` leitet dorthin um (ADR 0004).
+- **A5:** Eine cookielose Besuchsmessung (laut Roadmap Cloudflare Web Analytics) braucht keinen Cookie-Banner, solange sonst nichts trackt.
+- **A6:** „Klick-Dummy“ heißt: echte Inhalte, aber keine Funktion mit eigenem Backend. Platzhalter-Texte gehen nicht live.
+
+## Constitution-Check
+
+| Artikel                          | Bewertung | Anmerkung                                                                                                                        |
+| -------------------------------- | --------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| I Spec zuerst                    | ✅        | diese Spec, SDD-Ablauf ab Stufe 1                                                                                                |
+| II Tests beweisen die Spec       | ✅        | 16 AKs, davon 10 automatisiert; die übrigen mit Protokoll oder Review                                                            |
+| III Kleine Schritte              | ✅        | Zuschnitt in einzelne PRs im Plan                                                                                                |
+| IV Fragen statt raten            | ✅        | Annahmen A1–A6, offene Fragen unten, blockierende vor dem Plan klären                                                            |
+| V Keine zerstörerischen Aktionen | ✅        | DNS-Änderungen nur nach geprüftem Plan und Freigabe; Mail bleibt unberührt (AK-13)                                               |
+| VI Secrets nie ins Repo          | ✅        | keine neuen Secrets im Repo; Zugänge für die Veröffentlichung nur in GitHub Secrets                                              |
+| VII Sicher als Standard          | ✅        | nur HTTPS, Sicherheits-Header (AK-9), keine Eingaben von außen (AK-3)                                                            |
+| VIII Datenschutz & EU            | ✅        | keine Cookies, keine Drittdienste außer Besuchsmessung (AK-4), Datenschutzerklärung (AK-12), Dienstleister in `dsgvo.md` (AK-14) |
+| IX Mensch im Loop                | ✅        | KI-Entwürfe gehen erst nach Freigabe des Inhabers live (AK-11), siehe offene Frage 9                                             |
+| X Reproduzierbar                 | ✅        | Seite und Domain-Einrichtung per Code, Rest als Runbook (Details im Plan)                                                        |
+| XI Einfach vor vollständig       | ✅        | Kern der Phase: Klick-Dummy ohne Backend und ohne Server, 0 € (AK-15)                                                            |
+| XII Offen dokumentieren          | ✅        | öffentliches Repo, Case Study auf der Seite (AK-16), Content-Notiz in der Retro                                                  |
+| XIII Wiederverwendbar            | ✅        | Seitenaufbau als Vorlage für Kunden-Webseiten nutzbar (Details im Plan)                                                          |
+| XIV Messen statt schätzen        | ✅        | Besuche und Kontakt-Klicks werden gemessen (AK-5), Zeiten in `zeiten.md`, Soll/Ist in der Roadmap                                |
+| XV Kein unnötiger Code           | ✅        | bestehende Qualitäts-Checks gelten auch für die Webseite                                                                         |
+| XVI Fehler sind sichtbar         | ✅        | fehlgeschlagene Veröffentlichung macht die CI rot; ein Ausfall der Seite wird erst mit Phase S überwacht (siehe Risiken)         |
+
+## Risiken
+
+| Risiko                                                                                                                       | Gegenmaßnahme                                                                                  |
+| ---------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| Pflichtangaben im Impressum (Name, Anschrift) widersprechen der Regel „keine persönlichen Kontaktdaten im öffentlichen Repo“ | vor dem Plan klären (offene Frage 4)                                                           |
+| Fehlerhaftes Impressum oder fehlerhafte Datenschutzerklärung (Abmahnrisiko)                                                  | Prüfung und Freigabe durch den Inhaber (AK-12), bei Bedarf Generator oder Rechtsberatung       |
+| KI-Texte gehen ungeprüft live                                                                                                | Freigabe aller Texte durch den Inhaber, Vorschau vor dem Livegang (AK-11)                      |
+| Mail fällt bei der Domain-Umstellung aus                                                                                     | nur Web-Einträge ändern, MX und Mail-Einträge bleiben unberührt, Prüfung direkt danach (AK-13) |
+| Die Besuchsmessung zählt keine Klicks auf einen Mail-Link                                                                    | vor dem Plan klären, was als „Klick“ zählt (offene Frage 8)                                    |
+| Lighthouse-Werte schwanken zwischen Messungen                                                                                | mehrere Läufe je Seite, Grenzwert im Plan festlegen                                            |
+| Ausfall der Seite bleibt unbemerkt                                                                                           | bewusst hingenommen: Klick-Dummy ohne SLA; Überwachung kommt mit Phase S                       |
+
+## Offene Fragen
+
+| #   | Frage                                                                                                                                                                                                                                                                                                                                                                                                    | Blockiert?       | Antwort |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------------- | ------- |
+| 1   | **Leistungen:** Welche Leistungen sollen auf der Seite stehen? Vorschlag: KI-Automatisierung von Geschäftsprozessen, Webentwicklung und Prototypen (PoC/MVP), Infrastruktur und Betrieb für Startups. Mit Preisen oder Preisrahmen, oder „auf Anfrage“?                                                                                                                                                  | ja (Inhalte)     |         |
+| 2   | **Projekte und Referenzen:** Welche Projekte erscheinen? Vorschlag: `codeslage/werkstatt` selbst (offenes Repo, Soll/Ist-Wette) und die Case Study aus Phase 1. Gibt es eigene Projekte oder Referenzen, die genannt werden dürfen?                                                                                                                                                                      | nein             |         |
+| 3   | **Über mich:** Mit vollem Namen, Foto und Werdegang? Was darf öffentlich stehen (Arbeitgeber ist laut `governance.md` intern)? Ansprache „du“ oder „Sie“?                                                                                                                                                                                                                                                | ja (Inhalte)     |         |
+| 4   | **Impressum:** Das Impressum braucht Name und ladungsfähige Anschrift, das öffentliche Repo darf keine persönlichen Kontaktdaten enthalten. Wie lösen wir das? Optionen: (a) Ausnahme in `governance.md` nur für die Impressumsangaben, (b) Angaben kommen nicht aus dem Repo, sondern werden erst beim Veröffentlichen eingesetzt, (c) eine Geschäfts- bzw. Impressumsadresse statt der Privatanschrift | ja (Plan)        |         |
+| 5   | **Datenschutzerklärung:** Entwirft Claude den Text auf Basis von `docs/dsgvo.md`, oder nutzt der Inhaber einen Generator bzw. eine Vorlage?                                                                                                                                                                                                                                                              | nein             |         |
+| 6   | **Kontaktadresse:** Welche öffentliche Rollenadresse steht im Kontakt-Link und im Impressum (z. B. eine eigene Adresse für Anfragen)? Existiert sie schon in Google Workspace, oder muss sie als Alias angelegt werden?                                                                                                                                                                                  | ja (Plan)        |         |
+| 7   | **Domain:** Ist auf `codeslage.de` oder `www.codeslage.de` heute etwas erreichbar (Weiterleitung, Parkseite), das abgelöst wird? Gibt es außer der Mail Einträge, die nicht angefasst werden dürfen?                                                                                                                                                                                                     | ja (Plan)        |         |
+| 8   | **Was zählt als „Klick“?** Die Roadmap verlangt, dass Besuche und Klicks gezählt werden. Eine cookielose Messung zählt in der Regel nur Seitenaufrufe. Reicht es, Aufrufe der Kontaktseite als Kontakt-Interesse zu zählen, oder sollen Klicks auf den Mail-Link selbst gezählt werden?                                                                                                                  | ja (Plan, AK-5)  |         |
+| 9   | **Freigabe der Texte (Artikel IX):** Bisher mergt Claude bei grüner CI selbst. Vorschlag: PRs mit Texten, die öffentlich erscheinen, mergt nur der Inhaber bzw. erst nach seiner ausdrücklichen Freigabe im PR; reine Technik-PRs weiter per Selbst-Merge. Einverstanden?                                                                                                                                | ja (Plan, AK-11) |         |
+| 10  | **Gestaltung:** Gibt es ein Logo, Farben oder Vorbilder für den Stil? Oder entwirft Claude einen schlichten Vorschlag zur Freigabe?                                                                                                                                                                                                                                                                      | nein             |         |
+| 11  | **Case Study:** Erscheint die Case Study „Wir bauen erst, wenn wir es brauchen“ als eigene Seite unter „Projekte“, und darf sie die Zahlen der Soll/Ist-Wette aus Phase 1 nennen (≈ 14,4 h statt ≈ 50 h)?                                                                                                                                                                                                | nein             |         |
+| 12  | **Livegang:** Soll die Seite live gehen, sobald alle AKs erfüllt sind, oder gibt es einen Wunschtermin (z. B. zusammen mit einer Ankündigung)?                                                                                                                                                                                                                                                           | nein             |         |
