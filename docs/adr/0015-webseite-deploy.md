@@ -1,4 +1,4 @@
-# ADR 0012 – Webseite: Upload aus der CI statt Git-Anbindung von Cloudflare Pages
+# ADR 0015 – Webseite: Upload aus der CI statt Git-Anbindung von Cloudflare Pages
 
 > Status: **Angenommen** am 2026-11-19 (Entscheidung des Inhabers in Stufe 3) · Stand: 2026-11-19
 > Bezug: `specs/06-webseite/spec.md` (AK-2, AK-11, AK-15, Frage 13, A7), `specs/06-webseite/plan.md`, ADR 0002, ADR 0009, Constitution IX, X

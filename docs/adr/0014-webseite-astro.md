@@ -1,4 +1,4 @@
-# ADR 0011 – Webseite mit Astro statt Next.js
+# ADR 0014 – Webseite mit Astro statt Next.js
 
 > Status: **Angenommen** am 2026-11-19 (Entscheidung des Inhabers in Stufe 3) · Stand: 2026-11-19
 > Bezug: `specs/06-webseite/spec.md` (AK-4, AK-6, AK-9, AK-17, AK-18), `specs/06-webseite/plan.md`, `specs/02-architektur.md` (A1), ADR 0009, Constitution XI, XIII, XV
@@ -31,6 +31,6 @@ Phase 1.5 plant außerdem ein statisches Docs-Portal (`02-architektur.md`, A10: 
 
 ## Folgen
 
-- `02-architektur.md` A1: „Astro für `web` (ADR 0011), Next.js für `portal`“.
+- `02-architektur.md` A1: „Astro für `web` (ADR 0014), Next.js für `portal`“.
 - Zwei Web-Stacks im Monorepo (Astro, später Next.js). Das ist bewusst so: Jeder passt zu seiner Aufgabe, und der Astro-Teil teilt sich das Wissen mit dem Docs-Portal aus Phase 1.5.
 - Die Qualitäts-Checks (ESLint, Knip, Modulgrenzen, Format) müssen `.astro`-Dateien kennen. Details stehen im Plan.

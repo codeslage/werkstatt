@@ -2,14 +2,14 @@
 
 > Status: **Entwurf**
 > Stand: 2026-11-19
-> Bezug: `spec.md` (Status: Geklärt, freigegeben am 2026-11-19), `leistungen.md`, `gestaltung.md`, `CONSTITUTION.md` (v1.1.0), `02-architektur.md`, ADR 0002, 0004, 0009, 0011, 0012
+> Bezug: `spec.md` (Status: Geklärt, freigegeben am 2026-11-19), `leistungen.md`, `gestaltung.md`, `CONSTITUTION.md` (v1.1.0), `02-architektur.md`, ADR 0002, 0004, 0009, 0014, 0015
 > SDD-Stufe: 3 Plan
 
 ## Technischer Ansatz
 
-`apps/web` ist eine **statische Seite aus Astro** (ADR 0011). Sie liefert reines HTML und CSS aus, ohne eigenes JavaScript, ohne Cookies und ohne Schriften von außen. Einziges fremdes Skript ist der Beacon von Cloudflare Web Analytics.
+`apps/web` ist eine **statische Seite aus Astro** (ADR 0014). Sie liefert reines HTML und CSS aus, ohne eigenes JavaScript, ohne Cookies und ohne Schriften von außen. Einziges fremdes Skript ist der Beacon von Cloudflare Web Analytics.
 
-- **Hosting:** Cloudflare Pages. Die CI baut die Seite und lädt sie nur von `main` hoch (ADR 0012). Einen Deploy gibt es erst ab dem Livegang-Schritt, nach dem OK des Inhabers (A7). Vorher läuft die Seite nur lokal (`pnpm --filter web dev` bzw. `preview`, AK-11).
+- **Hosting:** Cloudflare Pages. Die CI baut die Seite und lädt sie nur von `main` hoch (ADR 0015). Einen Deploy gibt es erst ab dem Livegang-Schritt, nach dem OK des Inhabers (A7). Vorher läuft die Seite nur lokal (`pnpm --filter web dev` bzw. `preview`, AK-11).
 - **Infrastruktur:** Pages-Projekt, eigene Domains, DNS-Einträge, die Weiterleitung `www` → Hauptdomain und die Seite für Web Analytics legt OpenTofu in `infra/tofu/live` an (ADR 0002). Die Mail-Einträge bleiben unverändert (AK-13).
 - **Impressum:** Name und Anschrift stehen nicht im Repo (Frage 4, V4). Beim Build kommen sie aus Umgebungsvariablen: lokal aus `.env`, im Deploy aus GitHub Secrets. Ein Schema prüft sie (Constitution VII). Fehlt ein Wert oder ist er ungültig, bricht der Build mit einer klaren Meldung ab (XVI). Für Tests und die lokale Vorschau gibt `.env.example` erkennbare Platzhalter vor.
 - **Sicherheits-Header** kommen aus einer `_headers`-Datei von Pages (AK-9): HSTS, Content-Security-Policy, `frame-ancestors 'none'`, `X-Content-Type-Options`, `Referrer-Policy`, `Permissions-Policy`. HTTP → HTTPS erledigt die Zoneneinstellung `always_use_https`, die es schon gibt.
@@ -19,10 +19,10 @@ Zugehörige ADRs:
 
 | ADR                                                   | Entscheidung                                                               | Status                                                  |
 | ----------------------------------------------------- | -------------------------------------------------------------------------- | ------------------------------------------------------- |
-| [0011](../../docs/adr/0011-webseite-astro.md)         | Astro statt Next.js für `apps/web`                                         | Angenommen 2026-11-19                                   |
-| [0012](../../docs/adr/0012-webseite-deploy.md)        | Upload aus der CI statt Git-Anbindung; kein Container-Image für `apps/web` | Angenommen 2026-11-19                                   |
+| [0014](../../docs/adr/0014-webseite-astro.md)         | Astro statt Next.js für `apps/web`                                         | Angenommen 2026-11-19                                   |
+| [0015](../../docs/adr/0015-webseite-deploy.md)        | Upload aus der CI statt Git-Anbindung; kein Container-Image für `apps/web` | Angenommen 2026-11-19                                   |
 | [0004](../../docs/adr/0004-domain-schema.md)          | Webseite auf `codeslage.de`                                                | Vorgeschlagen                                           |
-| [0009](../../docs/adr/0009-server-erst-bei-bedarf.md) | Server erst bei Bedarf                                                     | Vorgeschlagen; Ausnahme „Dockerfile je App“ in ADR 0012 |
+| [0009](../../docs/adr/0009-server-erst-bei-bedarf.md) | Server erst bei Bedarf                                                     | Vorgeschlagen; Ausnahme „Dockerfile je App“ in ADR 0015 |
 
 ## Bausteine & Struktur
 
@@ -58,13 +58,13 @@ Abhängigkeitsrichtungen: `apps/web` importiert nichts aus anderen Apps und aus 
 
 | Paket                       | Wofür                                                             | Lizenz         | Begründung (Artikel XI)                                                                             |
 | --------------------------- | ----------------------------------------------------------------- | -------------- | --------------------------------------------------------------------------------------------------- |
-| `astro`                     | statische Seite bauen                                             | MIT            | ADR 0011                                                                                            |
+| `astro`                     | statische Seite bauen                                             | MIT            | ADR 0014                                                                                            |
 | `@playwright/test`          | E2E-Tests (AK-1, 3, 4, 7, 8, 16, 17, 18)                          | Apache-2.0     | in `02-architektur.md` (A1) bereits vorgesehen                                                      |
 | `@axe-core/playwright`      | Kontrast- und Barrierefreiheitsprüfung in hell und dunkel (AK-18) | MPL-2.0        | Kontrast nach WCAG selbst zu berechnen wäre fehleranfällig; axe ist der Standard                    |
 | `@lhci/cli`                 | Lighthouse je Seite mit Grenzwerten in der CI (AK-6)              | Apache-2.0     | die „Fertig, wenn“-Bedingung der Roadmap ist Lighthouse ≥ 90; nutzt das Chromium von Playwright mit |
 | `prettier-plugin-astro`     | Formatprüfung auch für `.astro` (Format-Check, AK-30 aus 04)      | MIT            | sonst blieben `.astro`-Dateien ungeprüft                                                            |
 | `eslint-plugin-astro`       | Lint auch für `.astro`                                            | MIT            | Artikel XV verlangt maschinelle Prüfung jedes Codes                                                 |
-| `wrangler` (erst Schritt 6) | Upload nach Cloudflare Pages                                      | MIT/Apache-2.0 | offizielles Werkzeug, ADR 0012                                                                      |
+| `wrangler` (erst Schritt 6) | Upload nach Cloudflare Pages                                      | MIT/Apache-2.0 | offizielles Werkzeug, ADR 0015                                                                      |
 
 Nicht gebraucht: Tailwind oder ein anderes CSS-Framework (eine Datei mit Tokens reicht), UI-Bibliotheken, Analytics-SDKs, eine Bibliothek für das Schema (die Prüfung von drei Feldern sind wenige Zeilen, XI).
 
@@ -159,15 +159,15 @@ Die Tests aus Schritt 1 entstehen vor dem Inhalt. Sie prüfen Struktur und Regel
 | I Spec zuerst                    | ✅        | Spec geklärt und freigegeben; dieser Plan vor jedem Code                                                                                                       |
 | II Tests beweisen die Spec       | ✅        | jedes AK hat einen Test (Tabelle oben); Prüfstand in Schritt 1 vor den Inhalten                                                                                |
 | III Kleine Schritte              | ✅        | sechs Schritte, Texte seitenweise als eigene PRs                                                                                                               |
-| IV Fragen statt raten            | ✅        | Framework, Deploy-Weg und Image vom Inhaber entschieden (ADR 0011, 0012); Voraussetzungen V1–V4 benannt                                                        |
+| IV Fragen statt raten            | ✅        | Framework, Deploy-Weg und Image vom Inhaber entschieden (ADR 0014, 0015); Voraussetzungen V1–V4 benannt                                                        |
 | V Keine zerstörerischen Aktionen | ✅        | `apply` erst im Livegang, nach gezeigtem `plan` und Freigabe; Mail-Einträge werden nicht angefasst und vorher festgehalten                                     |
 | VI Secrets nie ins Repo          | ✅        | Impressumsangaben und Tokens nur in `.env` und GitHub Secrets; `.env.example` mit Platzhaltern                                                                 |
 | VII Sicher als Standard          | ✅        | Token nur mit „Pages: Edit“; strenge CSP ohne `unsafe-inline`; Eingaben zur Build-Zeit per Schema geprüft                                                      |
 | VIII Datenschutz & EU            | ✅        | keine Cookies, keine fremden Schriften; Cloudflare in `docs/dsgvo.md` ergänzt (AK-14)                                                                          |
 | IX Mensch im Loop                | ✅        | Text-PRs nur nach Freigabe; Vorschau nur lokal; Deploy erst nach OK                                                                                            |
-| X Reproduzierbar                 | ⚠️        | Pages, DNS, Weiterleitung und Analytics per OpenTofu, Deploy als Workflow. Abweichung: kein Container-Image für `apps/web` (ADR 0012, vom Inhaber entschieden) |
+| X Reproduzierbar                 | ⚠️        | Pages, DNS, Weiterleitung und Analytics per OpenTofu, Deploy als Workflow. Abweichung: kein Container-Image für `apps/web` (ADR 0015, vom Inhaber entschieden) |
 | XI Einfach vor vollständig       | ✅        | statisches HTML ohne JS und Backend; kein CSS-Framework, keine Schema-Bibliothek; jede neue Abhängigkeit begründet                                             |
-| XII Offen dokumentieren          | ✅        | ADR 0011 und 0012, `02-architektur.md` angepasst, Protokolle je Schritt, Case Study auf der Seite                                                              |
+| XII Offen dokumentieren          | ✅        | ADR 0014 und 0015, `02-architektur.md` angepasst, Protokolle je Schritt, Case Study auf der Seite                                                              |
 | XIII Wiederverwendbar            | ✅        | Layout, Tokens, Header-Konfiguration und Prüfstand (E2E, Lighthouse, axe) ohne codeslage-Annahmen im Kern, als Vorlage für Kunden-Webseiten                    |
 | XIV Messen statt schätzen        | ✅        | Besuche und Kontakt-Interesse (AK-5); Lighthouse-Werte je Lauf; Zeiten in `zeiten.md`                                                                          |
 | XV Kein unnötiger Code           | ✅        | Lint, Knip, Modulgrenzen und Format auch für `.astro`; eine Quelle für die Seitenliste                                                                         |
@@ -175,11 +175,12 @@ Die Tests aus Schritt 1 entstehen vor dem Inhalt. Sie prüfen Struktur und Regel
 
 ## Risiken
 
-| Risiko                                                                                              | Gegenmaßnahme                                                                                                                         |
-| --------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| Lighthouse-Werte schwanken in der CI                                                                | drei Läufe je Seite, Median; Seite ohne JS und ohne fremde Schriften hat Reserve                                                      |
-| Der Beacon von Web Analytics verlangt CSP-Ausnahmen oder Inline-Code                                | Beacon als externes Skript mit eigenem Tag; CSP erlaubt nur die zwei Cloudflare-Hosts; Live-Test prüft die CSP                        |
-| Die Tofu-Ressourcen für Pages oder Web Analytics im Provider 5.x verhalten sich anders als erwartet | in Schritt 5 nur `plan`; Abweichungen dort beheben, bevor etwas live geht; Rückfall: Domain-Verknüpfung per Runbook dokumentieren (X) |
-| `*.pages.dev` liefert die Seite auch aus                                                            | Canonical-Link auf `codeslage.de`; erst ab Schritt 6, also nach Freigabe                                                              |
-| Eine Freigabe für Text-PRs bleibt aus und hält den Livegang auf                                     | Texte seitenweise in kleinen PRs; Technik-Schritte laufen unabhängig weiter                                                           |
-| Ein Fehler bei der DNS-Änderung trifft die Mail                                                     | `web.tf` ändert nur Einträge für `@` (A/AAAA bzw. CNAME) und `www`, nie MX/TXT; `plan` vor dem `apply` zeigen; AK-13 direkt danach    |
+| Risiko                                                                                                                                      | Gegenmaßnahme                                                                                                                                     |
+| ------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Lighthouse-Werte schwanken in der CI                                                                                                        | drei Läufe je Seite, Median; Seite ohne JS und ohne fremde Schriften hat Reserve                                                                  |
+| Der Beacon von Web Analytics verlangt CSP-Ausnahmen oder Inline-Code                                                                        | Beacon als externes Skript mit eigenem Tag; CSP erlaubt nur die zwei Cloudflare-Hosts; Live-Test prüft die CSP                                    |
+| Die Tofu-Ressourcen für Pages oder Web Analytics im Provider 5.x verhalten sich anders als erwartet                                         | in Schritt 5 nur `plan`; Abweichungen dort beheben, bevor etwas live geht; Rückfall: Domain-Verknüpfung per Runbook dokumentieren (X)             |
+| `*.pages.dev` liefert die Seite auch aus                                                                                                    | Canonical-Link auf `codeslage.de`; erst ab Schritt 6, also nach Freigabe                                                                          |
+| Eine Freigabe für Text-PRs bleibt aus und hält den Livegang auf                                                                             | Texte seitenweise in kleinen PRs; Technik-Schritte laufen unabhängig weiter                                                                       |
+| Ein Fehler bei der DNS-Änderung trifft die Mail                                                                                             | `web.tf` ändert nur Einträge für `@` (A/AAAA bzw. CNAME) und `www`, nie MX/TXT; `plan` vor dem `apply` zeigen; AK-13 direkt danach                |
+| Phase 1.5 (ADR 0013, PR #53) legt ebenfalls Pages-Projekte, DNS und Access in `infra/tofu/live` an und erweitert die Rechte des Tofu-Tokens | eigene Datei `web.tf`; vor Schritt 5 den Stand von Phase 1.5 auf `main` prüfen und gemeinsame Teile (Token-Rechte, Deploy-Weg) nur einmal anlegen |
