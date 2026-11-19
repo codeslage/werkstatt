@@ -27,7 +27,7 @@ Methode:
 | Clarify | Arbeit    | 2026-11-19 15:36 | 2026-11-19 15:44 | 0:08  | Spec auf „Geklärt“, `leistungen.md`, `gestaltung.md`, Review, Protokoll                                                             |
 | Plan    | Arbeit    | 2026-11-19 15:55 | 2026-11-19 15:56 | 0:01  | Branch, Vorlage und Bezüge lesen, Fragen zu Framework, Deploy und Image                                                             |
 | Plan    | Wartezeit | 2026-11-19 15:56 | 2026-11-19 19:25 | 3:29  | Entscheidungen Framework, Deploy, Image; Ende = erste Ablesung nach der Antwort. Vom Inhaber zu bestätigen, ob ein Teil Pause war   |
-| Plan    | Arbeit    | 2026-11-19 19:25 | läuft            |       | `plan.md`, ADR 0011 und 0012, `02-architektur.md`, PR, Review                                                                       |
+| Plan    | Arbeit    | 2026-11-19 19:25 | läuft            |       | `plan.md`, ADR 0014 und 0015, `02-architektur.md`, PR, Review                                                                       |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
