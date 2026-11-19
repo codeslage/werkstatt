@@ -160,3 +160,9 @@ linejoin
 seite
 tspan
 kontakt
+Barrierefreiheitsprüfung
+Formatprüfung
+impressum
+lhci
+lighthouserc
+projekte

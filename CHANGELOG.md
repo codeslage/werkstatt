@@ -10,6 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
+- 2026-11-19 – Phase 2, Stufe 3 (Plan): `specs/06-webseite/plan.md` mit sechs Schritten und Teststrategie je AK; ADR 0011 (Astro für `apps/web`) und ADR 0012 (Upload aus der CI nach Cloudflare Pages, kein Container-Image); `02-architektur.md` A1 und A3 angepasst (#PR).
 - 2026-11-19 – Phase 2, Stufe 2 (Clarify): Spec 06 geklärt. Kontaktadresse, Vorschau nur lokal, Pilotprojekte mit Konditionen auf Anfrage, Foto; neues AK-18 (hell/dunkel), Voraussetzungen V1–V4; Leistungen (`leistungen.md`), Gestaltung und Logo (`gestaltung.md`, `gestaltung/`) (#51).
 - 2026-11-19 – Phase 2, Stufe 1 (Specify): Spec `specs/06-webseite/spec.md` für die Webseite als Klick-Dummy mit 17 AKs freigegeben, `zeiten.md` mit getrennt ausgewiesener Wartezeit, Start von Phase 2 in der Roadmap (#49).
 - 2026-11-19 – Vorlage `specs/_vorlagen/zeiten.md`; Zeiterfassung ist für jedes Vorhaben ab Stufe 1 Pflicht (`sdd-ablauf.md`, alle `/sdd-*`-Befehle, Spalten Soll/Ist in der tasks-Vorlage), als Grundlage für Soll/Ist und spätere Abrechnung (Entscheidung des Inhabers, #47).
