@@ -11,6 +11,17 @@ Methode:
 - **Parallele Tasks:** Die Zeit zählt nur einmal. Sie gehört der Task, an der die Sitzung gerade arbeitet; die Zeilen überlappen sich nicht.
 - **Auswertung:** Die Summe je Task wird auf Viertelstunden gerundet (mindestens 0,25 h) und in `tasks.md` als Ist eingetragen. Für die Retro und eine spätere Abrechnung zählen die genauen Minuten aus dieser Tabelle.
 
-| Was  | Start            | Ende  | Dauer | Bemerkung                                                 |
-| ---- | ---------------- | ----- | ----- | --------------------------------------------------------- |
-| Spec | 2026-11-19 14:17 | läuft |       | Entwurf `spec.md`, Roadmap-Eintrag; parallel zu Phase 1.5 |
+| Was  | Art       | Start            | Ende             | Dauer | Bemerkung                                                                             |
+| ---- | --------- | ---------------- | ---------------- | ----- | ------------------------------------------------------------------------------------- |
+| Spec | Arbeit    | 2026-11-19 14:17 | 2026-11-19 14:20 | 0:03  | Entwurf `spec.md`, Roadmap-Eintrag, Draft-PR; parallel zu Phase 1.5                   |
+| Spec | Wartezeit | 2026-11-19 14:20 | 2026-11-19 15:11 | 0:51  | Antworten auf die Fragen 3, 4, 8, 9; Ende = erste Ablesung nach der Antwort           |
+| Spec | Arbeit    | 2026-11-19 15:11 | 2026-11-19 15:11 | 0:00  | Antworten eingetragen, Commit                                                         |
+| Spec | Wartezeit | 2026-11-19 15:11 | 2026-11-19 15:17 | 0:06  | Antworten auf die übrigen Fragen und Freigabe; Ende = erste Ablesung nach der Antwort |
+| Spec | Arbeit    | 2026-11-19 15:17 | läuft            |       | Unterchats gestartet, Freigabe eingetragen, Review, Protokoll; parallel zu Phase 1.5  |
+
+Wartezeit steht ab diesem Vorhaben in **eigenen Zeilen** (Spalte „Art“), damit sie getrennt ausgewiesen werden kann (Wunsch des Inhabers vom 2026-11-19). Die Sitzungen für Leistungen sowie Gestaltung und Logo führen ihre Zeiten selbst; sie werden in Stufe 2 übernommen.
+
+| Summe     | Dauer |
+| --------- | ----- |
+| Arbeit    | läuft |
+| Wartezeit | 0:57  |
