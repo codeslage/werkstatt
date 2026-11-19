@@ -14,3 +14,4 @@ Methode:
 | Was  | Start            | Ende             | Dauer | Bemerkung                                                                                                                           |
 | ---- | ---------------- | ---------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | Spec | 2026-11-19 13:04 | 2026-11-19 13:06 | 0:02  | Prozess, Roadmap und Vorlagen gelesen; Branch, `spec.md` (21 AKs, 12 offene Fragen), `zeiten.md`, Roadmap-Start; lokale Checks grün |
+| Spec | 2026-11-19 13:06 | 2026-11-19 13:10 | 0:04  | PR #48, Review durch `code-reviewer` (kein 🔴, 5 × 🟡), Befunde umgesetzt, Review-Bericht und Protokoll                             |
