@@ -17,7 +17,7 @@ Methode:
 | Spec | Wartezeit | 2026-11-19 14:20 | 2026-11-19 15:11 | 0:51  | Antworten auf die Fragen 3, 4, 8, 9; Ende = erste Ablesung nach der Antwort           |
 | Spec | Arbeit    | 2026-11-19 15:11 | 2026-11-19 15:11 | 0:00  | Antworten eingetragen, Commit                                                         |
 | Spec | Wartezeit | 2026-11-19 15:11 | 2026-11-19 15:17 | 0:06  | Antworten auf die übrigen Fragen und Freigabe; Ende = erste Ablesung nach der Antwort |
-| Spec | Arbeit    | 2026-11-19 15:17 | läuft            |       | Unterchats gestartet, Freigabe eingetragen, Review, Protokoll; parallel zu Phase 1.5  |
+| Spec | Arbeit    | 2026-11-19 15:17 | 2026-11-19 15:25 | 0:08  | Unterchats gestartet, Freigabe eingetragen, Review, Protokoll; parallel zu Phase 1.5  |
 
 Die Sitzungen für Leistungen sowie Gestaltung und Logo führen ihre Zeiten selbst; sie werden in Stufe 2 übernommen.
 
@@ -25,4 +25,4 @@ Summen:
 
 | Was  | Arbeit | Wartezeit | Gesamt |
 | ---- | ------ | --------- | ------ |
-| Spec | läuft  | 0:57      | läuft  |
+| Spec | 0:11   | 0:57      | 1:08   |
