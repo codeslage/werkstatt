@@ -13,4 +13,4 @@ Vorhaben: $ARGUMENTS
 4. Jede Task bekommt: AK-Bezug, Test, Abhängigkeiten und ein Soll in Stunden. Eine Task ohne AK gibt es nicht.
 5. Danach direkt `/sdd-analyze` ausführen.
 
-Zeit: Trage die Zeit dieser Stufe in `specs/<NN-name>/zeiten.md` ein (Systemuhr, Wartezeit auf den Inhaber in eigenen Zeilen „(Warten)“).
+Zeit: Trage die Zeit dieser Stufe in `specs/<NN-name>/zeiten.md` ein (Systemuhr, Wartezeit auf den Inhaber in eigenen Zeilen, Spalte „Art“).

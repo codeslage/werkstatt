@@ -13,4 +13,4 @@ Vorhaben: $ARGUMENTS
 4. Trage die Antworten in die Spec ein, aktualisiere AKs und Constitution-Check, setze den Status auf `Geklärt`.
 5. Weiter zu `/sdd-plan` erst, wenn keine blockierende Frage mehr offen ist.
 
-Zeit: Trage die Zeit dieser Stufe in `specs/<NN-name>/zeiten.md` ein (Systemuhr, Wartezeit auf den Inhaber in eigenen Zeilen „(Warten)“).
+Zeit: Trage die Zeit dieser Stufe in `specs/<NN-name>/zeiten.md` ein (Systemuhr, Wartezeit auf den Inhaber in eigenen Zeilen, Spalte „Art“).
