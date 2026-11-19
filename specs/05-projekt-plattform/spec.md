@@ -1,7 +1,7 @@
 # 05 – Phase 1.5 Projekt-Plattform: Spec
 
 > Status: **Geklärt** am 2026-11-19 (Stufe 2); Freigegeben am 2026-11-19 (Inhaber im Chat)
-> Stand: 2026-11-19 (Plan-Review PR #53: AK-22 auf zentralen Scan umformuliert, Ziel unverändert); 2026-11-19 (Clarify: Name CodeslageWerkzeugKasten (CWK), Regel- und Code-Teil, ein offener Sync-PR je Repo, Erinnerung nach 14 Tagen; AK-25 bis AK-27 neu; AK-1, AK-3, AK-7, AK-9, AK-10, AK-11 angepasst; nach Review: Festlegung „ohne Code“, Erinnerung wöchentlich, Frage 18); 2026-11-19 (Antworten des Inhabers auf die Fragen 1–13: Sync umfasst das Kit, AK-17 entfällt, AK-24 neu, Frage 14 neu); 2026-11-19 (Review PR #48 umgesetzt: AK-3, AK-9, AK-17, AK-20 geschärft, AK-22, AK-23 und Frage 13 neu)
+> Stand: 2026-11-19 (Plan-Review PR #53: AK-22 auf zentralen Scan umformuliert, Ziel unverändert; Bestätigung des Inhabers mit der Plan-Freigabe, Plan Frage P4); 2026-11-19 (Clarify: Name CodeslageWerkzeugKasten (CWK), Regel- und Code-Teil, ein offener Sync-PR je Repo, Erinnerung nach 14 Tagen; AK-25 bis AK-27 neu; AK-1, AK-3, AK-7, AK-9, AK-10, AK-11 angepasst; nach Review: Festlegung „ohne Code“, Erinnerung wöchentlich, Frage 18); 2026-11-19 (Antworten des Inhabers auf die Fragen 1–13: Sync umfasst das Kit, AK-17 entfällt, AK-24 neu, Frage 14 neu); 2026-11-19 (Review PR #48 umgesetzt: AK-3, AK-9, AK-17, AK-20 geschärft, AK-22, AK-23 und Frage 13 neu)
 > Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md` (Erfolg Nr. 5), `02-architektur.md` (A9, A10), `03-roadmap.md` (Phase 1.5), `docs/prozess/governance.md` (Geltungsbereich, Öffentlich vs. intern)
 > SDD-Stufe: 1 Specify · 2 Clarify
 

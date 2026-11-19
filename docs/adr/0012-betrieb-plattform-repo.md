@@ -22,10 +22,10 @@ Freigabe: eigener Workflow-Check (umgehbar, siehe oben) gegen Ruleset von GitHub
 ## Entscheidung
 
 - Alle Abläufe mit Zugriff auf mehrere Repos laufen im privaten Repo **`codeslage/platform`**. Es hat keinen Code und bekommt nur den Regel-Teil des CWK. Auch alle geplanten Läufe liegen dort, und ihre Cron-Zeilen ändert nur der Inhaber.
-- Eine **GitHub App `codeslage-cwk`**, installiert für alle Repos, mit Contents Write, Workflows Write, Pull requests Write und Metadata Read. Sie steht in keiner Bypass-Liste.
+- Eine **GitHub App `codeslage-cwk`** mit Contents Write, Workflows Write, Pull requests Write und Metadata Read, installiert **nur für ausgewählte Repos**: alle Projekt-Repos außer `platform`, nie `werkstatt`. Die CWK-Quelle liest der Sync öffentlich; in `platform` liegt die Ersatzprüfung für private Repos, die die App nicht ändern darf. Sie steht in keiner Bypass-Liste.
 - **Freigabe per Ruleset** in jedem öffentlichen Repo, in zwei Rulesets:
-  - `main-checks`: nur per PR, Pflicht-Check `ci-ok`, ohne Bypass.
-  - `main-approval`: ein Code-Owner-Review durch das Team `maintainers`, veraltete Freigaben verfallen, die Freigabe muss sich auf den neuesten Push beziehen. Bypass hat die Rolle „Repository admin“ nur für PRs, damit der Inhaber eigene PRs weiter selbst mergen kann.
+  - `main-checks`: nur per PR, Pflicht-Check `ci-ok` (Quelle GitHub Actions), ohne Bypass.
+  - `main-approval`: ein Code-Owner-Review durch das Team `maintainers`, veraltete Freigaben verfallen, die Freigabe muss sich auf den neuesten Push beziehen. Bypass hat die Rolle „Repository admin“ nur für PRs, damit der Inhaber eigene PRs weiter selbst mergen kann. `CODEOWNERS` ist exakt `* @codeslage/maintainers`; das Team ist sichtbar und hat Schreibrecht. Auch `werkstatt` bekommt `main-approval`.
 - Der Historien-Scan (AK-22) läuft zentral in `platform` über alle Projekt-Repos.
 - Läufe, die von außen gestartet werden (Webhook → Worker), löst ein Fine-grained Token **des Inhabers** aus, beschränkt auf `platform` mit Actions Write. Das ist eine bewusste Ausnahme von „Rechte unabhängig von einer Person“: Nur so ist der Inhaber Auslöser und bekommt die Fehler-Mails (AK-16). Wer den Token durch die App ersetzt, verliert diese Mails.
 
