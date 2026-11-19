@@ -1,0 +1,114 @@
+# 05 – Phase 1.5 Projekt-Plattform: Spec
+
+> Status: **Entwurf**
+> Stand: 2026-11-19
+> Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md` (Erfolg Nr. 5), `02-architektur.md` (A9, A10), `03-roadmap.md` (Phase 1.5), `docs/prozess/governance.md` (Geltungsbereich, Öffentlich vs. intern)
+> SDD-Stufe: 1 Specify · 2 Clarify
+
+<!-- Nur WAS und WARUM. Keine Technik – die gehört in plan.md. -->
+
+## Ziel
+
+Jedes neue Projekt in der Organisation `codeslage` soll **gleich starten und gleich bleiben**: mit derselben Constitution, denselben Prozessen und derselben Qualitätssicherung wie das Monorepo `werkstatt`, und mit seiner Doku an **einer** zentralen Stelle.
+
+Warum:
+
+- **Weniger Aufwand je Projekt:** Ein neues Projekt (eigenes oder Kundenprojekt) soll in Minuten mit grüner CI starten, statt das Gerüst aus Phase 1 jedes Mal nachzubauen.
+- **Regeln bleiben einheitlich:** Laut `governance.md` gilt die Constitution für alle Repos der Organisation. Das funktioniert nur, wenn eine Änderung an der zentralen Constitution und an den Prozessdokumenten zuverlässig in allen Projekt-Repos ankommt, ohne dass jemand daran denken muss.
+- **Eine Stelle für die Doku:** Doku liegt beim Code (A10), soll aber für Inhaber, KI und Besucher an einer Adresse lesbar sein: öffentliche Teile als Schaufenster, interne Teile nur für Berechtigte.
+- **Wiederverwendbar (Artikel XIII):** Die Vorlage ist selbst ein Baustein, der sich in Kundenprojekten einsetzen lässt.
+
+Leitsatz aus Phase 1 bleibt: **Wir bauen erst, wenn wir es brauchen** (Artikel XI). Die Phase soll keine laufenden Kosten verursachen.
+
+## Nicht im Umfang
+
+- **PoC-Hosting** (Erreichbarkeit unter `<projekt>.poc.codeslage.de` per Git-Push, Zugriff für Friendly User, Ressourcen-Limits) → Phase S „Server & Betrieb“ (Roadmap). Damit ist Erfolg Nr. 5 aus `01-vision.md` nach dieser Phase nur teilweise erreicht; der PoC-Teil folgt mit Phase S.
+- Wiederverwendung der Pakete aus dem Monorepo (`ui`, `auth`, `db`) in Projekten → mit der Phase, die das erste Paket baut
+- Webseite `codeslage.de` → Phase 2. Das Docs-Portal ist eine eigene Adresse und ersetzt die Webseite nicht.
+- Bearbeiten der Doku im Browser (WYSIWYG) → nur bei Bedarf, siehe A10
+- Kundenprojekte mit echten Kundendaten → erst wenn ein Kunde da ist; die Vorlage muss sie aber ermöglichen
+
+## User Stories / Anforderungen
+
+- Als Inhaber möchte ich ein neues Projekt mit wenigen Schritten aus einer Vorlage anlegen, damit es von der ersten Minute an Constitution, SDD-Prozess und eine grüne CI hat.
+- Als Inhaber möchte ich, dass eine Änderung an Constitution oder Prozessdokumenten automatisch als Vorschlag in jedem Projekt-Repo ankommt, damit kein Projekt mit veralteten Regeln weiterläuft und ich trotzdem jede Übernahme freigebe.
+- Als Inhaber möchte ich sehen, welches Projekt-Repo vom zentralen Stand abweicht, damit Abschwächungen der Regeln auffallen.
+- Als Inhaber möchte ich die Doku aller Projekte unter einer Adresse lesen, damit ich und die KI nicht in jedem Repo einzeln suchen.
+- Als Besucher möchte ich die öffentliche Doku ohne Anmeldung lesen, damit codeslage zeigt, wie es arbeitet (Schaufenster, Artikel XII).
+- Als Inhaber möchte ich, dass interne Doku nur nach Anmeldung sichtbar ist und nie versehentlich öffentlich wird.
+- Als Inhaber möchte ich meine bestehenden eigenen Projekte in die Organisation übernehmen, damit sie denselben Regeln folgen.
+- Als Claude-Code-Sitzung in einem Projekt-Repo möchte ich Constitution und SDD-Befehle kennen, ohne dass sie erwähnt werden.
+
+## Akzeptanzkriterien
+
+| ID    | Kriterium                                                                                                                                                                                                                          | Nachweis (Testart)                                                       |
+| ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------ |
+| AK-1  | Ein neues Repo aus der Vorlage enthält Constitution, Projekt-Regeln für Claude, die SDD-Vorlagen und -Befehle, die Prozessdokumente, `docs/`, ein PR-Template mit Constitution-Checkliste, `.env.example` und ein Container-Gerüst | automatisiert (Prüfung eines frisch angelegten Probe-Repos)              |
+| AK-2  | Die erste CI eines neuen Repos aus der Vorlage läuft ohne Nacharbeit grün                                                                                                                                                          | automatisiert (CI-Status des Probe-Repos)                                |
+| AK-3  | Die CI der Vorlage erzwingt dieselben Pflicht-Checks wie `werkstatt` (Secret- und Öffentlich-Scan, Spec-Check, Code-Qualität, Formatierung, Rechtschreibung, Container-Build); ein Verstoß blockiert den Merge                     | automatisiert (Negativtest je Check im Probe-Repo)                       |
+| AK-4  | In einem neuen Repo aus der Vorlage ist `main` geschützt, Änderungen gehen nur per PR, und alle CI-Jobs sind Pflicht-Checks                                                                                                        | automatisiert (Repo-Einstellungen prüfen, abgelehnter Direkt-Push)       |
+| AK-5  | Eine neue Claude-Code-Sitzung in einem Repo aus der Vorlage kennt Constitution und SDD-Befehle, ohne dass man sie erwähnt                                                                                                          | manuell, protokolliert                                                   |
+| AK-6  | Ein neues Projekt lässt sich nach einer Anleitung anlegen; vom Start bis zur grünen CI vergehen höchstens 30 Minuten                                                                                                               | manuell (Probelauf nach Anleitung, Zeit nach Systemuhr), protokolliert   |
+| AK-7  | Eine gemergte Änderung an der zentralen Constitution oder an einem Prozessdokument erzeugt in **jedem** Projekt-Repo der Organisation automatisch einen PR mit genau dieser Änderung                                               | automatisiert (Probe-Änderung, PRs in allen Projekt-Repos gezählt)       |
+| AK-8  | Ein Sync-PR wird nie automatisch gemergt und nie direkt auf `main` geschrieben; er durchläuft CI und Review wie jeder andere PR und braucht die Freigabe des Inhabers                                                              | automatisiert (Repo- und PR-Einstellungen) + Review                      |
+| AK-9  | Projektspezifische Ergänzungen in einem Projekt-Repo bleiben bei einem Sync erhalten; eine Abschwächung oder Löschung der übernommenen Regeln wird erkannt und lässt die CI des Projekt-Repos rot werden                           | automatisiert (Negativtest: Artikel gelöscht bzw. Ergänzung erhalten)    |
+| AK-10 | Eine Übersicht zeigt je Projekt-Repo, auf welchem Stand von Constitution und Prozessdokumenten es ist und ob ein Sync-PR offen ist                                                                                                 | automatisiert (Übersicht gegen bekannten Stand prüfen)                   |
+| AK-11 | Das Docs-Portal ist unter `docs.codeslage.de` per HTTPS erreichbar und zeigt die öffentliche Doku von `werkstatt` und von jedem Projekt-Repo, das Doku veröffentlicht                                                              | automatisiert (Erreichbarkeit und Inhalt je Repo)                        |
+| AK-12 | Eine nach `main` gemergte Doku-Änderung erscheint ohne manuellen Schritt im Portal, spätestens 15 Minuten nach dem Merge                                                                                                           | automatisiert (Probe-Änderung, Zeit gemessen)                            |
+| AK-13 | Interne Bereiche des Portals sind ohne Anmeldung nicht lesbar, auch nicht über direkte Adressen, die Suche oder einen Seitenindex; nach Anmeldung als berechtigte Person sind sie lesbar                                           | automatisiert (Abruf ohne Anmeldung abgelehnt, je Zugriffsweg) + manuell |
+| AK-14 | Doku aus privaten Repos ist standardmäßig intern; öffentlich wird sie nur, wenn das Repo das ausdrücklich festlegt                                                                                                                 | automatisiert (Probe-Repo privat ohne Festlegung → nicht öffentlich)     |
+| AK-15 | Bevor Inhalte öffentlich im Portal erscheinen, werden sie auf Inhalte aus der Liste „Öffentlich vs. intern“ geprüft; ein Fund verhindert die Veröffentlichung                                                                      | automatisiert (Negativtest mit Kanarienbegriff)                          |
+| AK-16 | Ein fehlgeschlagener Sync oder eine fehlgeschlagene Aktualisierung des Portals erreicht den Inhaber per Mail, ohne dass er danach suchen muss                                                                                      | manuell (provozierter Fehler), protokolliert                             |
+| AK-17 | Die vom Inhaber benannten eigenen Projekte (offene Frage 1) liegen in der Organisation, folgen der Vorlage, haben eine grüne CI und erscheinen im Portal                                                                           | automatisiert (CI-Status) + Review je Projekt                            |
+| AK-18 | Die zusätzlichen laufenden Kosten der Phase liegen bei **0 €/Monat** (ausgenommen bestehende Kosten laut `docs/kosten.md`)                                                                                                         | Kostenübersicht                                                          |
+| AK-19 | Alle neuen Tokens und Berechtigungen sind minimal und in `docs/secrets.md` dokumentiert (wer, wofür, welche Rechte, Ablaufdatum), ohne Werte; die Sync-Berechtigung kann nur PRs anlegen, nicht mergen                             | Review                                                                   |
+| AK-20 | Jeder neue Dienstleister oder Dienst, der Daten verarbeitet (z. B. für die Anmeldung zum internen Bereich), ist in `docs/dsgvo.md` erfasst                                                                                         | Review                                                                   |
+| AK-21 | Portal, Sync und Vorlage sind reproduzierbar: Was als Code geht, liegt als Code vor; der Rest steht als Runbook in `docs/runbooks/`                                                                                                | Review                                                                   |
+
+## Constitution-Check
+
+| Artikel                          | Bewertung | Anmerkung                                                                                                                                                       |
+| -------------------------------- | --------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| I Spec zuerst                    | ✅        | diese Spec; die Vorlage bringt den SDD-Ablauf in jedes Projekt (AK-1)                                                                                           |
+| II Tests beweisen die Spec       | ✅        | jedes AK mit Nachweis; die meisten automatisiert am Probe-Repo                                                                                                  |
+| III Kleine Schritte              | ✅        | Vorlage, Sync, Portal und Übernahme der Projekte lassen sich getrennt umsetzen und prüfen                                                                       |
+| IV Fragen statt raten            | ✅        | offene Fragen unten, blockierende markiert                                                                                                                      |
+| V Keine zerstörerischen Aktionen | ✅        | Übernahme bestehender Projekte (AK-17) kann Repos verschieben oder umbenennen: nur nach ausdrücklicher Freigabe je Repo, vorher wird gezeigt, was betroffen ist |
+| VI Secrets nie ins Repo          | ✅        | Vorlage mit `.env.example` und Secret-Scan (AK-1, AK-3); Tokens dokumentiert ohne Werte (AK-19)                                                                 |
+| VII Sicher als Standard          | ✅        | interne Doku nur nach Anmeldung (AK-13), Sync-Berechtigung ohne Merge-Recht (AK-19), `main` geschützt in jedem Projekt (AK-4)                                   |
+| VIII Datenschutz & EU            | ✅        | Dienste für die Anmeldung in `docs/dsgvo.md` (AK-20); das Portal enthält keine personenbezogenen Daten Dritter                                                  |
+| IX Mensch im Loop                | ✅        | Sync-PRs nur mit Freigabe des Inhabers (AK-8); öffentliche Doku nur nach Prüfung (AK-15)                                                                        |
+| X Reproduzierbar                 | ✅        | AK-21                                                                                                                                                           |
+| XI Einfach vor vollständig       | ✅        | PoC-Hosting und Paket-Wiederverwendung bewusst verschoben; 0 € laufende Kosten (AK-18)                                                                          |
+| XII Offen dokumentieren          | ✅        | öffentliche Doku als Schaufenster (AK-11); Vorlage und Portal sind selbst Case-Study-Material                                                                   |
+| XIII Wiederverwendbar            | ✅        | Vorlage als Baustein für Kundenprojekte; offene Frage 4 klärt, wie viel codeslage-Spezifisches im Kern bleibt                                                   |
+| XIV Messen statt schätzen        | ✅        | `zeiten.md` ab Stufe 1; Zeit bis zur grünen CI gemessen (AK-6); Soll/Ist in der Roadmap                                                                         |
+| XV Kein unnötiger Code           | ✅        | die Vorlage bringt die Code-Qualitäts-Checks mit (AK-3); sie enthält nur, was jedes Projekt braucht                                                             |
+| XVI Fehler sind sichtbar         | ✅        | Mail bei fehlgeschlagenem Sync oder Portal-Build (AK-16); Abweichungen vom zentralen Stand sichtbar (AK-9, AK-10)                                               |
+
+Bewertung: ✅ erfüllt · ⚠️ Abweichung (mit Begründung) · – nicht relevant
+
+## Risiken
+
+- **Interne Doku wird öffentlich:** Das Portal sammelt Inhalte aus mehreren Repos, auch privaten. Ein Fehler in der Zuordnung öffentlich/intern wäre ein Datenleck. Gegenmaßnahme: privat ist der Standard (AK-14), Prüfung vor Veröffentlichung (AK-15), Negativtests je Zugriffsweg (AK-13).
+- **Sync-PRs werden zur Last:** Bei vielen Projekten erzeugt jede Regeländerung viele PRs, die einzeln freigegeben werden müssen. Gegenmaßnahme: Übersicht (AK-10); bei Bedarf eine gesammelte Freigabe in einer späteren Phase.
+- **Abweichende Projekte:** Ältere Projekte (AK-17) passen nicht sofort zur Vorlage (anderer Stack, fehlende Tests). Ihre Übernahme kann länger dauern als geschätzt.
+- **Vorlage und `werkstatt` laufen auseinander:** Checks, die in `werkstatt` verbessert werden, fehlen in der Vorlage. Gegenmaßnahme: Plan klärt, welche Teile der Sync mitnimmt (offene Frage 2).
+- **Kostenlose Kontingente:** Die Phase setzt auf Gratis-Angebote (wie Phase 1). Ändern sich deren Grenzen, entstehen Kosten. Gegenmaßnahme: Kostenübersicht (AK-18), Budget-Check am Phasenende.
+
+## Offene Fragen
+
+| #   | Frage                                                                                                                                                                                                                                                          | Blockiert? | Antwort |
+| --- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ---------- | ------- |
+| 1   | Welche eigenen Projekte kommen in dieser Phase in die Organisation (Name, öffentlich oder privat, Stack, liegen sie schon auf GitHub)? Gilt das für alle oder nur für ein erstes Projekt? (Roadmap, offene Frage 3)                                            | ja         |         |
+| 2   | Was genau synchronisiert der Constitution-Sync? `governance.md` nennt Constitution **und** Prozessdokumente. Gehören auch SDD-Vorlagen, Claude-Befehle, PR-Template und CI-Bausteine dazu?                                                                     | ja         |         |
+| 3   | Wer darf den internen Bereich des Portals lesen: nur der Inhaber, oder auch Kollegen, Friendly User oder Kunden (je Projekt)?                                                                                                                                  | ja         |         |
+| 4   | Soll die Vorlage auch für Kundenprojekte taugen, die nicht der codeslage-Constitution folgen (z. B. mit eigenen Regeln des Kunden)? Oder gilt für jedes Repo in der Organisation immer die codeslage-Constitution (so `governance.md`)?                        | ja         |         |
+| 5   | Soll `codeslage/internal` im internen Bereich des Portals erscheinen? Es enthält Konto-Angaben; Annahme: **nein**, es bleibt nur auf GitHub lesbar.                                                                                                            | nein       |         |
+| 6   | Welche Teile von `werkstatt` erscheinen im Portal: nur `docs/` oder auch `specs/` (Specs, Pläne, Reviews, Retros)? Annahme: beides, weil das Repo öffentlich ist und die Specs das Schaufenster zeigen.                                                        | nein       |         |
+| 7   | Ist das Repo `codeslage/project-template` öffentlich? Annahme: **ja** (Artikel XII, „öffentlich ist der Standard“).                                                                                                                                            | nein       |         |
+| 8   | Reichen 15 Minuten vom Merge bis zur Anzeige im Portal (AK-12) und 30 Minuten vom Start bis zur grünen CI eines neuen Projekts (AK-6)?                                                                                                                         | nein       |         |
+| 9   | Gehört das Container-Gerüst in jede Vorlage, auch für Projekte ohne Server-Anteil (z. B. reine Bibliotheken)? Annahme: ja, analog AK-26 aus 04, mit Möglichkeit zum bewussten Weglassen pro Projekt.                                                           | nein       |         |
+| 10  | Wie weit darf ein Projekt bei den Pflicht-Checks abweichen (z. B. Rechtschreibprüfung nur Englisch, anderer Stack ohne TypeScript)? `governance.md` erlaubt Ergänzungen, keine Abschwächungen; ist ein anderer Stack mit gleichwertigen Checks eine Ergänzung? | nein       |         |
+| 11  | Soll das Docs-Portal eine Suche über alle Repos haben, und darf diese Suche interne Inhalte nach Anmeldung einschließen?                                                                                                                                       | nein       |         |
+| 12  | Die Roadmap schätzt ~1 Woche. Bleibt das Soll so, oder passt du es nach Klärung von Frage 1 an (abhängig von Anzahl und Zustand der Projekte)?                                                                                                                 | nein       |         |
