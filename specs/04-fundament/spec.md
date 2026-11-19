@@ -1,7 +1,7 @@
 # 04 – Phase 1 Fundament: Spec
 
-> Status: **Freigegeben** am 2026-11-05 (v2.1: AK-28 bis AK-30 aus der Analyse ergänzt)
-> Stand: 2026-11-18 (Risiko „Docker unter Windows“ durch das Mac-Risiko aus Plan v1.2 ersetzt, keine AK-Änderung)
+> Status: **Umgesetzt** am 2026-11-19 (abgenommen am 2026-11-18, Retro `retro.md`); Freigegeben am 2026-11-05 (v2.1: AK-28 bis AK-30 aus der Analyse ergänzt)
+> Stand: 2026-11-19 (Status Umgesetzt); 2026-11-18 (Risiko „Docker unter Windows“ durch das Mac-Risiko aus Plan v1.2 ersetzt, keine AK-Änderung)
 > Historie: v1 freigegeben am 2026-11-05 (mit eigenem Server). Am 2026-11-05 in Stufe 3 zurück nach Stufe 1: Der Server kommt erst, wenn er gebraucht wird (ADR 0009); die Server-AKs sind in eine spätere Spec „Server & Betrieb“ verschoben.
 > Bezug: `CONSTITUTION.md` (v1.1.0), `02-architektur.md` (A1–A3, A8), `03-roadmap.md`
 > SDD-Stufe: 1 Specify · 2 Clarify

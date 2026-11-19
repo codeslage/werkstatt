@@ -10,6 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
+- 2026-11-19 – Phase 1 abgeschlossen (Stufe 8): Retro mit Soll/Ist (≈ 14,4 h statt ≈ 50 h), Content-Notiz `docs/content/2026-11-19-phase-1-fundament.md`, Spec 04 auf „Umgesetzt“, Roadmap mit Ist und Ende (#45).
 - 2026-11-18 – Rechtschreibprüfung mit cspell (Deutsch und Englisch) als Befehl `pnpm spellcheck` und Pflicht-Check „Rechtschreibung“; Wortliste `project-words.txt`, Protokolle und Reviews ausgenommen (#43, Change `changes/2026-11-18-rechtschreibung-cspell.md`).
 - 2026-11-18 – Phase 1, Stufe 7 (Verify): `specs/04-fundament/retro.md` mit Nachweis je AK auf `main` (#44).
 - 2026-11-18 – Phase 1, Schritt 3 (Lokale Umgebung & Images): `apps/status` als Container-Image mit Compose, Seed und Smoke-Test (#36); CI-Job „Image (Compose + Smoke)“ mit Gegenprobe, Runbook `lokale-umgebung.md` für den Mac (#37).
@@ -20,7 +21,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Geändert
 
-- 2026-11-19 – `sdd-ablauf.md` und `/sdd-verify`: Abnahme auf `main`, solange es kein int gibt; Zeiterfassung zählt parallele Tasks nur einmal (Retro 04, Entscheidung des Inhabers, #46).
+- 2026-11-19 – `sdd-ablauf.md` und `/sdd-verify`: Abnahme auf `main`, solange es kein int gibt; Zeiterfassung zählt parallele Tasks nur einmal; Hinweise in `release.md`, `code-review.md` und `/release` (Retro 04, Entscheidung des Inhabers, #46).
 - 2026-11-18 – Phase 1, Schritt 3: erster Dependabot-Lauf für `docker` und `docker-compose` nachgewiesen, T-27 abgeschlossen (#42).
 - 2026-11-18 – Plan 04 v1.3: AK-25 durch die Ersteinrichtung des neuen Mac nachgewiesen; `aenderungsklassen.md`: Updates von GitHub Actions bleiben M (Entscheidungen des Inhabers, #41).
 - 2026-11-18 – `aenderungsklassen.md`: Abschnitt „Abhängigkeits-Updates per Dependabot“ (Klasse, Sammeleintrag im Changelog), „Renovate“ durch „Dependabot“ ersetzt; Schritt im `/release`-Ablauf und Pflege-Hinweis im Changelog; Freigabe des Inhabers (#40).

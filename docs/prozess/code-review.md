@@ -1,6 +1,6 @@
 # Code-Review
 
-> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-05
+> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-19 (Hinweis Abnahme auf `main` bis Phase S)
 > Verbindlich über `CONSTITUTION.md`, Abschnitt „Verbindliche Prozesse“. Gilt für jeden PR und für SDD-Stufe 7 (Verify).
 
 ## Ziel
@@ -9,11 +9,11 @@ Ein Review stellt sicher, dass ein PR **genau das** tut, was Spec und Task verla
 
 ## Drei Ebenen
 
-| Ebene          | Wer                                                                                         | Was                                                                 | Ergebnis                                                   |
-| -------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ---------------------------------------------------------- |
-| 1. Automatisch | CI                                                                                          | Lint, Typecheck, Tests, Secret-Scan, Code-Qualität (XV), Spec-Check | grün/rot – rot blockiert immer                             |
-| 2. KI-Review   | **Agent `code-reviewer`** (`.claude/agents/code-reviewer.md`) mit eigenem, frischem Kontext | die Checkliste unten                                                | Befundliste mit Schweregrad als Review-Datei (siehe unten) |
-| 3. Mensch      | Inhaber                                                                                     | Zusammenfassung, Blocker, Verhalten auf int                         | Abnahme und prod-Freigabe beim Release (`release.md`)      |
+| Ebene          | Wer                                                                                         | Was                                                                 | Ergebnis                                                                              |
+| -------------- | ------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| 1. Automatisch | CI                                                                                          | Lint, Typecheck, Tests, Secret-Scan, Code-Qualität (XV), Spec-Check | grün/rot – rot blockiert immer                                                        |
+| 2. KI-Review   | **Agent `code-reviewer`** (`.claude/agents/code-reviewer.md`) mit eigenem, frischem Kontext | die Checkliste unten                                                | Befundliste mit Schweregrad als Review-Datei (siehe unten)                            |
+| 3. Mensch      | Inhaber                                                                                     | Zusammenfassung, Blocker, Verhalten auf int                         | Abnahme und prod-Freigabe beim Release (`release.md`); bis Phase S Abnahme auf `main` |
 
 Die Trennung bei Ebene 2 ist wichtig: Wer den Code geschrieben hat, übersieht die eigenen Annahmen. Deshalb gilt für den Agent:
 

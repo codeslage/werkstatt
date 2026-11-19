@@ -3,7 +3,7 @@ description: 'Release-Kandidat taggen, über int abnehmen lassen und nach prod b
 argument-hint: '[Version, z. B. v0.3.0]'
 ---
 
-Release gemäß `docs/prozess/release.md`.
+Release gemäß `docs/prozess/release.md`. Bis Phase S gibt es kein int: Dann entfällt `/release`, Stufe 7 wird auf `main` abgenommen (`sdd-ablauf.md`, „Verify ohne int“).
 
 Version (optional): $ARGUMENTS
 
