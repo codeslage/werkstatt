@@ -8,7 +8,7 @@ SDD-Stufe 1 **Specify** gemäß `docs/prozess/sdd-ablauf.md` (verbindlich über 
 Vorhaben: $ARGUMENTS
 
 1. Lies `CONSTITUTION.md`, `specs/01-vision.md`, `specs/02-architektur.md`, `specs/03-roadmap.md`.
-2. Lege `specs/<NN-name>/spec.md` aus `specs/_vorlagen/spec.md` an.
+2. Lege `specs/<NN-name>/spec.md` aus `specs/_vorlagen/spec.md` und `specs/<NN-name>/zeiten.md` aus `specs/_vorlagen/zeiten.md` an. Trage die Zeit dieser Stufe als erste Zeile ein (Systemuhr).
 3. Beschreibe nur **Was** und **Warum** – keine Technik, keine Tools, keine Code-Struktur.
 4. Formuliere Akzeptanzkriterien so, dass jedes testbar ist.
 5. Fülle den Constitution-Check für alle Artikel aus.

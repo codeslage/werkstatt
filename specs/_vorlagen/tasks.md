@@ -6,11 +6,13 @@
 
 ## Tasks
 
-| ID   | Task | AK   | Test | Abhängig von | PR  | Status |
-| ---- | ---- | ---- | ---- | ------------ | --- | ------ |
-| T-01 |      | AK-1 |      | –            |     | ⬜     |
+| ID   | Task | AK   | Test | Abhängig von | PR  | Soll | Ist | Status |
+| ---- | ---- | ---- | ---- | ------------ | --- | ---- | --- | ------ |
+| T-01 |      | AK-1 |      | –            |     |      |     | ⬜     |
 
 Status: ⬜ offen · 🔄 in Arbeit · ✅ erledigt
+
+Soll und Ist in Stunden. Soll schätzt Claude beim Anlegen (konservativ, inkl. Abstimmung); Ist ist die Summe aus `zeiten.md`, auf Viertelstunden gerundet (mindestens 0,25 h).
 
 Regeln für die Umsetzung (Stufe 6):
 
