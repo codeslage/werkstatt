@@ -39,3 +39,4 @@ Vorab: Die Sitzung für Phase 2 (`specs/06-webseite/zeiten.md`, PR #49) hat zur 
 2. 🟡 Vorschlag (die Entscheidung liegt beim Inhaber, mit dem Merge): **Ist = Gesamtzeit** (Arbeit + Wartezeit), weil das Soll laut `tasks.md`-Vorlage die Abstimmung enthält. So steht es in der Vorlage `zeiten.md`, in `sdd-ablauf.md` und in `/sdd-retro`. Die Retro-Vorlage hat jetzt die Zeilen „Zeit (gesamt)“, „davon Arbeit“ und „davon Wartezeit“. Die Roadmap behält eine Ist-Spalte (Gesamt).
 3. ⚪ Die Summen-Tabellen in Vorlage und 05 haben jetzt dieselben Spalten: Was, Arbeit, Wartezeit, Gesamt.
 4. ⚪ „#50“ ist committet.
+- Freigabe: Der Inhaber hat den Merge am 2026-11-19 im Chat freigegeben („Ja, mergen“), mit Ist = Gesamtzeit.

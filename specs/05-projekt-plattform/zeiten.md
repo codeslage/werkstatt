@@ -22,12 +22,15 @@ Methode:
 | Spec  | Arbeit    | 2026-11-19 15:12 | 2026-11-19 15:14 | 0:02  | Freigabe eingetragen (Status Freigegeben), CI abgewartet, Wartezeit getrennt, Merge #48                                             |
 | M #50 | Wartezeit | 2026-11-19 15:14 | 2026-11-19 15:18 | 0:04  | Entscheidung des Inhabers, die getrennte Wartezeit in Vorlage und Prozess aufzunehmen                                               |
 | M #50 | Arbeit    | 2026-11-19 15:18 | 2026-11-19 15:20 | 0:02  | Vorlage, `sdd-ablauf.md`, Befehle, Changelog; PR #50, Review (kein 🔴, 2 × 🟡), Format an Phase 2 (Spalte „Art“) angeglichen        |
+| M #50 | Arbeit    | 2026-11-19 15:20 | 2026-11-19 15:21 | 0:01  | Review-Bericht abgelegt, PR-Text neu gesetzt, Push                                                                                  |
+| M #50 | Wartezeit | 2026-11-19 15:21 | 2026-11-19 15:26 | 0:05  | Freigabe des Inhabers zum Merge (Ist = Gesamtzeit)                                                                                  |
+| M #50 | Arbeit    | 2026-11-19 15:26 | 2026-11-19 15:26 | 0:00  | Freigabe eingetragen, CI geprüft, Merge                                                                                             |
 
 ## Summen
 
 | Was   | Arbeit | Wartezeit | Gesamt |
 | ----- | ------ | --------- | ------ |
 | Spec  | 0:10   | 2:00      | 2:10   |
-| M #50 | 0:02   | 0:04      | 0:06   |
+| M #50 | 0:03   | 0:09      | 0:12   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus dieser Stufe entstand.
