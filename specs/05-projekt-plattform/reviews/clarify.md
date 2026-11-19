@@ -1,0 +1,51 @@
+## Review: PR #52 (feature/projekt-plattform-clarify) · Vorhaben 05-projekt-plattform · Stufe 2 (Clarify), keine Tasks
+
+Ergebnis: ✅ mergebar (kein 🔴). Das Gate von Stufe 2, „keine blockierenden Fragen“, ist erfüllt. Die drei 🟡 sollten vor dem Merge erledigt werden, spätestens vor dem Plan (Stufe 3). Befund 3 gehört in diesen PR.
+
+Hinweis zur Prüfbasis: Das lokale `main` steht hinter `origin/main` (#51 fehlt lokal). Deshalb zeigt `git diff main...` fälschlich 18 Dateien, darunter `specs/06-webseite/*`. Geprüft wurde gegen `origin/main`. Dort umfasst der Diff 4 Dateien: `spec.md`, `zeiten.md`, `03-roadmap.md` und `project-words.txt`.
+
+### Befunde
+| # | Grad | Datei:Zeile | Befund | Fehlerfall | Artikel |
+|---|---|---|---|---|---|
+| 1 | 🟡 | specs/05-projekt-plattform/spec.md:64 gegen :81 und :65 | AK-9 macht die CI rot bei „jede[r] Abweichung eines übernommenen CWK-Inhalts … vom zentralen Stand“. Offen bleibt, was „zentraler Stand“ heißt: der neueste Stand in `werkstatt` oder der Stand, auf dem das Repo laut AK-10 gerade ist. Liest man „neuester Stand“, widerspricht AK-9 dem neuen AK-26 („die CI des Projekt-Repos bleibt deswegen grün“). | In `werkstatt` wird eine CWK-Änderung gemergt, und der Sync-PR (AK-7/25) ist noch offen. Nach AK-9 in der Lesart „neuester Stand“ ist die CI auf `main` jedes Projekt-Repos rot, bis der Sync-PR gemergt ist. AK-26 verlangt dagegen grün. Die Tests zu AK-9 und AK-26 können dann nicht beide bestehen. Vorschlag: In AK-9 „vom Stand des CWK, auf dem das Repo ist (AK-10)“ schreiben. | II, IV |
+| 2 | 🟡 | spec.md:25, :62, :82 (zusammen mit :56) | Neu ist die Aufteilung in Repos „mit Code“ und „ohne Code“. Wie ein Repo zu der einen oder anderen Gruppe gehört, legt die Spec nicht fest. AK-7 („Code-Teil: alle mit Code“) hat für den Code-Teil deshalb wieder keine feste Soll-Menge (vgl. Befund 3 aus specify.md). Dazu kommt: AK-1 verlangt, dass jedes Repo aus der Vorlage Regel- **und** Code-Teil enthält. Ein neues Repo ohne Code (Nachweis von AK-27: „Probe-Repo ohne Code“) kann also nicht aus der Vorlage entstehen. Wie es stattdessen entsteht, sagt die Spec nicht. | Ein reines Doku-Repo wird aus der Vorlage angelegt. Nach AK-1 hat es die Code-Checks, nach AK-27 dürfte es sie nicht verlangen. Beim Zählen der Sync-PRs für eine Änderung am Code-Teil (AK-7) ist offen, ob dieses Repo und die Vorlage selbst zur Soll-Menge gehören. Vorschlag: Das Repo legt „ohne Code“ ausdrücklich fest, analog zu AK-14. AK-1 nennt dann, wie ein Repo ohne Code aus der Vorlage entsteht. | II, IV |
+| 3 | 🟡 | specs/05-projekt-plattform/zeiten.md:33 (letzte Tabellenzeile) und Summen „Clarify“ | Die letzte Arbeitszeile „Antworten eingetragen, …, PR, Review, Protokoll“ endet um 16:10. Der Commit trägt die Zeit 16:09:13, und dieses Review lief um 16:09:56 noch. Das Ende wurde also eingetragen, bevor Review und Protokoll fertig waren. Im Diff gibt es außerdem kein Clarify-Protokoll zu 05 (`docs/protokolle/` enthält für 05 nur `2026-11-19-05-specify.md`). | `zeiten.md` (Methode) sagt: „Ende heißt: … Protokoll geschrieben bzw. Stufe abgeschlossen“, und die Zeiten kommen von der Systemuhr. Die Summe Clarify (0:02 Arbeit, 0:14 gesamt) ist dadurch zu niedrig, und die Bemerkung führt Arbeit auf, die noch nicht erledigt ist. Vorschlag: Ende nach Review-Bericht und Protokoll ablesen, Summen nachziehen, Protokoll ergänzen. | XIV, II |
+| 4 | ⚪ | spec.md:58 gegen :24 | AK-3 nennt „alle Prüfungen aus Regel- und Code-Teil“ und verlangt: „Ein Verstoß blockiert den Merge“. Zum Regel-Teil gehört laut Zeile 24 aber der Historien-Scan, und der läuft monatlich und blockiert keinen Merge (AK-22). Die IaC-Prüfungen aus AK-3 gehören dagegen zu keinem der beiden Teile. | Beim Negativtest „je Check“ zu AK-3 ist offen, ob ein Historien-Scan-Fund den Merge blockieren muss. Ebenso offen ist, über welchen Teil des CWK die IaC-Prüfung synchronisiert wird. Vorschlag: In AK-3 „alle PR-Prüfungen“ schreiben und die IaC-Prüfung einem Teil zuordnen. | II |
+| 5 | ⚪ | spec.md:81 | Bei AK-26 ist offen, ob die Erinnerung einmal kommt oder wiederholt wird (täglich, wöchentlich). | Ein Sync-PR bleibt 60 Tage liegen. Einmalige Erinnerung und tägliche Mail erfüllen beide das AK. Die eine Umsetzung meldet sich danach nie wieder, die andere schickt 46 Mails. Im Plan festlegen oder in der Spec ergänzen. | XVI |
+| 6 | ⚪ | spec.md:80 | AK-25 sagt: Ein offener Sync-PR „wird auf den neuesten Stand gebracht“. Was mit Änderungen geschieht, die der Inhaber selbst auf dem Sync-Branch gemacht hat, sagt das AK nicht. Ein Beispiel ist das Auflösen eines Konflikts mit projektspezifischen Ergänzungen (AK-9). | Der Inhaber löst im Sync-PR einen Konflikt. Danach kommt eine zweite CWK-Änderung, und das Aktualisieren überschreibt seine Lösung. Im Plan berücksichtigen. | V, IX |
+| 7 | ⚪ | spec.md:4 | Die Stand-Zeile nennt nur „AK-25 bis AK-27 neu“. Geändert wurden in diesem PR aber auch AK-1, AK-3, AK-7, AK-9, AK-10 und AK-11 (AK-11 jetzt mit `specs/`, ohne `internal`). | Wer die Spec-Historie nachliest, übersieht die geschärften AKs. | XII |
+
+### Checkliste
+| # | Prüfpunkt | ✅/❌/– | Anmerkung |
+|---|---|---|---|
+| 1 | Auftrag | ✅ | Der Diff enthält nur Clarify-Ergebnisse: Antworten auf die Fragen 14–17, den CWK-Begriff mit Regel- und Code-Teil, AK-25 bis AK-27, angepasste AKs (1, 3, 7, 9, 10, 11), Constitution-Check (III, XV, XVI) und Risiken, die Roadmap-Zeile, `project-words.txt` (CWK, CodeslageWerkzeugKasten) und `zeiten.md`. Nichts darüber hinaus. |
+| 2 | Korrektheit | ✅ | Alle blockierenden Fragen (1, 2, 3, 4, 15) sind beantwortet. Die Fragen 10 und 11 sind bewusst vertagt und begründet, das passt zum Gate von Stufe 2. Die Spec bleibt bei Was und Warum: Die Schreibweise von CWK in Repo- und Ordnernamen ist ausdrücklich dem Plan überlassen, und es werden keine Werkzeuge genannt. Der Ausschluss von AK-11 passt zu Frage 5, `specs/` zu Frage 6. Unschärfen und Widersprüche: Befunde 1, 2 und 4. |
+| 3 | Tests | ✅ | AK-25 bis AK-27 haben je einen Nachweis. AK-25 und AK-27 werden automatisiert geprüft, AK-26 teils automatisiert, teils manuell, mit Protokoll. Ob AK-9 zusammen mit AK-26 und ob AK-7 und AK-27 prüfbar sind, hängt an den Befunden 1 und 2. |
+| 4 | Eingaben | – | Keine Code-Änderung. |
+| 5 | Sicherheit | ✅ | Keine Secrets, keine Kontonamen, keine internen Angaben. Secret- und Öffentlich-Scan in der CI grün. |
+| 6 | Datenschutz | ✅ | Constitution-Check VIII: anfangs nur der Inhaber, eine Neubewertung bei weiteren Personen ist vorgesehen. Ein offener Punkt aus dem Specify-Review (Befund 6) ist damit erledigt. |
+| 7 | Mensch im Loop | ✅ | AK-8 unverändert. AK-25 und AK-26 halten die Freigabe durch den Inhaber bei, und die CI erzwingt keinen Merge. |
+| 8 | Zerstörerisches | ✅ | Constitution-Check V: Repos verschieben oder löschen ist nicht mehr vorgesehen (AK-17 entfällt). Hinweis zum Überschreiben beim Aktualisieren eines Sync-PRs: Befund 6. |
+| 9 | Code-Qualität | – | Kein Code. |
+| 10 | Abhängigkeiten | – | Keine neuen. |
+| 11 | Fehler | ✅ | AK-26 ergänzt eine Meldung bei liegengebliebenen Sync-PRs, AK-16 und AK-22 sind unverändert. Häufigkeit der Erinnerung offen: Befund 5. |
+| 12 | Doku | ✅ | Spec-Status „Geklärt“, SDD-Stufe und Stand gepflegt (Lücke: Befund 7). Die Roadmap verwendet den neuen Begriff, und Roadmap-Frage 3 ist weiterhin beantwortet (Specify-Review, Befund 7). `zeiten.md` nachgerechnet: Jede Dauer ist Ende − Start (u. a. 1:07, 0:53, 0:12), es gibt keine Überlappungen, die Pause 15:28–15:56 ist ausgewiesen. Summen stimmen: Spec 0:10/2:00/2:10, M #50 0:05/0:09/0:14, Clarify 0:02/0:12/0:14. Die nachträgliche Korrektur bei M #50 (15:26 → 15:28) ist begründet. Das Ende der letzten Zeile ist zu früh eingetragen (Befund 3). Lokal grün: `pnpm spec-check`, `pnpm spellcheck` (150 Dateien, 0 Funde), Prettier. CI: alle Jobs grün, „Image (Compose + Smoke)“ lief beim Review noch. |
+
+### Zusammenfassung für den Inhaber
+Dieser PR trägt deine Antworten aus der Klärungsrunde in die Spec ein. Es gibt noch keinen Code. Das gemeinsame Paket heißt jetzt CodeslageWerkzeugKasten (CWK) und hat zwei Teile: Regeln für alle Repos und Code-Prüfungen nur für Repos mit Code. Pro Repo ist höchstens ein Sync-Vorschlag offen, und nach 14 Tagen kommt eine Erinnerung. Alle blockierenden Fragen sind beantwortet, die Spec bleibt ohne Technik.
+
+Zwei Stellen sind noch zu ungenau. Erstens könnte die Regel „jede Abweichung vom zentralen Stand macht die CI rot“ so gelesen werden, dass nach jeder Regeländerung alle Projekte rot werden, bis du den Vorschlag annimmst. Das widerspricht der neuen Zusage, dass die CI grün bleibt. Zweitens steht nirgends, woran man erkennt, ob ein Repo Code hat. In der Zeiterfassung ist das Ende der Klärungsstufe eingetragen, bevor Review und Protokoll fertig waren.
+
+Eine Vorschau zum Ausprobieren gibt es nicht. Bitte prüfe, ob die Aufteilung in Regel- und Code-Teil so gemeint ist, und entscheide die Befunde 1 und 2 vor dem Plan.
+
+---
+
+## Umsetzung der Befunde (Nachtrag)
+
+1. 🟡 AK-9 vergleicht jetzt mit dem Stand des CWK, auf dem das Repo gerade ist (AK-10). Eine neue CWK-Änderung macht die CI also nicht rot, solange der Sync-PR offen ist. Damit passt AK-9 zu AK-26.
+2. 🟡 Unter „Ziel“ steht jetzt: Jedes Repo legt ausdrücklich fest, ob es Code hat. Standard ist „mit Code“, die Vorlage selbst hat Code. AK-1 verlangt den Code-Teil nur ohne die Festlegung „ohne Code“; wie ein Repo ohne Code entsteht, beschreibt die Anleitung (AK-6). AK-7 und AK-27 zählen nach diesen Festlegungen.
+3. 🟡 Das Ende der letzten Clarify-Zeile wird erst nach Review-Bericht und Protokoll abgelesen, die Summen sind nachgezogen. Das Protokoll `docs/protokolle/2026-11-19-05-clarify.md` ist im PR.
+4. ⚪ AK-3 spricht jetzt von PR-Prüfungen und nennt den Historien-Scan ausdrücklich als monatliche Prüfung (AK-22). Prüfungen der Infrastruktur als Code gehören zum Code-Teil.
+5. ⚪ AK-26: Erinnerung nach 14 Tagen, danach wöchentlich, bis der PR gemergt oder geschlossen ist. Die Annahme steht als nicht blockierende Frage 18 in der Spec.
+6. ⚪ AK-25: Eigene Änderungen des Inhabers im Sync-PR gehen beim Aktualisieren nicht verloren. Der Nachweis ist entsprechend ergänzt.
+7. ⚪ Die Stand-Zeile nennt jetzt auch die angepassten AKs.
