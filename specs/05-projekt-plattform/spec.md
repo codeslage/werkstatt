@@ -1,6 +1,6 @@
 # 05 – Phase 1.5 Projekt-Plattform: Spec
 
-> Status: **Entwurf**
+> Status: **Freigegeben** am 2026-11-19 (Inhaber im Chat)
 > Stand: 2026-11-19 (Antworten des Inhabers auf die Fragen 1–13: Sync umfasst das Kit, AK-17 entfällt, AK-24 neu, Frage 14 neu); 2026-11-19 (Review PR #48 umgesetzt: AK-3, AK-9, AK-17, AK-20 geschärft, AK-22, AK-23 und Frage 13 neu)
 > Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md` (Erfolg Nr. 5), `02-architektur.md` (A9, A10), `03-roadmap.md` (Phase 1.5), `docs/prozess/governance.md` (Geltungsbereich, Öffentlich vs. intern)
 > SDD-Stufe: 1 Specify · 2 Clarify

@@ -17,3 +17,4 @@ Methode:
 | Spec | 2026-11-19 13:06 | 2026-11-19 13:10 | 0:04  | PR #48, Review durch `code-reviewer` (kein 🔴, 5 × 🟡), Befunde umgesetzt, Review-Bericht und Protokoll                             |
 | Spec | 2026-11-19 13:10 | 2026-11-19 14:17 | 1:07  | Wartezeit auf die Antworten des Inhabers zu den offenen Fragen                                                                      |
 | Spec | 2026-11-19 14:17 | 2026-11-19 14:19 | 0:02  | Antworten eingearbeitet (Kit-Sync, AK-17 entfällt, AK-24 und Frage 14 neu), Roadmap-Frage 3 beantwortet                             |
+| Spec | 2026-11-19 14:19 | 2026-11-19 15:12 | 0:53  | Wartezeit auf die Freigabe; Freigabe durch den Inhaber, Status Freigegeben, Merge                                                   |
