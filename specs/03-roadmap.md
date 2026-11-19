@@ -1,7 +1,7 @@
 # 03 – Roadmap
 
 > Status: **Entwurf** – wartet auf Freigabe
-> Stand: 2026-11-19 (Frage 3 beantwortet, Kit-Sync; Start Phase 1.5, Spec `specs/05-projekt-plattform/`; Ist und Ende für Phase 1: Abnahme 2026-11-18, Retro 2026-11-19); 2026-11-05 (Server erst bei Bedarf, ADR 0009; Webseite zuerst als Klick-Dummy auf Cloudflare Pages)
+> Stand: 2026-11-19 (Start Phase 2, Spec `specs/06-webseite/`; Frage 3 beantwortet, Kit-Sync; Start Phase 1.5, Spec `specs/05-projekt-plattform/`; Ist und Ende für Phase 1: Abnahme 2026-11-18, Retro 2026-11-19); 2026-11-05 (Server erst bei Bedarf, ADR 0009; Webseite zuerst als Klick-Dummy auf Cloudflare Pages)
 > Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md`, `02-architektur.md`
 
 ## Ziel
@@ -17,7 +17,7 @@ Claude hat konservativ geschätzt (bei ~20 h/Woche). Der Inhaber wettet, dass es
 | 0 – Discovery                     | –                                                                                           |                                                                                        | 2026-11-04 |            |
 | 1 – Fundament (lokal)             | **2–3 Wochen** (≈ 50 h laut `tasks.md`; zuvor ~1 Woche, ursprünglich 1–2 Wochen mit Server) | **≈ 14,4 h** in 2 Wochen nebenbei (7 Arbeitstage; Retro `specs/04-fundament/retro.md`) | 2026-11-05 | 2026-11-19 |
 | 1.5 – Projekt-Plattform           | ~1 Woche                                                                                    |                                                                                        | 2026-11-19 |            |
-| 2 – Webseite (Klick-Dummy)        | 1–2 Wochen (vorher 2–3 Wochen mit Formular und Coolify)                                     |                                                                                        |            |            |
+| 2 – Webseite (Klick-Dummy)        | 1–2 Wochen (vorher 2–3 Wochen mit Formular und Coolify)                                     |                                                                                        | 2026-11-19 |            |
 | S – Server & Betrieb (bei Bedarf) | ~1 Woche                                                                                    |                                                                                        |            |            |
 | 3 – Erste KI-Automation           | 2–4 Wochen                                                                                  |                                                                                        |            |            |
 | 4 – Demo-Kundenportal             | 3–4 Wochen                                                                                  |                                                                                        |            |            |
@@ -62,7 +62,7 @@ Spec-Ordner: `specs/06-webseite/`
 - Kontakt zunächst ohne eigenes Backend (z. B. Mail-Link); das Formular mit Speicherung kommt mit Phase 3
 - Impressum, Datenschutz, Cloudflare Web Analytics (cookielos)
 - Erste Case Study: „Wir bauen erst, wenn wir es brauchen“
-- **Fertig, wenn:** die Seite auf `codeslage.de` live ist, Lighthouse ≥ 90, Web Analytics Besuche und Klicks zählt und die E2E-Tests in der CI grün sind.
+- **Fertig, wenn:** die Seite auf `codeslage.de` live ist, Lighthouse ≥ 90, Web Analytics Besuche zählt und Aufrufe der Kontaktseite als Kontakt-Interesse ausweist (Spec 06, Frage 8) und die E2E-Tests in der CI grün sind.
 
 ### Phase S – Server & Betrieb (bei Bedarf)
 
