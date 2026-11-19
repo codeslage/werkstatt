@@ -39,11 +39,11 @@ Methode:
 | Clarify | Wartezeit | 2026-11-19 19:50 | 2026-11-19 19:55 | 0:05  | Nachtrag Gestaltung: Auswahl Farbe                                                                                                  |
 | Clarify | Arbeit    | 2026-11-19 19:55 | 2026-11-19 19:57 | 0:02  | Nachtrag Gestaltung: Runde 7 bauen, Endfassung; darin 0:44 min Warten auf die Auswahl (unter einer Minute, nicht getrennt)          |
 | Tasks   | Arbeit    | 2026-11-19 22:30 | 2026-11-19 22:33 | 0:03  | Branch, Vorlage, finale Gestaltung übernehmen, `tasks.md`                                                                           |
-| Analyze | Arbeit    | 2026-11-19 22:33 | läuft            |       | Analyse in `tasks.md`, PR, Review                                                                                                   |
+| Analyze | Arbeit    | 2026-11-19 22:33 | 2026-11-19 22:38 | 0:05  | Analyse in `tasks.md`, PR, Review                                                                                                   |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
-Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). Ihre Zeiten sind als „Clarify, Nachtrag Gestaltung“ auf die Minute übernommen, nur wo keine andere Zeile läuft; ihre eigenen Pausen 15:34–16:32 und 16:58–19:27 zählen nicht. Zwischen 15:56 und 19:25 lag eine Pause des Inhabers in dieser Sitzung. Sie zählt nicht und steht deshalb in keiner Zeile (Bestätigung des Inhabers am 2026-11-19).
+Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). Ihre Zeiten sind als „Clarify, Nachtrag Gestaltung“ auf die Minute übernommen, nur wo keine andere Zeile läuft; ihre eigenen Pausen 15:34–16:32 und 16:58–19:27 zählen nicht. Zwischen 15:56 und 19:25 lag eine Pause in der Hauptsitzung. Die Gestaltungs-Sitzung lief in dieser Zeit von 16:32 bis 16:58 weiter; diese Zeilen stehen als Nachtrag hinter „Plan“. Sie zählt nicht und steht deshalb in keiner Zeile (Bestätigung des Inhabers am 2026-11-19).
 
 ## Summen
 
@@ -53,4 +53,4 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | Clarify | 0:23   | 0:31      | 0:54   |
 | Plan    | 0:15   | 0:08      | 0:23   |
 | Tasks   | 0:03   | 0:00      | 0:03   |
-| Analyze | läuft  | 0:00      | läuft  |
+| Analyze | 0:05   | 0:00      | 0:05   |

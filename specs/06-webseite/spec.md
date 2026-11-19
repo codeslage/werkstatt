@@ -80,7 +80,7 @@ Leitsatz der ersten Case Study: **Wir bauen erst, wenn wir es brauchen.**
 ## Inhalte (Ergebnis Stufe 2)
 
 - **Leistungen** (`leistungen.md`): Klammer „alles AI-driven“; vier Bereiche: KI-Automatisierung von Geschäftsprozessen (gekennzeichnet als „im Aufbau“ bis Phase 3), Prototyp/MVP, Infrastruktur & CI, KI-Entwicklung einführen. Zielgruppe: Startups in früher Phase (1–10 Personen) im DACH-Raum. Keine Preise und nirgends „kostenlos“: Pilotprojekte gegen Feedback und Case Study, Konditionen auf Anfrage, höchstens zwei gleichzeitig. Nicht im Angebot: Betrieb mit SLA, reines Betreiben fertiger Tools.
-- **Gestaltung** (`gestaltung.md`): Richtung „Terminal“, technisch-schlicht, ohne Stockfotos und Verläufe; hell und dunkel nach Systemeinstellung; eine Akzentfarbe; nur Systemschriften (AK-4). Logo: Wortmarke `codeslage_` und Zeichen `>_` (Dateien in `gestaltung/`).
+- **Gestaltung** (`gestaltung.md`): Richtung „Terminal“, technisch-schlicht, ohne Stockfotos und Verläufe (Ausnahme: das Relief im Logo-Zeichen, Entscheidung des Inhabers vom 2026-11-19, `gestaltung.md`); hell und dunkel nach Systemeinstellung; eine Akzentfarbe; nur Systemschriften (AK-4). Logo: Wortmarke `codeslage_` und Zeichen `>_` (Dateien in `gestaltung/`).
 
 ## Voraussetzungen (erledigt der Inhaber selbst)
 

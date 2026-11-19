@@ -75,15 +75,9 @@ Nur Systemschriften, nichts wird geladen (AK-4, gut für Performance in AK-6):
 ## Logo
 
 - **Wortmarke (zweiteilig):** `codeslage_` in Monospace: „code“ Gewicht 300 in Nebentextfarbe (`#4A5260` hell / `#9AA4B2` dunkel), „slage_“ Gewicht 800 in Textfarbe (`#14181F` / `#E6EAF0`), Unterstrich ebenfalls in Textfarbe. Grundlinie der Schrift auf der Unterkante des Zeichens. Auf der Webseite als **echter Text** im Header, nicht als Bild; beide Farben ≥ 7:1.
-- **Zeichen:** Eingabe-Prompt `>_` in **Waldgrün hell** (`#6FD69A`) auf einer **Graphit**-Kachel, wie ein Terminal. Groß im Relief-Stil (Verlauf `#454B55` → `#1E2228`, feiner heller Rand, weicher Schatten, Zeichen mit dunkler und grüner Kante herausgeprägt); klein und als Favicon flach (`#1E2228`, Zeichen `#6FD69A`, 7,6:1). Dieselbe Kachel funktioniert auf hellem und dunklem Grund. Reine Pfade, keine Schrift.
+- **Zeichen:** Eingabe-Prompt `>_` in **Waldgrün hell** (`#6FD69A`) auf einer **Graphit**-Kachel, wie ein Terminal. Groß im Relief-Stil (Verlauf `#454B55` → `#1E2228`, feiner heller Rand, weicher Schatten, Zeichen mit dunkler und grüner Kante herausgeprägt); klein und als Favicon flach (`#1E2228`, Zeichen `#6FD69A`, ≈ 9,0 : 1). Dieselbe Kachel funktioniert auf hellem und dunklem Grund. Reine Pfade, keine Schrift.
 
-| Datei                     | Inhalt                                               |
-| ------------------------- | ---------------------------------------------------- |
-| `favicon.svg`             | Favicon, Linien etwas kräftiger (3,8) für 16 px      |
-| `logo-zeichen.svg`        | Zeichen `>_` für helle Flächen (z. B. GitHub-Avatar) |
-| `logo-zeichen-dunkel.svg` | Zeichen invertiert für dunkle Flächen                |
-| `logo.svg`                | Zeichen + Wortmarke, hell                            |
-| `logo-dunkel.svg`         | Zeichen + Wortmarke, dunkel                          |
+Die Dateien stehen unten in „Dateien (Stand Runde 7)“.
 
 Offen für Stufe 6 (nicht blockierend):
 
@@ -116,9 +110,13 @@ Gemeinsam auf jeder Seite: Header mit Wortmarke links und Navigation rechts (mob
 
 ## Nachtrag Runde 4 (Feinschliff, 2026-11-19)
 
+> Überholt durch Runde 7, was Farben, Dateien und viewBox angeht; maßgeblich sind „Logo“ oben und „Dateien (Stand Runde 7)“.
+
 Inhaber wählte: **1b** Gewicht „code“ 300 / „slage“ 800 · **2c** „code“ grau, „slage_“ inkl. Unterstrich in Textfarbe, nur das Kästchen ist blau · **3a** Zeichen unverändert · **4a** nebeneinander · Grundlinie der Schrift auf der Unterkante des Kästchens (viewBox 230 × 36, Unterstrich ragt darunter). `logo.svg` / `logo-dunkel.svg` entsprechend aktualisiert; Abschnitt „Logo“ oben gilt bis auf diese Punkte. Noch nicht vom Inhaber in der Vorschau geprüft.
 
 ## Nachtrag Runde 5 (plastisch, 2026-11-19)
+
+> Überholt durch Runde 7, was Farben, Dateien und viewBox angeht; maßgeblich sind „Logo“ oben und „Dateien (Stand Runde 7)“.
 
 Wunsch des Inhabers: Zeichen „etwas plastischer, im Stil vom neuen Apple-Design“. Gezeigt: A Glas-Kachel, B Liquid Glass, C Relief. Gewählt: **C Relief** – Kachel mit leichtem Verlauf (`#2A5AE0` → `#1640B8`), feiner heller Rand (Weiß 18 %), weicher Schatten; das `>_` ist herausgeprägt (dunkle Kante `#0C2C85`, helle Kante `#9DB6F5`, Zeichen Weiß). Dunkle Fassung: Kachel `#9BB9FF` → `#6F98F5`, Zeichen `#0D1117`. Die Vorgabe „keine Verläufe“ gilt weiter für die Webseite; der Verlauf im Zeichen ist eine bewusste Ausnahme des Inhabers.
 
