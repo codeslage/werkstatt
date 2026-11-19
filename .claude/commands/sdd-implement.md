@@ -12,6 +12,6 @@ Vorhaben/Task: $ARGUMENTS
 3. Arbeite auf einem eigenen Branch. Schreibe zuerst den Test, der fehlschlägt, dann den minimalen Code, bis er grün ist.
 4. Halte Artikel XV ein: kein toter Code, klare Modulgrenzen, Überflüssiges im selben PR entfernen.
 5. Lint, Typecheck und alle Tests laufen lokal grün.
-6. Aktualisiere den Task-Status, erstelle einen PR mit ausgefüllter Constitution-Checkliste. Keine zerstörerischen Aktionen ohne Freigabe (Artikel V).
+6. Trage die Zeit der Task in `zeiten.md` ein (Systemuhr, Wartezeit auf den Inhaber in der Bemerkung) und das gerundete Ist in `tasks.md`. Aktualisiere den Task-Status, erstelle einen PR mit ausgefüllter Constitution-Checkliste. Keine zerstörerischen Aktionen ohne Freigabe (Artikel V).
 7. Starte den Agent `code-reviewer` und nenne ihm **nur** Branch/PR und Vorhaben. Lege seine Ausgabe unverändert unter `specs/<NN-name>/reviews/T-xx.md` ab. Behebe 🔴-Befunde und lass das Review danach erneut laufen.
 8. Der Merge nach `main` (dev) erfolgt automatisch nach `docs/prozess/release.md`.
