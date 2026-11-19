@@ -159,3 +159,4 @@ linecap
 linejoin
 seite
 tspan
+kontakt

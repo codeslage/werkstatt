@@ -2,7 +2,7 @@
 
 > Ergebnis der Sitzung „Leistungen“ vom 2026-11-19, Antwort auf die offene Frage 1 der Spec. Zeiten in `zeiten.md`.
 
-> Antwort auf die offene Frage 1 in `specs/06-webseite/spec.md` · mit dem Inhaber abgestimmt am 2026-11-19
+> Mit dem Inhaber abgestimmt am 2026-11-19.
 > Kein Webseiten-Text. Die Formulierungen unten sind die Grundlage, der endgültige Text entsteht in Stufe 6 und braucht die Freigabe des Inhabers (Artikel IX, AK-11).
 
 ## Klammer: alles AI-driven

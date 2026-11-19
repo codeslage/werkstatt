@@ -98,7 +98,7 @@ Leitsatz der ersten Case Study: **Wir bauen erst, wenn wir es brauchen.**
 | I Spec zuerst                    | ✅        | diese Spec, SDD-Ablauf ab Stufe 1                                                                                                 |
 | II Tests beweisen die Spec       | ✅        | 18 AKs: 10 automatisiert, 3 teils automatisiert (AK-13, AK-16, AK-17), 5 mit Protokoll oder Review                                |
 | III Kleine Schritte              | ✅        | Zuschnitt in einzelne PRs im Plan                                                                                                 |
-| IV Fragen statt raten            | ✅        | Annahmen A1–A7, offene Fragen unten, blockierende vor dem Plan klären                                                             |
+| IV Fragen statt raten            | ✅        | Annahmen A1–A9, offene Fragen unten, blockierende vor dem Plan klären                                                             |
 | V Keine zerstörerischen Aktionen | ✅        | DNS-Änderungen nur nach geprüftem Plan und Freigabe; Mail bleibt unberührt (AK-13)                                                |
 | VI Secrets nie ins Repo          | ✅        | keine neuen Secrets im Repo; Zugänge für die Veröffentlichung nur in GitHub Secrets                                               |
 | VII Sicher als Standard          | ✅        | nur HTTPS, Sicherheits-Header (AK-9), keine Eingaben von außen (AK-3)                                                             |
