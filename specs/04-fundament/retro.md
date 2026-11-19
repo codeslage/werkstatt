@@ -43,12 +43,12 @@ Abgenommen durch den Inhaber am: 2026-11-18 (im Chat, mit den Abweichungen bei A
 
 ## Soll/Ist
 
-|                   | Soll                                          | Ist                                                                                                             |
-| ----------------- | --------------------------------------------- | --------------------------------------------------------------------------------------------------------------- |
-| Zeit (Arbeit)     | ≈ 50 h (Summe der Tasks, Claude, konservativ) | **13,8 h** (827 min laut `zeiten.md`, davon 8 min doppelt gezählt); auf Viertelstunden je Task: 16,5 h          |
-| Zeit (Kalender)   | 2–3 Wochen bei ~20 h/Woche                    | 2 Wochen (2026-11-05 bis 2026-11-18), gearbeitet an 6 Tagen, nebenbei                                           |
-| Schätzung Inhaber | 2–5 Arbeitstage                               | ≈ 2 Arbeitstage, wenn man die 13,8 h am Stück rechnet                                                           |
-| Kosten/Monat      | 0 € zusätzlich (AK-15)                        | 0 € zusätzlich. Laufend bestehen weiter: Domain, Google Workspace, Claude-Abo (Beträge in `codeslage/internal`) |
+|                   | Soll                                          | Ist                                                                                                                                                        |
+| ----------------- | --------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Zeit (Arbeit)     | ≈ 50 h (Summe der Tasks, Claude, konservativ) | **≈ 14,4 h** mit Retro (bis zur Abnahme 13,8 h = 827 min laut `zeiten.md`, davon 8 min doppelt gezählt; Retro ≈ 0,5 h); auf Viertelstunden je Task: 16,5 h |
+| Zeit (Kalender)   | 2–3 Wochen bei ~20 h/Woche                    | 2 Wochen (2026-11-05 bis 2026-11-19), gearbeitet an 7 Tagen, nebenbei                                                                                      |
+| Schätzung Inhaber | 2–5 Arbeitstage                               | ≈ 2 Arbeitstage, wenn man die gut 14 h am Stück rechnet                                                                                                    |
+| Kosten/Monat      | 0 € zusätzlich (AK-15)                        | 0 € zusätzlich. Laufend bestehen weiter: Domain, Google Workspace, Claude-Abo (Beträge in `codeslage/internal`)                                            |
 
 Die Zeit ist die gemeinsame Sitzungszeit von Inhaber und Claude, Wartezeit auf den Inhaber eingeschlossen (Methode in `zeiten.md`). Außerhalb der Sitzungen hat der Inhaber nichts für das Vorhaben getan; auch Registrar, Cloudflare und Docker Desktop liefen mit Anleitung in der Sitzung.
 
@@ -63,7 +63,7 @@ Die Zeit ist die gemeinsame Sitzungszeit von Inhaber und Claude, Wartezeit auf d
 - **Der Review-Agent findet etwas.** Fast jeder PR hatte berechtigte 🟡: ungenaue Doku, fehlende Change-Seite, falsch zugeordnete Schritte. Von den 7 🔴 stammen 3 aus dem absichtlichen Negativtest (PR verworfen); die übrigen wurden vor dem Merge behoben oder vom Inhaber ausdrücklich freigegeben.
 - **DNS-Umzug ohne Mail-Ausfall.** Records nachgebaut, verglichen, dann umgestellt; die Testmail kam in beide Richtungen an (AK-3, AK-4).
 - **Der Rechnerwechsel mitten in der Phase** (Windows → Mac) kostete nur eine Plan-Version (v1.2) und eine Sitzung.
-- **Viel weniger Zeit als geschätzt:** 13,8 h statt ≈ 50 h.
+- **Viel weniger Zeit als geschätzt:** ≈ 14,4 h statt ≈ 50 h.
 
 ## Was lief schlecht / was hat überrascht?
 
@@ -77,12 +77,12 @@ Die Zeit ist die gemeinsame Sitzungszeit von Inhaber und Claude, Wartezeit auf d
 
 ## Was ändern wir? (ggf. Constitution, Vorlagen, Befehle)
 
-| Vorschlag                                                                                        | Entscheidung des Inhabers (2026-11-18) | Umsetzung                                                   |
-| ------------------------------------------------------------------------------------------------ | -------------------------------------- | ----------------------------------------------------------- |
-| Bis Phase S wird in Stufe 7 auf `main` abgenommen statt auf int (`sdd-ablauf.md`, `/sdd-verify`) | ja                                     | eigener PR (Prozessdokument, Merge durch den Inhaber)       |
-| Zeiterfassung: Laufen Tasks parallel, zählt die Zeit nur einmal                                  | ja                                     | im selben PR, Regel in `sdd-ablauf.md`                      |
-| AK-29: Nachweis „erfolgreicher Lauf, bei Updates ein PR“ statt „erster Update-PR“                | nicht übernommen                       | abwarten: der erste echte PR wird nachgetragen (`tasks.md`) |
-| Checkliste beim Wechsel auf einen neuen Rechner („interne Repos gepusht?“)                       | nein, nicht relevant                   | –                                                           |
+| Vorschlag                                                                                        | Entscheidung des Inhabers (2026-11-18) | Umsetzung                                                     |
+| ------------------------------------------------------------------------------------------------ | -------------------------------------- | ------------------------------------------------------------- |
+| Bis Phase S wird in Stufe 7 auf `main` abgenommen statt auf int (`sdd-ablauf.md`, `/sdd-verify`) | ja                                     | eigener PR #46 (Prozessdokument, Merge durch den Inhaber)     |
+| Zeiterfassung: Laufen Tasks parallel, zählt die Zeit nur einmal                                  | ja                                     | im selben Prozess-PR wie oben (#46), Regel in `sdd-ablauf.md` |
+| AK-29: Nachweis „erfolgreicher Lauf, bei Updates ein PR“ statt „erster Update-PR“                | nicht übernommen                       | abwarten: der erste echte PR wird nachgetragen (`tasks.md`)   |
+| Checkliste beim Wechsel auf einen neuen Rechner („interne Repos gepusht?“)                       | nein, nicht relevant                   | –                                                             |
 
 ## Content-Notizen
 

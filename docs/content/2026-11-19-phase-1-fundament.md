@@ -5,7 +5,7 @@
 
 ## Kernaussage
 
-Ein komplettes technisches Fundament – öffentliches Monorepo mit CI, die die eigene Constitution durchsetzt, DNS als Code mit Mail-Umzug, verschlüsselter State, lokale Umgebung mit Container-Images, Alarme – entstand in **13,8 Stunden** gemeinsamer Sitzungszeit. Der Inhaber hat dabei keine Zeile Code geschrieben.
+Ein komplettes technisches Fundament – öffentliches Monorepo mit CI, die die eigene Constitution durchsetzt, DNS als Code mit Mail-Umzug, verschlüsselter State, lokale Umgebung mit Container-Images, Alarme – entstand in **gut 14 Stunden** gemeinsamer Sitzungszeit (13,8 h bis zur Abnahme, dazu ≈ 0,5 h Retro). Der Inhaber hat dabei keine Zeile Code geschrieben.
 
 Der Inhaber: „Wahrscheinlich geht alles, was man sich vorstellen kann, in absurd kurzer Zeit.“
 
@@ -13,9 +13,9 @@ Der Inhaber: „Wahrscheinlich geht alles, was man sich vorstellen kann, in absu
 
 | Wer          | Erwartung vorher                                        | Ergebnis                                                        |
 | ------------ | ------------------------------------------------------- | --------------------------------------------------------------- |
-| Claude       | ≈ 50 h Arbeit, 2–3 Wochen bei ~20 h/Woche (konservativ) | 13,8 h, also gut ein Viertel der eigenen Schätzung              |
-| Inhaber      | 2–5 Arbeitstage                                         | ≈ 2 Arbeitstage, wenn man die 13,8 h am Stück rechnet           |
-| Kalenderzeit | –                                                       | 2 Wochen, weil das Vorhaben nebenbei lief; Sitzungen an 6 Tagen |
+| Claude       | ≈ 50 h Arbeit, 2–3 Wochen bei ~20 h/Woche (konservativ) | ≈ 14,4 h, also gut ein Viertel der eigenen Schätzung            |
+| Inhaber      | 2–5 Arbeitstage                                         | ≈ 2 Arbeitstage, wenn man die gut 14 h am Stück rechnet         |
+| Kalenderzeit | –                                                       | 2 Wochen, weil das Vorhaben nebenbei lief; Sitzungen an 7 Tagen |
 
 Der Inhaber lag näher dran als Claude. Interessant für den Talk: Die KI hat sich selbst unterschätzt, vermutlich weil sie in menschlichen Arbeitsstunden geschätzt hat.
 
@@ -44,4 +44,4 @@ Der Inhaber lag näher dran als Claude. Interessant für den Talk: Die KI hat si
 ## Offene Fragen für die Case Study
 
 - Wie verändert sich das Verhältnis Mensch/KI, wenn Tasks parallel laufen (echte Projekte)?
-- Wie viel der 13,8 h war Warten auf den Menschen? (Die Zeilen nennen Wartezeit nur in der Bemerkung; die längste reine Wartezeit waren 1:55 h.)
+- Wie viel der gut 14 h war Warten auf den Menschen? (Die Zeilen nennen Wartezeit nur in der Bemerkung; die längste reine Wartezeit waren 1:55 h.)
