@@ -1,7 +1,7 @@
 # 03 – Roadmap
 
 > Status: **Entwurf** – wartet auf Freigabe
-> Stand: 2026-11-19 (Start Phase 1.5, Spec `specs/05-projekt-plattform/`; Ist und Ende für Phase 1: Abnahme 2026-11-18, Retro 2026-11-19); 2026-11-05 (Server erst bei Bedarf, ADR 0009; Webseite zuerst als Klick-Dummy auf Cloudflare Pages)
+> Stand: 2026-11-19 (Frage 3 beantwortet, Kit-Sync; Start Phase 1.5, Spec `specs/05-projekt-plattform/`; Ist und Ende für Phase 1: Abnahme 2026-11-18, Retro 2026-11-19); 2026-11-05 (Server erst bei Bedarf, ADR 0009; Webseite zuerst als Klick-Dummy auf Cloudflare Pages)
 > Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md`, `02-architektur.md`
 
 ## Ziel
@@ -47,9 +47,9 @@ Spec-Ordner: `specs/04-fundament/`
 Spec-Ordner: `specs/05-projekt-plattform/`
 
 - Projekt-Vorlage `codeslage/project-template` (CONSTITUTION.md, CLAUDE.md, specs mit Vorlage, docs, CI, PR-Template, Dockerfile)
-- Constitution-Sync: Änderungen an der zentralen Constitution erzeugen automatisch PRs in allen Projekt-Repos
+- Constitution-Sync: Änderungen am Kit (Constitution, Prozesse, Vorlagen, Befehle, CI-Bausteine) erzeugen automatisch PRs in allen Projekt-Repos
 - Zentrales Docs-Portal `docs.codeslage.de` als statische Seite auf Cloudflare Pages, das die `docs/` aller Repos einsammelt (öffentliche Bereiche; interne Bereiche hinter Cloudflare Access)
-- Erste eigene Projekte in die Org übernehmen
+- ~~Erste eigene Projekte in die Org übernehmen~~ entfällt, es gibt noch keine (Spec 05, Frage 1)
 - PoC-Hosting (Domains, Coolify-Deploy je Projekt, Access für Friendly User) → Phase S
 - **Fertig, wenn:** ein neues Projekt aus der Vorlage mit grüner CI startet und seine Doku im Docs-Portal erscheint.
 
@@ -146,4 +146,4 @@ Spec-Ordner: `specs/08-portal/`
 
 1. ~~Soll die Webseite schon vor Phase 1 als „Coming Soon“-Seite live gehen?~~ Beantwortet am 2026-11-05: Die Webseite kommt in Phase 2 als Klick-Dummy auf Cloudflare Pages, nicht auf eigener Infrastruktur.
 2. Gibt es schon Friendly User, die man ab Phase 2 einbinden kann?
-3. Welche ersten Projekte kommen in Phase 1.5 dazu (Name, Stack, öffentlich oder privat)?
+3. ~~Welche ersten Projekte kommen in Phase 1.5 dazu (Name, Stack, öffentlich oder privat)?~~ Beantwortet am 2026-11-19: Es gibt noch keine eigenen Projekte; das erste startet aus der Vorlage (`specs/05-projekt-plattform/spec.md`, Frage 1).
