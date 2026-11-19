@@ -1,6 +1,6 @@
 # SDD-Ablauf (Spec-Driven Development)
 
-> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-05
+> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-19 (Verify ohne int bis Phase S, Zeiterfassung bei parallelen Tasks; Retro 04)
 > Verbindlich über `CONSTITUTION.md`, Artikel I. Änderungen nach `docs/prozess/governance.md`.
 
 Jedes Vorhaben (Phase oder Feature) bekommt einen Ordner `specs/NN-name/`. Die Stufen bauen aufeinander auf; ein ⛔ markiert ein **Gate**, das die Freigabe des Inhabers braucht.
@@ -13,7 +13,7 @@ Jedes Vorhaben (Phase oder Feature) bekommt einen Ordner `specs/NN-name/`. Die S
 | 4   | **Tasks**     | Welche kleinen Aufgaben?          | `tasks.md`: nummerierte Tasks, je mit AK-Bezug, Test, Abhängigkeiten                                                               | –                                      |
 | 5   | **Analyze**   | Passt alles zusammen?             | Konsistenzbericht in `tasks.md`: jedes AK hat Task und Test, jede Task hat ein AK, kein Widerspruch zu Constitution, Spec und Plan | keine offenen Lücken                   |
 | 6   | **Implement** | Umsetzen                          | je Task: Test zuerst, dann Code, dann PR, Review-Datei in `reviews/`                                                               | CI grün, kein 🔴 → Auto-Merge nach dev |
-| 7   | **Verify**    | Erfüllt es die Spec?              | Release-Kandidat auf **int** (`/release`), alle AKs dort nachgewiesen, alle Reviews ohne 🔴                                        | ⛔ Abnahme auf int = Freigabe für prod |
+| 7   | **Verify**    | Erfüllt es die Spec?              | Release-Kandidat auf **int** (`/release`), alle AKs dort nachgewiesen, alle Reviews ohne 🔴 (bis Phase S: Regel „Verify ohne int“) | ⛔ Abnahme auf int = Freigabe für prod |
 | 8   | **Retro**     | Was haben wir gelernt?            | `retro.md`: Soll/Ist, Learnings, Content-Notizen; Status `Umgesetzt`                                                               | –                                      |
 
 Regeln:
@@ -23,4 +23,6 @@ Regeln:
 - Ändert sich in einer späteren Stufe etwas Grundlegendes, geht es zurück zur betroffenen Stufe, und deren Gate gilt erneut.
 - Grundlagen-Dokumente (`01-vision`, `02-architektur`, `03-roadmap`) liegen flach in `specs/` und durchlaufen nur die Stufen 1–2.
 - Was „Code-Review“ bedeutet, regelt `docs/prozess/code-review.md`; Branches, Umgebungen und Releases regelt `docs/prozess/release.md`.
+- **Verify ohne int (bis Phase S):** Solange es int und prod nicht gibt (ADR 0009), wird in Stufe 7 auf dem aktuellen `main` abgenommen. Nachweis: automatische Tests lokal und in der CI, geplante Läufe (z. B. Drift-Check, Historien-Scan) auf `main` neu gestartet, manuelle Tests protokolliert. `/release` entfällt. Das Gate lautet dann „⛔ Abnahme auf `main`“.
+- **Zeiterfassung:** Führt ein Vorhaben eine `zeiten.md` (Soll/Ist, Constitution XIV) und laufen Tasks parallel, wird die Zeit nur einmal gezählt: Sie gehört der Task, an der die Sitzung gerade arbeitet, und die Zeilen überlappen sich nicht.
 - Nicht jede Änderung braucht den vollen Ablauf: kleine Änderungen (Klasse K) und Mini-Änderungen (Klasse M) regelt `docs/prozess/aenderungsklassen.md`.
