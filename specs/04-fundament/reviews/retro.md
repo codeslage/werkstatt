@@ -36,7 +36,7 @@ Mit dieser Änderung ist Phase 1 schriftlich abgeschlossen. Darin stehen die Rü
 
 ## Umsetzung der Befunde (Nachtrag)
 
-1. 🟡 Die Retro-Zeit zählt mit. Neues Ist **≈ 14,4 h**: 827 min bis zur Abnahme, dazu die Retro mit 0:15 + 0:12 + 0:05 (Review-Nacharbeit) und 0:03 für den Prozess-PR #46, zusammen 862 min. Retro, Roadmap, Content-Notiz und Changelog nennen jetzt dieselbe Zahl, dazu die 13,8 h bis zur Abnahme. Ende der Phase ist der 2026-11-19, gearbeitet wurde an 7 Tagen.
+1. 🟡 Die Retro-Zeit zählt mit. Neues Ist **≈ 14,4 h**: 827 min bis zur Abnahme, dazu die Retro mit 0:15 + 0:12 + 0:05 (Review-Nacharbeit) und 0:03 für den Prozess-PR #46, zusammen 862 min (nach Korrektur der Uhrzeiten in #46: 861 min, weiterhin ≈ 14,4 h). Retro, Roadmap, Content-Notiz und Changelog nennen jetzt dieselbe Zahl, dazu die 13,8 h bis zur Abnahme. Ende der Phase ist der 2026-11-19, gearbeitet wurde an 7 Tagen.
 2. ⚪ „im selben Prozess-PR wie oben (#46)“.
 3. ⚪ `spec.md`: „Umgesetzt am 2026-11-19 (abgenommen am 2026-11-18)“.
 - Die nicht committete Korrektur der Zeitzeile (09:52 / 0:12) ist jetzt Teil des PR.
