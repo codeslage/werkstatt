@@ -6,11 +6,11 @@ const mainPages = PAGES.filter((page) => page.nav === 'main');
 const current = Astro.url.pathname;
 ---
 
-<header>
+<header class="site-header">
   <a href="/" data-testid="home-link">
     [Wortmarke]
   </a>
-  <nav aria-label="Hauptnavigation">
+  <nav class="site-nav" aria-label="Hauptnavigation">
     <ul>
       {mainPages.map((page) => (
         <li>
