@@ -1,14 +1,19 @@
 ---
 import { PAGES } from '../site/pages.ts';
 
-// Wortmarke und Hauptnavigation aus der Seitenliste (Plan 06, AK-1). Wortmarke und Zeichen folgen in T-10.
+// Zeichen und Wortmarke (AK-17, gestaltung.md) und Hauptnavigation aus der Seitenliste (AK-1).
+// Die Wortmarke ist echter Text, das Zeichen nur Schmuck (leeres alt).
 const mainPages = PAGES.filter((page) => page.nav === 'main');
 const current = Astro.url.pathname;
 ---
 
 <header class="site-header">
-  <a href="/" data-testid="home-link">
-    [Wortmarke]
+  <a class="brand" href="/" data-testid="home-link">
+    <img src="/logo-zeichen.svg" alt="" width="36" height="38" />
+    <span class="brand-name mono">
+      <span class="brand-code">code</span>
+      <span class="brand-slage">slage_</span>
+    </span>
   </a>
   <nav class="site-nav" aria-label="Hauptnavigation">
     <ul>
