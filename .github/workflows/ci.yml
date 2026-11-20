@@ -184,6 +184,25 @@ jobs:
       - name: Geplante Workflows
         run: pnpm test:infra drift.test.ts history-scan.test.ts simulate-failure.test.ts
 
+  web:
+    name: Webseite (E2E + Lighthouse)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: Chromium für Playwright und Lighthouse
+        run: pnpm --filter @codeslage/web exec playwright install --with-deps chromium
+
+      # Baut die Seite mit den Platzhaltern aus apps/web/.env.example und prüft sie über `astro preview`.
+      - name: E2E – Navigation, SEO, Layout, Datenschutz (AK-1, AK-4, AK-7, AK-8)
+        run: pnpm --filter @codeslage/web test:e2e
+
+      # Auf dem Build aus dem E2E-Schritt; Berichte nur im Runner, kein öffentlicher Upload.
+      - name: Lighthouse mobil, alle Seiten, alle Kategorien ≥ 90 (AK-6)
+        run: pnpm --filter @codeslage/web lighthouse
+
   image:
     name: Image (Compose + Smoke)
     runs-on: ubuntu-latest

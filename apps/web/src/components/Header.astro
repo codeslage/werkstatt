@@ -1,0 +1,24 @@
+---
+import { PAGES } from '../site/pages.ts';
+
+// Wortmarke und Hauptnavigation aus der Seitenliste (Plan 06, AK-1). Wortmarke und Zeichen folgen in T-10.
+const mainPages = PAGES.filter((page) => page.nav === 'main');
+const current = Astro.url.pathname;
+---
+
+<header>
+  <a href="/" data-testid="home-link">
+    [Wortmarke]
+  </a>
+  <nav aria-label="Hauptnavigation">
+    <ul>
+      {mainPages.map((page) => (
+        <li>
+          <a href={page.path} aria-current={page.path === current ? 'page' : undefined}>
+            {page.label}
+          </a>
+        </li>
+      ))}
+    </ul>
+  </nav>
+</header>

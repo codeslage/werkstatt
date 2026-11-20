@@ -14,6 +14,9 @@ const FIELDS = {
   postalCodeCity: 'IMPRESSUM_PLZ_ORT',
 } as const satisfies Record<keyof Imprint, string>;
 
+/** Namen der Umgebungsvariablen, aus denen der Build die Angaben liest. */
+export const IMPRINT_VARIABLES: readonly string[] = Object.values(FIELDS);
+
 const MAX_LENGTH = 100;
 // Steuerzeichen (C0, DEL, C1) und unsichtbare Formatzeichen (z. B. Bidi-Umschaltung, Null-Breite) haben in
 // einer Anschriftzeile nichts zu suchen (Review PR #56, Befund 2).
@@ -26,7 +29,7 @@ function isValid(value: string | undefined): value is string {
 }
 
 export function readImprint(env: Readonly<Record<string, string | undefined>>): Imprint {
-  const invalid = Object.values(FIELDS).filter((variable) => !isValid(env[variable]));
+  const invalid = IMPRINT_VARIABLES.filter((variable) => !isValid(env[variable]));
   if (invalid.length > 0) {
     throw new Error(
       `Impressumsangaben fehlen oder sind ungültig (Pflicht, höchstens ${MAX_LENGTH} Zeichen, keine Steuerzeichen): ${invalid.join(', ')}`,

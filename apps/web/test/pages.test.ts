@@ -17,6 +17,12 @@ describe('PAGES', () => {
     expect(new Set(titles).size).toBe(titles.length);
   });
 
+  it('hat eindeutige, kurze Beschriftungen für Navigation und Überschrift', () => {
+    const labels = PAGES.map((page) => page.label);
+    expect(new Set(labels).size).toBe(labels.length);
+    for (const page of PAGES) expect(page.label.length, page.path).toBeLessThanOrEqual(30);
+  });
+
   it('hat für jede Seite eine Beschreibung mit 50 bis 160 Zeichen', () => {
     for (const page of PAGES) {
       expect(page.description.length, page.path).toBeGreaterThanOrEqual(50);
