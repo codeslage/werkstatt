@@ -14,4 +14,5 @@
    - Navigation: Leistungen, Projekte, Über mich, Kontakt. Footer: „© 2026 codeslage“, Impressum, Datenschutz, „Quellcode auf GitHub“.
    - 404: Titel „Seite nicht gefunden – codeslage“, Überschrift „Diese Seite gibt es nicht.“, Link „Zur Startseite“.
 4. **Ergebnis:** Unit 22, E2E 59 und Lighthouse grün. Screenshots (Start und 404, hell und dunkel, mobil und Desktop) gingen an den Inhaber.
-5. **Freigabe:** steht aus.
+5. **Review (kein 🔴):** Die Mono-Optik der 404-Überschrift aus `gestaltung.md` fehlte. Nachgezogen sind Token `--mono` und Klasse `.mono` mit dieser ersten Verwendung. Drei inhaltliche Hinweise gingen an den Inhaber: „KI-Automatisierung“ ohne „im Aufbau“, die vorläufige Überschrift „Start“ und das feste Jahr „© 2026“.
+6. **Freigabe:** steht aus.

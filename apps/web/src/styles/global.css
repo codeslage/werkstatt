@@ -1,6 +1,6 @@
 /* Gestaltung „Terminal“ nach specs/06-webseite/gestaltung.md (Stand Runde 7): eine Akzentfarbe (Waldgrün),
    hell und dunkel nach Systemeinstellung, nur Systemschriften (AK-4), Kontrast mindestens WCAG AA (AK-18).
-   Weitere Tokens (Fläche, Mono-Schrift, Button) kommen mit ihrer ersten Verwendung (Artikel XV). */
+   Weitere Tokens (Fläche, Button) kommen mit ihrer ersten Verwendung (Artikel XV). */
 
 :root {
   color-scheme: light dark;
@@ -12,6 +12,7 @@
   --accent: #1e7b4a;
 
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
   --content-width: 65rem;
   --text-width: 65ch;
@@ -70,6 +71,12 @@ h3 {
 
 h1 {
   font-size: clamp(1.875rem, 1.2rem + 3vw, 2.75rem);
+}
+
+/* Mono-Optik für Details wie die Fehlerseite (gestaltung.md). */
+.mono {
+  font-family: var(--mono);
+  letter-spacing: 0;
 }
 
 /* Links im Fließtext unterstrichen, nicht nur farbig (gestaltung.md, Lighthouse „link-in-text-block“). */
