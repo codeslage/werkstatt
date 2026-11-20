@@ -1,4 +1,5 @@
 Anbieterwahl
+auseinanderläuft
 Brevo
 Checklistenpunkt
 Cloudflares
@@ -20,12 +21,14 @@ GITHUB
 HEALTHCHECK
 Healthcheck
 Healthchecks
+HMAC
 Hotfixes
 Härtungs
 IONOS
 IVXL
 Ignorier
 Integrationen
+Kanarien
 Kanarienbegriff
 Knip
 Konnektoren
@@ -34,6 +37,7 @@ Lexoffice
 Lexware
 Livegang
 Northflank
+plattform
 Resolvern
 SERVFAIL
 STACKIT
