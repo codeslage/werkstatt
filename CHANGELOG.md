@@ -10,7 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
-- 2026-11-20 – Phase 2, Schritt 2 (PR-4, T-09): Gestaltung der Webseite (Waldgrün, hell und dunkel nach Systemeinstellung, Systemschriften) mit Kontrastprüfung per axe in beiden Darstellungen (#PR).
+- 2026-11-20 – Phase 2, Schritt 2 (PR-4, T-09): Gestaltung der Webseite (Waldgrün, hell und dunkel nach Systemeinstellung, Systemschriften) mit Kontrastprüfung per axe in beiden Darstellungen (#59).
 - 2026-11-20 – Phase 2, Schritt 1 (PR-2, T-04 bis T-07): Layout, alle Seiten mit Platzhaltern, 404, Sicherheits-Header; E2E-Tests mit Playwright (Navigation, SEO, Layout, Datenschutz) und Lighthouse CI (alle Seiten ≥ 90) im neuen CI-Job „Webseite (E2E + Lighthouse)“ (#58).
 - 2026-11-20 – Phase 2, Schritt 1 (PR-1, T-01 bis T-03): `apps/web` mit Astro 7 (statisch, ohne Telemetrie), Seitenliste `pages.ts` und geprüfte Impressumsangaben `imprint.ts` mit Unit-Tests; ESLint, Prettier und Typecheck kennen `.astro`; neue Prüfung `tools/astro-imports` setzt die Modulgrenzen für `.astro` im Check „Modulgrenzen“ durch (#56).
 - 2026-11-19 – Phase 2, Stufen 4 und 5 (Tasks, Analyze): `specs/06-webseite/tasks.md` mit 27 Tasks (Soll 35,75 h) und Analyse ohne offene Lücken; finale Gestaltung (Waldgrün, Logo als Graphit-Kachel) in `gestaltung.md` und `gestaltung/` (#55).
