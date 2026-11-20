@@ -57,3 +57,54 @@ Dieser PR zerlegt den freigegebenen Plan in 44 kleine Aufgaben mit zusammen 55,5
 12. ⚪ Zeiten und Protokoll sind nachgetragen.
 
 Neue Summe: 47 Tasks, Soll 58,25 h.
+
+---
+
+## Review: PR #57 (feature/projekt-plattform-tasks), 2. Durchgang · Vorhaben 05-projekt-plattform · Stufen 4 (Tasks) und 5 (Analyze), T-01 bis T-47 (nur Planung, kein Code)
+
+Ergebnis: ✅ mergebar (kein 🔴 offen). Der Merge setzt weiter voraus, dass der Inhaber die geänderten AK-4 und AK-7 bestätigt (`sdd-ablauf.md:23`, Lücke 1 der Analyse).
+
+Prüfbasis: `git diff origin/main...HEAD` (dd1c7c0, 5834a02). Vollständig gelesen habe ich `tasks.md`, die Diffs von `plan.md` und `spec.md`, die relevanten Plan-Abschnitte (:36–75, :120–150, :184–219), `zeiten.md`, das Protokoll und `reviews/tasks-review.md`.
+
+Die 12 Befunde aus dem ersten Durchgang habe ich einzeln nachgeprüft. Alle sind in `tasks.md`, `plan.md` und `spec.md` sachlich richtig umgesetzt:
+- 🔴 1: T-21 hat jetzt die drei richtigen Fälle, plan.md:199 ist korrigiert.
+- 🔴 2: T-40 liegt in PR-3, der Fall „ohne `cwk.json`“ steht in T-18 und T-21.
+- 🔴 3: T-10 setzt Rulesets, Team und `CODEOWNERS` und wird vor T-17 getestet.
+- 🟡 4 bis 🟡 9 und ⚪ 10 bis ⚪ 12 sind umgesetzt.
+
+Summen per Skript nachgerechnet: 47 Tasks, 58,25 h. Je Schritt: 10,5 · 12 · 9,25 · 5 · 8,5 · 5,75 · 5 · 2,25. Das stimmt mit tasks.md:104 und :131 überein. `zeiten.md` stimmt ebenfalls: Tasks + Analyze 0:03 + 0:09 = 0:12, Plan 0:35, und das Ende 09:06 passt zum Commit 09:06:38.
+
+### Befunde
+| # | Grad | Datei:Zeile | Befund | Fehlerfall | Artikel |
+|---|---|---|---|---|---|
+| 1 | 🟡 | specs/05-projekt-plattform/plan.md:73, :217–219 gegen tasks.md:51 (T-40), :52 (T-46), :98–99 | Die Behebung von 🔴 2 und 🟡 5 verschiebt Inhalte zwischen den Plan-Schritten, aber der Plan ist nicht mitgezogen. plan.md:73 sagt weiter „`internal` … wird im letzten Schritt angebunden“. Schritt 8 (plan.md:217–219) enthält weiter „`internal` anbinden“ und „`docs/secrets.md` … und die Runbooks … schreiben“. Laut Stand-Zeile ändert v4.1 nur T-21 und die Probe-Dateien. Die Analyse meldet trotzdem „Kein Widerspruch zu … Plan ✅“ (tasks.md:122). | Wer in Stufe 6 nach dem Plan arbeitet (Rangfolge Plan > Tasks), bindet `internal` erst in PR-8 an. Dann sind `sync.yml` und `status.yml` ab PR-3 jede Nacht rot, also genau der Fehler, den 🔴 2 beheben sollte. Das Review von PR-3 hätte zwei widersprüchliche Vorgaben für den Ort der Doku. Behebung: plan.md:73, Schritt 3 und Schritt 8 an tasks.md anpassen (v4.1), Stand-Zeile ergänzen. | XII, I |
+| 2 | 🟡 | tasks.md:24 (T-47), :25 (T-06), :32 (T-08); plan.md:47, :189 | Der Job „Repo-Einstellungen“ liegt im wiederverwendbaren `cwk-rules.yml` (plan.md:47), und `werkstatt` ruft ihn ab PR-1 auf (T-06). T-47 macht diesen Job zu `cwk settings`: „öffentlich → beide Rulesets, Team mit Schreibrecht, `CODEOWNERS`“. In `werkstatt` entstehen `main-approval`, Team und `CODEOWNERS` aber erst in T-08 (PR-2). T-47 sagt nur „in Projekten“. Offen bleibt, ob `werkstatt` in PR-1 `cwk settings` oder weiter `repo.test.ts` ausführt. | Läuft der Job aus `cwk-rules.yml` in `werkstatt` als `cwk settings`, ist „Repo-Einstellungen“ in PR-1 rot, weil `main-approval` und das Team noch fehlen. PR-1 ist dann nicht mergebar, und ein grüner Lauf ginge nur mit abgeschwächtem Test (Artikel II). Behebung: In T-47/T-06 festlegen, wie `werkstatt` geprüft wird (z. B. `repo.test.ts` bis T-08, danach `cwk settings`), oder die Ruleset- und Team-Prüfung für `werkstatt` erst in T-08 scharf schalten. | II, III |
+| 3 | 🟡 | tasks.md:51 (T-40) | T-40 hängt nur von T-16 und T-18 ab. Ihr Test „nächtlicher Sync danach grün“ braucht aber `sync.yml` (T-19) und die Lese-App (T-17). | Wird T-40 wie eingetragen direkt nach T-18 erledigt, gibt es noch keinen nächtlichen Sync, und der Test kann nicht laufen. Wird `sync.yml` (T-19) dagegen zuerst in `platform` aktiv, sind die Läufe bis T-40 rot, weil `internal` noch nicht angebunden ist. Behebung: T-40 → T-17, T-19 als Abhängigkeit eintragen und in PR-3 festhalten, dass T-40 erledigt ist, bevor der nächtliche Zeitplan von `sync.yml` aktiv wird. | III, XVI |
+| 4 | ⚪ | tasks.md:4, :115 | Bezug und Analyse nennen weiter `plan.md (v4)`, der Plan ist jetzt v4.1. | Wer die Tasks liest, prüft gegen die falsche Planfassung. | XII |
+| 5 | ⚪ | tasks.md:130 (Lücke 4), :93 (Überschrift Schritt 8) | Lücke 4 sagt weiter „T-43 schreibt zusätzlich `platform-setup.md` (Soll + 0,5 h)“. Inzwischen entsteht das Runbook in T-11, T-30, T-37 und T-46, T-43 prüft nur noch. Die Überschrift von Schritt 8 nennt weiter „Anbindung `internal`“, obwohl T-40 jetzt in Schritt 3 liegt. | Wer der Analyse folgt, sucht das Runbook an der falschen Stelle. | XII |
+
+### Checkliste
+| # | Prüfpunkt | ✅/❌/– | Anmerkung |
+|---|---|---|---|
+| 1 | Auftrag | ✅ | Der Diff enthält nur Stufe 4/5 und die Umsetzung des Reviews. Jede Task hat AK, Test, Abhängigkeit, PR und Soll. Die neuen Tasks T-45, T-46 und T-47 verweisen auf AKs. |
+| 2 | Korrektheit | ✅ | Die drei 🔴 sind richtig behoben. Die Summen stimmen (47 Tasks, 58,25 h). Neue Widersprüche zum Plan gibt es (1), dazu eine unklare Reihenfolge für `werkstatt` in PR-1 (2) und eine fehlende Abhängigkeit (3), alles 🟡. |
+| 3 | Tests | ✅ | Neu sind der Direkt-Push-Test (T-12), der Fall „ohne `cwk.json`“ (T-18, T-21), die drei Installationsfälle (T-21) und `settings.test.ts` (T-47). T-20 ist als „auf Anforderung“ markiert und hat eigene Probe-Dateien. |
+| 4 | Eingaben | – | Kein Code. Die Schema-Prüfung ist geplant (T-01, T-36). |
+| 5 | Sicherheit | ✅ | Die Vorlage ist vor T-17 geschützt (T-10). Die Schreib-App kommt nur in öffentliche Repos (T-21, T-45). ⛔ ist gesetzt, auch für `governance.md` in T-46. |
+| 6 | Datenschutz | ✅ | T-35 unverändert. |
+| 7 | Mensch im Loop | ✅ | Sync-PRs nur mit Code-Owner-Review. Die Bestätigung von AK-4 und AK-7 steht noch aus. |
+| 8 | Zerstörerisches | ✅ | Keine Löschungen. T-20 ist schreibend, aber nur auf Anforderung und mit Probe-Dateien. |
+| 9 | Code-Qualität | – | Kein Code. |
+| 10 | Abhängigkeiten | ✅ | Unverändert gegenüber dem 1. Durchgang (T-24, T-36). |
+| 11 | Fehler | ✅ | Die nächtlichen Fehlalarme durch `internal` sind in `tasks.md` behoben. Der Rest steht in Befund 1 und 3. |
+| 12 | Doku | ✅ | Die Doku liegt jetzt im jeweiligen PR, Spec VII steht auf ⚠️, die Stand-Zeile ist vollständig. Es bleiben die veralteten Stellen im Plan (1) und in tasks.md (4, 5). Lokal grün: `pnpm spec-check`, `pnpm spellcheck` (159 Dateien, 0 Funde), Prettier für `specs/05-projekt-plattform` und `docs/protokolle`. Den CI-Status auf GitHub habe ich nicht abgefragt. |
+
+---
+
+## Umsetzung der Befunde aus dem 2. Durchgang (Nachtrag)
+
+1. 🟡 Der Plan ist angeglichen (v4.1): `internal` und die Doku zu Schritt 3 stehen jetzt in Schritt 3. Schritt 8 heißt „Kosten, Abgleich, Schlussprüfung der Doku“. Die Stand-Zeile nennt das.
+2. 🟡 `werkstatt` prüft die Repo-Einstellungen bis T-08 weiter mit `repo.test.ts`. T-08 stellt auf `cwk settings` um, sobald `main-approval`, Team und `CODEOWNERS` da sind; T-08 hängt dafür von T-47 ab.
+3. 🟡 T-40 hängt jetzt von T-17 und T-19 ab. T-19 aktiviert den nächtlichen Zeitplan erst, wenn T-40 erledigt ist.
+4. ⚪ Bezug und Analyse nennen Plan v4.1.
+5. ⚪ Lücke 4 und die Überschrift von Schritt 8 sind korrigiert.

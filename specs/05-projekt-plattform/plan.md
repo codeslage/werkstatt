@@ -1,7 +1,7 @@
 # 05 – Phase 1.5 Projekt-Plattform: Plan
 
 > Status: **Freigegeben** am 2026-11-20 (Inhaber im Chat, v4)
-> Stand: 2026-11-20 (v4.1, Korrektur nach Review PR #57: Testfall zum Abgleich der Installation aus v3 an v4 angepasst, Probe-Dateien `.cwk/probe.md` und `.cwk/probe-code.md` für den Sync-Test; keine Änderung am Ansatz); v4 nach den Antworten des Inhabers zu P1–P5: automatischer Sync nur für öffentliche Repos, private per Hand als „CWK-Release“; Namen bestätigt; AK-22 bestätigt); 2026-11-19 (v3.1 nach 3. Review: zweite App nur zum Lesen für die Soll-Menge, nächtliche Prüfung von außen, `werkstatt` mit `CODEOWNERS`, Rückstand von `platform` meldet sich, Secrets für Deployments in Environments; v3 nach 2. Review: App ohne `werkstatt` und `platform`, CODEOWNERS exakt, `ci-ok` mit `always()` und fester Quelle, Schutz vor Rückstufung, Datum der Sperrliste aus `platform`); v2 nach Review PR #53: Freigabe über Ruleset statt eigenen Check, Sammel-Check `ci-ok`, SHA-Pinning, Sperrliste, Erinnerung mit Zustand, nächtlicher Sync, IaC-Prüfungen, AK-3/AK-12 automatisiert, englische Namen)
+> Stand: 2026-11-20 (v4.1, Korrektur nach Review PR #57: Testfall zum Abgleich der Installation aus v3 an v4 angepasst, Probe-Dateien `.cwk/probe.md` und `.cwk/probe-code.md` für den Sync-Test; `internal` und Doku zu Schritt 3 aus Schritt 8 vorgezogen; keine Änderung am Ansatz); v4 nach den Antworten des Inhabers zu P1–P5: automatischer Sync nur für öffentliche Repos, private per Hand als „CWK-Release“; Namen bestätigt; AK-22 bestätigt); 2026-11-19 (v3.1 nach 3. Review: zweite App nur zum Lesen für die Soll-Menge, nächtliche Prüfung von außen, `werkstatt` mit `CODEOWNERS`, Rückstand von `platform` meldet sich, Secrets für Deployments in Environments; v3 nach 2. Review: App ohne `werkstatt` und `platform`, CODEOWNERS exakt, `ci-ok` mit `always()` und fester Quelle, Schutz vor Rückstufung, Datum der Sperrliste aus `platform`); v2 nach Review PR #53: Freigabe über Ruleset statt eigenen Check, Sammel-Check `ci-ok`, SHA-Pinning, Sperrliste, Erinnerung mit Zustand, nächtlicher Sync, IaC-Prüfungen, AK-3/AK-12 automatisiert, englische Namen)
 > Bezug: `spec.md` (Status: Geklärt, freigegeben am 2026-11-19), `CONSTITUTION.md` (v1.1.0), `02-architektur.md` (A9, A10), ADR 0002, 0004, 0008, 0009
 > SDD-Stufe: 3 Plan
 
@@ -70,7 +70,7 @@ Neue Repos in der Organisation (Namen: Frage P3):
 | `codeslage/cwk-sample`         | öffentlich   | `code`, `docs: public`      | Probe-Repo mit Code für die AK-Tests (bleibt für Regressionstests) |
 | `codeslage/cwk-sample-no-code` | privat       | ohne Code, ohne `docs`      | Probe ohne Code, privat ohne Festlegung (AK-14, AK-27)             |
 
-`codeslage/internal` bekommt eine `cwk.json` mit „ohne Code“ und `"docs": "none"` und wird im letzten Schritt angebunden. Laut Frage 5 erscheint es nicht im Portal.
+`codeslage/internal` bekommt in Schritt 3 eine `cwk.json` mit „ohne Code“ und `"docs": "none"`, bevor der nächtliche Sync aktiv wird. Laut Frage 5 erscheint es nicht im Portal.
 
 Dazu kommt in der Organisation das sichtbare Team **`maintainers`** mit dem Inhaber als einzigem Mitglied. `CODEOWNERS` ist eine CWK-Datei im Modus `exact` mit genau einer Regel: `* @codeslage/maintainers`. Das Team ist damit Code-Owner aller Dateien. `cwk new` gibt ihm in jedem Repo ausdrücklich Schreibrecht, sonst erkennt GitHub es nicht als Code-Owner an.
 
@@ -192,7 +192,8 @@ V1 durch den Inhaber. `werkstatt` bekommt `CODEOWNERS` (`* @codeslage/maintainer
 ### Schritt 3 – `platform`, GitHub App und Sync
 
 `platform` über `cwk new --private --no-code`. V2 durch den Inhaber. `sync.yml` mit `cwk sync`, manuell, per Dispatch und nächtlich. Probe-Änderung je Teil, Sync-PRs gegen die Soll-Menge zählen. Zwei Änderungen nacheinander ergeben einen PR. Eine eigene Änderung auf dem Branch bleibt erhalten. Ohne Code-Owner-Review ist kein Merge möglich, auch nicht per App-API. Die Schreib-App hat in `werkstatt` und in privaten Repos keinen Zugriff (per API geprüft). In private Repos rollt der Inhaber mit `cwk sync --private` aus; liegt eines 14 Tage zurück, kommt eine Mail (P1, P5).
-**AK:** AK-7, AK-8, AK-19 (App-Rechte), AK-25, AK-27 (Sync nur Regel-Teil).
+Im selben Schritt: `codeslage/internal` anbinden (`cwk.json` „ohne Code“, `docs: none`, erster Sync-PR mit `cwk sync --repo internal`), bevor der nächtliche Zeitplan von `sync.yml` aktiv wird. Dazu die Doku zu diesem Schritt: `docs/secrets.md` (beide Apps, gh-Login als Sync-Weg für private Repos), Runbooks `cwk-sync.md` und `platform-setup.md` (Abschnitt Apps), ⛔ `governance.md` (Geltungsbereich).
+**AK:** AK-7, AK-8, AK-19 (App-Rechte), AK-21, AK-25, AK-27 (Sync nur Regel-Teil, echtes Repo `internal`).
 
 ### Schritt 4 – Übersicht, Erinnerung, zentraler Historien-Scan
 
@@ -214,10 +215,10 @@ Pages-Projekt `docs-internal`, Domain `docs-internal.codeslage.de`. Access-Anwen
 `apps/docs-trigger` (Worker) mit Tests: gültige und ungültige Signatur, fremde Branches, Pfade ohne Doku, CWK-Pfade in `werkstatt`, ungültige Nutzdaten, keine Nutzdaten im Log. Tofu: Worker, Route, Secrets. V6 durch den Inhaber. Infra-Test `docs-freshness.test.ts`: pusht eine Probe-Änderung in die Doku von `cwk-sample`, fragt `docs.codeslage.de` ab und ist rot, wenn sie nach 15 Minuten nicht da ist. Ein provozierter Fehler im Portal-Build erzeugt eine Mail.
 **AK:** AK-12, AK-16 (Teil Portal).
 
-### Schritt 8 – Anbindung `internal`, Kosten, Register, Runbooks
+### Schritt 8 – Kosten, Abgleich, Schlussprüfung der Doku
 
-`codeslage/internal` mit `cwk.json` („ohne Code“, `docs: none`) anbinden, erster Sync-PR. Danach `docs/kosten.md`, `docs/secrets.md` (App, Tokens, Webhook-Secret, `PUBLIC_BLOCKLIST` je Repo) und `docs/dsgvo.md` prüfen und die Runbooks `neues-projekt.md`, `cwk-sync.md` (Sperrliste ändern → `cwk secrets`) und `docs-portal.md` (Zugang erteilen und entziehen) schreiben. Abgleich wie T-42.
-**AK:** AK-18, AK-19, AK-20, AK-21, AK-27 (echtes Repo).
+Die Doku entsteht in den Schritten, in denen das Beschriebene entsteht (Artikel XII). Schritt 8 schließt ab: `docs/kosten.md` (Cloudflare, Actions-Minuten von `platform`), Abgleich von `docs/secrets.md` mit GitHub und Cloudflare wie T-42 aus 04, Schlussprüfung aller Runbooks auf Vollständigkeit für einen Neuaufbau, `02-architektur.md` (A9, A10) und CLAUDE.md von `werkstatt`.
+**AK:** AK-18, AK-19, AK-21.
 
 ## Teststrategie
 
