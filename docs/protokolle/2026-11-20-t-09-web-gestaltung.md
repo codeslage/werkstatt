@@ -16,3 +16,4 @@
 5. **Lighthouse:** alle Seiten bestanden (mobil, Median aus drei Läufen, alle Kategorien ≥ 0,9).
 6. **Unterbrechung:** Die Sitzung brach nach der Lighthouse-Messung ab (letzte Datei 10:09:59). Weiter ging es um 13:59, auf Bitte des Inhabers („Versuch es noch einmal“). Die Zeit dazwischen zählt nicht.
 7. Lokal grün: `lint`, `format`, `typecheck`, `knip`, `depcruise`, `test`, `spellcheck`, `spec-check`, E2E (57), Lighthouse.
+8. **Nach dem Review (kein 🔴):** Ungenutztes CSS entfernt (`.mono`, `code`, `--radius`, `--surface`, `--on-accent`, `--mono`). Diese Tokens aus `gestaltung.md` kommen mit ihrer ersten Verwendung (Artikel XV). Danach weiter 57 von 57 E2E-Tests grün. Zeiten und Ist von T-09 sind geschlossen.

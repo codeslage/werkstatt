@@ -1,35 +1,30 @@
 /* Gestaltung „Terminal“ nach specs/06-webseite/gestaltung.md (Stand Runde 7): eine Akzentfarbe (Waldgrün),
-   hell und dunkel nach Systemeinstellung, nur Systemschriften (AK-4), Kontrast mindestens WCAG AA (AK-18). */
+   hell und dunkel nach Systemeinstellung, nur Systemschriften (AK-4), Kontrast mindestens WCAG AA (AK-18).
+   Weitere Tokens (Fläche, Mono-Schrift, Button) kommen mit ihrer ersten Verwendung (Artikel XV). */
 
 :root {
   color-scheme: light dark;
 
   --bg: #ffffff;
-  --surface: #f3f5f8;
   --line: #dde2ea;
   --text: #14181f;
   --muted: #4a5260;
   --accent: #1e7b4a;
-  --on-accent: #ffffff;
 
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
 
   --content-width: 65rem;
   --text-width: 65ch;
   --gutter: max(1rem, 4vw);
-  --radius: 6px;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --bg: #0d1117;
-    --surface: #161b22;
     --line: #2a313c;
     --text: #e6eaf0;
     --muted: #9aa4b2;
     --accent: #6fd69a;
-    --on-accent: #0d1117;
   }
 }
 
@@ -75,12 +70,6 @@ h3 {
 
 h1 {
   font-size: clamp(1.875rem, 1.2rem + 3vw, 2.75rem);
-}
-
-code,
-.mono {
-  font-family: var(--mono);
-  font-variant-numeric: tabular-nums;
 }
 
 /* Links im Fließtext unterstrichen, nicht nur farbig (gestaltung.md, Lighthouse „link-in-text-block“). */

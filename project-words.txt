@@ -191,4 +191,3 @@ lighthouseci
 networkidle
 nosniff
 testid
-nums
