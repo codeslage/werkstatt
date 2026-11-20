@@ -5,7 +5,7 @@ import { PAGES } from '../src/site/pages.ts';
 const PATHS = [...PAGES.map((page) => page.path), '/gibt-es-nicht/'];
 
 // AK-4: keine Cookies, kein Speicher im Browser, keine Dienste Dritter. Der Test-Build hat kein Beacon-Token,
-// also darf keine einzige Anfrage den eigenen Ursprung verlassen; der Beacon wird live geprüft (T-22, T-26).
+// also darf keine einzige Anfrage den eigenen Ursprung verlassen. Den Build mit Token prüft beacon.spec.ts.
 
 for (const path of PATHS) {
   test(`${path} setzt keine Cookies, speichert nichts und lädt nur vom eigenen Ursprung`, async ({
