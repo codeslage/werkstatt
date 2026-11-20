@@ -15,9 +15,9 @@ const FIELDS = {
 } as const satisfies Record<keyof Imprint, string>;
 
 const MAX_LENGTH = 100;
-// Steuerzeichen (C0 und DEL) haben in einer Anschriftzeile nichts zu suchen.
-// eslint-disable-next-line no-control-regex -- genau diese Zeichen sollen erkannt werden
-const CONTROL_CHARACTERS = /[\u0000-\u001F\u007F]/;
+// Steuerzeichen (C0, DEL, C1) und unsichtbare Formatzeichen (z. B. Bidi-Umschaltung, Null-Breite) haben in
+// einer Anschriftzeile nichts zu suchen (Review PR #56, Befund 2).
+const CONTROL_CHARACTERS = /[\p{Cc}\p{Cf}]/u;
 
 function isValid(value: string | undefined): value is string {
   if (value === undefined) return false;

@@ -49,6 +49,12 @@ describe('readImprint', () => {
     expect(() => readImprint({ ...complete, IMPRESSUM_NAME: 'Erika\u0000' })).toThrow(/IMPRESSUM_NAME/);
   });
 
+  it('lehnt auch C1-Steuerzeichen und unsichtbare Formatzeichen ab', () => {
+    expect(() => readImprint({ ...complete, IMPRESSUM_NAME: 'Erika\u0085' })).toThrow(/IMPRESSUM_NAME/);
+    expect(() => readImprint({ ...complete, IMPRESSUM_NAME: 'Erika\u202E' })).toThrow(/IMPRESSUM_NAME/);
+    expect(() => readImprint({ ...complete, IMPRESSUM_STRASSE: 'Muster\u200Bstraße 1' })).toThrow(/IMPRESSUM_STRASSE/);
+  });
+
   it('gibt den Wert nie in der Meldung preis', () => {
     const message = messageOf(() => readImprint({ ...complete, IMPRESSUM_NAME: 'Geheim\tName' }));
     expect(message).toMatch(/IMPRESSUM_NAME/);

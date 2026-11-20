@@ -93,7 +93,7 @@ Content-Security-Policy (Entwurf): `default-src 'self'; script-src 'self' https:
 - **Text-PR:** die echten Titel, Beschreibungen, Navigations- und Footer-Texte und der 404-Text. Gemergt wird nach Freigabe des Inhabers. Platzhalter gehen nie live (A6), und vor Schritt 6 prüft ein Test, dass kein `[`…`]`-Platzhalter mehr im Build steht.
 - `imprint.ts` mit Unit-Tests; `.env.example` mit Platzhaltern (z. B. „Erika Mustermann“).
 - Playwright-Suite und Lighthouse CI als neuer Job „Webseite (E2E + Lighthouse)“ in `ci.yml` von `werkstatt` (app-spezifisch, nicht in den gemeinsamen CWK-Workflows aus Plan 05). Pflicht wird er über das Modell, das dann auf `main` gilt: Liegt Schritt 1 aus Plan 05 schon vor, steht der Job in `needs` von `ci-ok`, und `ci-ok` ist der Pflicht-Check. Sonst kommt er direkt ins Ruleset (Einstellungsänderung nur mit Freigabe des Inhabers). `infra/tests/repo.test.ts` prüft das jeweilige Modell.
-- ESLint, Knip, dependency-cruiser, Prettier und der Typecheck (`astro check`) kennen `apps/web` und `.astro`.
+- ESLint, Knip, Prettier und der Typecheck (`astro check`) kennen `apps/web` und `.astro`. dependency-cruiser liest `.astro` nicht; die Regel „nur-nach-packages“ prüft dafür `tools/astro-imports` (wenige Zeilen eigener Code, keine neue Abhängigkeit) im selben Check „Modulgrenzen“. Zyklen zwischen `.astro`-Dateien deckt das nicht ab, die Seiten importieren nur Komponenten und `src/site/`.
 
 ### Schritt 2 – Gestaltung und Logo (AK-17, AK-18, AK-6) · Text-PR (Wortmarke, Header)
 
@@ -179,7 +179,7 @@ Die Tests aus Schritt 1 entstehen vor dem Inhalt. Sie prüfen Struktur und Regel
 | XII Offen dokumentieren          | ✅        | ADR 0014 und 0015, `02-architektur.md` angepasst, Protokolle je Schritt, Case Study auf der Seite                                                              |
 | XIII Wiederverwendbar            | ✅        | Layout, Tokens, Header-Konfiguration und Prüfstand (E2E, Lighthouse, axe) ohne codeslage-Annahmen im Kern, als Vorlage für Kunden-Webseiten                    |
 | XIV Messen statt schätzen        | ✅        | Besuche und Kontakt-Interesse (AK-5); Lighthouse-Werte je Lauf; Zeiten in `zeiten.md`                                                                          |
-| XV Kein unnötiger Code           | ✅        | Lint, Knip, Modulgrenzen und Format auch für `.astro`; eine Quelle für die Seitenliste                                                                         |
+| XV Kein unnötiger Code           | ✅        | Lint, Knip, Modulgrenzen (über `tools/astro-imports`) und Format auch für `.astro`; eine Quelle für die Seitenliste                                            |
 | XVI Fehler sind sichtbar         | ✅        | Build bricht bei fehlenden Impressumsangaben ab; Deploy- und Live-Test-Fehler machen die CI rot, wöchentliche Live-Prüfung im Drift-Workflow mit Mail          |
 
 ## Risiken

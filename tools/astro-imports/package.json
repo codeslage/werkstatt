@@ -1,0 +1,11 @@
+{
+  "name": "@codeslage/astro-imports",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "typecheck": "tsc -p ."
+  },
+  "devDependencies": {
+    "@codeslage/config": "workspace:*"
+  }
+}
