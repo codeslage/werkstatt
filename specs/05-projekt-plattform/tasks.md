@@ -144,4 +144,4 @@ Nachträglich im Review von PR #57 gefunden (Bericht `reviews/tasks-review.md`) 
 
 Im 2. Review-Durchgang (Bericht `reviews/tasks-review.md`) außerdem behoben: Plan an die vorgezogene Anbindung von `internal` und die Doku in Schritt 3 angeglichen (v4.1); `werkstatt` prüft die Repo-Einstellungen bis T-08 weiter mit `repo.test.ts`; T-40 hängt von T-17 und T-19 ab, und der nächtliche Sync wird erst danach aktiv.
 
-Keine offene Lücke, die die Umsetzung blockiert. Offen beim Inhaber: Bestätigung von AK-4 und AK-7 (Lücke 1) und die Entscheidung zum Roadmap-Soll (Lücke 5).
+Keine offene Lücke, die die Umsetzung blockiert. Beim Inhaber geklärt am 2026-11-20: AK-4 und AK-7 bestätigt (Lücke 1); Roadmap-Soll auf die Summe der Tasks korrigiert (Lücke 5).

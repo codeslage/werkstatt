@@ -39,6 +39,8 @@ Methode:
 | Tasks + Analyze | Arbeit    | 2026-11-20 08:54 | 2026-11-20 08:57 | 0:03  | `tasks.md` (44 Tasks, Soll 55,5 h), direkt danach Analyse (Stufe 5) mit 5 Lücken; beide Stufen in einer Zeile, weil der Wechsel nicht per `date` abgelesen wurde                                         |
 | Tasks + Analyze | Arbeit    | 2026-11-20 08:57 | 2026-11-20 09:06 | 0:09  | PR #57, Review (3 × 🔴), Befunde umgesetzt (T-45 bis T-47, Plan v4.1, Spec VII), Bericht, Protokoll                                                                                                      |
 | Tasks + Analyze | Arbeit    | 2026-11-20 09:06 | 2026-11-20 09:09 | 0:03  | Review 2. Durchgang (✅, 3 × 🟡), Befunde umgesetzt (Plan v4.1 angeglichen), Bericht, Protokoll; Bestätigung angefragt                                                                                   |
+| Tasks + Analyze | Wartezeit | 2026-11-20 09:09 | 2026-11-20 09:51 | 0:42  | Bestätigung von AK-4/AK-7 und Entscheidung zum Roadmap-Soll                                                                                                                                              |
+| Tasks + Analyze | Arbeit    | 2026-11-20 09:51 | 2026-11-20 09:51 | 0:00  | Antworten eingetragen, Roadmap-Soll korrigiert, CI, Merge (Ende wird mit Stufe 6 nachgetragen)                                                                                                           |
 
 ## Summen
 
@@ -48,6 +50,6 @@ Methode:
 | M #50           | 0:05   | 0:09      | 0:14   |
 | Clarify         | 0:06   | 0:12      | 0:18   |
 | Plan            | 0:33   | 0:02      | 0:35   |
-| Tasks + Analyze | 0:15   | 0:00      | 0:15   |
+| Tasks + Analyze | 0:15   | 0:42      | 0:57   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.
