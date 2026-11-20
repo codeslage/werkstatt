@@ -32,3 +32,7 @@
    - Die 404-Seite gibt kein Canonical mehr aus, getestet in `seo`. Sie läuft jetzt auch in `layout` und `privacy` mit. Insgesamt 41 E2E-Tests grün.
    - Hinweis für lokale Läufe: `pnpm --filter @codeslage/web lighthouse` misst das vorhandene `dist/`. Vorher also `test:e2e` oder `build` laufen lassen. In der CI stimmt die Reihenfolge.
    - Reihenfolge für T-07: Sobald der neue Check im Ruleset Pflicht ist, warten offene PRs ohne diesen Job (z. B. #57 aus Phase 1.5) auf ihn. Sie brauchen dann den aktuellen `main`.
+9. **T-07 (⛔):** Der Inhaber hat am 2026-11-20 im Chat zugestimmt („Ja, eintragen“). Danach habe ich das Ruleset `main-schutz` per `gh api` aktualisiert.
+   - Ich habe den Stand vorher gesichert und den Unterschied angesehen. Einzige Änderung ist der neue Pflicht-Check „Webseite (E2E + Lighthouse)“. Statt 11 sind es jetzt 12, die übrigen Regeln sind unverändert.
+   - `infra/tests/repo.test.ts` leitet die Pflicht-Checks aus `ci.yml` ab und brauchte keine Änderung. Lokal: 3 von 3 grün.
+   - Vorher war der CI-Lauf auf `d761de5` nur in „Repo-Einstellungen“ rot. Der neue Job „Webseite (E2E + Lighthouse)“ war dort schon grün.

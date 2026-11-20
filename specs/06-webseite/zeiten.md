@@ -44,7 +44,9 @@ Methode:
 | T-01       | Arbeit    | 2026-11-20 08:50 | 2026-11-20 09:02 | 0:12  | Astro-Konfiguration, ESLint/Prettier/Knip/Typecheck für `.astro`, Gegenproben, PR, Review                                                                |
 | T-04       | Arbeit    | 2026-11-20 09:05 | 2026-11-20 09:08 | 0:03  | Branch, Layout, Header, Footer, Seiten, 404, `_headers`; Ende = erster erfolgreicher Build (Zeitstempel im Build-Log)                                    |
 | T-05       | Arbeit    | 2026-11-20 09:08 | 2026-11-20 09:19 | 0:11  | Playwright, vier E2E-Specs, `--ignore-lock` für `astro preview`, vier Gegenproben; Ende = Build für die Lighthouse-Gegenprobe (Zeitstempel im Build-Log) |
-| T-06       | Arbeit    | 2026-11-20 09:19 | läuft            |       | Lighthouse CI, Gegenprobe, CI-Job, Doku, PR, Review                                                                                                      |
+| T-06       | Arbeit    | 2026-11-20 09:19 | 2026-11-20 09:37 | 0:18  | Lighthouse CI, Gegenprobe, CI-Job, Doku, PR, Review, Befunde umgesetzt (Beacon-Test, 404)                                                                |
+| T-07       | Wartezeit | 2026-11-20 09:37 | 2026-11-20 09:50 | 0:13  | Freigabe Pflicht-Check im Ruleset; gefragt 09:31, bis 09:37 lief parallel die Arbeit an T-06 (zählt dort); Ende = erste Ablesung nach der Antwort        |
+| T-07       | Arbeit    | 2026-11-20 09:50 | 2026-11-20 09:51 | 0:01  | Ruleset `main-schutz` um „Webseite (E2E + Lighthouse)“ ergänzt (Diff gezeigt), `repo.test.ts` lokal grün, Doku, Merge                                    |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -63,4 +65,5 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | T-02, T-03 | 0:02   | 0:00      | 0:02   |
 | T-04       | 0:03   | 0:00      | 0:03   |
 | T-05       | 0:11   | 0:00      | 0:11   |
-| T-06       | läuft  | 0:00      | läuft  |
+| T-06       | 0:18   | 0:00      | 0:18   |
+| T-07       | 0:01   | 0:13      | 0:14   |
