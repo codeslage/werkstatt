@@ -12,7 +12,7 @@
     "typecheck": "pnpm -r typecheck",
     "lint": "eslint .",
     "knip": "knip",
-    "depcruise": "depcruise --config .dependency-cruiser.json --output-type err .",
+    "depcruise": "depcruise --config .dependency-cruiser.json --output-type err . && node tools/astro-imports/src/cli.ts",
     "spec-check": "node tools/spec-check/src/cli.ts specs",
     "test:infra": "vitest run --project infra",
     "test:smoke": "vitest run --project smoke",
@@ -29,8 +29,10 @@
     "cspell": "10.5.1",
     "dependency-cruiser": "18.7.2",
     "eslint": "10.15.0",
+    "eslint-plugin-astro": "3.2.1",
     "knip": "6.45.1",
     "prettier": "3.10.1",
+    "prettier-plugin-astro": "1.1.2",
     "typescript": "6.0.3",
     "vitest": "^5.1.0"
   }
