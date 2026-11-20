@@ -12,6 +12,7 @@
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
+    "@axe-core/playwright": "4.14.0",
     "@codeslage/config": "workspace:*",
     "@lhci/cli": "0.16.1",
     "@playwright/test": "1.65.1",
