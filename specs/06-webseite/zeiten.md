@@ -55,6 +55,9 @@ Methode:
 | T-08       | Wartezeit | 2026-11-20 14:18 | 2026-11-20 14:30 | 0:12  | Freigabe der Texte (Text-PR #60); gefragt 14:15, bis 14:18 lief parallel die Arbeit am Review (zählt dort)                                               |
 | T-08       | Arbeit    | 2026-11-20 14:30 | 2026-11-20 14:31 | 0:01  | Freigabe eingetragen, Merge                                                                                                                              |
 | T-08       | Arbeit    | 2026-11-20 14:14 | 2026-11-20 14:18 | 0:04  | Doku, PR, Review                                                                                                                                         |
+| T-08       | Arbeit    | 2026-11-20 14:31 | 2026-11-20 14:36 | 0:05  | Nacharbeit PR-3: CI, Merge (#60)                                                                                                                         |
+| T-10       | Arbeit    | 2026-11-20 14:36 | 2026-11-20 14:44 | 0:08  | `brand.spec.ts` (rot), Header mit Zeichen und Wortmarke, Touch-Icon, Screenshots, Lighthouse                                                             |
+| T-10       | Arbeit    | 2026-11-20 14:44 | läuft            |       | Doku, PR, Review                                                                                                                                         |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -76,4 +79,5 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | T-06       | 0:18   | 0:00      | 0:18   |
 | T-07       | 0:14   | 0:13      | 0:27   |
 | T-09       | 0:16   | 0:00      | 0:16   |
-| T-08       | 0:10   | 0:12      | 0:22   |
+| T-08       | 0:15   | 0:12      | 0:27   |
+| T-10       | läuft  | 0:00      | läuft  |
