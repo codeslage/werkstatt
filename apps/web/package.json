@@ -6,11 +6,15 @@
     "dev": "ASTRO_TELEMETRY_DISABLED=1 astro dev",
     "build": "ASTRO_TELEMETRY_DISABLED=1 astro build",
     "preview": "ASTRO_TELEMETRY_DISABLED=1 astro preview",
-    "typecheck": "ASTRO_TELEMETRY_DISABLED=1 astro check"
+    "typecheck": "ASTRO_TELEMETRY_DISABLED=1 astro check",
+    "test:e2e": "playwright test",
+    "lighthouse": "CHROME_PATH=\"$(node -e \"import('@playwright/test').then((m) => console.log(m.chromium.executablePath()))\")\" lhci autorun"
   },
   "devDependencies": {
     "@astrojs/check": "0.9.12",
     "@codeslage/config": "workspace:*",
+    "@lhci/cli": "0.16.1",
+    "@playwright/test": "1.65.1",
     "typescript": "6.0.3"
   },
   "dependencies": {

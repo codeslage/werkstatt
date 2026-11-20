@@ -1,0 +1,16 @@
+---
+import Base from '../layouts/Base.astro';
+import { pageByPath } from '../site/page-by-path.ts';
+
+// Gemeinsamer Aufbau der Inhaltsseiten: Titel und Beschreibung aus PAGES, Überschrift aus dem Label.
+interface Props {
+  path: string;
+}
+
+const page = pageByPath(Astro.props.path);
+---
+
+<Base title={page.title} description={page.description}>
+  <h1>{page.label}</h1>
+  <slot />
+</Base>

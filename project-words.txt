@@ -183,3 +183,11 @@ Formatzeichen
 Frontmatters
 straße
 mitbündelt
+Autodiscover
+VIEWPORTS
+geolocation
+hrefs
+lighthouseci
+networkidle
+nosniff
+testid

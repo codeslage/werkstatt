@@ -1,16 +1,7 @@
 ---
-import { PAGES } from '../site/pages.ts';
-
-const home = PAGES.find((page) => page.path === '/');
-if (!home) throw new Error('Startseite fehlt in PAGES');
+import PageShell from '../components/PageShell.astro';
 ---
 
-<html lang="de">
-  <head>
-    <meta charset="utf-8" />
-    <title>{home.title}</title>
-  </head>
-  <body>
-    <h1>{home.title}</h1>
-  </body>
-</html>
+<PageShell path="/">
+  <p>[Inhalt]</p>
+</PageShell>
