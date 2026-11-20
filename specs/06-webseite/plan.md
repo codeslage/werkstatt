@@ -41,7 +41,7 @@ apps/web/                      # neu, Astro, statisch
 │  ├─ styles/global.css        # Farb-Tokens hell/dunkel (prefers-color-scheme), Systemschriften (gestaltung.md)
 │  └─ site/                    # TypeScript: Seitenliste/Navigation, Kontaktadresse, Impressum-Schema
 │     ├─ pages.ts              # eine Quelle für Navigation und Tests (Titel, Pfad, Beschreibung)
-│     └─ imprint.ts            # liest und prüft IMPRESSUM_* (Schema), Unit-Tests daneben
+│     └─ imprint.ts            # liest und prüft IMPRESSUM_* (Schema); Unit-Tests in apps/web/test/ (wie apps/status)
 ├─ e2e/                        # Playwright: Navigation, Kontakt, Datenschutz, Layout, SEO, Kontrast
 ├─ lighthouserc.json           # Grenzwerte ≥ 0.9 je Kategorie, mobil, alle Seiten
 └─ package.json
@@ -147,11 +147,11 @@ Voraussetzungen: V1 (Alias `kontakt@codeslage.de`), V4 (Impressumsangaben), Frag
 | AK-5  | manuell: Auswertung zeigt Besuche je Seite und Aufrufe von `/kontakt/`; Screenshot im Protokoll                                                                                                         | Protokoll Schritt 6                                  |
 | AK-6  | Lighthouse CI, mobil, je Seite drei Läufe (Median), alle vier Kategorien ≥ 0,9                                                                                                                          | `apps/web/lighthouserc.json`, CI-Job                 |
 | AK-7  | E2E bei 375 × 812 und 1280 × 800: `scrollWidth` ≤ Fensterbreite auf jeder Seite                                                                                                                         | `apps/web/e2e/layout.spec.ts`                        |
-| AK-8  | Unit: Titel und Beschreibungen eindeutig; E2E: `lang="de"`, `<title>`, `meta description` je Seite, alle internen Links liefern 200, unbekannter Pfad → 404-Seite                                       | `apps/web/src/site/pages.test.ts`, `e2e/seo.spec.ts` |
+| AK-8  | Unit: Titel und Beschreibungen eindeutig; E2E: `lang="de"`, `<title>`, `meta description` je Seite, alle internen Links liefern 200, unbekannter Pfad → 404-Seite                                       | `apps/web/test/pages.test.ts`, `e2e/seo.spec.ts`     |
 | AK-9  | Live: HSTS, CSP, `frame-ancestors`, `X-Content-Type-Options`, `Referrer-Policy` vorhanden; nur HTTPS                                                                                                    | `infra/tests/web.test.ts` (ab Schritt 6)             |
 | AK-10 | CI: Job „Webseite (E2E + Lighthouse)“ ist Pflicht für den Merge, entweder über `needs` von `ci-ok` (Modell aus Plan 05) oder direkt im Ruleset                                                          | `infra/tests/repo.test.ts`                           |
 | AK-11 | Review und manuell: jeder PR mit sichtbarem Text als Text-PR mit Freigabe des Inhabers; Gesamtabnahme der lokalen Vorschau vor Schritt 6; bis Schritt 6 gibt es keinen Deploy-Workflow und kein `apply` | Review-Checkliste, Protokoll Schritt 6               |
-| AK-12 | manuell: Prüfung von Impressum und Datenschutzerklärung durch den Inhaber; Unit-Test: Build bricht ohne gültige `IMPRESSUM_*` ab                                                                        | Protokoll Schritt 4, `imprint.test.ts`               |
+| AK-12 | manuell: Prüfung von Impressum und Datenschutzerklärung durch den Inhaber; Unit-Test: Build bricht ohne gültige `IMPRESSUM_*` ab                                                                        | Protokoll Schritt 4, `apps/web/test/imprint.test.ts` |
 | AK-13 | DNS-Test (vorhanden) nach dem `apply` + Testmail                                                                                                                                                        | `infra/tests/dns.test.ts`, Protokoll Schritt 6       |
 | AK-14 | Review: Einträge in `docs/dsgvo.md`                                                                                                                                                                     | Review Schritt 4                                     |
 | AK-15 | Kostenübersicht `docs/kosten.md`; Cloudflare-Abrechnung nach dem Livegang                                                                                                                               | Review Schritt 4, Protokoll Schritt 6                |
