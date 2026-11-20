@@ -10,7 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
-- 2026-11-20 – Phase 2, Schritt 2 (PR-5, T-10, Text-PR): Logo-Zeichen und zweiteilige Wortmarke `codeslage_` im Header, Touch-Icon; Test für Logo, Favicon und Touch-Icon (#PR).
+- 2026-11-20 – Phase 2, Schritt 2 (PR-5, T-10, Text-PR): Logo-Zeichen und zweiteilige Wortmarke `codeslage_` im Header, Touch-Icon; Test für Logo, Favicon und Touch-Icon (#61).
 - 2026-11-20 – Phase 2, Schritt 1 (PR-3, T-08, Text-PR): Seitentitel, Beschreibungen, Navigation, Footer und Fehlerseite mit fertigen Texten; Tests gegen Platzhalter (#60).
 - 2026-11-20 – Phase 2, Schritt 2 (PR-4, T-09): Gestaltung der Webseite (Waldgrün, hell und dunkel nach Systemeinstellung, Systemschriften) mit Kontrastprüfung per axe in beiden Darstellungen (#59).
 - 2026-11-20 – Phase 2, Schritt 1 (PR-2, T-04 bis T-07): Layout, alle Seiten mit Platzhaltern, 404, Sicherheits-Header; E2E-Tests mit Playwright (Navigation, SEO, Layout, Datenschutz) und Lighthouse CI (alle Seiten ≥ 90) im neuen CI-Job „Webseite (E2E + Lighthouse)“ (#58).
