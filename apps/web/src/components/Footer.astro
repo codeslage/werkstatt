@@ -1,0 +1,20 @@
+---
+import { PAGES } from '../site/pages.ts';
+
+// Impressum und Datenschutz von jeder Seite mit einem Klick (Spec AK-1), dazu der Link zum öffentlichen Repo.
+const footerPages = PAGES.filter((page) => page.nav === 'footer');
+---
+
+<footer>
+  <p>[Footer-Text]</p>
+  <ul>
+    {footerPages.map((page) => (
+      <li>
+        <a href={page.path}>{page.label}</a>
+      </li>
+    ))}
+    <li>
+      <a href="https://github.com/codeslage/werkstatt">[Link zum Repo]</a>
+    </li>
+  </ul>
+</footer>

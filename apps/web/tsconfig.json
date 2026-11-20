@@ -1,0 +1,6 @@
+{
+  "extends": ["@codeslage/config/tsconfig.json", "astro/tsconfigs/strict"],
+  "compilerOptions": {
+    "lib": ["ES2024", "DOM"]
+  }
+}

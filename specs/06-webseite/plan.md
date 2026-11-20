@@ -41,7 +41,7 @@ apps/web/                      # neu, Astro, statisch
 │  ├─ styles/global.css        # Farb-Tokens hell/dunkel (prefers-color-scheme), Systemschriften (gestaltung.md)
 │  └─ site/                    # TypeScript: Seitenliste/Navigation, Kontaktadresse, Impressum-Schema
 │     ├─ pages.ts              # eine Quelle für Navigation und Tests (Titel, Pfad, Beschreibung)
-│     └─ imprint.ts            # liest und prüft IMPRESSUM_* (Schema), Unit-Tests daneben
+│     └─ imprint.ts            # liest und prüft IMPRESSUM_* (Schema); Unit-Tests in apps/web/test/ (wie apps/status)
 ├─ e2e/                        # Playwright: Navigation, Kontakt, Datenschutz, Layout, SEO, Kontrast
 ├─ lighthouserc.json           # Grenzwerte ≥ 0.9 je Kategorie, mobil, alle Seiten
 └─ package.json
@@ -93,7 +93,7 @@ Content-Security-Policy (Entwurf): `default-src 'self'; script-src 'self' https:
 - **Text-PR:** die echten Titel, Beschreibungen, Navigations- und Footer-Texte und der 404-Text. Gemergt wird nach Freigabe des Inhabers. Platzhalter gehen nie live (A6), und vor Schritt 6 prüft ein Test, dass kein `[`…`]`-Platzhalter mehr im Build steht.
 - `imprint.ts` mit Unit-Tests; `.env.example` mit Platzhaltern (z. B. „Erika Mustermann“).
 - Playwright-Suite und Lighthouse CI als neuer Job „Webseite (E2E + Lighthouse)“ in `ci.yml` von `werkstatt` (app-spezifisch, nicht in den gemeinsamen CWK-Workflows aus Plan 05). Pflicht wird er über das Modell, das dann auf `main` gilt: Liegt Schritt 1 aus Plan 05 schon vor, steht der Job in `needs` von `ci-ok`, und `ci-ok` ist der Pflicht-Check. Sonst kommt er direkt ins Ruleset (Einstellungsänderung nur mit Freigabe des Inhabers). `infra/tests/repo.test.ts` prüft das jeweilige Modell.
-- ESLint, Knip, dependency-cruiser, Prettier und der Typecheck (`astro check`) kennen `apps/web` und `.astro`.
+- ESLint, Knip, Prettier und der Typecheck (`astro check`) kennen `apps/web` und `.astro`. dependency-cruiser liest `.astro` nicht; die Regel „nur-nach-packages“ prüft dafür `tools/astro-imports` (wenige Zeilen eigener Code, keine neue Abhängigkeit) im selben Check „Modulgrenzen“. Geprüft werden Frontmatter und `<script>`-Blöcke, auch dynamische Imports und `import.meta.glob`. Nicht abgedeckt sind Zyklen zwischen `.astro`-Dateien und Import-Ziele, die erst zur Laufzeit berechnet werden; die Seiten importieren nur Komponenten und `src/site/`.
 
 ### Schritt 2 – Gestaltung und Logo (AK-17, AK-18, AK-6) · Text-PR (Wortmarke, Header)
 
@@ -143,15 +143,15 @@ Voraussetzungen: V1 (Alias `kontakt@codeslage.de`), V4 (Impressumsangaben), Frag
 | AK-1  | E2E: jede Seite aus `pages.ts` liefert 200; von jeder Seite führen Links zu jeder Hauptseite, Impressum, Datenschutz                                                                                    | `apps/web/e2e/navigation.spec.ts`                    |
 | AK-2  | Live: `http://` und `www.` → 301 auf `https://codeslage.de/…`, Pfad bleibt erhalten; Hauptdomain 200                                                                                                    | `infra/tests/web.test.ts` (ab Schritt 6)             |
 | AK-3  | E2E: alle Kontakt-Links zeigen auf `/kontakt/`; dort ist `kontakt@codeslage.de` als Text sichtbar, und es gibt genau einen Link `mailto:kontakt@codeslage.de`; kein `<form>` auf keiner Seite           | `apps/web/e2e/contact.spec.ts`                       |
-| AK-4  | E2E: keine Cookies, `localStorage`/`sessionStorage` leer; alle Anfragen gehen an den eigenen Ursprung, mit dem Beacon als einziger erlaubter Ausnahme (Test baut einmal mit Beacon-Token)               | `apps/web/e2e/privacy.spec.ts`                       |
+| AK-4  | E2E: keine Cookies, `localStorage`/`sessionStorage` leer; alle Anfragen gehen an den eigenen Ursprung, mit dem Beacon als einziger erlaubter Ausnahme (Test baut einmal mit Beacon-Token)               | `apps/web/e2e/privacy.spec.ts`, `beacon.spec.ts`     |
 | AK-5  | manuell: Auswertung zeigt Besuche je Seite und Aufrufe von `/kontakt/`; Screenshot im Protokoll                                                                                                         | Protokoll Schritt 6                                  |
 | AK-6  | Lighthouse CI, mobil, je Seite drei Läufe (Median), alle vier Kategorien ≥ 0,9                                                                                                                          | `apps/web/lighthouserc.json`, CI-Job                 |
 | AK-7  | E2E bei 375 × 812 und 1280 × 800: `scrollWidth` ≤ Fensterbreite auf jeder Seite                                                                                                                         | `apps/web/e2e/layout.spec.ts`                        |
-| AK-8  | Unit: Titel und Beschreibungen eindeutig; E2E: `lang="de"`, `<title>`, `meta description` je Seite, alle internen Links liefern 200, unbekannter Pfad → 404-Seite                                       | `apps/web/src/site/pages.test.ts`, `e2e/seo.spec.ts` |
+| AK-8  | Unit: Titel und Beschreibungen eindeutig; E2E: `lang="de"`, `<title>`, `meta description` je Seite, alle internen Links liefern 200, unbekannter Pfad → 404-Seite                                       | `apps/web/test/pages.test.ts`, `e2e/seo.spec.ts`     |
 | AK-9  | Live: HSTS, CSP, `frame-ancestors`, `X-Content-Type-Options`, `Referrer-Policy` vorhanden; nur HTTPS                                                                                                    | `infra/tests/web.test.ts` (ab Schritt 6)             |
 | AK-10 | CI: Job „Webseite (E2E + Lighthouse)“ ist Pflicht für den Merge, entweder über `needs` von `ci-ok` (Modell aus Plan 05) oder direkt im Ruleset                                                          | `infra/tests/repo.test.ts`                           |
 | AK-11 | Review und manuell: jeder PR mit sichtbarem Text als Text-PR mit Freigabe des Inhabers; Gesamtabnahme der lokalen Vorschau vor Schritt 6; bis Schritt 6 gibt es keinen Deploy-Workflow und kein `apply` | Review-Checkliste, Protokoll Schritt 6               |
-| AK-12 | manuell: Prüfung von Impressum und Datenschutzerklärung durch den Inhaber; Unit-Test: Build bricht ohne gültige `IMPRESSUM_*` ab                                                                        | Protokoll Schritt 4, `imprint.test.ts`               |
+| AK-12 | manuell: Prüfung von Impressum und Datenschutzerklärung durch den Inhaber; Unit-Test: Build bricht ohne gültige `IMPRESSUM_*` ab                                                                        | Protokoll Schritt 4, `apps/web/test/imprint.test.ts` |
 | AK-13 | DNS-Test (vorhanden) nach dem `apply` + Testmail                                                                                                                                                        | `infra/tests/dns.test.ts`, Protokoll Schritt 6       |
 | AK-14 | Review: Einträge in `docs/dsgvo.md`                                                                                                                                                                     | Review Schritt 4                                     |
 | AK-15 | Kostenübersicht `docs/kosten.md`; Cloudflare-Abrechnung nach dem Livegang                                                                                                                               | Review Schritt 4, Protokoll Schritt 6                |
@@ -179,7 +179,7 @@ Die Tests aus Schritt 1 entstehen vor dem Inhalt. Sie prüfen Struktur und Regel
 | XII Offen dokumentieren          | ✅        | ADR 0014 und 0015, `02-architektur.md` angepasst, Protokolle je Schritt, Case Study auf der Seite                                                              |
 | XIII Wiederverwendbar            | ✅        | Layout, Tokens, Header-Konfiguration und Prüfstand (E2E, Lighthouse, axe) ohne codeslage-Annahmen im Kern, als Vorlage für Kunden-Webseiten                    |
 | XIV Messen statt schätzen        | ✅        | Besuche und Kontakt-Interesse (AK-5); Lighthouse-Werte je Lauf; Zeiten in `zeiten.md`                                                                          |
-| XV Kein unnötiger Code           | ✅        | Lint, Knip, Modulgrenzen und Format auch für `.astro`; eine Quelle für die Seitenliste                                                                         |
+| XV Kein unnötiger Code           | ✅        | Lint, Knip, Modulgrenzen (über `tools/astro-imports`) und Format auch für `.astro`; eine Quelle für die Seitenliste                                            |
 | XVI Fehler sind sichtbar         | ✅        | Build bricht bei fehlenden Impressumsangaben ab; Deploy- und Live-Test-Fehler machen die CI rot, wöchentliche Live-Prüfung im Drift-Workflow mit Mail          |
 
 ## Risiken

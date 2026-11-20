@@ -1,7 +1,12 @@
 # Abhängigkeiten und Build-Ausgaben
 node_modules/
 dist/
+dist-beacon/
 coverage/
+.astro/
+.lighthouseci/
+test-results/
+playwright-report/
 
 # Secrets und vertrauliche Listen (Constitution VI, governance.md „Öffentlich vs. intern“)
 .env

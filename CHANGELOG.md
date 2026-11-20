@@ -10,6 +10,8 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
+- 2026-11-20 – Phase 2, Schritt 1 (PR-2, T-04 bis T-07): Layout, alle Seiten mit Platzhaltern, 404, Sicherheits-Header; E2E-Tests mit Playwright (Navigation, SEO, Layout, Datenschutz) und Lighthouse CI (alle Seiten ≥ 90) im neuen CI-Job „Webseite (E2E + Lighthouse)“ (#58).
+- 2026-11-20 – Phase 2, Schritt 1 (PR-1, T-01 bis T-03): `apps/web` mit Astro 7 (statisch, ohne Telemetrie), Seitenliste `pages.ts` und geprüfte Impressumsangaben `imprint.ts` mit Unit-Tests; ESLint, Prettier und Typecheck kennen `.astro`; neue Prüfung `tools/astro-imports` setzt die Modulgrenzen für `.astro` im Check „Modulgrenzen“ durch (#56).
 - 2026-11-19 – Phase 2, Stufen 4 und 5 (Tasks, Analyze): `specs/06-webseite/tasks.md` mit 27 Tasks (Soll 35,75 h) und Analyse ohne offene Lücken; finale Gestaltung (Waldgrün, Logo als Graphit-Kachel) in `gestaltung.md` und `gestaltung/` (#55).
 - 2026-11-19 – Phase 2, Stufe 3 (Plan): `specs/06-webseite/plan.md` mit sechs Schritten und Teststrategie je AK; ADR 0014 (Astro für `apps/web`) und ADR 0015 (Upload aus der CI nach Cloudflare Pages, kein Container-Image); `02-architektur.md` A1, A2 und A3 angepasst (#54).
 - 2026-11-19 – Phase 2, Stufe 2 (Clarify): Spec 06 geklärt. Kontaktadresse, Vorschau nur lokal, Pilotprojekte mit Konditionen auf Anfrage, Foto; neues AK-18 (hell/dunkel), Voraussetzungen V1–V4; Leistungen (`leistungen.md`), Gestaltung und Logo (`gestaltung.md`, `gestaltung/`) (#51).

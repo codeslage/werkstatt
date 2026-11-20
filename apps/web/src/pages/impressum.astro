@@ -1,0 +1,20 @@
+---
+import { getSecret } from 'astro:env/server';
+import PageShell from '../components/PageShell.astro';
+import { IMPRINT_VARIABLES, readImprint } from '../site/imprint.ts';
+
+// Angaben aus der Build-Umgebung (.env bzw. GitHub-Environment), geprüft; ohne gültige Angaben bricht der
+// Build ab (Plan 06, AK-12). Astro reicht Variablen ohne PUBLIC_ nur über getSecret weiter.
+const imprint = readImprint(Object.fromEntries(IMPRINT_VARIABLES.map((name) => [name, getSecret(name)])));
+---
+
+<PageShell path="/impressum/">
+  <address>
+    {imprint.name}
+    <br />
+    {imprint.street}
+    <br />
+    {imprint.postalCodeCity}
+  </address>
+  <p>[Inhalt]</p>
+</PageShell>

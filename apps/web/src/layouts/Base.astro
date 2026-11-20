@@ -1,0 +1,43 @@
+---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+
+// Rahmen jeder Seite: Sprache, Titel, Beschreibung, Canonical auf codeslage.de (auch unter *.pages.dev, ADR 0015),
+// Favicon und – nur mit Token beim Build – der Beacon von Cloudflare Web Analytics (Plan 06, AK-4, AK-8).
+interface Props {
+  title: string;
+  description: string;
+  /** false für die Fehlerseite: Sie hat keine eigene Adresse, auf die ein Canonical zeigen könnte. */
+  canonical?: boolean;
+}
+
+const { title, description, canonical: withCanonical = true } = Astro.props;
+const canonical = withCanonical ? new URL(Astro.url.pathname, Astro.site) : undefined;
+const beaconToken = import.meta.env.PUBLIC_CF_BEACON_TOKEN;
+---
+
+<html lang="de">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    {beaconToken && (
+      <script
+        is:inline
+        defer
+        src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon={JSON.stringify({ token: beaconToken })}
+      />
+    )}
+  </head>
+  <body>
+    <Header />
+    <main>
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

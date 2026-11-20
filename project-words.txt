@@ -177,3 +177,17 @@ herausgeprägt
 slage
 Formatfehler
 Planfreigabe
+Anschriftzeile
+tsconfigs
+Formatzeichen
+Frontmatters
+straße
+mitbündelt
+Autodiscover
+VIEWPORTS
+geolocation
+hrefs
+lighthouseci
+networkidle
+nosniff
+testid
