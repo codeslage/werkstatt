@@ -41,7 +41,7 @@ Methode:
 | Tasks      | Arbeit    | 2026-11-19 22:30 | 2026-11-19 22:33 | 0:03  | Branch, Vorlage, finale Gestaltung übernehmen, `tasks.md`                                                                           |
 | Analyze    | Arbeit    | 2026-11-19 22:33 | 2026-11-19 22:38 | 0:05  | Analyse in `tasks.md`, PR, Review                                                                                                   |
 | T-02, T-03 | Arbeit    | 2026-11-20 08:48 | 2026-11-20 08:50 | 0:02  | Branch, Tests zuerst (rot), `pages.ts` und `imprint.ts` (13 Tests grün)                                                             |
-| T-01       | Arbeit    | 2026-11-20 08:50 | läuft            |       | Astro-Konfiguration, ESLint/Prettier/Knip/Typecheck für `.astro`, Gegenproben, PR, Review                                           |
+| T-01       | Arbeit    | 2026-11-20 08:50 | 2026-11-20 09:02 | 0:12  | Astro-Konfiguration, ESLint/Prettier/Knip/Typecheck für `.astro`, Gegenproben, PR, Review                                           |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -56,5 +56,5 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | Plan       | 0:15   | 0:08      | 0:23   |
 | Tasks      | 0:03   | 0:00      | 0:03   |
 | Analyze    | 0:05   | 0:00      | 0:05   |
-| T-01       | läuft  | 0:00      | läuft  |
+| T-01       | 0:12   | 0:00      | 0:12   |
 | T-02, T-03 | 0:02   | 0:00      | 0:02   |

@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { checkAstroFile, frontmatterImports } from '../src/check.ts';
+import { checkAstroFile, astroImports } from '../src/check.ts';
 
 // dependency-cruiser liest keine .astro-Dateien (Review PR #56, Befund 1). Diese Prüfung setzt dieselbe Regel
 // „nur-nach-packages“ für die Imports im Frontmatter durch (Artikel XV, Plan 06, T-01).
@@ -7,16 +7,31 @@ import { checkAstroFile, frontmatterImports } from '../src/check.ts';
 const PACKAGES = ['config'];
 const page = (imports: string) => `---\n${imports}\n---\n\n<h1>Hallo</h1>\n`;
 
-describe('frontmatterImports', () => {
+describe('astroImports', () => {
   it('findet statische, reine und dynamische Imports im Frontmatter', () => {
     const source = page(
       "import { PAGES } from '../site/pages.ts';\nimport '../styles/global.css';\nconst m = await import(\"astro:content\");",
     );
-    expect(frontmatterImports(source)).toEqual(['../site/pages.ts', '../styles/global.css', 'astro:content']);
+    expect(astroImports(source)).toEqual(['../site/pages.ts', '../styles/global.css', 'astro:content']);
   });
 
   it('ignoriert Text außerhalb des Frontmatters', () => {
-    expect(frontmatterImports("<p>import x from 'y'</p>")).toEqual([]);
+    expect(astroImports("<p>import x from 'y'</p>")).toEqual([]);
+  });
+
+  it('findet Imports in <script>-Blöcken, die Astro mitbündelt (Review PR #56, 2. Durchgang)', () => {
+    const source =
+      "---\nconst a = 1;\n---\n\n<p>{a}</p>\n<script>\n  import x from '../../../status/src/config.ts';\n</script>\n";
+    expect(astroImports(source)).toEqual(['../../../status/src/config.ts']);
+  });
+
+  it('findet import.meta.glob und dynamische Imports mit Template-String', () => {
+    const source = page("const a = import.meta.glob('../a/*.ts');\nconst b = await import(`../b/c.ts`);");
+    expect(astroImports(source)).toEqual(['../a/*.ts', '../b/c.ts']);
+  });
+
+  it('erkennt das Frontmatter auch nach einer Leerzeile', () => {
+    expect(astroImports("\n---\nimport x from '../x.ts';\n---\n")).toEqual(['../x.ts']);
   });
 });
 
