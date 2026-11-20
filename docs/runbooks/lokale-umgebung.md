@@ -16,8 +16,8 @@ Homebrew und das Node-Verzeichnis gehören dem Konto, das sie installiert. Ein S
 | pnpm (über Corepack) | Paketverwaltung                           | `corepack enable` (legt die Shims im Node-Verzeichnis an)                                                            | 12.16.1          |
 | GitHub CLI           | Repo, PRs, Secrets                        | `brew install gh`                                                                                                    | 2.105.0          |
 | Docker Desktop       | lokale Container                          | von docker.com, Lizenz selbst akzeptieren; danach Settings → General → „Send usage statistics“ aus (`docs/dsgvo.md`) | 4.99.0           |
-| gitleaks             | Secret- und Öffentlich-Scan (Git-Hook)    | Release-Binary in `~/.local/bin`, Version wie in `ci.yml` (`GITLEAKS_VERSION`)                                       | 8.30.1           |
-| OpenTofu, tflint     | DNS als Code (nur für Arbeit an `infra/`) | Release-Binaries in `~/.local/bin`, Versionen wie in `ci.yml` (`TOFU_VERSION`, `TFLINT_VERSION`)                     | 1.13.1, 0.66.0   |
+| gitleaks             | Secret- und Öffentlich-Scan (Git-Hook)    | Release-Binary in `~/.local/bin`, Version wie in `.github/scripts/install-gitleaks.sh`                               | 8.30.1           |
+| OpenTofu, tflint     | DNS als Code (nur für Arbeit an `infra/`) | Release-Binaries in `~/.local/bin`, Versionen wie in `.github/scripts/install-tofu.sh`                               | 1.13.1, 0.66.0   |
 
 Die pnpm-Version steht im Feld `packageManager` der `package.json`; Corepack lädt genau diese Version. gitleaks, OpenTofu und tflint sind dieselben gepinnten Versionen wie in der CI, damit lokale und CI-Ergebnisse nicht abweichen.
 

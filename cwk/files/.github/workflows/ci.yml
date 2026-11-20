@@ -1,0 +1,48 @@
+name: CI
+
+# Aus dem CodeslageWerkzeugKasten (CWK). Eigene Jobs stehen nur im Projektblock unten; damit sie Pflicht werden,
+# kommen sie dort auch in `needs` von ci-ok. Einziger Pflicht-Check im Ruleset ist ci-ok (Plan 05).
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  rules:
+    name: Regeln
+    uses: codeslage/werkstatt/.github/workflows/cwk-rules.yml@CWK_REF
+    secrets: inherit
+
+  code:
+    name: Code
+    uses: codeslage/werkstatt/.github/workflows/cwk-code.yml@CWK_REF
+
+  ci-ok:
+    name: ci-ok
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      - uses: ./.github/actions/cwk-source
+
+      - name: Ergebnis aller Jobs auswerten
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: node "$CWK_DIR/tools/cwk/src/cli.ts" ci-ok
+    needs:
+      - rules
+      - code
+      # cwk:project:start
+      # cwk:project:end

@@ -1,5 +1,8 @@
 name: CI
 
+# Prüfungen aus dem CodeslageWerkzeugKasten (cwk-rules.yml, cwk-code.yml), dieselben wie in jedem Projekt-Repo,
+# dazu die Jobs, die es nur in werkstatt gibt. Einziger Pflicht-Check im Ruleset ist ci-ok (Plan 05, AK-3):
+# Ein neuer Job muss dort in `needs` stehen, im Ruleset ändert sich nichts.
 on:
   pull_request:
   push:
@@ -12,177 +15,33 @@ concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  GITLEAKS_VERSION: 8.30.1
-  GITLEAKS_SHA256: 551f6fc83ea457d62a0d98237cbad105af8d557003051f41f3e7ca7b3f2470eb
-  # Gleiche Version wie lokal (fmt-Ergebnisse sollen nicht abweichen); Prüfsummen aus den offiziellen Releases.
-  TOFU_VERSION: 1.13.1
-  TOFU_SHA256: 378ada19d4bc70c43732004e8159be771b23b9a5afdf059e5f8a2b3fa2c70a69
-  TFLINT_VERSION: 0.66.0
-  TFLINT_SHA256: 22be11cadc25cd02401e94c0ccc91aa63467debb8485c2a755d98f4c0a9d1e2e
-
 jobs:
-  public-scan:
-    name: Secret- und Öffentlich-Scan
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-        with:
-          fetch-depth: 0
+  rules:
+    name: Regeln
+    uses: ./.github/workflows/cwk-rules.yml
+    secrets: inherit
 
-      - uses: ./.github/actions/setup
-
-      # Kein gitleaks-action: braucht für Organisationen einen Lizenzschlüssel (ADR 0008).
-      - name: gitleaks installieren (gepinnt, Prüfsumme)
-        run: |
-          archive="gitleaks_${GITLEAKS_VERSION}_linux_x64.tar.gz"
-          curl -sSfL -o "$RUNNER_TEMP/$archive" \
-            "https://github.com/gitleaks/gitleaks/releases/download/v${GITLEAKS_VERSION}/$archive"
-          echo "${GITLEAKS_SHA256}  $RUNNER_TEMP/$archive" | sha256sum -c -
-          mkdir -p "$RUNNER_TEMP/bin"
-          tar -xzf "$RUNNER_TEMP/$archive" -C "$RUNNER_TEMP/bin" gitleaks
-          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
-
-      - name: Tests (alle Pakete; die Scan-Tests brauchen gitleaks)
-        run: pnpm test
-
-      # Ebene 2 (governance.md): gesamte Historie inkl. dieses PRs, Sperrliste aus dem Secret.
-      - name: Scan
-        env:
-          PUBLIC_BLOCKLIST: ${{ secrets.PUBLIC_BLOCKLIST }}
-        run: node tools/public-scan/src/cli.ts git . --require-blocklist
-
-  typecheck:
-    name: Typecheck
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - uses: ./.github/actions/setup
-
-      - name: Typecheck (alle Pakete)
-        run: pnpm typecheck
-
-  lint:
-    name: Lint
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - uses: ./.github/actions/setup
-
-      - name: ESLint (Komplexitäts- und Größengrenzen, Artikel XV)
-        run: pnpm lint
-
-  knip:
-    name: Knip
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - uses: ./.github/actions/setup
-
-      - name: Ungenutzte Dateien, Exporte und Abhängigkeiten (Artikel XV)
-        run: pnpm knip
-
-  dependency-cruiser:
-    name: Modulgrenzen
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - uses: ./.github/actions/setup
-
-      - name: Zyklen und Abhängigkeitsrichtungen (Artikel XV)
-        run: pnpm depcruise
-
-  spec-check:
-    name: Spec-Check
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - uses: ./.github/actions/setup
-
-      - name: Pflichtteile aller spec.md und plan.md (Artikel I, AK-16)
-        run: pnpm spec-check
-
-  repo-settings:
-    name: Repo-Einstellungen
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - uses: ./.github/actions/setup
-
-      - name: Sichtbarkeit und Schutz von main bei GitHub (AK-1)
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: pnpm test:infra repo.test.ts
-
-  format:
-    name: Format
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - uses: ./.github/actions/setup
-
-      - name: Einheitliche Formatierung (AK-30)
-        run: pnpm format
-
-  spellcheck:
-    name: Rechtschreibung
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
-
-      - uses: ./.github/actions/setup
-
-      - name: Rechtschreibung Deutsch und Englisch (Change 2026-11-18-rechtschreibung-cspell)
-        run: pnpm spellcheck
+  code:
+    name: Code
+    uses: ./.github/workflows/cwk-code.yml
 
   infra:
-    name: Infra (OpenTofu)
+    name: Infra-Tests
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - uses: ./.github/actions/setup
 
-      # Wie bei gitleaks: Binaries direkt aus den Releases, gepinnt und mit Prüfsumme (keine zusätzlichen Actions).
-      - name: OpenTofu und tflint installieren (gepinnt, Prüfsumme)
-        run: |
-          mkdir -p "$RUNNER_TEMP/bin"
-          tofu="tofu_${TOFU_VERSION}_linux_amd64.tar.gz"
-          curl -sSfL -o "$RUNNER_TEMP/$tofu"             "https://github.com/opentofu/opentofu/releases/download/v${TOFU_VERSION}/$tofu"
-          echo "${TOFU_SHA256}  $RUNNER_TEMP/$tofu" | sha256sum -c -
-          tar -xzf "$RUNNER_TEMP/$tofu" -C "$RUNNER_TEMP/bin" tofu
-          curl -sSfL -o "$RUNNER_TEMP/tflint.zip"             "https://github.com/terraform-linters/tflint/releases/download/v${TFLINT_VERSION}/tflint_linux_amd64.zip"
-          echo "${TFLINT_SHA256}  $RUNNER_TEMP/tflint.zip" | sha256sum -c -
-          unzip -q "$RUNNER_TEMP/tflint.zip" -d "$RUNNER_TEMP/bin"
-          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
-
-      - name: Formatierung (AK-30)
-        run: tofu fmt -check -recursive -diff infra/tofu
-
-      # Ohne Backend und ohne Zugangsdaten: prüft nur die Konfiguration, liest keinen State (ADR 0002).
-      - name: Validierung und tflint je Wurzel (AK-5, AK-18)
-        run: |
-          for root in infra/tofu/*/; do
-            echo "::group::$root"
-            tofu -chdir="$root" init -backend=false -input=false
-            tofu -chdir="$root" validate
-            tflint --chdir="$root" --config="$GITHUB_WORKSPACE/.tflint.hcl"
-            echo "::endgroup::"
-          done
+      - name: OpenTofu und tflint installieren
+        run: sh .github/scripts/install-tofu.sh --with-tflint
 
       - name: Gegenbeispiele für fmt und tflint (Negativtests, AK-18, AK-30)
         run: pnpm test:infra hcl.test.ts
 
-      # Geplante Workflows (AK-5, AK-24): Auslöser, Rechte, gleiche Tool-Versionen wie hier.
-      - name: Geplante Workflows
-        run: pnpm test:infra drift.test.ts history-scan.test.ts simulate-failure.test.ts
+      # Geplante und wiederverwendbare Workflows (AK-5, AK-24, Plan 05 AK-3): Auslöser, Rechte, gleiche Tool-Versionen.
+      - name: Workflows
+        run: pnpm test:infra drift.test.ts history-scan.test.ts simulate-failure.test.ts cwk-workflows.test.ts
 
   web:
     name: Webseite (E2E + Lighthouse)
@@ -239,3 +98,21 @@ jobs:
       - name: Compose stoppen
         if: always()
         run: pnpm dev:down
+
+  ci-ok:
+    name: ci-ok
+    if: always()
+    needs: [rules, code, infra, web, image]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      # failure und cancelled sind rot; skipped nur beim Code-Teil von Repos ohne Code (tools/cwk/src/ci-ok.ts).
+      - name: Ergebnis aller Jobs auswerten
+        env:
+          NEEDS: ${{ toJSON(needs) }}
+        run: node tools/cwk/src/cli.ts ci-ok

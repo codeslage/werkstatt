@@ -1,0 +1,153 @@
+name: CWK – Code
+
+# Code-Teil des CodeslageWerkzeugKastens (Plan 05, AK-3). Repos „ohne Code“ (cwk.json "code": false) überspringen
+# alle Jobs; ci-ok erlaubt das nur dort. IaC- und Container-Prüfungen laufen nur, wenn es *.tf-Dateien bzw. ein
+# Dockerfile gibt. Ihre Jobs laufen trotzdem, damit kein übersprungener Job ci-ok rot macht.
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  config:
+    name: Festlegungen
+    runs-on: ubuntu-latest
+    outputs:
+      code: ${{ steps.code.outputs.code }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # werkstatt hat keine cwk.json und immer Code. Den Rest von cwk.json prüft „CWK-Abgleich“.
+      - id: code
+        name: Hat das Repo Code?
+        run: |
+          code=true
+          if [ "$GITHUB_REPOSITORY" != codeslage/werkstatt ]; then
+            code="$(jq -r 'if has("code") then .code else true end' cwk.json)"
+          fi
+          case "$code" in true | false) ;; *) echo "::error::cwk.json: code muss true oder false sein"; exit 1 ;; esac
+          echo "code=$code" >> "$GITHUB_OUTPUT"
+
+  typecheck:
+    name: Typecheck
+    needs: config
+    if: needs.config.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: Typecheck (alle Pakete)
+        run: pnpm typecheck
+
+  lint:
+    name: Lint
+    needs: config
+    if: needs.config.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: ESLint (Komplexitäts- und Größengrenzen, Artikel XV)
+        run: pnpm lint
+
+  test:
+    name: Tests
+    needs: config
+    if: needs.config.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      # Die Tests von tools/public-scan rufen gitleaks auf; das gibt es nur in werkstatt.
+      - name: gitleaks installieren (werkstatt)
+        if: github.repository == 'codeslage/werkstatt'
+        run: sh .github/scripts/install-gitleaks.sh
+
+      - name: Unit-Tests
+        run: pnpm test
+
+  knip:
+    name: Knip
+    needs: config
+    if: needs.config.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: Ungenutzte Dateien, Exporte und Abhängigkeiten (Artikel XV)
+        run: pnpm knip
+
+  dependency-cruiser:
+    name: Modulgrenzen
+    needs: config
+    if: needs.config.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: Zyklen und Abhängigkeitsrichtungen (Artikel XV)
+        run: pnpm depcruise
+
+  iac:
+    name: IaC (OpenTofu)
+    needs: config
+    if: needs.config.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - id: tf
+        name: Gibt es *.tf-Dateien?
+        run: |
+          if git ls-files '*.tf' | grep -q .; then echo "present=true" >> "$GITHUB_OUTPUT"; fi
+
+      - if: steps.tf.outputs.present == 'true'
+        uses: ./.github/actions/cwk-source
+
+      - name: OpenTofu und tflint installieren
+        if: steps.tf.outputs.present == 'true'
+        run: sh "$CWK_DIR/.github/scripts/install-tofu.sh" --with-tflint
+
+      - name: Formatierung
+        if: steps.tf.outputs.present == 'true'
+        run: tofu fmt -check -recursive -diff infra/tofu
+
+      # Ohne Backend und ohne Zugangsdaten: prüft nur die Konfiguration, liest keinen State (ADR 0002).
+      - name: Validierung und tflint je Wurzel in infra/tofu
+        if: steps.tf.outputs.present == 'true'
+        run: |
+          for root in infra/tofu/*/; do
+            echo "::group::$root"
+            tofu -chdir="$root" init -backend=false -input=false
+            tofu -chdir="$root" validate
+            tflint --chdir="$root" --config="$GITHUB_WORKSPACE/.tflint.hcl"
+            echo "::endgroup::"
+          done
+
+  container:
+    name: Container-Build
+    needs: config
+    if: needs.config.outputs.code == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - id: dockerfile
+        name: Gibt es ein Dockerfile?
+        run: |
+          if [ -f Dockerfile ]; then echo "present=true" >> "$GITHUB_OUTPUT"; fi
+
+      - name: Image bauen (ohne Push)
+        if: steps.dockerfile.outputs.present == 'true'
+        run: docker build --pull .

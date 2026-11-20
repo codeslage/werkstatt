@@ -1,5 +1,3 @@
-import { readFileSync } from 'node:fs';
-import { join } from 'node:path';
 import { beforeAll, describe, expect, it } from 'vitest';
 
 // AK-1: Repo ist öffentlich, `main` geschützt, CI läuft bei jedem PR.
@@ -7,7 +5,9 @@ import { beforeAll, describe, expect, it } from 'vitest';
 // Nicht abgedeckt: „keine Ausnahme für Admins“ – die öffentliche API zeigt die Bypass-Liste nicht (Nachweis: Protokoll T-10).
 
 const REPO = 'codeslage/werkstatt';
-const CI_WORKFLOW = join(import.meta.dirname, '..', '..', '.github', 'workflows', 'ci.yml');
+// Einziger Pflicht-Check ist der Sammel-Job ci-ok, gesetzt nur von GitHub Actions (App-ID 15368), damit keine
+// andere App einen gleichnamigen Status melden kann (Plan 05). Dass ci-ok jeden Job abwartet, prüft cwk-workflows.test.ts.
+const REQUIRED_CHECK = { context: 'ci-ok', integration_id: 15368 };
 
 async function github(path: string): Promise<unknown> {
   const headers: Record<string, string> = { Accept: 'application/vnd.github+json' };
@@ -19,7 +19,7 @@ async function github(path: string): Promise<unknown> {
 
 interface BranchRule {
   type: string;
-  parameters?: { required_status_checks?: { context: string }[] };
+  parameters?: { required_status_checks?: { context: string; integration_id?: number }[] };
 }
 
 /** Antworten der API gegen die erwartete Form prüfen statt ihnen blind zu vertrauen (Artikel VII). */
@@ -34,23 +34,6 @@ function asVisibility(value: unknown): string {
   const visibility = (value as { visibility?: unknown } | null)?.visibility;
   if (typeof visibility !== 'string') throw new Error('Unerwartete Antwort für das Repo');
   return visibility;
-}
-
-/**
- * Die Check-Namen aller Jobs in ci.yml: `name:` des Jobs, sonst seine ID – so benennt GitHub den Check.
- * Bewusst ohne YAML-Bibliothek: Job-IDs stehen mit 2 Leerzeichen unter `jobs:`, ihr `name:` mit 4.
- */
-function ciCheckNames(): string[] {
-  const lines = readFileSync(CI_WORKFLOW, 'utf8').split(/\r?\n/);
-  const jobs = lines.slice(lines.indexOf('jobs:') + 1);
-  const names: string[] = [];
-  for (const line of jobs) {
-    const id = /^ {2}([\w-]+):\s*$/.exec(line)?.[1];
-    if (id) names.push(id);
-    const name = /^ {4}name:\s*(.+?)\s*$/.exec(line)?.[1];
-    if (name) names[names.length - 1] = name.replace(/^(['"])(.*)\1$/, '$2');
-  }
-  return names;
 }
 
 describe(`Repo ${REPO} bei GitHub (AK-1)`, () => {
@@ -71,11 +54,8 @@ describe(`Repo ${REPO} bei GitHub (AK-1)`, () => {
     );
   });
 
-  it('verlangt jeden Job aus ci.yml als Pflicht-Check', () => {
-    const required = rules
-      .flatMap((rule) => rule.parameters?.required_status_checks ?? [])
-      .map((check) => check.context);
-    expect(ciCheckNames().length).toBeGreaterThan(0);
-    expect(required).toEqual(expect.arrayContaining(ciCheckNames()));
+  it('verlangt ci-ok als einzigen Pflicht-Check, gesetzt von GitHub Actions', () => {
+    const required = rules.flatMap((rule) => rule.parameters?.required_status_checks ?? []);
+    expect(required).toEqual([REQUIRED_CHECK]);
   });
 });

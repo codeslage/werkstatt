@@ -6,7 +6,7 @@
 
 `.github/workflows/history-scan.yml` scannt am 1. jedes Monats (04:23 UTC) und auf Knopfdruck die **gesamte Historie aller Branches** mit gitleaks, den eigenen Regeln aus `.gitleaks.toml` und der Sperrliste (GitHub Secret `PUBLIC_BLOCKLIST`).
 
-Der Scan in `ci.yml` prüft bei jedem PR dasselbe. Der monatliche Lauf ist dafür da, dass neue gitleaks-Regeln oder neue Sperrbegriffe auch dann auf alte Commits angewendet werden, wenn gerade kein PR läuft.
+Der Scan in der CI (`cwk-rules.yml`, Job „Secret- und Öffentlich-Scan“) prüft bei jedem PR dasselbe. Der monatliche Lauf ist dafür da, dass neue gitleaks-Regeln oder neue Sperrbegriffe auch dann auf alte Commits angewendet werden, wenn gerade kein PR läuft.
 
 Manuell starten: Actions → „Historien-Scan“ → Run workflow. Mit Haken bei `simulate_failure` bricht der Lauf absichtlich ab; so lässt sich die Fehler-Mail testen (AK-27). Lokal: `node tools/public-scan/src/cli.ts git . --require-blocklist` (Sperrliste aus `.sperrliste`).
 
