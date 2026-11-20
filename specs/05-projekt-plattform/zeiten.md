@@ -34,6 +34,8 @@ Methode:
 | Plan    | Arbeit    | 2026-11-19 16:54 | 2026-11-19 16:58 | 0:04  | Review 3. Durchgang (✅, 6 × 🟡); Ende aus der gemessenen Laufzeit des Review-Agenten (214 s), nicht per `date` abgelesen. Danach Pause bis 22:31 (Token-Kontingent des Inhabers erschöpft, zählt nicht) |
 | Plan    | Arbeit    | 2026-11-19 22:31 | 2026-11-19 22:33 | 0:02  | Plan v3.1 (zweite App nur zum Lesen, Prüfung von außen, `CODEOWNERS` in `werkstatt`, P5), Bericht und Protokoll; Freigabe angefragt                                                                      |
 | Plan    | Arbeit    | 2026-11-20 08:47 | 2026-11-20 08:49 | 0:02  | Antworten P1–P5 eingearbeitet (Plan v4: Sync in private Repos per Hand), ADR 0011/0012, Nachtrag, Protokoll. Von 22:33 bis 08:47 Pause über Nacht (zählt nicht, obwohl die Fragen offen waren)           |
+| Plan    | Wartezeit | 2026-11-20 08:49 | 2026-11-20 08:51 | 0:02  | Freigabe des Plans durch den Inhaber                                                                                                                                                                     |
+| Plan    | Arbeit    | 2026-11-20 08:51 | 2026-11-20 08:51 | 0:00  | Status Freigegeben, CI, Merge (Ende wird nach dem Merge in Stufe 4 nachgetragen, falls später)                                                                                                           |
 
 ## Summen
 
@@ -42,6 +44,6 @@ Methode:
 | Spec    | 0:10   | 2:00      | 2:10   |
 | M #50   | 0:05   | 0:09      | 0:14   |
 | Clarify | 0:06   | 0:12      | 0:18   |
-| Plan    | 0:31   | 0:00      | 0:31   |
+| Plan    | 0:31   | 0:02      | 0:33   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.

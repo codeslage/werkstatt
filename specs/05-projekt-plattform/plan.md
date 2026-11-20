@@ -1,6 +1,6 @@
 # 05 – Phase 1.5 Projekt-Plattform: Plan
 
-> Status: **Entwurf**
+> Status: **Freigegeben** am 2026-11-20 (Inhaber im Chat, v4)
 > Stand: 2026-11-20 (v4 nach den Antworten des Inhabers zu P1–P5: automatischer Sync nur für öffentliche Repos, private per Hand als „CWK-Release“; Namen bestätigt; AK-22 bestätigt); 2026-11-19 (v3.1 nach 3. Review: zweite App nur zum Lesen für die Soll-Menge, nächtliche Prüfung von außen, `werkstatt` mit `CODEOWNERS`, Rückstand von `platform` meldet sich, Secrets für Deployments in Environments; v3 nach 2. Review: App ohne `werkstatt` und `platform`, CODEOWNERS exakt, `ci-ok` mit `always()` und fester Quelle, Schutz vor Rückstufung, Datum der Sperrliste aus `platform`); v2 nach Review PR #53: Freigabe über Ruleset statt eigenen Check, Sammel-Check `ci-ok`, SHA-Pinning, Sperrliste, Erinnerung mit Zustand, nächtlicher Sync, IaC-Prüfungen, AK-3/AK-12 automatisiert, englische Namen)
 > Bezug: `spec.md` (Status: Geklärt, freigegeben am 2026-11-19), `CONSTITUTION.md` (v1.1.0), `02-architektur.md` (A9, A10), ADR 0002, 0004, 0008, 0009
 > SDD-Stufe: 3 Plan
