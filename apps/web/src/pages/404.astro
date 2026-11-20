@@ -4,11 +4,13 @@ import Base from '../layouts/Base.astro';
 
 <Base
   canonical={false}
-  title="[Titel 404]"
-  description="[Beschreibung der Fehlerseite für Suchmaschinen, 50 bis 160 Zeichen]"
+  title="Seite nicht gefunden – codeslage"
+  description="Diese Seite gibt es auf codeslage.de nicht. Über die Navigation oder die Startseite geht es weiter."
 >
-  <h1 data-testid="not-found">[Überschrift 404]</h1>
+  <h1 class="mono" data-testid="not-found">
+    Diese Seite gibt es nicht.
+  </h1>
   <p>
-    <a href="/">[Link zur Startseite]</a>
+    <a href="/">Zur Startseite</a>
   </p>
 </Base>
