@@ -52,7 +52,8 @@ Methode:
 | T-09       | Arbeit    | 2026-11-20 13:59 | 2026-11-20 14:02 | 0:03  | nach Unterbrechung (10:10–13:59, zählt nicht): Checks, Doku, PR, Review                                                                                  |
 | T-09       | Arbeit    | 2026-11-20 14:02 | 2026-11-20 14:09 | 0:07  | Nacharbeit PR-4: Commit, CI, Merge (#59)                                                                                                                 |
 | T-08       | Arbeit    | 2026-11-20 14:09 | 2026-11-20 14:14 | 0:05  | Platzhalter-Tests (rot), Texte für Titel, Beschreibungen, Navigation, Footer, 404, Screenshots, Lighthouse                                               |
-| T-08       | Wartezeit | 2026-11-20 14:18 | läuft            |       | Freigabe der Texte (Text-PR #60); gefragt 14:15, bis 14:18 lief parallel die Arbeit am Review (zählt dort)                                               |
+| T-08       | Wartezeit | 2026-11-20 14:18 | 2026-11-20 14:30 | 0:12  | Freigabe der Texte (Text-PR #60); gefragt 14:15, bis 14:18 lief parallel die Arbeit am Review (zählt dort)                                               |
+| T-08       | Arbeit    | 2026-11-20 14:30 | 2026-11-20 14:31 | 0:01  | Freigabe eingetragen, Merge                                                                                                                              |
 | T-08       | Arbeit    | 2026-11-20 14:14 | 2026-11-20 14:18 | 0:04  | Doku, PR, Review                                                                                                                                         |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
@@ -75,4 +76,4 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | T-06       | 0:18   | 0:00      | 0:18   |
 | T-07       | 0:14   | 0:13      | 0:27   |
 | T-09       | 0:16   | 0:00      | 0:16   |
-| T-08       | 0:09   | läuft     | läuft  |
+| T-08       | 0:10   | 0:12      | 0:22   |
