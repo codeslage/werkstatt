@@ -1,6 +1,7 @@
 # Abhängigkeiten und Build-Ausgaben
 node_modules/
 dist/
+dist-beacon/
 coverage/
 .astro/
 .lighthouseci/

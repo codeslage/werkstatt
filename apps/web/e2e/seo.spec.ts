@@ -29,4 +29,5 @@ test('ein unbekannter Pfad zeigt die eigene 404-Seite', async ({ page: browser }
   const response = await browser.goto('/gibt-es-nicht/');
   expect(response?.status()).toBe(404);
   await expect(browser.getByTestId('not-found')).toBeVisible();
+  await expect(browser.locator('link[rel="canonical"]')).toHaveCount(0);
 });

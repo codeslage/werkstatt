@@ -11,20 +11,44 @@ const placeholders = Object.fromEntries(
 );
 
 const PORT = 4321;
+// Zweiter Build mit Test-Token: prüft, dass der Beacon die einzige fremde Quelle ist (AK-4, T-05).
+const BEACON_PORT = 4322;
+export const BEACON_TEST_TOKEN = 'e2e-test-token';
+
+// --ignore-lock: einmaliger Server im Vordergrund. Astro 7 schiebt `preview` sonst in Agent-Umgebungen
+// automatisch in den Hintergrund, und Playwright hielte den Prozess für beendet.
+const serve = (port: number) => `pnpm build && pnpm preview --host 127.0.0.1 --port ${port} --ignore-lock`;
 
 export default defineConfig({
   testDir: 'e2e',
   forbidOnly: Boolean(process.env.CI),
   reporter: process.env.CI ? 'github' : 'list',
-  use: { baseURL: `http://127.0.0.1:${PORT}` },
-  webServer: {
-    // --ignore-lock: einmaliger Server im Vordergrund. Astro 7 schiebt `preview` sonst in Agent-Umgebungen
-    // automatisch in den Hintergrund, und Playwright hielte den Prozess für beendet.
-    command: `pnpm build && pnpm preview --host 127.0.0.1 --port ${PORT} --ignore-lock`,
-    url: `http://127.0.0.1:${PORT}/`,
-    env: placeholders,
-    reuseExistingServer: !process.env.CI,
-    timeout: 120_000,
-  },
-  projects: [{ name: 'chromium', use: { ...devices['Desktop Chrome'] } }],
+  webServer: [
+    {
+      command: serve(PORT),
+      url: `http://127.0.0.1:${PORT}/`,
+      env: placeholders,
+      reuseExistingServer: !process.env.CI,
+      timeout: 120_000,
+    },
+    {
+      command: serve(BEACON_PORT),
+      url: `http://127.0.0.1:${BEACON_PORT}/`,
+      env: { ...placeholders, PUBLIC_CF_BEACON_TOKEN: BEACON_TEST_TOKEN, WEB_OUT_DIR: './dist-beacon' },
+      reuseExistingServer: !process.env.CI,
+      timeout: 120_000,
+    },
+  ],
+  projects: [
+    {
+      name: 'chromium',
+      testIgnore: 'beacon.spec.ts',
+      use: { ...devices['Desktop Chrome'], baseURL: `http://127.0.0.1:${PORT}` },
+    },
+    {
+      name: 'beacon',
+      testMatch: 'beacon.spec.ts',
+      use: { ...devices['Desktop Chrome'], baseURL: `http://127.0.0.1:${BEACON_PORT}` },
+    },
+  ],
 });
