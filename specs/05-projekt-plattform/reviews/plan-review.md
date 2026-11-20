@@ -189,3 +189,7 @@ Plan v3.1 und ADR 0012 sind überarbeitet:
 6. 🟡 Neues Risiko mit Regel: Secrets für Deployments liegen in Environments, die auf `main` beschränkt sind, nie als Repo-Secrets. Die Regel steht im Runbook `neues-projekt.md`, in `docs/secrets.md` und in ADR 0012.
 7. ⚪ Der Constitution-Check sagt jetzt „P1–P5; P1 und P4 blockieren“.
 8. ⚪ Ansatz und IX sagen jetzt „in öffentlichen Repos“ mit Verweis auf P1. Im ADR-Kontext steht „lesen alle Repos, schreiben nur in Projekt-Repos“. Die Klammer in der Stand-Zeile ist korrigiert.
+
+## Nachtrag nach den Antworten des Inhabers (Plan v4, 2026-11-20)
+
+Der Inhaber hat P1 so entschieden: kein automatischer Sync in private Repos, er rollt dort per Hand aus („CWK-Release“). Die Schreib-App ist deshalb nur noch für öffentliche Projekt-Repos installiert. Das verkleinert die Rechte gegenüber v3.1: In privaten Repos hat die App keinen Zugriff mehr. Die Befunde 6 aus dem 2. und 2 aus dem 3. Durchgang betreffen damit nur noch die Claude GitHub App in `platform` (P1 c, Entscheidung in Schritt 3). P2–P5 sind bestätigt, AK-22 ebenfalls. Ein weiterer Review-Durchgang war für diese Einschränkung nicht nötig; das nächste Review ist das von Schritt 1.
