@@ -10,6 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
+- 2026-11-21 – Phase 2, Schritt 3 (PR-6, T-12, Text-PR): Kontaktseite mit Rollenadresse und Mail-Link, kein Formular; Tests für AK-3 (#PR).
 - 2026-11-20 – Phase 2, Schritt 2 (PR-5, T-10, Text-PR): Logo-Zeichen und zweiteilige Wortmarke `codeslage_` im Header, Touch-Icon; Test für Logo, Favicon und Touch-Icon (#61).
 - 2026-11-20 – Phase 2, Schritt 1 (PR-3, T-08, Text-PR): Seitentitel, Beschreibungen, Navigation, Footer und Fehlerseite mit fertigen Texten; Tests gegen Platzhalter (#60).
 - 2026-11-20 – Phase 2, Schritt 2 (PR-4, T-09): Gestaltung der Webseite (Waldgrün, hell und dunkel nach Systemeinstellung, Systemschriften) mit Kontrastprüfung per axe in beiden Darstellungen (#59).
