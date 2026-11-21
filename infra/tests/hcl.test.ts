@@ -40,7 +40,7 @@ describe('tflint (AK-18)', () => {
 
 describe('tofu fmt (AK-30)', () => {
   it('der CI-Job prüft die Formatierung nur, statt sie zu korrigieren', () => {
-    const ci = readFileSync(join(REPO_ROOT, '.github', 'workflows', 'ci.yml'), 'utf8');
+    const ci = readFileSync(join(REPO_ROOT, '.github', 'workflows', 'cwk-code.yml'), 'utf8');
     expect(ci).toContain('tofu fmt -check -recursive -diff infra/tofu');
   });
 
