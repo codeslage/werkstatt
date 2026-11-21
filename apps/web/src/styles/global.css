@@ -1,6 +1,6 @@
 /* Gestaltung „Terminal“ nach specs/06-webseite/gestaltung.md (Stand Runde 7): eine Akzentfarbe (Waldgrün),
    hell und dunkel nach Systemeinstellung, nur Systemschriften (AK-4), Kontrast mindestens WCAG AA (AK-18).
-   Weitere Tokens (Fläche, Button) kommen mit ihrer ersten Verwendung (Artikel XV). */
+   Weitere Tokens (z. B. Fläche) kommen mit ihrer ersten Verwendung (Artikel XV). */
 
 :root {
   color-scheme: light dark;
@@ -10,6 +10,7 @@
   --text: #14181f;
   --muted: #4a5260;
   --accent: #1e7b4a;
+  --on-accent: #ffffff;
 
   --sans: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
   --mono: ui-monospace, 'SF Mono', Menlo, Consolas, 'Liberation Mono', monospace;
@@ -17,6 +18,7 @@
   --content-width: 65rem;
   --text-width: 65ch;
   --gutter: max(1rem, 4vw);
+  --radius: 6px;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -26,6 +28,7 @@
     --text: #e6eaf0;
     --muted: #9aa4b2;
     --accent: #6fd69a;
+    --on-accent: #0d1117;
   }
 }
 
@@ -90,6 +93,22 @@ a:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
   border-radius: 2px;
+}
+
+/* Hauptaktion, z. B. „Mail schreiben“ (gestaltung.md: Button in Akzentfarbe, Ecken 6 px). */
+.button {
+  display: inline-block;
+  padding: 0.6rem 1.1rem;
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contact-address {
+  font-size: 1.375rem;
+  font-weight: 600;
 }
 
 .site-header {
