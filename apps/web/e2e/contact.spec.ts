@@ -14,10 +14,21 @@ test('die Kontaktseite zeigt die Adresse und genau einen Mail-Link', async ({ pa
   expect(await mailLinks.getAttribute('href')).toMatch(new RegExp(`^mailto:${ADDRESS}(\\?|$)`));
 });
 
-for (const page of PAGES) {
-  test(`${page.path}: kein Formular, Mail-Links nur auf der Kontaktseite`, async ({ page: browser }) => {
-    await browser.goto(page.path);
-    await expect(browser.locator('form')).toHaveCount(0);
-    if (page.path !== '/kontakt/') await expect(browser.locator('a[href^="mailto:"]')).toHaveCount(0);
+// Alle Seiten aus PAGES und die Fehlerseite (über einen unbekannten Pfad).
+const PATHS = [...PAGES.map((page) => page.path), '/gibt-es-nicht/'];
+// Kontakt-Aufrufe erkennt der Test an ihrem Text; „Mail schreiben“ ist der mailto-Link auf der Kontaktseite selbst.
+const CONTACT_TEXT = /kontakt|schreib mir/i;
+
+for (const path of PATHS) {
+  test(`${path}: kein Formular, Kontakt-Links nur zur Kontaktseite, mailto nur dort`, async ({ page }) => {
+    await page.goto(path);
+    await expect(page.locator('form')).toHaveCount(0);
+    if (path !== '/kontakt/') await expect(page.locator('a[href^="mailto:"]')).toHaveCount(0);
+    const contactLinks = await page
+      .locator('a')
+      .filter({ hasText: CONTACT_TEXT })
+      .evaluateAll((links) => links.map((link) => link.getAttribute('href')));
+    expect(contactLinks.length).toBeGreaterThan(0);
+    for (const href of contactLinks) expect(href).toBe('/kontakt/');
   });
 }
