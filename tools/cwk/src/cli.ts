@@ -2,12 +2,16 @@
 // GitHub; die Prüflogik steckt in check.ts, ci-ok.ts und settings.ts.
 
 import { spawnSync } from 'node:child_process';
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readdirSync, readFileSync } from 'node:fs';
+import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';
 import { checkProject } from './check.ts';
 import { evaluateNeeds } from './ci-ok.ts';
+import { spawnRun } from './gh.ts';
+import { createProject } from './new.ts';
 import { parseConfig, parseManifest, type Visibility } from './schema.ts';
+import { syncSecrets } from './secrets.ts';
 import { checkSettings, CODEOWNERS_PATHS } from './settings.ts';
 
 const readIfExists = (path: string) => (existsSync(path) ? readFileSync(path, 'utf8') : undefined);
@@ -93,14 +97,48 @@ async function settings(): Promise<string[]> {
     get,
     repo,
     CODEOWNERS_PATHS.filter((path) => existsSync(path)),
+    process.env.GITHUB_SHA,
   );
   for (const note of result.notes) console.log(`::notice::${note}`);
   return result.errors;
 }
 
+// new und secrets laufen lokal in werkstatt mit dem gh-Login des Inhabers; die Sperrliste kommt aus .sperrliste.
+const blocklist = () => readIfExists('.sperrliste') ?? '';
+const today = () => new Date().toISOString().slice(0, 10);
+const printNotes = (notes: string[]): string[] => {
+  for (const note of notes) console.log(`Hinweis: ${note}`);
+  return [];
+};
+
+function newProject(args: string[]): string[] {
+  const { values, positionals } = parseArgs({
+    args,
+    allowPositionals: true,
+    options: { private: { type: 'boolean' }, 'no-code': { type: 'boolean' } },
+  });
+  if (positionals.length !== 1) return ['Aufruf: cwk new <name> [--private] [--no-code]'];
+  const notes = createProject(
+    { name: positionals[0] ?? '', isPrivate: values.private === true, code: values['no-code'] !== true },
+    {
+      run: spawnRun,
+      workDir: mkdtempSync(join(tmpdir(), 'cwk-new-')),
+      blocklist: blocklist(),
+      manifest: parseManifest(readFileSync(join('cwk', 'manifest.json'), 'utf8')),
+      today: today(),
+      sleep: (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms),
+    },
+  );
+  return printNotes(notes);
+}
+
+const secrets = (): string[] => printNotes(syncSecrets({ run: spawnRun, blocklist: blocklist(), today: today() }));
+
 const COMMANDS: Record<string, (args: string[]) => string[] | Promise<string[]>> = {
   check,
   'ci-ok': ciOk,
+  new: newProject,
+  secrets,
   settings,
 };
 
@@ -111,7 +149,12 @@ async function main(): Promise<void> {
     console.error(`Aufruf: cwk <${Object.keys(COMMANDS).join(' | ')}>`);
     process.exit(2);
   }
-  const errors = await command(args);
+  let errors: string[];
+  try {
+    errors = await command(args);
+  } catch (error) {
+    errors = [(error as Error).message];
+  }
   for (const error of errors) console.error(`cwk ${name}: ${error}`);
   process.exit(errors.length === 0 ? 0 : 1);
 }
