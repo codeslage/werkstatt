@@ -38,14 +38,22 @@ async function rulesetErrors(get: GitHubGet, repo: string): Promise<string[]> {
   return RULESETS.filter((name) => !names.includes(name)).map((name) => `Ruleset ${name} fehlt`);
 }
 
-function pullRequestErrors(rule: Rule | undefined): string[] {
-  if (rule === undefined) return [];
-  const parameters = rule.parameters ?? {};
+/**
+ * main-checks und main-approval haben je eine pull_request-Regel; GitHub wendet beide an. Deshalb zählt je Feld
+ * die strengste Einstellung über alle Regeln, nicht die erste in der Antwort.
+ */
+function pullRequestErrors(rules: Rule[]): string[] {
+  const all = rules.filter((rule) => rule.type === 'pull_request').map((rule) => rule.parameters ?? {});
+  if (all.length === 0) return [];
+  const any = (field: string) => all.some((parameters) => parameters[field] === true);
   const required: [string, boolean][] = [
-    ['required_approving_review_count', Number(parameters.required_approving_review_count) >= 1],
-    ['require_code_owner_review', parameters.require_code_owner_review === true],
-    ['dismiss_stale_reviews_on_push', parameters.dismiss_stale_reviews_on_push === true],
-    ['require_last_push_approval', parameters.require_last_push_approval === true],
+    [
+      'required_approving_review_count',
+      all.some((parameters) => Number(parameters.required_approving_review_count) >= 1),
+    ],
+    ['require_code_owner_review', any('require_code_owner_review')],
+    ['dismiss_stale_reviews_on_push', any('dismiss_stale_reviews_on_push')],
+    ['require_last_push_approval', any('require_last_push_approval')],
   ];
   return required.filter(([, ok]) => !ok).map(([field]) => `main: pull_request ohne ${field}`);
 }
@@ -63,24 +71,35 @@ async function branchErrors(get: GitHubGet, repo: string): Promise<string[]> {
   const types = rules.map((rule) => rule.type);
   return [
     ...REQUIRED_RULES.filter((type) => !types.includes(type)).map((type) => `main: Regel ${type} fehlt`),
-    ...pullRequestErrors(rules.find((rule) => rule.type === 'pull_request')),
+    ...pullRequestErrors(rules),
     ...statusCheckErrors(rules),
   ];
 }
 
-/** GitHub meldet hier u. a. „Unknown owner“, wenn das Team kein Schreibrecht hat und deshalb kein Code-Owner ist. */
-async function codeownerErrors(get: GitHubGet, repo: string, hasCodeowners: boolean): Promise<string[]> {
-  if (!hasCodeowners) return ['CODEOWNERS fehlt'];
+/** Fundorte von CODEOWNERS in der Reihenfolge, in der GitHub sucht; die erste gefundene Datei gilt. */
+export const CODEOWNERS_PATHS = ['.github/CODEOWNERS', 'CODEOWNERS', 'docs/CODEOWNERS'];
+
+/**
+ * Nur die CWK-Datei im Wurzelverzeichnis ist erlaubt, sonst könnte eine andere Datei sie aushebeln. GitHub meldet
+ * unter /codeowners/errors u. a. „Unknown owner“, wenn das Team kein Schreibrecht hat und deshalb kein Code-Owner ist.
+ */
+async function codeownerErrors(get: GitHubGet, repo: string, present: string[]): Promise<string[]> {
+  if (!present.includes('CODEOWNERS')) return ['CODEOWNERS fehlt'];
+  const elsewhere = present.filter((path) => path !== 'CODEOWNERS');
+  if (elsewhere.length > 0) {
+    return elsewhere.map((path) => `${path}: nur CODEOWNERS im Wurzelverzeichnis ist erlaubt (CWK)`);
+  }
   const errors = ((await get(`/repos/${repo}/codeowners/errors`)) as { errors?: unknown } | null)?.errors;
   return expectArray(errors, 'CODEOWNERS').map((error) => `CODEOWNERS Zeile ${error.line}: ${error.message}`);
 }
 
-export async function checkSettings(get: GitHubGet, repo: string, hasCodeowners: boolean): Promise<SettingsResult> {
+/** `codeowners`: die Pfade aus CODEOWNERS_PATHS, die es im Repo gibt. */
+export async function checkSettings(get: GitHubGet, repo: string, codeowners: string[]): Promise<SettingsResult> {
   if ((await visibilityOf(get, repo)) !== 'public') return { errors: [], notes: [PRIVATE_NOTE] };
   const errors = [
     ...(await rulesetErrors(get, repo)),
     ...(await branchErrors(get, repo)),
-    ...(await codeownerErrors(get, repo, hasCodeowners)),
+    ...(await codeownerErrors(get, repo, codeowners)),
   ];
   return { errors, notes: [] };
 }

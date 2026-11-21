@@ -131,6 +131,13 @@ describe('cwk check: Pins und Rückstufung (AK-9)', () => {
     ]);
   });
 
+  it('erkennt Verweise unabhängig von Groß- und Kleinschreibung', () => {
+    const other = { path: '.github/workflows/x.yml', text: 'uses: Codeslage/Werkstatt/.github/workflows/a.yml@main\n' };
+    expect(checkProject(input({}, { workflows: [...input().workflows, other] }))).toEqual([
+      '.github/workflows/x.yml: Verweis auf codeslage/werkstatt mit @main statt @' + SHA,
+    ]);
+  });
+
   it('meldet einen Stand, der kein Nachfolger des Basis-Branches ist', () => {
     const ancestorCalls: [string, string][] = [];
     const isAncestor = (older: string, newer: string) => {

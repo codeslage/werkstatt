@@ -94,7 +94,10 @@ describe('cwk-code.yml: Code-Teil (AK-3, AK-27)', () => {
 
   it('führt die IaC-Prüfungen nur bei *.tf-Dateien aus', () => {
     const iac = steps(codeJobs.get('iac') ?? '');
-    expect(iac.some((step) => step.includes("git ls-files '*.tf'"))).toBe(true);
+    const detect = iac.find((step) => step.includes("git ls-files '*.tf'")) ?? '';
+    // *.tf außerhalb von infra/tofu/ macht den Job rot, statt die Prüfung still auszulassen (Review PR #62, Befund 3).
+    expect(detect).toContain("grep -v '^infra/tofu/'");
+    expect(detect).toMatch(/::error::.*\n\s+exit 1/);
     const tofuSteps = iac.filter((step) => /tofu|tflint|cwk-source/.test(step) && !step.includes('git ls-files'));
     expect(tofuSteps).toHaveLength(4);
     for (const step of tofuSteps) expect(step).toContain("if: steps.tf.outputs.present == 'true'");

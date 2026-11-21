@@ -25,7 +25,8 @@ const PLACEHOLDER = '@CWK_REF';
 /** Start- und Endzeile eines Projektblocks, in Markdown als HTML-Kommentar, in YAML als `#`-Kommentar. */
 const BLOCK_START = /^\s*(<!-- cwk:project:start -->|# cwk:project:start)\s*$/;
 const BLOCK_END = /^\s*(<!-- cwk:project:end -->|# cwk:project:end)\s*$/;
-const WERKSTATT_USES = /uses:\s*['"]?codeslage\/werkstatt\/[^@\s'"]+@([^\s'"]+)/g;
+// GitHub löst Owner und Repo ohne Rücksicht auf Groß-/Kleinschreibung auf, deshalb `i`.
+const WERKSTATT_USES = /uses:\s*['"]?codeslage\/werkstatt\/[^@\s'"]+@([^\s'"]+)/gi;
 
 /** Ersetzt den Inhalt des Projektblocks durch nichts; die Markierungen bleiben Teil des Vergleichs. */
 function withoutProjectBlock(text: string): string | undefined {

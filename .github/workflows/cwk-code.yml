@@ -108,9 +108,18 @@ jobs:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
       - id: tf
-        name: Gibt es *.tf-Dateien?
+        name: Gibt es *.tf-Dateien (nur unter infra/tofu/)?
+        # Konvention des CWK: je Wurzel ein Ordner infra/tofu/<name>/. *.tf an anderer Stelle würde sonst nicht
+        # geprüft und ist deshalb ein Fehler, kein stilles Überspringen.
         run: |
-          if git ls-files '*.tf' | grep -q .; then echo "present=true" >> "$GITHUB_OUTPUT"; fi
+          files="$(git ls-files '*.tf')"
+          [ -n "$files" ] || exit 0
+          outside="$(printf '%s\n' "$files" | grep -v '^infra/tofu/' || true)"
+          if [ -n "$outside" ]; then
+            echo "::error::*.tf nur unter infra/tofu/ (CWK-Konvention): $(echo $outside)"
+            exit 1
+          fi
+          echo "present=true" >> "$GITHUB_OUTPUT"
 
       - if: steps.tf.outputs.present == 'true'
         uses: ./.github/actions/cwk-source

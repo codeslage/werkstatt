@@ -8,7 +8,7 @@ import { parseArgs } from 'node:util';
 import { checkProject } from './check.ts';
 import { evaluateNeeds } from './ci-ok.ts';
 import { parseConfig, parseManifest, type Visibility } from './schema.ts';
-import { checkSettings } from './settings.ts';
+import { checkSettings, CODEOWNERS_PATHS } from './settings.ts';
 
 const readIfExists = (path: string) => (existsSync(path) ? readFileSync(path, 'utf8') : undefined);
 const visibility = (): Visibility => (process.env.CWK_VISIBILITY === 'public' ? 'public' : 'private');
@@ -89,7 +89,11 @@ async function settings(): Promise<string[]> {
     if (!response.ok) throw new Error(`GitHub ${path}: HTTP ${response.status}`);
     return response.json();
   };
-  const result = await checkSettings(get, repo, existsSync('CODEOWNERS'));
+  const result = await checkSettings(
+    get,
+    repo,
+    CODEOWNERS_PATHS.filter((path) => existsSync(path)),
+  );
   for (const note of result.notes) console.log(`::notice::${note}`);
   return result.errors;
 }

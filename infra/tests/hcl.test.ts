@@ -4,10 +4,10 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { afterAll, describe, expect, it } from 'vitest';
 
-// Prüfungen für HCL im CI-Job „Infra (OpenTofu)“, bewiesen mit Gegenbeispielen.
+// Prüfungen für HCL im CI-Job „Code / IaC (OpenTofu)“ (cwk-code.yml), bewiesen mit Gegenbeispielen.
 // AK-18: tflint mit der echten Repo-Konfiguration meldet toten Code. Wird .tflint.hcl gelockert, wird der Test rot.
 // AK-30: falsch formatiertes HCL macht die CI rot. Wird aus „fmt -check“ ein reines „fmt“, wird der Test rot.
-// Braucht tofu und tflint im PATH (CI-Job „Infra“, lokal: docs/runbooks/tofu-state.md).
+// Braucht tofu und tflint im PATH (CI-Job „Infra-Tests“, lokal: docs/runbooks/tofu-state.md).
 
 const REPO_ROOT = join(import.meta.dirname, '..', '..');
 const REPO_CONFIG = join(REPO_ROOT, '.tflint.hcl');
