@@ -82,7 +82,7 @@ Die Dateien stehen unten in „Dateien (Stand Runde 7)“.
 Offen für Stufe 6 (nicht blockierend):
 
 - Die Wortmarke in `logo.svg` / `logo-dunkel.svg` ist `<text>` mit dem System-Monospace-Stapel und sieht daher je Gerät leicht anders aus. Für Verwendung außerhalb der Seite (Social, Folien) in Pfade umwandeln; dafür braucht es eine frei lizenzierte Monospace (z. B. JetBrains Mono oder IBM Plex Mono, beide OFL) und ein Werkzeug wie `fonttools`. Beides ist hier nicht installiert, Download nur nach Freigabe.
-- Zusätzlich `apple-touch-icon.png` (180 px) und ggf. `favicon.ico` (32 px) aus `favicon.svg` erzeugen.
+- ~~Zusätzlich `apple-touch-icon.png` (180 px) aus `favicon.svg` erzeugen.~~ Erledigt in T-10 (aus `logo-zeichen-flach.svg`). Ein `favicon.ico` ist nicht nötig, solange alle Zielbrowser SVG-Favicons können.
 
 ## Grundlayout
 

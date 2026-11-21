@@ -32,6 +32,8 @@ apps/web/                      # neu, Astro, statisch
 ├─ public/
 │  ├─ _headers                 # Sicherheits-Header für Pages (AK-9)
 │  ├─ favicon.svg              # aus specs/06-webseite/gestaltung/ (AK-17)
+│  ├─ logo-zeichen.svg         # Zeichen mit Relief für den Header (AK-17)
+│  ├─ apple-touch-icon.png     # 180 px aus dem flachen Zeichen (T-10)
 │  └─ robots.txt
 ├─ src/
 │  ├─ layouts/Base.astro       # <html lang="de">, Titel, Beschreibung, Canonical, Favicon, Beacon, Header, Footer

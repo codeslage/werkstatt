@@ -106,6 +106,34 @@ a:focus-visible {
   text-decoration: none;
 }
 
+/* Wortmarke zweiteilig: „code“ leicht in Nebentextfarbe, „slage_“ kräftig in Textfarbe (gestaltung.md). */
+.brand {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  color: var(--text);
+}
+
+/* Grundlinie der Wortmarke auf der Unterkante der Kachel (gestaltung.md). Das SVG hat unter der Kachel
+   7 von 44 Einheiten Rand für den Schatten; um so viel wird das Bild nach unten verschoben. */
+.brand img {
+  transform: translateY(calc(38px * 7 / 44));
+}
+
+.brand-name {
+  font-size: 1.25rem;
+  letter-spacing: -0.01em;
+}
+
+.brand-code {
+  color: var(--muted);
+  font-weight: 300;
+}
+
+.brand-slage {
+  font-weight: 800;
+}
+
 .site-header a[aria-current='page'] {
   text-decoration: underline;
 }
