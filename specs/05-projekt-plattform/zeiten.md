@@ -48,7 +48,9 @@ Methode:
 | Implement PR-1  | Arbeit    | 2026-11-21 18:13 | 2026-11-21 18:20 | 0:07  | CI: `hcl.test.ts` auf `cwk-code.yml` umgestellt, Review neu gestartet. 17:15–18:13 (Folgetag) Pause: Review-Agent am Nutzungslimit abgebrochen                                                           |
 | Implement PR-1  | Arbeit    | 2026-11-21 18:20 | 2026-11-21 18:25 | 0:05  | Review 1 umgesetzt (🔴 zwei pull_request-Regeln), Review 2 (✅), `main` gemergt, Befunde aus Review 2; Freigabe T-06 angefragt                                                                           |
 | Implement PR-1  | Wartezeit | 2026-11-21 18:25 | 2026-11-21 18:37 | 0:12  | Freigabe der Umstellung des Rulesets (T-06)                                                                                                                                                              |
-| Implement PR-1  | Arbeit    | 2026-11-21 18:37 | 2026-11-21 18:45 | 0:08  | Ruleset umgestellt, CI neu, Nachtrag Protokoll, Merge #62 (Ende = geplanter Merge, wird bei Abweichung korrigiert)                                                                                       |
+| Implement PR-1  | Arbeit    | 2026-11-21 18:37 | 2026-11-21 18:44 | 0:07  | Ruleset umgestellt, CI neu, Nachtrag Protokoll, Merge #62 (Merge 18:44)                                                                                                                                  |
+| Implement PR-2  | Wartezeit | 2026-11-21 18:44 | 2026-11-21 19:02 | 0:18  | Entscheidung, ob PR-2 beginnt                                                                                                                                                                            |
+| Implement PR-2  | Arbeit    | 2026-11-21 19:02 |                  |       | T-09 `cwk new`/`cwk secrets`, T-11 Runbooks (läuft)                                                                                                                                                      |
 
 ## Summen
 
@@ -59,6 +61,6 @@ Methode:
 | Clarify         | 0:06   | 0:12      | 0:18   |
 | Plan            | 0:33   | 0:02      | 0:35   |
 | Tasks + Analyze | 0:19   | 0:53      | 1:12   |
-| Implement PR-1  | 0:40   | 0:12      | 0:52   |
+| Implement PR-1  | 0:39   | 0:12      | 0:51   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.

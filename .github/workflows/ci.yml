@@ -43,6 +43,12 @@ jobs:
       - name: Workflows
         run: pnpm test:infra drift.test.ts history-scan.test.ts simulate-failure.test.ts cwk-workflows.test.ts
 
+      # werkstatt muss öffentlich sein (Phase 1, AK-1); cwk settings wäre bei einem privaten Repo nur grün mit Hinweis.
+      - name: werkstatt öffentlich, main geschützt, ci-ok Pflicht (AK-1)
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: pnpm test:infra repo.test.ts
+
   web:
     name: Webseite (E2E + Lighthouse)
     runs-on: ubuntu-latest

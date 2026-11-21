@@ -130,6 +130,14 @@ describe('cwk settings: CODEOWNERS und Antworten der API (AK-4)', () => {
     expect(result.errors).toEqual(['CODEOWNERS Zeile 1: Unknown owner on line 1: @codeslage/maintainers']);
   });
 
+  // Sonst prüft GitHub den Stand von main, nicht den des PRs (Live-Lauf gegen werkstatt, T-08).
+  it('prüft CODEOWNERS im geprüften Commit, nicht auf main', async () => {
+    const unknown = { errors: [{ line: 1, message: 'Unknown owner' }] };
+    const get = api({ [`/repos/${REPO}/codeowners/errors?ref=${'d'.repeat(40)}`]: unknown });
+    const result = await checkSettings(get, REPO, ROOT_ONLY, 'd'.repeat(40));
+    expect(result.errors).toEqual(['CODEOWNERS Zeile 1: Unknown owner']);
+  });
+
   // GitHub nimmt die erste Datei aus .github/, Wurzel, docs/ (Review PR #62, Befund 2).
   it('ist rot, wenn eine CODEOWNERS-Datei an anderer Stelle Vorrang haben könnte', async () => {
     for (const other of ['.github/CODEOWNERS', 'docs/CODEOWNERS']) {
