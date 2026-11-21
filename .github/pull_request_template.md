@@ -22,6 +22,6 @@
 - [ ] **Sicherheit und Datenschutz:** Least Privilege, Eingaben an Systemgrenzen geprüft, keine personenbezogenen Daten ohne Zweck (VII, VIII)
 - [ ] **Zerstörerisches:** keine zerstörerische Aktion, oder sie ist hier genannt und vom Inhaber freigegeben (V)
 - [ ] **Kein unnötiger Code:** kein toter Code; neue Abhängigkeiten sind begründet, und `pnpm-workspace.yaml` enthält keine neue Ausnahme (XI, XV)
-- [ ] **Neue CI-Jobs** sind im Ruleset als Pflicht-Check eingetragen
+- [ ] **Neue CI-Jobs** stehen in `needs` von `ci-ok`, dem einzigen Pflicht-Check
 - [ ] **Doku im selben PR:** Specs, Tasks, Protokolle, Runbooks, Changelog (bei M Pflicht) (XII)
 - [ ] **Review-Agent** `code-reviewer` gelaufen, kein offenes 🔴, Ergebnis abgelegt (`docs/prozess/code-review.md`)

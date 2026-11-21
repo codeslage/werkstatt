@@ -1,0 +1,20 @@
+name: CWK-Quelle
+description: >-
+  Stellt den Stand von werkstatt aus cwk.json bereit und setzt CWK_DIR (Plan 05). In werkstatt ist das Repo selbst
+  die Quelle. Gemeinsam für cwk-rules.yml, cwk-code.yml und die ci.yml der Projekte.
+runs:
+  using: composite
+  steps:
+    # Der Stand kommt aus dem PR und wird deshalb geprüft, bevor er an git geht (Artikel VII).
+    - name: CWK-Quelle bereitstellen
+      shell: bash
+      run: |
+        if [ "$GITHUB_REPOSITORY" = codeslage/werkstatt ]; then
+          echo "CWK_DIR=$GITHUB_WORKSPACE" >> "$GITHUB_ENV"
+          exit 0
+        fi
+        ref="$(jq -r .cwk cwk.json)"
+        printf '%s' "$ref" | grep -Eqx '[0-9a-f]{40}' || { echo "::error::cwk.json: ungültiger CWK-Stand"; exit 1; }
+        git clone -q --filter=blob:none https://github.com/codeslage/werkstatt "$RUNNER_TEMP/cwk"
+        git -C "$RUNNER_TEMP/cwk" checkout -q "$ref"
+        echo "CWK_DIR=$RUNNER_TEMP/cwk" >> "$GITHUB_ENV"

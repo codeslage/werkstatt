@@ -8,9 +8,6 @@ import { describe, expect, it } from 'vitest';
 
 const WORKFLOWS = join(import.meta.dirname, '..', '..', '.github', 'workflows');
 const drift = readFileSync(join(WORKFLOWS, 'drift.yml'), 'utf8');
-const ci = readFileSync(join(WORKFLOWS, 'ci.yml'), 'utf8');
-
-const envValue = (workflow: string, name: string) => new RegExp(`^\\s+${name}: (\\S+)$`, 'm').exec(workflow)?.[1];
 
 describe('drift.yml (AK-5, AK-14)', () => {
   it('läuft wöchentlich, bei PRs auf infra/ und auf Knopfdruck', () => {
@@ -33,8 +30,8 @@ describe('drift.yml (AK-5, AK-14)', () => {
     expect(drift).toMatch(/^permissions:\s*\n\s+contents: read\s*$/m);
   });
 
-  it('nutzt dieselbe OpenTofu-Version wie ci.yml', () => {
-    expect(envValue(drift, 'TOFU_VERSION')).toBe(envValue(ci, 'TOFU_VERSION'));
-    expect(envValue(drift, 'TOFU_SHA256')).toBe(envValue(ci, 'TOFU_SHA256'));
+  it('installiert OpenTofu über das gemeinsame Skript, also in derselben Version wie die CI', () => {
+    expect(drift).toMatch(/run: sh \.github\/scripts\/install-tofu\.sh$/m);
+    expect(drift).not.toMatch(/TOFU_VERSION/);
   });
 });

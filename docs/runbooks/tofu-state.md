@@ -25,7 +25,7 @@ Die Konto-ID steht nie im Code. Sie kommt nur über `TF_VAR_account_id` und den 
 
 ## Prüfen vor dem PR
 
-Dieselben Prüfungen wie der CI-Job „Infra (OpenTofu)“ (tflint 0.66.0 aus den Releases von `terraform-linters/tflint`, Prüfsumme vergleichen):
+Dieselben Prüfungen wie der CI-Job „Code / IaC (OpenTofu)“ (`cwk-code.yml`; tflint 0.66.0 aus den Releases von `terraform-linters/tflint`, Prüfsumme vergleichen):
 
 ```bash
 tofu fmt -check -recursive infra/tofu

@@ -24,11 +24,6 @@ concurrency:
   group: drift-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  # Gleich wie in ci.yml (infra/tests/drift.test.ts prüft das).
-  TOFU_VERSION: 1.13.1
-  TOFU_SHA256: 378ada19d4bc70c43732004e8159be771b23b9a5afdf059e5f8a2b3fa2c70a69
-
 jobs:
   drift:
     name: Drift (OpenTofu live)
@@ -52,14 +47,9 @@ jobs:
 
       - uses: ./.github/actions/setup
 
-      - name: OpenTofu installieren (gepinnt, Prüfsumme)
-        run: |
-          mkdir -p "$RUNNER_TEMP/bin"
-          tofu="tofu_${TOFU_VERSION}_linux_amd64.tar.gz"
-          curl -sSfL -o "$RUNNER_TEMP/$tofu" "https://github.com/opentofu/opentofu/releases/download/v${TOFU_VERSION}/$tofu"
-          echo "${TOFU_SHA256}  $RUNNER_TEMP/$tofu" | sha256sum -c -
-          tar -xzf "$RUNNER_TEMP/$tofu" -C "$RUNNER_TEMP/bin" tofu
-          echo "$RUNNER_TEMP/bin" >> "$GITHUB_PATH"
+      # Dieselbe Version wie in der CI (gemeinsames Skript, infra/tests/drift.test.ts).
+      - name: OpenTofu installieren
+        run: sh .github/scripts/install-tofu.sh
 
       # Die Logs sind öffentlich: Zonen- und Datensatz-IDs (32 Hex-Zeichen) werden maskiert.
       - name: plan gegen Cloudflare (AK-5)

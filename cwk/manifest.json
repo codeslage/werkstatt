@@ -1,0 +1,238 @@
+{
+  "files": [
+    {
+      "source": "CONSTITUTION.md",
+      "target": "CONSTITUTION.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "docs/prozess/aenderungsklassen.md",
+      "target": "docs/prozess/aenderungsklassen.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "docs/prozess/code-review.md",
+      "target": "docs/prozess/code-review.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "docs/prozess/governance.md",
+      "target": "docs/prozess/governance.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "docs/prozess/release.md",
+      "target": "docs/prozess/release.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "docs/prozess/sdd-ablauf.md",
+      "target": "docs/prozess/sdd-ablauf.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "specs/_vorlagen/change.md",
+      "target": "specs/_vorlagen/change.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "specs/_vorlagen/plan.md",
+      "target": "specs/_vorlagen/plan.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "specs/_vorlagen/retro.md",
+      "target": "specs/_vorlagen/retro.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "specs/_vorlagen/spec.md",
+      "target": "specs/_vorlagen/spec.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "specs/_vorlagen/tasks.md",
+      "target": "specs/_vorlagen/tasks.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "specs/_vorlagen/zeiten.md",
+      "target": "specs/_vorlagen/zeiten.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".claude/commands/change.md",
+      "target": ".claude/commands/change.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".claude/commands/hotfix.md",
+      "target": ".claude/commands/hotfix.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".claude/commands/release.md",
+      "target": ".claude/commands/release.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".claude/commands/sdd-analyze.md",
+      "target": ".claude/commands/sdd-analyze.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".claude/commands/sdd-clarify.md",
+      "target": ".claude/commands/sdd-clarify.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".claude/commands/sdd-implement.md",
+      "target": ".claude/commands/sdd-implement.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".claude/commands/sdd-plan.md",
+      "target": ".claude/commands/sdd-plan.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".claude/commands/sdd-retro.md",
+      "target": ".claude/commands/sdd-retro.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".claude/commands/sdd-specify.md",
+      "target": ".claude/commands/sdd-specify.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".claude/commands/sdd-tasks.md",
+      "target": ".claude/commands/sdd-tasks.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".claude/commands/sdd-verify.md",
+      "target": ".claude/commands/sdd-verify.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".claude/agents/code-reviewer.md",
+      "target": ".claude/agents/code-reviewer.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "cwk/files/CLAUDE.md",
+      "target": "CLAUDE.md",
+      "part": "rules",
+      "mode": "extendable"
+    },
+    {
+      "source": "cwk/files/CODEOWNERS",
+      "target": "CODEOWNERS",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "cwk/files/.github/workflows/ci.yml",
+      "target": ".github/workflows/ci.yml",
+      "part": "rules",
+      "mode": "extendable"
+    },
+    {
+      "source": ".github/pull_request_template.md",
+      "target": ".github/pull_request_template.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".github/actions/cwk-source/action.yml",
+      "target": ".github/actions/cwk-source/action.yml",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".github/actions/setup/action.yml",
+      "target": ".github/actions/setup/action.yml",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".editorconfig",
+      "target": ".editorconfig",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": ".prettierignore",
+      "target": ".prettierignore",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "packages/config/prettier.config.js",
+      "target": "prettier.config.js",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "cspell.config.yaml",
+      "target": "cspell.config.yaml",
+      "part": "rules",
+      "mode": "extendable"
+    },
+    {
+      "source": "packages/config/eslint.config.js",
+      "target": "eslint.config.js",
+      "part": "code",
+      "mode": "exact"
+    },
+    {
+      "source": "packages/config/tsconfig.json",
+      "target": "tsconfig.base.json",
+      "part": "code",
+      "mode": "exact"
+    },
+    {
+      "source": ".dependency-cruiser.json",
+      "target": ".dependency-cruiser.json",
+      "part": "code",
+      "mode": "exact"
+    },
+    {
+      "source": "knip.json",
+      "target": "knip.json",
+      "part": "code",
+      "mode": "exact"
+    },
+    {
+      "source": ".tflint.hcl",
+      "target": ".tflint.hcl",
+      "part": "code",
+      "mode": "exact"
+    }
+  ]
+}
