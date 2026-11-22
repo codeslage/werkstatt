@@ -1,6 +1,6 @@
 # Code-Review
 
-> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-19 (Hinweis Abnahme auf `main` bis Phase S)
+> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-22 (Vorschlag: Review je PR-Gruppe; vorher: Hinweis Abnahme auf `main` bis Phase S)
 > Verbindlich über `CONSTITUTION.md`, Abschnitt „Verbindliche Prozesse“. Gilt für jeden PR und für SDD-Stufe 7 (Verify).
 
 ## Ziel
@@ -26,11 +26,11 @@ Die Trennung bei Ebene 2 ist wichtig: Wer den Code geschrieben hat, übersieht d
 
 Der Agent schreibt nicht selbst. Die aufrufende Sitzung übernimmt seine Ausgabe **unverändert**:
 
-| Klasse (`aenderungsklassen.md`) | Ablage                                                                    |
-| ------------------------------- | ------------------------------------------------------------------------- |
-| V – Vorhaben                    | `specs/NN-name/reviews/T-xx.md` (bei mehreren Durchläufen: `T-xx-2.md` …) |
-| K – Kleine Änderung             | Abschnitt „Review“ der Change-Seite in `changes/`                         |
-| M – Mini                        | Zusammenfassung in der PR-Beschreibung                                    |
+| Klasse (`aenderungsklassen.md`) | Ablage                                                                                                               |
+| ------------------------------- | -------------------------------------------------------------------------------------------------------------------- |
+| V – Vorhaben                    | `specs/NN-name/reviews/PR-xx.md` je PR-Gruppe (bei mehreren Durchläufen: `PR-xx-2.md` …; ältere Vorhaben: `T-xx.md`) |
+| K – Kleine Änderung             | Abschnitt „Review“ der Change-Seite in `changes/`                                                                    |
+| M – Mini                        | Zusammenfassung in der PR-Beschreibung                                                                               |
 
 So kann die Retro die Reviews auswerten (z. B. „welche Befunde kamen wiederholt?“).
 

@@ -10,6 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
+- 2026-11-22 – Schlanke Steuerung in Stufe 6: eine Sitzung je Task mit Kontextpaket, Review je PR-Gruppe, Werkzeug `tools/sdd-dirigent`; Verify meldet nur, Retro setzt nicht um; neue Spalten in der tasks-Vorlage (Change `changes/2026-11-22-schlanke-steuerung.md`, Entwurf).
 - 2026-11-21 – Phase 1.5, Schritt 1 (PR-1, T-01 bis T-06, T-47): CodeslageWerkzeugKasten in werkstatt – `tools/cwk` (Schema, `check`, `ci-ok`, `settings`), `cwk/manifest.json` mit Regel- und Code-Teil, wiederverwendbare Workflows `cwk-rules.yml` und `cwk-code.yml`; einziger Pflicht-Check ist `ci-ok` (#62).
 - 2026-11-20 – Phase 2, Schritt 2 (PR-5, T-10, Text-PR): Logo-Zeichen und zweiteilige Wortmarke `codeslage_` im Header, Touch-Icon; Test für Logo, Favicon und Touch-Icon (#61).
 - 2026-11-20 – Phase 2, Schritt 1 (PR-3, T-08, Text-PR): Seitentitel, Beschreibungen, Navigation, Footer und Fehlerseite mit fertigen Texten; Tests gegen Platzhalter (#60).

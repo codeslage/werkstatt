@@ -193,3 +193,6 @@ networkidle
 nosniff
 testid
 Anbieterkennzeichnung
+ausgecheckt
+committet
+Zeitentabelle
