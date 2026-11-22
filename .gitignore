@@ -26,3 +26,6 @@ playwright-report/
 # Betriebssystem
 .DS_Store
 Thumbs.db
+
+# Kontextpakete des SDD-Dirigenten (Stufe 6, docs/prozess/sdd-ablauf.md)
+.sdd-dirigent/
