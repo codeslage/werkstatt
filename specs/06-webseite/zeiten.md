@@ -73,6 +73,7 @@ Methode:
 | T-12       | Arbeit    | 2026-11-23 13:42 | 2026-11-23 13:43 | 0:01  | Merge (#63), Arbeitsregel festgehalten                                                                                                                      |
 | T-11       | Arbeit    | 2026-11-23 13:43 | 2026-11-23 13:50 | 0:07  | LinkedIn im Browser (Anmeldeseite), PDF gelesen, Entwurf „Über mich“, Foto erhalten (Wartezeit auf PDF und Foto nicht getrennt messbar, als Arbeit gezählt) |
 | T-16       | Arbeit    | 2026-11-23 13:50 | 2026-11-23 13:55 | 0:05  | Foto zugeschnitten (ohne Lanyard) und ohne Metadaten neu gerendert, `about.spec.ts` (rot), Seite, Lighthouse, Scan, Doku, PR                                |
+| T-16       | Arbeit    | 2026-11-23 13:56 | 2026-11-23 13:58 | 0:02  | Foto weniger eng (Wunsch des Inhabers), Review, Doku, Freigabe („besser :)“) eingetragen, Merge                                                             |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -98,4 +99,4 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | T-10       | 0:19   | 2:06      | 2:25   |
 | T-12       | 0:30   | 0:17      | 0:47   |
 | T-11       | 0:07   | 0:00      | 0:07   |
-| T-16       | 0:05   | läuft     | läuft  |
+| T-16       | 0:07   | 0:00      | 0:07   |
