@@ -4,3 +4,7 @@
 export const CONTACT_ADDRESS = 'kontakt@codeslage.de';
 
 export const contactMailto = `mailto:${CONTACT_ADDRESS}?subject=${encodeURIComponent('Anfrage über codeslage.de')}`;
+
+// Öffentliche Buchungsseite für ein Erstgespräch (Google Kalender, Terminplan). Nur verlinkt, nicht eingebettet:
+// Die Webseite lädt nichts von Google (AK-4); Daten gehen erst bei einer Buchung an Google (Datenschutz, T-17).
+export const BOOKING_URL = 'https://calendar.app.google/AoVREVhD3FnqSuMN7';

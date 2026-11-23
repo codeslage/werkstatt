@@ -65,6 +65,8 @@ Methode:
 | T-12       | Arbeit    | 2026-11-21 18:19 | 2026-11-21 18:22 | 0:03  | Doku, PR, Review                                                                                                                                         |
 | T-12       | Wartezeit | 2026-11-21 18:22 | 2026-11-21 18:37 | 0:15  | Freigabe der Kontaktseite (Text-PR #63)                                                                                                                  |
 | T-12       | Arbeit    | 2026-11-21 18:37 | 2026-11-21 18:38 | 0:01  | Freigabe eingetragen, Merge                                                                                                                              |
+| T-12       | Arbeit    | 2026-11-21 18:38 | 2026-11-21 18:43 | 0:05  | CI rot nach Freigabe: Ursache Ruleset `ci-ok` vor #62, nicht gemergt                                                                                     |
+| T-12       | Arbeit    | 2026-11-23 13:24 | 2026-11-23 13:31 | 0:07  | Buchungslink „Erstgespräch buchen“ (Auftrag der Hauptsitzung, URL vom Inhaber), `main` mit #62 hineingemergt, Test (rot), Screenshots, Checks            |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -88,4 +90,4 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | T-09       | 0:16   | 0:00      | 0:16   |
 | T-08       | 0:15   | 0:12      | 0:27   |
 | T-10       | 0:19   | 2:06      | 2:25   |
-| T-12       | 0:09   | 0:15      | 0:24   |
+| T-12       | 0:21   | 0:15      | 0:36   |

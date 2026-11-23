@@ -14,6 +14,13 @@ test('die Kontaktseite zeigt die Adresse und genau einen Mail-Link', async ({ pa
   expect(await mailLinks.getAttribute('href')).toMatch(new RegExp(`^mailto:${ADDRESS}(\\?|$)`));
 });
 
+test('die Kontaktseite verlinkt die Buchungsseite für ein Erstgespräch, ohne sie einzubetten', async ({ page }) => {
+  await page.goto('/kontakt/');
+  const booking = page.getByRole('link', { name: 'Erstgespräch buchen' });
+  await expect(booking).toHaveAttribute('href', 'https://calendar.app.google/AoVREVhD3FnqSuMN7');
+  await expect(page.locator('iframe')).toHaveCount(0);
+});
+
 // Alle Seiten aus PAGES und die Fehlerseite (über einen unbekannten Pfad).
 const PATHS = [...PAGES.map((page) => page.path), '/gibt-es-nicht/'];
 // Kontakt-Aufrufe erkennt der Test an ihrem Text; „Mail schreiben“ ist der mailto-Link auf der Kontaktseite selbst.
