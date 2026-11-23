@@ -53,7 +53,7 @@ Methode:
 | Implement PR-2  | Arbeit    | 2026-11-21 19:02 | 2026-11-21 19:10 | 0:08  | T-09 `cwk new`/`cwk secrets`, T-11 Runbooks, T-08 im Code, PR #64; Anleitung T-07 und Freigabe T-08 angefragt. 19:10 (21.11.) bis 09:25 (23.11.) Pause über das Wochenende, zählt nicht                  |
 | Implement PR-2  | Arbeit    | 2026-11-23 09:25 | 2026-11-23 09:27 | 0:02  | Team geprüft, Fragen zu Schreibrecht und Rulesets beantwortet                                                                                                                                            |
 | Implement PR-2  | Wartezeit | 2026-11-23 09:27 | 2026-11-23 09:29 | 0:02  | Inhaber: Schreibrecht des Teams, Umbenennung zu `main-checks`                                                                                                                                            |
-| Implement PR-2  | Arbeit    | 2026-11-23 09:29 | 2026-11-23 09:36 | 0:07  | `main-approval` angelegt, CI neu (grün), Bypass geprüft, Protokoll; Freigabe T-10 angefragt                                                                                                              |
+| Implement PR-2  | Arbeit    | 2026-11-23 09:29 | 2026-11-23 09:32 | 0:03  | `main-approval` angelegt, CI neu (grün), Bypass geprüft, Protokoll; Freigabe T-10 angefragt                                                                                                              |
 
 ## Summen
 
@@ -65,6 +65,6 @@ Methode:
 | Plan            | 0:33   | 0:02      | 0:35   |
 | Tasks + Analyze | 0:19   | 0:53      | 1:12   |
 | Implement PR-1  | 0:39   | 0:12      | 0:51   |
-| Implement PR-2  | 0:17   | 0:20      | 0:37   |
+| Implement PR-2  | 0:13   | 0:20      | 0:33   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.
