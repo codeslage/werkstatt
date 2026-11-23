@@ -84,12 +84,12 @@ Leitsatz der ersten Case Study: **Wir bauen erst, wenn wir es brauchen.**
 
 ## Voraussetzungen (erledigt der Inhaber selbst)
 
-| #   | Schritt                                                                                                     | Wann                     | Status |
-| --- | ----------------------------------------------------------------------------------------------------------- | ------------------------ | ------ |
-| V1  | Alias `kontakt@codeslage.de` in Google Workspace anlegen (Claude leitet an)                                 | vor dem Livegang         | offen  |
-| V2  | Foto für „Über mich“ liefern                                                                                | vor den Texten (Stufe 6) | offen  |
-| V3  | LinkedIn-Profil als PDF exportieren oder im Browser-Panel freigeben (Quelle für „Über mich“, „Projekte“)    | vor den Texten (Stufe 6) | offen  |
-| V4  | Angaben für das Impressum (Name, Anschrift) in `codeslage/internal` hinterlegen, nicht im öffentlichen Repo | vor dem Livegang         | offen  |
+| #   | Schritt                                                                                                     | Wann                     | Status        |
+| --- | ----------------------------------------------------------------------------------------------------------- | ------------------------ | ------------- |
+| V1  | Alias `kontakt@codeslage.de` in Google Workspace anlegen (Claude leitet an)                                 | vor dem Livegang         | offen         |
+| V2  | Foto für „Über mich“ liefern                                                                                | vor den Texten (Stufe 6) | ✅ 2026-11-23 |
+| V3  | LinkedIn-Profil als PDF exportieren oder im Browser-Panel freigeben (Quelle für „Über mich“, „Projekte“)    | vor den Texten (Stufe 6) | ✅ 2026-11-23 |
+| V4  | Angaben für das Impressum (Name, Anschrift) in `codeslage/internal` hinterlegen, nicht im öffentlichen Repo | vor dem Livegang         | offen         |
 
 ## Constitution-Check
 
