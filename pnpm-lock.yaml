@@ -271,6 +271,12 @@ importers:
         specifier: workspace:*
         version: link:../../packages/config
 
+  tools/cwk:
+    devDependencies:
+      '@codeslage/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+
   tools/public-scan:
     devDependencies:
       '@codeslage/config':

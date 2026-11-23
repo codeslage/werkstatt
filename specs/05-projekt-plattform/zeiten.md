@@ -43,6 +43,12 @@ Methode:
 | Tasks + Analyze | Arbeit    | 2026-11-20 09:51 | 2026-11-20 09:53 | 0:02  | Antworten eingetragen, Roadmap-Soll korrigiert, CI grün, Merge von GitHub blockiert (neuer Pflicht-Check aus Phase 2)                                                                                    |
 | Tasks + Analyze | Wartezeit | 2026-11-20 09:53 | 2026-11-20 10:04 | 0:11  | Warten auf PR #58 von Phase 2 (Pflicht-Check „Webseite (E2E + Lighthouse)“)                                                                                                                              |
 | Tasks + Analyze | Arbeit    | 2026-11-20 10:04 | 2026-11-20 10:05 | 0:01  | `main` in den Branch gemergt, CI neu, Merge (Rest bis zum Merge wird mit Stufe 6 nachgetragen)                                                                                                           |
+| Tasks + Analyze | Arbeit    | 2026-11-20 13:59 | 2026-11-20 14:00 | 0:01  | Merge #57 (nachgetragen). 10:05–13:59 Pause, zählt nicht: CI war um 10:08 grün, der Merge kam erst auf „Versuch es noch einmal“                                                                          |
+| Implement PR-1  | Arbeit    | 2026-11-20 16:55 | 2026-11-20 17:15 | 0:20  | T-01 bis T-05, T-47 testgetrieben, T-06 ohne Ruleset, PR #62, Review gestartet. Ende geschätzt (letzte Ablesung 17:09). 14:00–16:55 als Pause gewertet                                                   |
+| Implement PR-1  | Arbeit    | 2026-11-21 18:13 | 2026-11-21 18:20 | 0:07  | CI: `hcl.test.ts` auf `cwk-code.yml` umgestellt, Review neu gestartet. 17:15–18:13 (Folgetag) Pause: Review-Agent am Nutzungslimit abgebrochen                                                           |
+| Implement PR-1  | Arbeit    | 2026-11-21 18:20 | 2026-11-21 18:25 | 0:05  | Review 1 umgesetzt (🔴 zwei pull_request-Regeln), Review 2 (✅), `main` gemergt, Befunde aus Review 2; Freigabe T-06 angefragt                                                                           |
+| Implement PR-1  | Wartezeit | 2026-11-21 18:25 | 2026-11-21 18:37 | 0:12  | Freigabe der Umstellung des Rulesets (T-06)                                                                                                                                                              |
+| Implement PR-1  | Arbeit    | 2026-11-21 18:37 | 2026-11-21 18:45 | 0:08  | Ruleset umgestellt, CI neu, Nachtrag Protokoll, Merge #62 (Ende = geplanter Merge, wird bei Abweichung korrigiert)                                                                                       |
 
 ## Summen
 
@@ -52,6 +58,7 @@ Methode:
 | M #50           | 0:05   | 0:09      | 0:14   |
 | Clarify         | 0:06   | 0:12      | 0:18   |
 | Plan            | 0:33   | 0:02      | 0:35   |
-| Tasks + Analyze | 0:18   | 0:53      | 1:11   |
+| Tasks + Analyze | 0:19   | 0:53      | 1:12   |
+| Implement PR-1  | 0:40   | 0:12      | 0:52   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.

@@ -8,9 +8,6 @@ import { describe, expect, it } from 'vitest';
 
 const WORKFLOWS = join(import.meta.dirname, '..', '..', '.github', 'workflows');
 const scan = readFileSync(join(WORKFLOWS, 'history-scan.yml'), 'utf8');
-const ci = readFileSync(join(WORKFLOWS, 'ci.yml'), 'utf8');
-
-const envValue = (workflow: string, name: string) => new RegExp(`^\\s+${name}: (\\S+)$`, 'm').exec(workflow)?.[1];
 
 describe('history-scan.yml (AK-24)', () => {
   it('läuft monatlich und auf Knopfdruck', () => {
@@ -25,8 +22,8 @@ describe('history-scan.yml (AK-24)', () => {
     expect(scan).toMatch(/^permissions:\s*\n\s+contents: read\s*$/m);
   });
 
-  it('nutzt dieselbe gitleaks-Version wie ci.yml', () => {
-    expect(envValue(scan, 'GITLEAKS_VERSION')).toBe(envValue(ci, 'GITLEAKS_VERSION'));
-    expect(envValue(scan, 'GITLEAKS_SHA256')).toBe(envValue(ci, 'GITLEAKS_SHA256'));
+  it('installiert gitleaks über das gemeinsame Skript, also in derselben Version wie die CI', () => {
+    expect(scan).toMatch(/run: sh \.github\/scripts\/install-gitleaks\.sh$/m);
+    expect(scan).not.toMatch(/GITLEAKS_VERSION/);
   });
 });

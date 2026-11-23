@@ -1,0 +1,130 @@
+name: CWK – Regeln
+
+# Regel-Teil des CodeslageWerkzeugKastens (Plan 05, AK-3, AK-9). Jedes Repo ruft diesen Workflow aus seiner ci.yml
+# auf, Projekte gepinnt auf den Stand aus cwk.json, werkstatt selbst lokal. Die Werkzeuge kommen aus genau diesem
+# Stand von werkstatt („CWK-Quelle“), Projekte brauchen dafür keine eigene Kopie.
+on:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  scan:
+    name: Secret- und Öffentlich-Scan
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      - uses: ./.github/actions/cwk-source
+
+      - name: gitleaks installieren
+        run: sh "$CWK_DIR/.github/scripts/install-gitleaks.sh"
+
+      # Ebene 2 (governance.md): gesamte Historie inkl. dieses PRs, Sperrliste aus dem Secret.
+      - name: Scan
+        env:
+          PUBLIC_BLOCKLIST: ${{ secrets.PUBLIC_BLOCKLIST }}
+        run: node "$CWK_DIR/tools/public-scan/src/cli.ts" git . --require-blocklist
+
+  spec-check:
+    name: Spec-Check
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      - uses: ./.github/actions/cwk-source
+
+      - name: Pflichtteile aller spec.md und plan.md (Artikel I)
+        run: node "$CWK_DIR/tools/spec-check/src/cli.ts" specs
+
+  format:
+    name: Format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: Einheitliche Formatierung
+        run: pnpm format
+
+  spellcheck:
+    name: Rechtschreibung
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      - name: Rechtschreibung Deutsch und Englisch
+        run: pnpm spellcheck
+
+  repo-settings:
+    name: Repo-Einstellungen
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # werkstatt prüft bis T-08 weiter mit repo.test.ts (Plan 05, Schritt 1); danach auch hier cwk settings.
+      - name: Node und Abhängigkeiten (werkstatt)
+        if: github.repository == 'codeslage/werkstatt'
+        uses: ./.github/actions/setup
+
+      - name: Sichtbarkeit und Schutz von main (werkstatt, AK-4)
+        if: github.repository == 'codeslage/werkstatt'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: pnpm test:infra repo.test.ts
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      - uses: ./.github/actions/cwk-source
+
+      - name: Rulesets, Pflicht-Check und Code-Owner (Projekte, AK-4)
+        if: github.repository != 'codeslage/werkstatt'
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: node "$CWK_DIR/tools/cwk/src/cli.ts" settings
+
+  cwk-check:
+    name: CWK-Abgleich
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
+        with:
+          node-version: 24
+
+      - uses: ./.github/actions/cwk-source
+
+      - name: Manifest und Quellen (werkstatt)
+        if: github.repository == 'codeslage/werkstatt'
+        run: node tools/cwk/src/cli.ts check --self
+
+      # Bei PRs zählt der Stand auf dem Basis-Branch für den Schutz vor Rückstufung.
+      - name: Dateien, Pins und Stand gegen den CWK (Projekte, AK-9)
+        if: github.repository != 'codeslage/werkstatt'
+        env:
+          CWK_VISIBILITY: ${{ github.event.repository.visibility }}
+          BASE_REF: ${{ github.base_ref }}
+        run: |
+          if [ -n "$BASE_REF" ]; then
+            git fetch -q --depth=1 origin "$BASE_REF"
+            node "$CWK_DIR/tools/cwk/src/cli.ts" check --source "$CWK_DIR" --base-ref FETCH_HEAD
+          else
+            node "$CWK_DIR/tools/cwk/src/cli.ts" check --source "$CWK_DIR"
+          fi

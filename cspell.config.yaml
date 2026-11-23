@@ -19,3 +19,5 @@ ignorePaths:
   # Aufzeichnungen bleiben unverändert, auch mit Tippfehlern.
   - docs/protokolle/**
   - specs/**/reviews/**
+  # cwk:project:start
+  # cwk:project:end
