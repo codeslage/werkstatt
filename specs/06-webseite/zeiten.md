@@ -60,6 +60,14 @@ Methode:
 | T-10       | Arbeit    | 2026-11-20 14:44 | 2026-11-20 14:49 | 0:05  | Doku, PR, Review, Befunde umgesetzt (Grundlinie, Screenshots, 404)                                                                                       |
 | T-10       | Wartezeit | 2026-11-20 14:49 | 2026-11-20 16:55 | 2:06  | Freigabe von Logo und Wortmarke (Text-PR #61); gefragt 14:45, bis 14:49 lief parallel die Arbeit am Review (zählt dort)                                  |
 | T-10       | Arbeit    | 2026-11-20 16:55 | 2026-11-20 16:56 | 0:01  | Freigabe eingetragen, Merge                                                                                                                              |
+| T-10       | Arbeit    | 2026-11-20 16:56 | 2026-11-20 17:01 | 0:05  | Nacharbeit PR-5: CI, Merge (#61)                                                                                                                         |
+| T-12       | Arbeit    | 2026-11-21 18:14 | 2026-11-21 18:19 | 0:05  | `contact.spec.ts` (rot), `contact.ts` mit Unit-Test, Kontaktseite, Button-Stil, Screenshots, Lighthouse                                                  |
+| T-12       | Arbeit    | 2026-11-21 18:19 | 2026-11-21 18:22 | 0:03  | Doku, PR, Review                                                                                                                                         |
+| T-12       | Wartezeit | 2026-11-21 18:22 | 2026-11-21 18:37 | 0:15  | Freigabe der Kontaktseite (Text-PR #63)                                                                                                                  |
+| T-12       | Arbeit    | 2026-11-21 18:37 | 2026-11-21 18:38 | 0:01  | Freigabe eingetragen, Merge                                                                                                                              |
+| T-12       | Arbeit    | 2026-11-21 18:38 | 2026-11-21 18:43 | 0:05  | CI rot nach Freigabe: Ursache Ruleset `ci-ok` vor #62, nicht gemergt                                                                                     |
+| T-12       | Arbeit    | 2026-11-23 13:24 | 2026-11-23 13:31 | 0:07  | Buchungslink „Erstgespräch buchen“ (Auftrag der Hauptsitzung, URL vom Inhaber), `main` mit #62 übernommen, Test (rot), Screenshots, Checks               |
+| T-12       | Arbeit    | 2026-11-23 13:31 | 2026-11-23 13:32 | 0:01  | Nachreview, Format-Fix, Spec A9/Frage 14, Freigabe eingetragen (Freigabe kam um 13:31 ohne Wartezeit)                                                    |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -82,4 +90,5 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | T-07       | 0:14   | 0:13      | 0:27   |
 | T-09       | 0:16   | 0:00      | 0:16   |
 | T-08       | 0:15   | 0:12      | 0:27   |
-| T-10       | 0:14   | 2:06      | 2:20   |
+| T-10       | 0:19   | 2:06      | 2:25   |
+| T-12       | 0:22   | 0:15      | 0:37   |
