@@ -10,6 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
+- 2026-11-23 – Phase 2, Schritt 3 (PR-10, T-11, T-16, Text-PR): Seite „Über mich“ mit Foto (ohne Metadaten, ohne Arbeitgeber) und Werdegang (#PR).
 - 2026-11-21 – Phase 2, Schritt 3 (PR-6, T-12, Text-PR): Kontaktseite mit Rollenadresse, Mail-Link und Link „Erstgespräch buchen“ (Google Kalender, nicht eingebettet), kein Formular; Tests für AK-3 (#63).
 - 2026-11-21 – Phase 1.5, Schritt 1 (PR-1, T-01 bis T-06, T-47): CodeslageWerkzeugKasten in werkstatt – `tools/cwk` (Schema, `check`, `ci-ok`, `settings`), `cwk/manifest.json` mit Regel- und Code-Teil, wiederverwendbare Workflows `cwk-rules.yml` und `cwk-code.yml`; einziger Pflicht-Check ist `ci-ok` (#62).
 - 2026-11-20 – Phase 2, Schritt 2 (PR-5, T-10, Text-PR): Logo-Zeichen und zweiteilige Wortmarke `codeslage_` im Header, Touch-Icon; Test für Logo, Favicon und Touch-Icon (#61).

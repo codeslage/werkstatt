@@ -127,6 +127,13 @@ a:focus-visible {
   color: var(--muted);
 }
 
+.portrait {
+  display: block;
+  width: 160px;
+  height: 160px;
+  border-radius: var(--radius);
+}
+
 .contact-address {
   font-size: 1.375rem;
   font-weight: 600;
