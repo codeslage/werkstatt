@@ -1,0 +1,148 @@
+# 09 – Content-Pipeline (Building in Public): Spec
+
+> Status: **Entwurf** – wartet auf Freigabe
+> Stand: 2026-11-25 (Stufe 1 Specify; Nummer 09 vorläufig, Frage 1)
+> Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md` (Werbekanäle, Prinzipien „Schaufenster first“ und „Mensch im Loop“), `02-architektur.md` (A7 KI-Automationen, A8 DSGVO), `03-roadmap.md` (Querschnitt „Content sammeln“, Phase 3), ADR 0009 (Server erst bei Bedarf), `docs/prozess/governance.md` (Öffentlich vs. intern)
+> SDD-Stufe: 1 Specify · 2 Clarify
+
+<!-- Nur WAS und WARUM. Keine Technik – die gehört in plan.md. -->
+
+## Ziel
+
+Die Werkstatt erzeugt laufend Material, das sich für „Building in Public“ eignet: Retros, Zeitprotokolle mit Soll/Ist, Content-Notizen in `docs/content/`, ADRs. Bisher wird daraus kaum etwas veröffentlicht, weil das Schreiben Zeit kostet, die in die Arbeit selbst fließt.
+
+Aus diesem Material sollen **Entwürfe für LinkedIn-Posts in der Stimme des Inhabers** entstehen, die er nur noch redigiert und freigibt. Veröffentlicht wird **erst nach seiner Abnahme**, sofort oder zu einem festgelegten Zeitpunkt. Jede Korrektur des Inhabers macht die nächsten Entwürfe besser.
+
+Warum:
+
+1. **Regelmäßig sichtbar werden**, ohne Schreibzeit (Vision: Werbekanäle, Case Studies, Talk „Wie schnell ist KI-getriebene Entwicklung wirklich?“).
+2. **Die Pipeline ist selbst Schaufenster:** Sie ist eine kleine, vollständige KI-Automation mit Mensch im Loop, Kostenlimit, Validierung und Lernschleife, also genau das Muster, das Phase 3 („Anfrage → Angebotsentwurf“) und später Kunden brauchen. Deshalb wird sie selbst gebaut und nicht als fertiger Dienst eingekauft.
+3. **Qualität vor Menge:** Lieber kein Post als ein generischer. Ein Entwurf ohne konkreten Inhalt aus der Werkstatt ist ein Fehler, kein Ergebnis.
+
+> Leit-User-Story: _Als Inhaber möchte ich, dass aus meiner Arbeit an der Werkstatt automatisch Post-Entwürfe entstehen, die ich nur noch redigiere und freigebe, damit ich regelmäßig poste, ohne Zeit fürs Schreiben zu verlieren._
+
+## Vorgaben des Inhabers (gesetzt)
+
+Diese Punkte hat der Inhaber vorab entschieden. Sie stehen hier als Rahmen; wie sie technisch umgesetzt werden, regelt der Plan.
+
+| #   | Vorgabe                                                                                                                                                                      |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| G1  | Selbst bauen, kein Dienst wie Buffer oder Posty. Das Vorhaben ist Teil der Story und Muster für Phase 3.                                                                     |
+| G2  | Start nur mit **LinkedIn, persönliches Profil** (Teilen im eigenen Namen). Keine Unternehmensseite, keine weiteren Kanäle.                                                   |
+| G3  | Ein Post ist eine Datei im Repo mit Angaben zu Kanal, Veröffentlichungszeitpunkt und Status.                                                                                 |
+| G4  | **Abnahme = Merge** des Entwurfs-PRs (Artikel IX). Ohne Merge geht nichts raus.                                                                                              |
+| G5  | Veröffentlicht wird zeitgesteuert ohne eigenen Server (ADR 0009); eine Genauigkeit von etwa 15 Minuten reicht.                                                               |
+| G6  | **Lernschleife:** Der Unterschied zwischen Entwurf und abgenommener Fassung fließt in einen Styleguide, den die Entwurfserstellung beim nächsten Mal nutzt.                  |
+| G7  | **Kein „AI clutter“:** lieber kein Post als ein generischer.                                                                                                                 |
+| G8  | Der LinkedIn-Zugang läuft nach 60 Tagen ab und lässt sich nicht automatisch verlängern; der Inhaber wird rechtzeitig per Mail erinnert. Der Zugang liegt nur als Secret vor. |
+| G9  | Budget: zusätzliche Infrastrukturkosten ≈ 0 €; KI-Aufrufe mit Kostenlimit.                                                                                                   |
+
+## Nicht im Umfang
+
+- Weitere Kanäle (X, Mastodon, Bluesky, Unternehmensseite, Newsletter, Webseite) – später, wenn LinkedIn trägt
+- Bearbeiten oder Löschen bereits veröffentlichter Posts (bleibt Handarbeit in LinkedIn, Runbook genügt)
+- Kommentare lesen oder beantworten, Interaktion mit anderen Profilen
+- Auswertung von Reichweite, Likes und Kommentaren (Frage 14)
+- Bilder, Grafiken, Videos, Karussells – sofern Frage 5 nichts anderes ergibt
+- Posts aus Material außerhalb der Werkstatt (z. B. Arbeitgeber, Kunden, private Themen)
+- Veröffentlichung ohne Abnahme, auch nicht „nur dieses eine Mal“
+
+## User Stories / Anforderungen
+
+- **US-1 Entwurf:** Als Inhaber möchte ich, dass aus neuem Werkstatt-Material Post-Entwürfe entstehen, damit ich nicht vor einem leeren Blatt sitze.
+- **US-2 Stimme:** Als Inhaber möchte ich, dass die Entwürfe klingen wie ich und konkret von der Werkstatt erzählen (Zahlen, Entscheidungen, Fehler), damit ich wenig umschreiben muss und die Posts nicht austauschbar wirken.
+- **US-3 Kein Post statt schlechtem Post:** Als Inhaber möchte ich lieber keinen Entwurf bekommen als einen generischen, damit mein Profil nicht mit Füllmaterial wächst.
+- **US-4 Redigieren und Abnehmen:** Als Inhaber möchte ich einen Entwurf im gewohnten Ablauf (PR) ändern, terminieren und freigeben, damit ich kein neues Werkzeug lernen muss.
+- **US-5 Veröffentlichen:** Als Inhaber möchte ich, dass ein abgenommener Post sofort oder zum gewählten Zeitpunkt auf meinem LinkedIn-Profil erscheint, damit ich Slots planen kann, ohne dabei zu sein.
+- **US-6 Zurückziehen:** Als Inhaber möchte ich einen abgenommenen, noch nicht veröffentlichten Post zurückziehen oder verschieben können, damit ich auf Änderungen reagieren kann.
+- **US-7 Lernen:** Als Inhaber möchte ich, dass meine Korrekturen in die nächsten Entwürfe einfließen, damit der Aufwand je Post mit der Zeit sinkt.
+- **US-8 Verlässlichkeit:** Als Inhaber möchte ich erfahren, wenn etwas nicht veröffentlicht wurde oder der Zugang bald abläuft, damit kein geplanter Post still verloren geht.
+- **US-9 Sicherheit:** Als Inhaber möchte ich, dass kein Post interne Angaben (Liste „Öffentlich vs. intern“) enthält und kein Post doppelt erscheint, damit mir die Automation nicht öffentlich schadet.
+- **US-10 Kosten und Messung:** Als Inhaber möchte ich, dass die KI-Kosten begrenzt sind und ich sehe, wie viel ich an Entwürfen ändere, damit ich beurteilen kann, ob sich die Pipeline lohnt (Artikel XIV).
+
+## Akzeptanzkriterien
+
+| ID    | Kriterium                                                                                                                                                                                                                                                                                                                 | Nachweis (Testart)                                                  |
+| ----- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------- |
+| AK-1  | Aus neuem Werkstatt-Material (Auslöser nach Frage 7) entsteht ohne Zutun des Inhabers ein Entwurf als **Vorschlag zur Abnahme** (PR) mit Kanal, Format, Status „Entwurf“ und einem Vorschlag für den Zeitpunkt                                                                                                            | automatisiert (mit nachgestellter KI-Antwort) + manuell einmal echt |
+| AK-2  | Jeder Entwurf nennt seine Quellen (Dateien im Repo). Jede Zahl im Entwurf kommt in einer der genannten Quellen vor; ein Entwurf mit einer Zahl ohne Beleg wird verworfen                                                                                                                                                  | automatisiert                                                       |
+| AK-3  | Bietet das Material keinen konkreten Anlass (Kriterien aus dem Styleguide, z. B. keine Zahl, keine Entscheidung, kein Fehler), entsteht **kein** Entwurf, sondern ein kurzer Vermerk „kein Post“ mit Begründung                                                                                                           | automatisiert                                                       |
+| AK-4  | Jeder Entwurf erfüllt die prüfbaren Regeln des Styleguides (u. a. Länge, Sprache, Liste verbotener Floskeln, Höchstzahl an Hashtags und Emojis). Eine KI-Antwort, die sie verletzt oder nicht dem erwarteten Aufbau entspricht, wird abgelehnt, nicht nachgebessert (Artikel VII)                                         | automatisiert                                                       |
+| AK-5  | Kein Entwurf und kein veröffentlichter Post enthält Angaben aus der Liste „Öffentlich vs. intern“ (`governance.md`); die Prüfung schlägt vor der Abnahme **und** unmittelbar vor der Veröffentlichung an                                                                                                                  | automatisiert (inkl. Negativtest)                                   |
+| AK-6  | Veröffentlicht wird **nur**, was auf `main` abgenommen ist. Ein Post in einem offenen PR, auf einem anderen Branch oder mit Status „Entwurf“ wird nie veröffentlicht                                                                                                                                                      | automatisiert                                                       |
+| AK-7  | Ein abgenommener Post mit Zeitpunkt erscheint **nicht vor** diesem Zeitpunkt und spätestens 30 Minuten danach (Frage 17); ein Post ohne Zeitpunkt („sofort“) spätestens 30 Minuten nach der Abnahme                                                                                                                       | automatisiert (Zeitlogik) + manuell (AK-17)                         |
+| AK-8  | Liegt der Zeitpunkt bei der Abnahme schon zu weit zurück (Grenze nach Frage 12), wird der Post nicht veröffentlicht und der Inhaber benachrichtigt                                                                                                                                                                        | automatisiert                                                       |
+| AK-9  | Jeder Post erscheint **höchstens einmal**, auch wenn Läufe wiederholt, gleichzeitig oder nach einem Fehler erneut gestartet werden. Nach der Veröffentlichung steht im Repo Status „veröffentlicht“, Zeitpunkt und Link zum Post                                                                                          | automatisiert                                                       |
+| AK-10 | Ein abgenommener, noch nicht veröffentlichter Post lässt sich zurückziehen oder verschieben; danach erscheint er nicht bzw. erst zum neuen Zeitpunkt                                                                                                                                                                      | automatisiert                                                       |
+| AK-11 | Schlägt eine Veröffentlichung fehl (z. B. Zugang abgelaufen, LinkedIn nicht erreichbar, Prüfung nach AK-5), erhält der Inhaber eine Mail mit Post und Grund, ohne danach suchen zu müssen; der Post bleibt unveröffentlicht und wird beim nächsten Versuch nicht doppelt veröffentlicht (AK-9)                            | automatisiert (inkl. Negativtest)                                   |
+| AK-12 | Spätestens 7 Tage vor Ablauf des LinkedIn-Zugangs erhält der Inhaber eine Erinnerung per Mail, bis der Zugang erneuert ist; ein Runbook beschreibt das Erneuern                                                                                                                                                           | automatisiert + Runbook                                             |
+| AK-13 | Nach jeder Abnahme wird der Unterschied zwischen Entwurf und abgenommener Fassung festgehalten, und daraus entsteht ein **Vorschlag** zur Änderung des Styleguides. Der Styleguide ändert sich nur mit Freigabe des Inhabers (Frage 11); der jeweils gültige Styleguide wird beim nächsten Entwurf nachweislich verwendet | automatisiert                                                       |
+| AK-14 | Für jeden veröffentlichten Post ist festgehalten, wie stark die abgenommene Fassung vom Entwurf abweicht (Maß im Plan); die Werte sind für die Retro auswertbar                                                                                                                                                           | automatisiert                                                       |
+| AK-15 | KI-Aufrufe haben ein Limit je Lauf und je Monat (Höhe nach Frage 15). Ist es erreicht, entsteht kein Entwurf und der Inhaber wird benachrichtigt. Jeder Aufruf wird mit Zweck, Umfang und Kosten protokolliert, ohne Secrets und ohne personenbezogene Daten Dritter                                                      | automatisiert                                                       |
+| AK-16 | Neue Dienstleister (LinkedIn als Kanal, KI-Anbieter für die Entwürfe) stehen in `docs/dsgvo.md`; Secrets stehen in `docs/secrets.md`, die zusätzlichen laufenden Kosten in `docs/kosten.md` und liegen bei ≈ 0 € plus KI-Kosten im Limit                                                                                  | manuell (Review)                                                    |
+| AK-17 | **Ende-zu-Ende:** Mindestens ein echter Post durchläuft die ganze Kette: Entwurf entsteht, Inhaber redigiert, Merge, Veröffentlichung zum gewählten Zeitpunkt, Status und Link im Repo, Abweichung festgehalten, Vorschlag für den Styleguide liegt vor                                                                   | manuell, protokolliert                                              |
+
+## Constitution-Check
+
+| Artikel                          | Bewertung | Anmerkung                                                                                                                                                                                         |
+| -------------------------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| I Spec zuerst                    | ✅        | diese Spec, voller SDD-Ablauf (Klasse V)                                                                                                                                                          |
+| II Tests beweisen die Spec       | ✅        | 17 AKs; 15 automatisiert (AK-1, AK-7, AK-12 zusätzlich manuell bzw. mit Runbook), AK-16 per Review, AK-17 als protokollierter manueller Test                                                      |
+| III Kleine Schritte              | ✅        | Zuschnitt in PRs folgt in `tasks.md`; naheliegend: Entwurf, Veröffentlichung, Lernschleife getrennt                                                                                               |
+| IV Fragen statt raten            | ✅        | 18 offene Fragen unten, blockierende markiert                                                                                                                                                     |
+| V Keine zerstörerischen Aktionen | ✅        | Löschen veröffentlichter Posts ist nicht im Umfang; Zurückziehen betrifft nur noch nicht veröffentlichte Posts (AK-10)                                                                            |
+| VI Secrets nie ins Repo          | ✅        | LinkedIn-Zugang und KI-Schlüssel nur als Secret (G8, AK-16)                                                                                                                                       |
+| VII Sicher als Standard          | ✅        | KI-Antworten werden geprüft und abgelehnt statt repariert (AK-4); Zugang nur mit dem Recht, im eigenen Namen zu teilen (G2); Prüfung „Öffentlich vs. intern“ zweifach (AK-5)                      |
+| VIII Datenschutz & EU            | ⚠️        | LinkedIn und der KI-Anbieter verarbeiten Daten außerhalb der EU. Betroffen sind nur Daten des Inhabers und öffentliches Repo-Material; Eintrag in `docs/dsgvo.md` (AK-16), Frage 8 (Quellen)      |
+| IX Mensch im Loop                | ✅        | Kern des Vorhabens: ohne Merge kein Post (G4, AK-6); auch der Styleguide ändert sich nur mit Freigabe (AK-13)                                                                                     |
+| X Reproduzierbar                 | ✅        | Posts, Styleguide und Abläufe liegen im Repo; Erneuern des Zugangs als Runbook (AK-12)                                                                                                            |
+| XI Einfach vor vollständig       | ✅        | ein Kanal, kein Server, keine Bilder (vorbehaltlich Frage 5), keine Reichweiten-Auswertung                                                                                                        |
+| XII Offen dokumentieren          | ✅        | das Vorhaben veröffentlicht die Doku der Werkstatt; eigene Content-Notizen in der Retro                                                                                                           |
+| XIII Wiederverwendbar            | ✅        | Muster „KI-Entwurf → menschliche Abnahme → zeitgesteuerte Ausführung → Lernschleife“ für Phase 3 und Kunden; im Kern ohne codeslage-spezifische Annahmen (Kanal, Quellen und Stimme austauschbar) |
+| XIV Messen statt schätzen        | ✅        | Abweichung Entwurf ↔ Fassung je Post (AK-14), KI-Kosten (AK-15), Zeiten in `zeiten.md`                                                                                                            |
+| XV Kein unnötiger Code           | –         | Spec ohne Code; gilt ab Plan                                                                                                                                                                      |
+| XVI Fehler sind sichtbar         | ✅        | Mail bei fehlgeschlagener Veröffentlichung, ablaufendem Zugang und erreichtem Kostenlimit (AK-8, AK-11, AK-12, AK-15)                                                                             |
+
+Bewertung: ✅ erfüllt · ⚠️ Abweichung (mit Begründung) · – nicht relevant
+
+## Voraussetzungen (👤 Inhaber)
+
+| #   | Was                                                                                             | Wann                       | Status |
+| --- | ----------------------------------------------------------------------------------------------- | -------------------------- | ------ |
+| V1  | LinkedIn-Entwicklerzugang mit dem Recht, im eigenen Namen zu teilen, einrichten (mit Anleitung) | vor der Veröffentlichung   | offen  |
+| V2  | 3–5 eigene Texte als Vorlage für die Stimme (frühere LinkedIn-Posts oder andere Texte)          | vor dem ersten Styleguide  | offen  |
+| V3  | Schlüssel für die KI-API mit Kostenlimit beim Anbieter (Frage 15)                               | vor dem ersten echten Lauf | offen  |
+
+## Risiken
+
+- **Generische Posts:** Die größte Gefahr für das Ziel. Gegenmittel: AK-2, AK-3, AK-4 und die Lernschleife; im Zweifel kein Post.
+- **Entwürfe sind vor der Veröffentlichung öffentlich:** Das Repo ist öffentlich, offene PRs damit auch. Ein Entwurf ist also schon vor der Abnahme sichtbar (Frage 13).
+- **Falsche Fakten unter eigenem Namen:** Eine erfundene Zahl wäre peinlich und widerspräche der Soll/Ist-Wette. Gegenmittel: AK-2 und die Abnahme.
+- **Zeitgesteuerte Läufe sind ungenau:** Planmäßige Läufe ohne Server können sich verzögern oder unter Last ausfallen. Deshalb 30 Minuten als Grenze in AK-7 statt 15 (Frage 17).
+- **Zugang läuft ab:** Ohne Erinnerung scheitern geplante Posts nach 60 Tagen. Gegenmittel: AK-11, AK-12.
+- **LinkedIn ändert Bedingungen oder Schnittstelle:** Teilen im eigenen Namen kann eingeschränkt werden. Dann fällt die Veröffentlichung auf „Entwurf fertig, Inhaber postet von Hand“ zurück; der Wert der Entwürfe bleibt.
+- **Kennzeichnung KI-erzeugter Texte:** Die EU-KI-Verordnung sieht für KI-Texte, die die Öffentlichkeit informieren, eine Kennzeichnung vor, außer bei menschlicher Prüfung und redaktioneller Verantwortung. Die Abnahme durch den Inhaber deckt das voraussichtlich ab (Einschätzung, keine Rechtsberatung; Frage 10).
+- **Doppelter Post:** Wäre öffentlich sichtbar und unprofessionell. Gegenmittel: AK-9.
+
+## Offene Fragen
+
+| #   | Frage                                                                                                                                                                                                                                                                                                      | Blockiert?        | Antwort |
+| --- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------- | ------- |
+| 1   | **Spec-Nummer:** Die Roadmap reserviert 07 (Phase 3) und 08 (Phase 4); Phase S wird „bei Anlage nummeriert“. Vorschlag: nächste freie Nummer **09** (wie angelegt), keine Umnummerierung, weil Ordnernummern die Anlage-Reihenfolge abbilden und nicht die Ausführung. Alternative: 07, dann 07→08, 08→09. | nein              |         |
+| 2   | **Einordnung in die Roadmap:** eigene Phase (z. B. „2.5 – Content-Pipeline“) vor Phase 3 oder Querschnitts-Vorhaben neben Phase 1.5/2? Startet sie jetzt parallel oder nach Abschluss von Phase 2? Vorschlag: eigene Phase 2.5, Start nach der Webseite, Soll in der Roadmap.                              | ja (vor dem Plan) |         |
+| 3   | **Post-Formate:** Welche Formate gibt es in v1? Vorschlag: „Zahl der Woche“ (Soll/Ist), „Fehler/Learning der Woche“ (Retro, Protokolle), „Entscheidung + Begründung“ (ADR), „Phase fertig“ (Retro, Content-Notiz). Gibt es Formate, die es ausdrücklich **nicht** geben soll?                              | ja                |         |
+| 4   | **Frequenz und Slots:** Wie viele Posts pro Woche höchstens, an welchen festen Tagen und Uhrzeiten? Vorschlag: höchstens 2 pro Woche, Di und Do 08:00 Uhr deutscher Zeit; der Entwurf schlägt den nächsten freien Slot vor.                                                                                | nein              |         |
+| 5   | **Bilder/Grafiken:** in v1 oder später? Vorschlag: später; v1 nur Text, ggf. mit Link zur Webseite oder zum Repo.                                                                                                                                                                                          | ja (Umfang)       |         |
+| 6   | **Wo liegt die Entwurfserstellung** (Skill, Slash-Befehl, Teil der Automationen)? Das ist eine Plan-Frage (Technik). Für die Spec zählt nur: Sie läuft auch ohne laufende Sitzung des Inhabers (AK-1)? Oder genügt es, dass er sie bei Bedarf anstößt?                                                     | ja (für AK-1)     |         |
+| 7   | **Auslöser:** Wann entstehen Entwürfe? (a) nach neuem Material auf `main` (z. B. Retro, Content-Notiz, ADR), (b) einmal pro Woche aus dem Material seit dem letzten Lauf, (c) nur auf Anstoß. Vorschlag: (b), dazu (c) jederzeit.                                                                          | ja                |         |
+| 8   | **Quellen:** Nur öffentliches Material aus `codeslage/werkstatt`, nie aus `codeslage/internal`? Auch Commit-Nachrichten und PR-Beschreibungen? Vorschlag: nur Dateien im öffentlichen Repo, nie `internal`.                                                                                                | ja                |         |
+| 9   | **Sprache und Ansprache:** Posts auf Deutsch? Ansprache „du“ wie auf der Webseite? Vereinzelt Englisch?                                                                                                                                                                                                    | nein              |         |
+| 10  | **KI-Hinweis:** Soll ein Post erwähnen, dass der Entwurf von Claude stammt? Passt inhaltlich zur Story, ist nach Abnahme rechtlich voraussichtlich nicht nötig (Risiken). Vorschlag: kein Pflicht-Hinweis, Inhaber entscheidet je Post.                                                                    | nein              |         |
+| 11  | **Styleguide-Änderungen:** Übernimmt die Lernschleife Änderungen selbst, oder schlägt sie sie als PR zur Freigabe vor? Vorschlag: Vorschlag per PR (Artikel IX), weil der Styleguide jeden künftigen Post prägt.                                                                                           | ja                |         |
+| 12  | **Verspätete Abnahme:** Wenn der Zeitpunkt beim Merge schon vorbei ist: sofort veröffentlichen oder verwerfen? Vorschlag: bis 24 h verspätet sofort, danach nicht und Mail (AK-8).                                                                                                                         | nein              |         |
+| 13  | **Sichtbarkeit der Entwürfe:** Entwürfe liegen als PR im öffentlichen Repo und sind vor der Abnahme sichtbar. Ist das gewollt (passt zu „Building in Public“, zeigt sogar das Redigieren), oder sollen Entwürfe bis zur Veröffentlichung privat bleiben?                                                   | ja                |         |
+| 14  | **Reichweite:** Soll später gemessen werden, wie Posts ankommen (Aufrufe, Reaktionen)? Mit dem Recht, im eigenen Namen zu teilen, sind solche Zahlen voraussichtlich nicht abrufbar. Vorschlag: vorerst nicht, ggf. Handnotiz in der Retro.                                                                | nein              |         |
+| 15  | **Kostenlimit:** Welche Obergrenze pro Monat für KI-Aufrufe? Vorschlag: 5 € pro Monat, 0,50 € pro Lauf. Läuft das über ein eigenes API-Konto (kommerzielle Bedingungen, Artikel VIII) statt des Claude-Abos?                                                                                               | nein              |         |
+| 16  | **Erinnerung an den Zugang:** Reicht eine Mail 7 Tage vor Ablauf, dann täglich bis zur Erneuerung (AK-12)?                                                                                                                                                                                                 | nein              |         |
+| 17  | **Genauigkeit:** Ist „nicht vor dem Zeitpunkt, spätestens 30 Minuten danach“ (AK-7) akzeptabel? Die 15 Minuten aus G5 sind ohne Server nicht verlässlich zuzusagen.                                                                                                                                        | nein              |         |
+| 18  | **Rückzug nach der Abnahme:** Zurückziehen oder Verschieben (AK-10) ebenfalls per PR mit Merge, oder darf der Inhaber das direkt auf `main` ändern? `main` ist geschützt (Artikel III), Vorschlag daher per PR, der sofort gemergt werden darf.                                                            | nein              |         |

@@ -10,6 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
+- 2026-11-25 – Vorhaben 09, Stufe 1 (Specify): Spec Content-Pipeline für LinkedIn-Posts aus dem Werkstatt-Material mit Abnahme per Merge (Entwurf, wartet auf Freigabe).
 - 2026-11-23 – Phase 2, Schritt 3 (PR-10, T-11, T-16, Text-PR): Seite „Über mich“ mit Foto (ohne Metadaten, ohne Arbeitgeber) und Werdegang (#66).
 - 2026-11-21 – Phase 2, Schritt 3 (PR-6, T-12, Text-PR): Kontaktseite mit Rollenadresse, Mail-Link und Link „Erstgespräch buchen“ (Google Kalender, nicht eingebettet), kein Formular; Tests für AK-3 (#63).
 - 2026-11-21 – Phase 1.5, Schritt 1 (PR-1, T-01 bis T-06, T-47): CodeslageWerkzeugKasten in werkstatt – `tools/cwk` (Schema, `check`, `ci-ok`, `settings`), `cwk/manifest.json` mit Regel- und Code-Teil, wiederverwendbare Workflows `cwk-rules.yml` und `cwk-code.yml`; einziger Pflicht-Check ist `ci-ok` (#62).
