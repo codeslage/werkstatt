@@ -15,9 +15,10 @@ Methode:
 | Was  | Art    | Start            | Ende             | Dauer | Bemerkung                                                           |
 | ---- | ------ | ---------------- | ---------------- | ----- | ------------------------------------------------------------------- |
 | Spec | Arbeit | 2026-11-25 18:53 | 2026-11-25 18:57 | 0:04  | Grundlagen gelesen, Entwurf `spec.md`, Protokoll, Prüfungen, Commit |
+| Spec | Arbeit | 2026-11-25 18:57 | 2026-11-25 19:00 | 0:03  | Review-Agent, Befunde umgesetzt, Review abgelegt                    |
 
 ## Summen
 
 | Was  | Arbeit | Wartezeit | Gesamt |
 | ---- | ------ | --------- | ------ |
-| Spec | 0:04   | 0:00      | 0:04   |
+| Spec | 0:07   | 0:00      | 0:07   |
