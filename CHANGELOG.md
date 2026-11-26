@@ -10,6 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
+- 2026-11-26 – Phase 2, Schritt 3 (PR-7, T-13, Text-PR): Startseite mit Kernsatz, Erklärung, „Schreib mir“, vier Leistungen in Kurzform und Teaser der Case Study (#74).
 - 2026-11-26 – Phase 2, Schritt 3 (PR-9, T-15, Text-PR): Seite „Projekte“ und Case Study „Wir bauen erst, wenn wir es brauchen“ mit den Soll/Ist-Zahlen aus Phase 1 (#73).
 - 2026-11-26 – Phase 2, Schritt 3 (PR-8, T-14, Text-PR): Seite „Leistungen“ mit vier Bereichen, Ablauf, Pilotprojekten (Preise auf Anfrage) und Abgrenzung (#72).
 - 2026-11-23 – Phase 2, Schritt 3 (PR-10, T-11, T-16, Text-PR): Seite „Über mich“ mit Foto (ohne Metadaten, ohne Arbeitgeber) und Werdegang (#66).

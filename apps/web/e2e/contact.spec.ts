@@ -39,3 +39,12 @@ for (const path of PATHS) {
     for (const href of contactLinks) expect(href).toBe('/kontakt/');
   });
 }
+
+// T-13: Die Startseite ruft oben und am Ende mit „Schreib mir“ zur Kontaktseite auf.
+test('die Startseite ruft mit „Schreib mir“ zur Kontaktseite auf', async ({ page }) => {
+  await page.goto('/');
+  const calls = page.locator('main').getByRole('link', { name: 'Schreib mir', exact: true });
+  await expect(calls).toHaveCount(2);
+  for (const href of await calls.evaluateAll((links) => links.map((link) => link.getAttribute('href'))))
+    expect(href).toBe('/kontakt/');
+});

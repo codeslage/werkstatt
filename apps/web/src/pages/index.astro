@@ -1,7 +1,67 @@
 ---
-import PageShell from '../components/PageShell.astro';
+import Base from '../layouts/Base.astro';
+import { pageByPath } from '../site/page-by-path.ts';
+
+// Eigener Aufbau statt PageShell: Die Überschrift ist der Kernsatz, nicht das Label „Start“ (gestaltung.md).
+// Die vier Leistungen sind die Kurzform von /leistungen/, die Zahlen stammen aus der Case Study.
+const page = pageByPath('/');
 ---
 
-<PageShell path="/">
-  <p>[Inhalt]</p>
-</PageShell>
+<Base title={page.title} description={page.description}>
+  <p class="overline">// KI-Automatisierung für Startups</p>
+  <h1>Software für dein Startup: von der KI gebaut, von mir geprüft.</h1>
+  <p>
+    Ich helfe Startups in frühen Phasen, aus einer Idee schnell etwas Lauffähiges zu machen: spec-driven, offen
+    dokumentiert, und jeden Entwurf der KI gebe ich erst nach meiner Prüfung frei.
+  </p>
+  <p class="actions">
+    <a class="button" href="/kontakt/">
+      Schreib mir
+    </a>
+    <a href="/projekte/">Projekte ansehen →</a>
+  </p>
+
+  <h2>Was ich mache</h2>
+  <ul class="cards">
+    <li>
+      <h3>Prototyp und MVP</h3>
+      <p>In Tagen statt Monaten etwas, das du Nutzern und Investoren zeigen kannst.</p>
+    </li>
+    <li>
+      <h3>Infrastruktur und CI</h3>
+      <p>Ein sicheres Fundament ab dem ersten Commit: reproduzierbar, in der EU und günstig.</p>
+    </li>
+    <li>
+      <h3>KI-Entwicklung einführen</h3>
+      <p>Dein Team entwickelt mit KI-Agenten schneller und behält Qualität und Sicherheit im Griff.</p>
+    </li>
+    <li>
+      <h3>
+        KI-Automatisierung <span class="badge">im Aufbau</span>
+      </h3>
+      <p>Wiederkehrende Abläufe entwirft eine KI, du prüfst nur noch und gibst frei.</p>
+    </li>
+  </ul>
+  <p>
+    <a href="/leistungen/">Alle Leistungen →</a>
+  </p>
+
+  <h2>Case Study</h2>
+  <p class="figure">≈ 14,4 h statt ≈ 50 h</p>
+  <p>
+    <a href="/projekte/wir-bauen-erst-wenn-wir-es-brauchen/">Wir bauen erst, wenn wir es brauchen</a>: Claude schätzte
+    rund 50 Stunden für das technische Fundament von codeslage. Gebraucht hat es gut 14, ohne eigenen Server und ohne
+    zusätzliche laufende Kosten.
+  </p>
+
+  <h2>Du hast eine Idee?</h2>
+  <p>
+    Schreib mir kurz, was du vorhast und wo du gerade stehst. Im Erstgespräch klären wir in 30 Minuten, ob und wie ich
+    helfen kann.
+  </p>
+  <p class="actions">
+    <a class="button" href="/kontakt/">
+      Schreib mir
+    </a>
+  </p>
+</Base>

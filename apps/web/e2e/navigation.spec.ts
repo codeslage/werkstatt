@@ -28,3 +28,29 @@ test('Projekte verlinkt die Case Study, und sie ist erreichbar', async ({ page }
   expect(response?.status()).toBe(200);
   await expect(page.getByRole('heading', { level: 1 })).toHaveText('Wir bauen erst, wenn wir es brauchen');
 });
+
+// T-13: Die Startseite hat einen Kernsatz statt „Start“, nennt die vier Leistungen wie /leistungen/
+// und verlinkt die Case Study.
+test('die Startseite zeigt den Kernsatz, die vier Leistungen und den Teaser der Case Study', async ({ page }) => {
+  await page.goto('/leistungen/');
+  const services = await page.locator('main h2').allTextContents();
+
+  await page.goto('/');
+  const main = page.locator('main');
+  const heading = page.getByRole('heading', { level: 1 });
+  await expect(heading).toHaveText(/\S/);
+  await expect(heading).not.toHaveText('Start');
+  const teasers = await main.locator('h3').allTextContents();
+  expect(teasers).toHaveLength(4);
+  expect(services.slice(0, 4).map(normalize)).toEqual(teasers.map(normalize));
+  await expect(main.getByRole('link', { name: /Alle Leistungen/ })).toHaveAttribute('href', '/leistungen/');
+  await expect(main.getByRole('link', { name: /Projekte ansehen/ })).toHaveAttribute('href', '/projekte/');
+  await expect(main.getByRole('link', { name: /Wir bauen erst, wenn wir es brauchen/ })).toHaveAttribute(
+    'href',
+    CASE_STUDY,
+  );
+});
+
+function normalize(text: string): string {
+  return text.replace(/\s+/g, ' ').trim();
+}
