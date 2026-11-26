@@ -87,6 +87,7 @@ Methode:
 | T-17–T-19  | Wartezeit | 2026-11-26 17:02 | 2026-11-26 17:13 | 0:11  | Entscheidung des Inhabers zu Frage 17                                                                                                                       |
 | T-17–T-19  | Arbeit    | 2026-11-26 17:13 | 2026-11-26 17:14 | 0:01  | Frage 17 und 15 in Spec und Review eingetragen                                                                                                              |
 | T-17–T-19  | Wartezeit | 2026-11-26 17:14 | 2026-11-26 17:24 | 0:10  | CI und Freigabe des Inhabers („Ja, mergen“)                                                                                                                 |
+| T-20–T-22  | Arbeit    | 2026-11-26 17:35 | 2026-11-26 17:44 | 0:09  | web.tf, Tests, Token-Rechte, Review mit Nachtrag, Entwurfs-PR #76 (bis T-25)                                                                                |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -117,3 +118,4 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | T-15       | 0:17   | 2:52      | 3:09   |
 | T-13       | 0:10   | 0:22      | 0:32   |
 | T-17–T-19  | 0:15   | 0:21      | 0:36   |
+| T-20–T-22  | 0:09   | 0:00      | 0:09   |

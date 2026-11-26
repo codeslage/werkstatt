@@ -20,7 +20,7 @@ Die Secrets stehen auch für Dependabot bereit, damit der Drift-Check bei dessen
 
 ## Geplante Erweiterung (Plan 05 V3/V4, Plan 06 T-21) – noch nicht angelegt
 
-Die Tokens werden **einmal** erweitert, für beide Vorhaben zusammen (Plan 06, Schritt 5). Anlegen und Erweitern macht der Inhaber in Plan 06 T-24 bzw. Plan 05 T-26, Claude leitet an. Die genauen Bezeichnungen der Rechte werden dabei in der Doku von Cloudflare geprüft und die Tabelle oben danach angepasst.
+Die Tokens werden **einmal** erweitert, für beide Vorhaben zusammen: in Plan 06 T-24, das damit auch die Rechte aus Plan 05 V3 mitnimmt (Plan 05 T-26 prüft dann nur noch und legt den Upload-Token für `platform` an). Anlegen und Erweitern macht der Inhaber, Claude leitet an. Die genauen Bezeichnungen der Rechte werden dabei in der Doku von Cloudflare geprüft und die Tabelle oben danach angepasst.
 
 | Token                                   | Neu dazu                                                                                                            | Wofür                                                      | Für          |
 | --------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------ |
@@ -30,6 +30,10 @@ Die Tokens werden **einmal** erweitert, für beide Vorhaben zusammen (Plan 06, S
 | `codeslage-pages-deploy` (neu)          | nur Konto: Cloudflare Pages Edit; Ablaufdatum wie die anderen Tokens                                                | `deploy-web.yml`: `wrangler pages deploy` (Plan 06 T-26)   | Plan 06      |
 | `CF_PAGES_TOKEN` (neu, Wert des obigen) | nur im GitHub-Environment `production` von `werkstatt` (nur Branch `main`), kein Repo-Secret                        | Deploy der Webseite                                        | Plan 06      |
 | Upload-Token für `platform` (neu)       | nur Konto: Cloudflare Pages Edit; eigener Token, nicht `codeslage-pages-deploy` (lässt sich getrennt widerrufen)    | `portal.yml` in `platform`                                 | Plan 05 (V4) |
+
+`PUBLIC_CF_BEACON_TOKEN` (GitHub-Variable im Environment `production`, kein Secret, steht ohnehin im HTML) gibt es erst nach dem `apply` in Plan 06 T-25: Cloudflare vergibt ihn beim Anlegen der Web-Analytics-Seite. Der Inhaber liest ihn im Dashboard ab (Web Analytics → Site → Manage site → JS snippet, Wert `token`) und setzt die Variable vor T-26. Die Seite nicht vorher im Dashboard anlegen, sonst gäbe es sie zweimal.
+
+Der Drift-Lauf auf PR-12 (#76) zeigt: Mit dem heutigen `codeslage-tofu-ro` scheitert das Lesen der Rulesets mit `403`; Single Redirect Read ist also nötig.
 
 Ohne diese Rechte scheitern `tofu plan` (lokal) und der Drift-Check an `web.tf` mit `403`; bis zum `apply` in Plan 06 T-25 ist der Drift-Check bei PRs auf `web.tf` ohnehin rot (`drift.yml`).
 
