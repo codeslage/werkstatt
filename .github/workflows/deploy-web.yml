@@ -1,0 +1,48 @@
+name: Deploy Webseite
+
+# Plan 06, T-26 (AK-2, AK-10): baut apps/web, lädt das Ergebnis nach Cloudflare Pages und prüft danach die Live-Seite.
+# Den Deploy-Token gibt es nur im Environment `production`, das nur `main` zulässt (docs/secrets.md). Ein Lauf von
+# einem anderen Branch (workflow_dispatch) bricht deshalb ab, bevor ein Schritt läuft.
+on:
+  push:
+    branches: [main]
+    paths:
+      - 'apps/web/**'
+      - '.github/workflows/deploy-web.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: deploy-web
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    name: Deploy (Cloudflare Pages)
+    runs-on: ubuntu-latest
+    environment: production
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - uses: ./.github/actions/setup
+
+      # Impressumsangaben nur aus dem Environment (AK-12), der Beacon-Token ist öffentlich und deshalb eine Variable.
+      - name: Build
+        env:
+          IMPRESSUM_NAME: ${{ secrets.IMPRESSUM_NAME }}
+          IMPRESSUM_STRASSE: ${{ secrets.IMPRESSUM_STRASSE }}
+          IMPRESSUM_PLZ_ORT: ${{ secrets.IMPRESSUM_PLZ_ORT }}
+          PUBLIC_CF_BEACON_TOKEN: ${{ vars.PUBLIC_CF_BEACON_TOKEN }}
+        run: pnpm --filter @codeslage/web build
+
+      - name: Upload nach Cloudflare Pages
+        env:
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CF_PAGES_TOKEN }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+        working-directory: apps/web
+        run: pnpm exec wrangler pages deploy dist --project-name=codeslage-web --branch=main --commit-hash=${{ github.sha }}
+
+      - name: Live-Prüfung codeslage.de (AK-2, AK-4, AK-9)
+        run: pnpm test:infra web.test.ts
