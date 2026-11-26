@@ -81,6 +81,7 @@ Methode:
 | T-14       | Wartezeit | 2026-11-26 11:17 | 2026-11-26 11:20 | 0:03  | Freigabe („dann gefällt es mir jetzt“)                                                                                                                      |
 | T-15       | Arbeit    | 2026-11-26 11:28 | 2026-11-26 11:45 | 0:17  | Test (rot), Projekte und Case Study, Checks, Lighthouse, Screenshots, Review mit Nachtrag, Doku, PR, CI-Fehler behoben                                      |
 | T-15       | Wartezeit | 2026-11-26 11:45 | 2026-11-26 14:37 | 2:52  | CI und Freigabe des Inhabers („Ja, freigegeben“)                                                                                                            |
+| T-13       | Arbeit    | 2026-11-26 14:59 | 2026-11-26 15:09 | 0:10  | Tests (rot), Startseite, Checks, Screenshots, PR, Review mit Nachtrag, Doku                                                                                 |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -109,3 +110,4 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | T-16       | 0:07   | 0:00      | 0:07   |
 | T-14       | 0:12   | 0:04      | 0:16   |
 | T-15       | 0:17   | 2:52      | 3:09   |
+| T-13       | 0:10   | 0:00      | 0:10   |

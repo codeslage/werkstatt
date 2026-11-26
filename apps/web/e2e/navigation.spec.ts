@@ -37,7 +37,9 @@ test('die Startseite zeigt den Kernsatz, die vier Leistungen und den Teaser der 
 
   await page.goto('/');
   const main = page.locator('main');
-  await expect(page.getByRole('heading', { level: 1 })).not.toHaveText('Start');
+  const heading = page.getByRole('heading', { level: 1 });
+  await expect(heading).toHaveText(/\S/);
+  await expect(heading).not.toHaveText('Start');
   const teasers = await main.locator('h3').allTextContents();
   expect(teasers).toHaveLength(4);
   expect(services.slice(0, 4).map(normalize)).toEqual(teasers.map(normalize));
