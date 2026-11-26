@@ -67,6 +67,7 @@ Methode:
 | Implement PR-2     | Arbeit    | 2026-11-26 16:49 | 2026-11-26 16:54 | 0:05  | T-13: Claude GitHub App geprüft, Entscheidung des Inhabers gegen den Live-Test, Nachweise gesammelt, Tasks und Protokoll. Darin stecken zwei kurze Antworten des Inhabers, die ich nicht abgelesen habe; getrennt werden kann es nachträglich nicht (Review PR-2, Befund 5). Davor Pause ab 15:08 (zählt nicht) |
 | Implement PR-2     | Arbeit    | 2026-11-26 17:11 | 2026-11-26 17:13 | 0:02  | T-15: `cwk-sample` geklont und geprüft, Anleitung für den Test; Ende ohne Ablesung (letzte Ablesung 17:11). Danach Pause bis 19:46 (zählt nicht). Darin lag auch der Test des Inhabers; wie lange er dauerte, ist unbekannt, deshalb keine Wartezeit-Zeile (Review PR-2, Befund 5)                              |
 | Implement PR-2     | Arbeit    | 2026-11-26 19:46 | 2026-11-26 20:01 | 0:15  | Nachtrag: Abschluss-Review (❌, #64 schon gemergt), Branch vom `main` mit T-13/T-15, Dependabot-Secret behoben (Tests zuerst), Plan v4.3, Runbooks, Protokoll, Changelog                                                                                                                                        |
+| Implement PR-2     | Arbeit    | 2026-11-26 22:27 | 2026-11-26 22:27 | 0:00  | Nachtrag: Merge-Konflikte mit `main` (#76, #79, #80) in `CHANGELOG.md` und `docs/secrets.md` gelöst, Prüfungen. Davor Pause ab 20:01 (zählt nicht)                                                                                                                                                              |
 
 ## Summen
 
