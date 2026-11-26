@@ -15,6 +15,6 @@ T-23 bleibt 🔄, bis Frage 15 erledigt ist. Der Livegang (T-25, T-26) folgt ers
 ## Test „kein Platzhalter im gesamten Build“
 
 1. **Definition:** wie in T-08 `hasPlaceholder` aus `src/site/pages.ts`, also Text in eckigen Klammern. Die Musterwerte `IMPRESSUM_*` aus `.env.example` sind Absicht und kein Platzhalter in diesem Sinn: Der Test-Build braucht keine echten Angaben, der Deploy setzt sie aus dem GitHub-Environment `production` (T-24).
-2. **Umfang:** jede HTML-Datei in `dist/`, mit Titel, Beschreibung, sichtbarem Text und den Attributen `alt`, `aria-label` und `title`. Der Test liest die Dateien selbst und nicht über den Vorschau-Server, damit er den eigenen Build prüft, auch wenn auf Port 4321 ein anderer Server läuft.
+2. **Umfang:** jede HTML-Datei in `dist/`, mit Titel, Beschreibung, sichtbarem Text und den Attributen `alt`, `aria-label` und `title`. Der Test liest die Dateien selbst und nicht über den Vorschau-Server. Den Build erzeugt der webServer aus `playwright.config.ts`. In der CI läuft er immer neu. Lokal entfällt er, wenn auf Port 4321 schon ein Server läuft (`reuseExistingServer`); dann vorher selbst `pnpm build` mit den Werten aus `.env.example` laufen lassen, sonst prüft der Test einen alten Stand. So lief der Nachweis hier, weil auf 4321 ein fremder Server lief.
 3. **Zuerst rot:** Mit „[Text folgt]“ auf der Fehlerseite schlug der Test mit genau dieser Stelle fehl. Ohne den Platzhalter ist er grün.
 4. **Review:** `specs/06-webseite/reviews/T-23.md`.
