@@ -3,7 +3,8 @@ import { syncSecrets } from '../src/secrets.ts';
 import { fakeRun, notFound } from './fake-run.ts';
 
 // AK-3, AK-15 (Projekte): `cwk secrets` setzt PUBLIC_BLOCKLIST in allen Repos der Organisation neu und schreibt
-// das Datum je Repo nach platform/blocklist-status.json. Die Sperrliste selbst erscheint nie in einer Ausgabe.
+// das Datum je Repo nach platform/blocklist-status.json. Gesetzt wird es für Actions und für Dependabot, weil Läufe
+// von Dependabot nur Dependabot-Secrets sehen (Review PR-2: Dependabot-PRs in cwk-sample waren im Scan rot). Die Sperrliste selbst erscheint nie in einer Ausgabe.
 
 const STATUS_PATH = '/repos/codeslage/platform/contents/blocklist-status.json';
 const encode = (value: object) => Buffer.from(JSON.stringify(value)).toString('base64');
@@ -23,8 +24,10 @@ describe('cwk secrets (AK-3)', () => {
     const notes = syncSecrets(deps);
     const secretCalls = calls.filter((call) => call.line.startsWith('gh secret set'));
     expect(secretCalls.map((call) => [call.line, call.input])).toEqual([
-      ['gh secret set PUBLIC_BLOCKLIST -R codeslage/werkstatt', 'geheim\n'],
-      ['gh secret set PUBLIC_BLOCKLIST -R codeslage/demo', 'geheim\n'],
+      ['gh secret set PUBLIC_BLOCKLIST -R codeslage/werkstatt --app actions', 'geheim\n'],
+      ['gh secret set PUBLIC_BLOCKLIST -R codeslage/werkstatt --app dependabot', 'geheim\n'],
+      ['gh secret set PUBLIC_BLOCKLIST -R codeslage/demo --app actions', 'geheim\n'],
+      ['gh secret set PUBLIC_BLOCKLIST -R codeslage/demo --app dependabot', 'geheim\n'],
     ]);
     const put = calls.find((call) => call.line === `gh api -X PUT ${STATUS_PATH} --input -`);
     const body = JSON.parse(put?.input ?? '{}');
@@ -60,7 +63,7 @@ describe('cwk secrets: Sonderfälle (AK-3, Artikel VII)', () => {
     } catch (error) {
       message = (error as Error).message;
     }
-    expect(message).toMatch(/gh secret set PUBLIC_BLOCKLIST -R codeslage\/werkstatt.*forbidden/);
+    expect(message).toMatch(/gh secret set PUBLIC_BLOCKLIST -R codeslage\/werkstatt --app actions.*forbidden/);
     expect(message).not.toContain('geheim');
     expect(calls).toHaveLength(2);
   });

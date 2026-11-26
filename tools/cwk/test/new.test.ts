@@ -64,10 +64,13 @@ describe('cwk new: öffentlich mit Code (AK-1, AK-4, AK-6)', () => {
     const order = lines();
     const index = (prefix: string) => order.findIndex((line) => line.startsWith(prefix));
     expect(order[0]).toBe('gh repo create codeslage/demo --template codeslage/project-template --public');
-    expect(calls.find((call) => call.line.startsWith('gh secret set'))).toMatchObject({
-      line: 'gh secret set PUBLIC_BLOCKLIST -R codeslage/demo',
-      input: 'geheim\n',
-    });
+    // Für Actions und Dependabot: Sonst ist jeder Dependabot-PR im Scan rot (Review PR-2).
+    expect(
+      calls.filter((call) => call.line.startsWith('gh secret set')).map((call) => [call.line, call.input]),
+    ).toEqual([
+      ['gh secret set PUBLIC_BLOCKLIST -R codeslage/demo --app actions', 'geheim\n'],
+      ['gh secret set PUBLIC_BLOCKLIST -R codeslage/demo --app dependabot', 'geheim\n'],
+    ]);
     expect(index('gh secret set')).toBeLessThan(index('git -C'));
     expect(order).toContain('gh api -X PUT /orgs/codeslage/teams/maintainers/repos/codeslage/demo -f permission=push');
     expect(index('git -C')).toBeLessThan(index('gh api -X POST /repos/codeslage/demo/rulesets'));

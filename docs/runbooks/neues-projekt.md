@@ -1,6 +1,6 @@
 # Runbook: Neues Projekt-Repo anlegen
 
-> Stand: 2026-11-21 · Bezug: `specs/05-projekt-plattform/` (AK-1, AK-4, AK-6, AK-27), Plan 05 Schritt 2, ADR 0011, `platform-setup.md`
+> Stand: 2026-11-26 · Bezug: `specs/05-projekt-plattform/` (AK-1, AK-4, AK-6, AK-27), Plan 05 Schritt 2, ADR 0011, `platform-setup.md`
 > Wer: der Inhaber, lokal in einem Checkout von `werkstatt` auf aktuellem `main`
 
 ## 1. Voraussetzungen
@@ -28,7 +28,7 @@ Der Name besteht aus Kleinbuchstaben, Ziffern und Bindestrichen. `werkstatt`, `p
 `cwk new` macht nacheinander:
 
 1. Repo aus der Vorlage anlegen und warten, bis der Inhalt da ist.
-2. Secret `PUBLIC_BLOCKLIST` aus `.sperrliste` setzen, vor dem ersten Push. Sonst wäre der erste Scan rot.
+2. Secret `PUBLIC_BLOCKLIST` aus `.sperrliste` setzen, vor dem ersten Push, für Actions und für Dependabot. Sonst wäre der erste Scan rot, und Läufe von Dependabot sehen nur Dependabot-Secrets.
 3. Dem Team `maintainers` Schreibrecht geben, damit GitHub es als Code-Owner anerkennt.
 4. Klonen, bei `--no-code` den Code-Teil des CWK und die Beispiel-App (`src/`, `tsconfig.json`, `Dockerfile`, `.dockerignore`) entfernen. `cwk.json` bekommt `"code"` und keinen Eintrag `docs`, dann gilt der Standard nach Sichtbarkeit (öffentlich → `public`, privat → `internal`). Danach einen Commit auf `main` pushen, der startet die erste CI.
 5. Nur öffentlich: Rulesets `main-checks` und `main-approval` setzen und das Repo in die Installation der Schreib-App `codeslage-cwk` aufnehmen.
@@ -52,3 +52,4 @@ Fehlen die Schreib-App oder `platform` noch, meldet `cwk new` einen Hinweis und 
 
 - **Abbruch mittendrin:** Das Repo existiert dann teilweise eingerichtet. Ein zweiter Aufruf mit demselben Namen scheitert schon beim Anlegen. Die fehlenden Schritte aus Abschnitt 2 lassen sich einzeln nachholen. Soll das Repo stattdessen weg, ist das eine zerstörerische Aktion: Löschen nur nach ausdrücklicher Freigabe (Constitution V).
 - **Erster Scan rot wegen fehlender Sperrliste:** `pnpm cwk secrets` setzt sie in allen Repos neu, danach den Lauf neu starten.
+- **Nur Dependabot-PRs im Scan rot** („Sperrliste fehlt“): Das Dependabot-Secret fehlt. `pnpm cwk secrets` setzt beide, danach im PR `@dependabot recreate` oder den Lauf neu starten.
