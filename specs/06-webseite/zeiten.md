@@ -79,7 +79,7 @@ Methode:
 | T-14       | Wartezeit | 2026-11-26 11:13 | 2026-11-26 11:14 | 0:01  | Rückmeldung des Inhabers zu Beispielen und Styling                                                                                                          |
 | T-14       | Arbeit    | 2026-11-26 11:14 | 2026-11-26 11:17 | 0:03  | Beispiele umformuliert, neu gestaltet, gekürzt (Wünsche des Inhabers)                                                                                       |
 | T-14       | Wartezeit | 2026-11-26 11:17 | 2026-11-26 11:20 | 0:03  | Freigabe („dann gefällt es mir jetzt“)                                                                                                                      |
-| T-15       | Arbeit    | 2026-11-26 11:28 | 2026-11-26 11:40 | 0:12  | Test (rot), Projekte und Case Study, Checks, Lighthouse, Screenshots, Review mit Nachtrag, Doku, PR                                                         |
+| T-15       | Arbeit    | 2026-11-26 11:28 | 2026-11-26 11:45 | 0:17  | Test (rot), Projekte und Case Study, Checks, Lighthouse, Screenshots, Review mit Nachtrag, Doku, PR, CI-Fehler behoben                                      |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
