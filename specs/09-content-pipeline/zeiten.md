@@ -17,10 +17,10 @@ Methode:
 | Spec | Arbeit | 2026-11-25 18:53 | 2026-11-25 18:57 | 0:04  | Grundlagen gelesen, Entwurf `spec.md`, Protokoll, Prüfungen, Commit                                                                                                                         |
 | Spec | Arbeit | 2026-11-25 18:57 | 2026-11-25 19:00 | 0:03  | Review-Agent, Befunde umgesetzt, Review abgelegt                                                                                                                                            |
 | Spec | Arbeit | 2026-11-26 18:44 | 2026-11-26 19:27 | 0:43  | Antworten eingetragen, Abstimmung Formate, Rhythmus, Variante B, Agents, Spec neu gefasst; Wartezeit auf Antworten nicht getrennt abgelesen, als Arbeit gezählt (Ausnahme, Protokoll Nr. 9) |
-| Spec | Arbeit | 2026-11-26 19:27 | 2026-11-26 19:32 | 0:05  | Review 2, Befunde umgesetzt, Review 1 im Wortlaut neu abgelegt                                                                                                                              |
+| Spec | Arbeit | 2026-11-26 19:27 | 2026-11-26 19:31 | 0:04  | Review 2, Befunde umgesetzt, Review 1 im Wortlaut neu abgelegt                                                                                                                              |
 
 ## Summen
 
 | Was  | Arbeit | Wartezeit | Gesamt |
 | ---- | ------ | --------- | ------ |
-| Spec | 0:55   | 0:00      | 0:55   |
+| Spec | 0:54   | 0:00      | 0:54   |
