@@ -87,7 +87,7 @@ Methode:
 | T-17–T-19  | Arbeit    | 2026-11-26 17:13 | 2026-11-26 17:14 | 0:01  | Frage 17 und 15 in Spec und Review eingetragen                                                                                                              |
 | T-17–T-19  | Wartezeit | 2026-11-26 17:14 | 2026-11-26 17:24 | 0:10  | CI und Freigabe des Inhabers („Ja, mergen“)                                                                                                                 |
 | Texte      | Arbeit    | 2026-11-26 19:18 | 2026-11-26 19:25 | 0:07  | Textkorrekturen nach der Abnahme: Tests (rot), Texte, Spec-Nachträge, Screenshots, PR, Review                                                               |
-| T-23       | Arbeit    | 2026-11-26 20:43 | 2026-11-26 21:00 | 0:17  | Test „kein Platzhalter im gesamten Build“ (rot, dann grün), Protokoll, V4, PR, Review                                                                       |
+| T-23       | Arbeit    | 2026-11-26 20:43 | 2026-11-26 20:47 | 0:04  | Test „kein Platzhalter im gesamten Build“ (rot, dann grün), Protokoll, V4, PR, Review                                                                       |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -121,4 +121,4 @@ Bei T-10 lag am 2026-11-20 von 14:49 bis 16:55 eine Pause, keine Wartezeit auf e
 | T-13       | 0:10   | 0:22      | 0:32   |
 | T-17–T-19  | 0:15   | 0:21      | 0:36   |
 | Texte      | 0:07   | 0:00      | 0:07   |
-| T-23       | 0:17   | 0:00      | 0:17   |
+| T-23       | 0:04   | 0:00      | 0:04   |
