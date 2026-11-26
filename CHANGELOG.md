@@ -10,6 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
+- 2026-11-26 – Phase 2, Schritt 5 (PR-12, T-20 bis T-22, Entwurf bis T-25): `infra/tofu/live/web.tf` mit Pages-Projekt, Domains, CNAME für `@` und `www`, Weiterleitung `www` → Hauptdomain und Web Analytics; Test gegen Änderungen an MX und TXT; Live-Test `web.test.ts`; Token-Rechte in `docs/secrets.md`; T-25: `tofu apply` (7 hinzugefügt, 0 geändert, 0 gelöscht), Frage 15 als bewusst akzeptiertes Risiko (#76).
 - 2026-11-26 – Phase 2, T-23: Test „kein Platzhalter im gesamten Build“ (`e2e/build.spec.ts`), Protokoll der Livegang-Voraussetzungen; V4 erledigt, Frage 15 läuft noch (#79).
 - 2026-11-26 – Phase 2, Schritt 4 (PR-11, T-17 bis T-19, Text-PR): Datenschutzerklärung (Hosting, cookielose Besuchsmessung, Mail, Terminbuchung über Google Kalender) und Impressum mit den Angaben aus der Build-Umgebung; Cloudflare Pages und Web Analytics in `docs/dsgvo.md` und `docs/kosten.md` (#75).
 - 2026-11-26 – Phase 2, Schritt 3 (PR-7, T-13, Text-PR): Startseite mit Kernsatz, Erklärung, „Schreib mir“, vier Leistungen in Kurzform und Teaser der Case Study (#74).

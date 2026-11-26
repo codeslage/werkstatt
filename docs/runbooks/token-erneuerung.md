@@ -1,20 +1,27 @@
 # Runbook: Cloudflare-Tokens erneuern
 
-> Stand: 2026-11-18 · Bezug: `docs/secrets.md` (Register, AK-14), `docs/runbooks/tofu-state.md`, Constitution VI und VII
+> Stand: 2026-11-26 (Deploy-Token und Erweiterung der Rechte vorgemerkt) · Bezug: `docs/secrets.md` (Register, AK-14), `docs/runbooks/tofu-state.md`, Constitution VI und VII
 > Nächster Termin: **alle Cloudflare-Tokens laufen am 2027-05-12 ab.** Erneuern spätestens zwei Wochen vorher.
 
 ## 1. Welche Tokens, was hängt daran
 
-| Token (Cloudflare)        | Art                  | Werte und wo sie liegen                                                                                          | Wer bricht, wenn er abläuft |
-| ------------------------- | -------------------- | ---------------------------------------------------------------------------------------------------------------- | --------------------------- |
-| `codeslage-tofu-rw`       | Account API Token    | Token-Wert → `.env` `CLOUDFLARE_API_TOKEN`                                                                       | `tofu plan`/`apply` lokal   |
-| `codeslage-tofu-state-rw` | Account API Token R2 | Access Key ID / Secret Access Key → `.env` `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY`                         | jeder lokale Tofu-Befehl    |
-| `codeslage-tofu-ro`       | Account API Token    | Token-Wert → GitHub Secret `CF_API_TOKEN_RO`                                                                     | Drift-Check                 |
-| `codeslage-tofu-state-ro` | Account API Token R2 | Access Key ID / Secret Access Key → GitHub Secrets `R2_STATE_RO_ACCESS_KEY_ID` / `R2_STATE_RO_SECRET_ACCESS_KEY` | Drift-Check                 |
+| Token (Cloudflare)                         | Art                  | Werte und wo sie liegen                                                                                          | Wer bricht, wenn er abläuft            |
+| ------------------------------------------ | -------------------- | ---------------------------------------------------------------------------------------------------------------- | -------------------------------------- |
+| `codeslage-tofu-rw`                        | Account API Token    | Token-Wert → `.env` `CLOUDFLARE_API_TOKEN`                                                                       | `tofu plan`/`apply` lokal              |
+| `codeslage-tofu-state-rw`                  | Account API Token R2 | Access Key ID / Secret Access Key → `.env` `AWS_ACCESS_KEY_ID` / `AWS_SECRET_ACCESS_KEY`                         | jeder lokale Tofu-Befehl               |
+| `codeslage-tofu-ro`                        | Account API Token    | Token-Wert → GitHub Secret `CF_API_TOKEN_RO`                                                                     | Drift-Check                            |
+| `codeslage-tofu-state-ro`                  | Account API Token R2 | Access Key ID / Secret Access Key → GitHub Secrets `R2_STATE_RO_ACCESS_KEY_ID` / `R2_STATE_RO_SECRET_ACCESS_KEY` | Drift-Check                            |
+| `codeslage-pages-deploy` (ab Plan 06 T-24) | Account API Token    | Token-Wert → Secret `CF_PAGES_TOKEN` nur im GitHub-Environment `production`                                      | Deploy der Webseite (`deploy-web.yml`) |
 
 GitHub Secrets gibt es jeweils zweimal: für Actions und für Dependabot. Alle Werte stehen zusätzlich im Passwortmanager des Inhabers.
 
 Ein R2-Token zeigt beim Anlegen oder Rollen **drei** Werte: Token value, Access Key ID, Secret Access Key. OpenTofu braucht nur die beiden letzten. Der Token value gehört in **keine** Zeile der `.env`.
+
+`CF_PAGES_TOKEN` liegt nur im Environment `production`, nicht in den Repo-Secrets und nicht bei Dependabot. Setzen mit `gh secret set CF_PAGES_TOKEN --env production --repo codeslage/werkstatt` (Wert wird abgefragt, nicht in die Shell-Historie).
+
+### Rechte erweitern (statt erneuern)
+
+Kommen neue Ressourcen in `infra/tofu/live` dazu (zuerst Plan 06 T-24 zusammen mit Plan 05 V3), werden die Rechte beim bestehenden Token unter **Edit** ergänzt, nicht neu angelegt; der Wert bleibt gleich. Soll-Rechte: `docs/secrets.md`, Abschnitt „Geplante Erweiterung“. Danach Abschnitt 4 ausführen, beim Read-only-Token zusätzlich den Drift-Check neu starten.
 
 ## 2. Anzeichen
 
@@ -23,8 +30,8 @@ Ein R2-Token zeigt beim Anlegen oder Rollen **drei** Werte: Token value, Access 
 
 ## 3. Erneuern (je Token)
 
-1. Cloudflare → Manage Account → Account API Tokens → beim Token **⋯ → Roll**. Der alte Wert ist danach sofort ungültig.
-2. Beim Token **Edit** → TTL: neues Enddatum (bisher halbjährlich). Rechte dabei nicht ändern, sie stehen in `docs/secrets.md`.
+1. Cloudflare → Seitenleiste → Manage account → Settings bzw. „Account API tokens“ → beim Token **⋯ → Roll**. Der alte Wert ist danach sofort ungültig.
+2. Beim Token **Edit** → TTL: neues Enddatum (bisher halbjährlich). Rechte dabei nicht ändern, sie stehen in `docs/secrets.md`; im Dashboard sind sie Policies mit Geltungsbereich (Entire Account bzw. Zone `codeslage.de`).
 3. Neue Werte in den Passwortmanager, alten Eintrag überschreiben.
 4. Werte eintragen:
    - lokale Tokens: in der `.env` die betroffenen Zeilen ersetzen.
