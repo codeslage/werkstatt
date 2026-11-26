@@ -58,7 +58,6 @@ Methode:
 | T-08       | Arbeit    | 2026-11-20 14:31 | 2026-11-20 14:36 | 0:05  | Nacharbeit PR-3: CI, Merge (#60)                                                                                                                            |
 | T-10       | Arbeit    | 2026-11-20 14:36 | 2026-11-20 14:44 | 0:08  | `brand.spec.ts` (rot), Header mit Zeichen und Wortmarke, Touch-Icon, Screenshots, Lighthouse                                                                |
 | T-10       | Arbeit    | 2026-11-20 14:44 | 2026-11-20 14:49 | 0:05  | Doku, PR, Review, Befunde umgesetzt (Grundlinie, Screenshots, 404)                                                                                          |
-| T-10       | Wartezeit | 2026-11-20 14:49 | 2026-11-20 16:55 | 2:06  | Freigabe von Logo und Wortmarke (Text-PR #61); gefragt 14:45, bis 14:49 lief parallel die Arbeit am Review (zählt dort)                                     |
 | T-10       | Arbeit    | 2026-11-20 16:55 | 2026-11-20 16:56 | 0:01  | Freigabe eingetragen, Merge                                                                                                                                 |
 | T-10       | Arbeit    | 2026-11-20 16:56 | 2026-11-20 17:01 | 0:05  | Nacharbeit PR-5: CI, Merge (#61)                                                                                                                            |
 | T-12       | Arbeit    | 2026-11-21 18:14 | 2026-11-21 18:19 | 0:05  | `contact.spec.ts` (rot), `contact.ts` mit Unit-Test, Kontaktseite, Button-Stil, Screenshots, Lighthouse                                                     |
@@ -87,10 +86,13 @@ Methode:
 | T-17–T-19  | Wartezeit | 2026-11-26 17:02 | 2026-11-26 17:13 | 0:11  | Entscheidung des Inhabers zu Frage 17                                                                                                                       |
 | T-17–T-19  | Arbeit    | 2026-11-26 17:13 | 2026-11-26 17:14 | 0:01  | Frage 17 und 15 in Spec und Review eingetragen                                                                                                              |
 | T-17–T-19  | Wartezeit | 2026-11-26 17:14 | 2026-11-26 17:24 | 0:10  | CI und Freigabe des Inhabers („Ja, mergen“)                                                                                                                 |
+| Texte      | Arbeit    | 2026-11-26 19:18 | 2026-11-26 19:25 | 0:07  | Textkorrekturen nach der Abnahme: Tests (rot), Texte, Spec-Nachträge, Screenshots, PR, Review                                                               |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
 Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). Ihre Zeiten sind als „Clarify, Nachtrag Gestaltung“ auf die Minute übernommen, nur wo keine andere Zeile läuft; ihre eigenen Pausen 15:34–16:32 und 16:58–19:27 zählen nicht. Zwischen 15:56 und 19:25 lag eine Pause in der Hauptsitzung. Die Gestaltungs-Sitzung lief in dieser Zeit von 16:32 bis 16:58 weiter; diese Zeilen stehen als Nachtrag hinter „Plan“. Sie zählt nicht und steht deshalb in keiner Zeile (Bestätigung des Inhabers am 2026-11-19).
+
+Bei T-10 lag am 2026-11-20 von 14:49 bis 16:55 eine Pause, keine Wartezeit auf eine Freigabe. Sie stand zuerst als Zeile „Wartezeit“ (2:06) in der Tabelle und ist nach Angabe des Inhabers vom 2026-11-26 gestrichen.
 
 ## Summen
 
@@ -109,7 +111,7 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | T-07       | 0:14   | 0:13      | 0:27   |
 | T-09       | 0:16   | 0:00      | 0:16   |
 | T-08       | 0:15   | 0:12      | 0:27   |
-| T-10       | 0:19   | 2:06      | 2:25   |
+| T-10       | 0:19   | 0:00      | 0:19   |
 | T-12       | 0:30   | 0:17      | 0:47   |
 | T-11       | 0:07   | 0:00      | 0:07   |
 | T-16       | 0:07   | 0:00      | 0:07   |
@@ -117,3 +119,4 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | T-15       | 0:17   | 2:52      | 3:09   |
 | T-13       | 0:10   | 0:22      | 0:32   |
 | T-17–T-19  | 0:15   | 0:21      | 0:36   |
+| Texte      | 0:07   | 0:00      | 0:07   |

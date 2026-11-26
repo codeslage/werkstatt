@@ -105,7 +105,7 @@ Content-Security-Policy (Entwurf): `default-src 'self'; script-src 'self' https:
 
 ### Schritt 3 – Inhalte (AK-3, AK-11, AK-16) · Text-PR · braucht V2, V3
 
-- Startseite, Leistungen (nach `leistungen.md`, KI-Automatisierung „im Aufbau“), Projekte mit der Case Study „Wir bauen erst, wenn wir es brauchen“ (Zahlen der Soll/Ist-Wette, Quelle `docs/content/`), Über mich (Quelle LinkedIn-PDF, Foto; ohne Arbeitgeber- und Kundennamen ohne Freigabe), Kontakt mit `kontakt@codeslage.de`.
+- Startseite, Leistungen (nach `leistungen.md`, KI-Automatisierung „im Aufbau“, entfällt laut Nachtrag 2026-11-26 zu Entscheidung 6), Projekte mit der Case Study „Wir bauen erst, wenn wir es brauchen“ (Zahlen der Soll/Ist-Wette, Quelle `docs/content/`), Über mich (Quelle LinkedIn-PDF, Foto; ohne Arbeitgeber- und Kundennamen ohne Freigabe), Kontakt mit `kontakt@codeslage.de`.
 - Offene Punkte aus `leistungen.md` (Beispiele, „im Aufbau“, Erstgespräch) werden mit den Entwürfen entschieden (Spec, Frage 14).
 - Möglich als mehrere PRs (eine Seite je PR), damit der Inhaber in kleinen Stücken freigibt.
 
