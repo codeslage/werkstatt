@@ -41,7 +41,7 @@ jobs:
 
       # Geplante und wiederverwendbare Workflows (AK-5, AK-24, Plan 05 AK-3): Auslöser, Rechte, gleiche Tool-Versionen.
       - name: Workflows
-        run: pnpm test:infra drift.test.ts history-scan.test.ts simulate-failure.test.ts cwk-workflows.test.ts
+        run: pnpm test:infra drift.test.ts history-scan.test.ts simulate-failure.test.ts cwk-workflows.test.ts deploy-web.test.ts
 
       # werkstatt muss öffentlich sein (Phase 1, AK-1); cwk settings wäre bei einem privaten Repo nur grün mit Hinweis.
       - name: werkstatt öffentlich, main geschützt, ci-ok Pflicht (AK-1)
