@@ -52,3 +52,24 @@ describe('tofu fmt (AK-30)', () => {
     expect(result.stdout).toContain('main.tf');
   });
 });
+
+// Plan 06, AK-13: web.tf ändert nur die Einträge für @ und www, nie MX oder TXT (die Mail hängt daran).
+describe('web.tf lässt die Mail-Einträge in Ruhe (Plan 06, AK-13)', () => {
+  const webTf = readFileSync(join(REPO_ROOT, 'infra', 'tofu', 'live', 'web.tf'), 'utf8');
+  const records = [...webTf.matchAll(/resource "cloudflare_dns_record" "\w+" \{([\s\S]*?)\n\}/g)].map(
+    ([, body = '']) => ({
+      type: /\btype\s*=\s*"(\w+)"/.exec(body)?.[1],
+      name: /\bname\s*=\s*(.+)/.exec(body)?.[1]?.trim(),
+    }),
+  );
+
+  it('legt genau die Einträge für @ und www an', () => {
+    expect(records.map((record) => record.name).sort()).toEqual(['"www.${local.zone_name}"', 'local.zone_name']);
+  });
+
+  it('enthält keinen MX- oder TXT-Eintrag', () => {
+    expect(records.map((record) => record.type)).not.toContain('MX');
+    expect(records.map((record) => record.type)).not.toContain('TXT');
+    expect(records.every((record) => record.type === 'CNAME')).toBe(true);
+  });
+});

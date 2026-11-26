@@ -1,6 +1,6 @@
 # Secrets & Tokens – Register
 
-> Stand: 2026-11-18 · Bezug: Constitution VI und VII, `specs/04-fundament/spec.md` (AK-14)
+> Stand: 2026-11-26 (geplante Erweiterung für Plan 05 und 06 ergänzt) · Bezug: Constitution VI und VII, `specs/04-fundament/spec.md` (AK-14)
 > **Hier stehen nie Werte**, nur wer, wofür, welche Rechte und bis wann. Die Werte liegen lokal in `.env` (gitignoriert), in GitHub Secrets oder im Passwort-Manager des Inhabers.
 
 | Name                                                                                      | Wo hinterlegt                                                                                                                           | Wofür                                                                                        | Rechte (minimal)                                                                                                                                                          | Verwaltet von | Angelegt                        | Läuft ab                                                              |
@@ -17,6 +17,21 @@
 | Claude GitHub App                                                                         | GitHub-App-Installation in der Organisation `codeslage` und im Konto des Inhabers                                                       | Claude-Code-Cloud-Sitzungen (Repos lesen, Branches und PRs)                                  | von der App festgelegt: u. a. Contents, Pull requests, Workflows, Webhooks Write; Repo-Auswahl in der Organisation: alle (bewusst, Entscheidung des Inhabers 2026-11-18)  | Inhaber       | –                               | – (Deinstallieren unter Settings → GitHub Apps)                       |
 
 Die Secrets stehen auch für Dependabot bereit, damit der Drift-Check bei dessen PRs auf `infra/` (Provider-Updates) laufen kann. Dependabot bekommt dabei nur die Lese-Tokens.
+
+## Geplante Erweiterung (Plan 05 V3/V4, Plan 06 T-21) – noch nicht angelegt
+
+Die Tokens werden **einmal** erweitert, für beide Vorhaben zusammen (Plan 06, Schritt 5). Anlegen und Erweitern macht der Inhaber in Plan 06 T-24 bzw. Plan 05 T-26, Claude leitet an. Die genauen Bezeichnungen der Rechte werden dabei in der Doku von Cloudflare geprüft und die Tabelle oben danach angepasst.
+
+| Token                                   | Neu dazu                                                                                                            | Wofür                                                      | Für          |
+| --------------------------------------- | ------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------ |
+| `codeslage-tofu-rw`                     | Konto: Cloudflare Pages Edit, Web Analytics Edit; Zone `codeslage.de`: Single Redirect (Dynamic URL Redirects) Edit | `web.tf`: Pages-Projekt, Domains, Weiterleitung, Analytics | Plan 06      |
+| `codeslage-tofu-rw`                     | Konto: Access: Apps and Policies Edit, Workers Scripts Edit                                                         | Docs-Portal: Access, Webhook-Worker                        | Plan 05 (V3) |
+| `codeslage-tofu-ro`                     | dieselben Bereiche nur lesend (Pages, Web Analytics, Single Redirect, Access, Workers Read)                         | Drift-Check liest die neuen Ressourcen                     | beide        |
+| `codeslage-pages-deploy` (neu)          | nur Konto: Cloudflare Pages Edit; Ablaufdatum wie die anderen Tokens                                                | `deploy-web.yml`: `wrangler pages deploy` (Plan 06 T-26)   | Plan 06      |
+| `CF_PAGES_TOKEN` (neu, Wert des obigen) | nur im GitHub-Environment `production` von `werkstatt` (nur Branch `main`), kein Repo-Secret                        | Deploy der Webseite                                        | Plan 06      |
+| Upload-Token für `platform` (neu)       | nur Konto: Cloudflare Pages Edit; eigener Token, nicht `codeslage-pages-deploy` (lässt sich getrennt widerrufen)    | `portal.yml` in `platform`                                 | Plan 05 (V4) |
+
+Ohne diese Rechte scheitern `tofu plan` (lokal) und der Drift-Check an `web.tf` mit `403`; bis zum `apply` in Plan 06 T-25 ist der Drift-Check bei PRs auf `web.tf` ohnehin rot (`drift.yml`).
 
 ## Abgleich (T-42, 2026-11-18)
 
