@@ -28,8 +28,11 @@ export interface NewDeps {
 const TEMPLATE = `${ORG}/project-template`;
 const WRITE_APP = 'codeslage-cwk';
 const RESERVED = ['werkstatt', 'project-template', 'platform', 'internal'];
-/** Code der Beispiel-App in der Vorlage, der in Repos ohne Code wegfällt (zusätzlich zum Code-Teil des CWK). */
-const TEMPLATE_CODE = ['apps', 'Dockerfile'];
+/**
+ * Beispiel-App der Vorlage (codeslage/project-template), die in Repos ohne Code wegfällt, zusätzlich zum Code-Teil des
+ * CWK. package.json bleibt: Format und Rechtschreibung brauchen Prettier und cspell auch ohne Code.
+ */
+const TEMPLATE_CODE = ['src', 'tsconfig.json', 'Dockerfile', '.dockerignore'];
 
 function validateName(name: string): void {
   if (!/^[a-z0-9][a-z0-9-]{0,99}$/.test(name) || RESERVED.includes(name)) {
@@ -50,9 +53,18 @@ function removeCode(deps: NewDeps, dir: string): void {
   const codeTargets = deps.manifest.files.filter((file) => file.part === 'code').map((file) => file.target);
   const present = [...codeTargets, ...TEMPLATE_CODE].filter((path) => existsSync(join(dir, path)));
   if (present.length > 0) must(deps.run, 'git', ['-C', dir, 'rm', '-r', '-q', '--', ...present]);
+}
+
+/**
+ * cwk.json ohne `docs`, damit der Standard nach Sichtbarkeit gilt (AK-14): Die Vorlage ist öffentlich und sagt
+ * "public"; ein privates Repo würde das sonst erben. Einzeilig mit Leerzeichen, so wie Prettier es verlangt.
+ */
+function writeConfig(deps: NewDeps, dir: string, code: boolean): void {
   const configPath = join(dir, 'cwk.json');
   const config = JSON.parse(readFileSync(configPath, 'utf8')) as Record<string, unknown>;
-  writeFileSync(configPath, `${JSON.stringify({ ...config, code: false })}\n`);
+  delete config.docs;
+  const entries = Object.entries({ ...config, code }).map(([key, value]) => `"${key}": ${JSON.stringify(value)}`);
+  writeFileSync(configPath, `{ ${entries.join(', ')} }\n`);
   must(deps.run, 'git', ['-C', dir, 'add', 'cwk.json']);
 }
 
@@ -61,6 +73,7 @@ function firstCommit(deps: NewDeps, repo: string, options: NewOptions): void {
   const dir = join(deps.workDir, options.name);
   must(deps.run, 'gh', ['repo', 'clone', repo, dir]);
   if (!options.code) removeCode(deps, dir);
+  writeConfig(deps, dir, options.code);
   const message = `Projekt angelegt mit cwk new${options.code ? '' : ' (ohne Code)'}`;
   must(deps.run, 'git', ['-C', dir, 'commit', '--allow-empty', '-m', message]);
   must(deps.run, 'git', ['-C', dir, 'push', 'origin', 'main']);

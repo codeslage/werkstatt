@@ -24,10 +24,13 @@ afterEach(() => rmSync(workDir, { recursive: true, force: true }));
 
 /** Simuliert `gh repo clone`: legt den Stand der Vorlage im Zielordner an. */
 function cloneTemplate(dir: string) {
-  mkdirSync(join(dir, 'apps', 'hello'), { recursive: true });
-  writeFileSync(join(dir, 'cwk.json'), `${JSON.stringify({ cwk: SHA })}\n`);
-  writeFileSync(join(dir, 'eslint.config.js'), '');
-  writeFileSync(join(dir, 'Dockerfile'), '');
+  // Wie codeslage/project-template: App in src/, eigene tsconfig.json, Docker-Dateien, cwk.json mit docs public.
+  mkdirSync(join(dir, 'src'), { recursive: true });
+  writeFileSync(join(dir, 'src', 'health.ts'), '');
+  writeFileSync(join(dir, 'cwk.json'), `{ "cwk": "${SHA}", "code": true, "docs": "public" }\n`);
+  for (const file of ['eslint.config.js', 'tsconfig.json', 'Dockerfile', '.dockerignore', 'package.json']) {
+    writeFileSync(join(dir, file), '');
+  }
   return {};
 }
 
@@ -106,13 +109,21 @@ describe('cwk new: privat und ohne Code (AK-27, P1)', () => {
     expect(notes).toContain('privat: keine Rulesets und keine Schreib-App (GitHub Free, Plan 05 P1)');
   });
 
-  it('entfernt ohne Code den Code-Teil und setzt code auf false', () => {
+  // Probelauf T-12: src/, tsconfig.json und .dockerignore blieben stehen; cwk.json war für Prettier falsch formatiert.
+  it('entfernt ohne Code den Code-Teil und die Beispiel-App, package.json bleibt', () => {
     const { lines, deps } = setup();
     createProject({ name: 'demo', isPrivate: true, code: false }, deps);
     const rm = lines().find((line) => line.includes(' rm -r -q '));
-    expect(rm).toMatch(/ rm -r -q -- eslint\.config\.js apps Dockerfile$/);
-    const config = JSON.parse(readFileSync(join(workDir, 'demo', 'cwk.json'), 'utf8'));
-    expect(config).toEqual({ cwk: SHA, code: false });
+    expect(rm).toMatch(/ rm -r -q -- eslint\.config\.js src tsconfig\.json Dockerfile \.dockerignore$/);
+    expect(readFileSync(join(workDir, 'demo', 'cwk.json'), 'utf8')).toBe(`{ "cwk": "${SHA}", "code": false }\n`);
+  });
+
+  // Probelauf T-12: Ein privates Repo erbte "docs": "public" aus der Vorlage; seine Doku wäre öffentlich geworden.
+  it('lässt docs weg, damit der Standard nach Sichtbarkeit gilt (AK-14)', () => {
+    const { lines, deps } = setup();
+    createProject({ name: 'demo', isPrivate: true, code: true }, deps);
+    expect(readFileSync(join(workDir, 'demo', 'cwk.json'), 'utf8')).toBe(`{ "cwk": "${SHA}", "code": true }\n`);
+    expect(lines()).toContain(`git -C ${join(workDir, 'demo')} add cwk.json`);
   });
 });
 

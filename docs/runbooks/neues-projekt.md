@@ -30,7 +30,7 @@ Der Name besteht aus Kleinbuchstaben, Ziffern und Bindestrichen. `werkstatt`, `p
 1. Repo aus der Vorlage anlegen und warten, bis der Inhalt da ist.
 2. Secret `PUBLIC_BLOCKLIST` aus `.sperrliste` setzen, vor dem ersten Push. Sonst wäre der erste Scan rot.
 3. Dem Team `maintainers` Schreibrecht geben, damit GitHub es als Code-Owner anerkennt.
-4. Klonen, bei `--no-code` den Code-Teil entfernen und `cwk.json` auf `"code": false` setzen, dann einen Commit auf `main` pushen. Der startet die erste CI.
+4. Klonen, bei `--no-code` den Code-Teil des CWK und die Beispiel-App (`src/`, `tsconfig.json`, `Dockerfile`, `.dockerignore`) entfernen. `cwk.json` bekommt `"code"` und keinen Eintrag `docs`, dann gilt der Standard nach Sichtbarkeit (öffentlich → `public`, privat → `internal`). Danach einen Commit auf `main` pushen, der startet die erste CI.
 5. Nur öffentlich: Rulesets `main-checks` und `main-approval` setzen und das Repo in die Installation der Schreib-App `codeslage-cwk` aufnehmen.
 6. Das Datum der Sperrliste in `platform/blocklist-status.json` eintragen.
 
