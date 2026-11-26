@@ -107,4 +107,4 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | T-11       | 0:07   | 0:00      | 0:07   |
 | T-16       | 0:07   | 0:00      | 0:07   |
 | T-14       | 0:12   | 0:04      | 0:16   |
-| T-15       | 0:12   | 0:00      | 0:12   |
+| T-15       | 0:17   | 0:00      | 0:17   |
