@@ -1,8 +1,8 @@
 import { beforeAll, describe, expect, it } from 'vitest';
 
 // Live-Prüfungen der Webseite (Plan 06): AK-2 Weiterleitungen und Erreichbarkeit, AK-9 Sicherheits-Header,
-// AK-4 der Beacon ist die einzige fremde Quelle. Läuft erst ab dem Livegang (T-26, deploy-web.yml und drift.yml),
-// bis dahin in keinem Workflow.
+// AK-4 der Beacon ist die einzige fremde Quelle. Läuft nach jedem Deploy (deploy-web.yml) und wöchentlich im
+// Drift-Check (drift.yml), Plan 06 T-26.
 
 const DOMAIN = 'codeslage.de';
 const ORIGIN = `https://${DOMAIN}`;

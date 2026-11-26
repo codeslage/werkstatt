@@ -204,3 +204,5 @@ menslage
 christopher
 bilder
 nums
+esbuild
+workerd

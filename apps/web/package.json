@@ -16,7 +16,8 @@
     "@codeslage/config": "workspace:*",
     "@lhci/cli": "0.16.1",
     "@playwright/test": "1.65.1",
-    "typescript": "6.0.3"
+    "typescript": "6.0.3",
+    "wrangler": "4.168.0"
   },
   "dependencies": {
     "astro": "7.4.13"
