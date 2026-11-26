@@ -16,3 +16,15 @@ for (const page of PAGES) {
     expect(hrefs).toEqual(expect.arrayContaining(['/', ...linked]));
   });
 }
+
+// AK-16 (T-15): Die Case Study liegt als Unterseite von „Projekte“ und ist von dort verlinkt.
+const CASE_STUDY = '/projekte/wir-bauen-erst-wenn-wir-es-brauchen/';
+
+test('Projekte verlinkt die Case Study, und sie ist erreichbar', async ({ page }) => {
+  await page.goto('/projekte/');
+  const link = page.locator('main').getByRole('link', { name: /Wir bauen erst, wenn wir es brauchen/ });
+  await expect(link).toHaveAttribute('href', CASE_STUDY);
+  const response = await page.goto(CASE_STUDY);
+  expect(response?.status()).toBe(200);
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Wir bauen erst, wenn wir es brauchen');
+});
