@@ -63,6 +63,7 @@ Methode:
 | Implement PR-2     | Arbeit    | 2026-11-26 12:24 | 2026-11-26 12:27 | 0:03  | Merge #7 geprüft, Nachweis Bypass im Protokoll, Zeiten                                                                                                                                                                      |
 | Implement PR-2     | Wartezeit | 2026-11-26 12:27 | 2026-11-26 12:31 | 0:04  | Freigabe T-12 und `cwk new cwk-sample` durch den Inhaber                                                                                                                                                                    |
 | Implement PR-2     | Arbeit    | 2026-11-26 12:31 | 2026-11-26 12:39 | 0:08  | T-12: Probe-Repos geprüft, drei Fehler in `cwk new` behoben (Tests zuerst), cwk-sample-no-code#6, Infra-Test für alle drei Repos, Direkt-Push-Probe, Protokoll                                                              |
+| Implement PR-2     | Arbeit    | 2026-11-26 14:40 | 2026-11-26 15:00 | 0:20  | T-14: `cwk-negative.test.ts`, zwei echte Läufe in `cwk-sample` (#6–#15 und #16–#25), Secret-Fall getrennt, Protokoll, Review                                                                                                |
 
 ## Summen
 
@@ -74,7 +75,7 @@ Methode:
 | Plan               | 0:33   | 0:02      | 0:35   |
 | Tasks + Analyze    | 0:19   | 0:53      | 1:12   |
 | Implement PR-1     | 0:39   | 0:12      | 0:51   |
-| Implement PR-2     | 0:36   | 0:53      | 1:29   |
+| Implement PR-2     | 0:56   | 0:53      | 1:49   |
 | Dependabot #67–#71 | 0:17   | 0:33      | 0:50   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.
