@@ -111,7 +111,7 @@ Content-Security-Policy (Entwurf): `default-src 'self'; script-src 'self' https:
 
 ### Schritt 4 – Rechtliches (AK-12, AK-14, AK-15) · Text-PR
 
-- Datenschutzerklärung: Grundlage aus einem Generator (A8), abgeglichen mit Hosting (Cloudflare Pages), Besuchsmessung (Cloudflare Web Analytics) und Mail-Link; keine Cookies.
+- Datenschutzerklärung: Grundlage aus einem Generator (A8; Abweichung in T-17: nur die Gliederung, eigener Text, Frage 17), abgeglichen mit Hosting (Cloudflare Pages), Besuchsmessung (Cloudflare Web Analytics) und Mail-Link; keine Cookies.
 - Impressum mit den Angaben aus `IMPRESSUM_*` und der Rollenadresse.
 - `docs/dsgvo.md`: Cloudflare Pages und Web Analytics ergänzen. `docs/kosten.md`: Pages und Web Analytics im Free-Plan, 0 €.
 

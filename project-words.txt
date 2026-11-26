@@ -150,6 +150,8 @@ getrackt
 HSTS
 cookielose
 cookielosen
+Generatortext
+Gratisversion
 Inhaltsblocker
 Abmahnrisiko
 ladungsfähige
