@@ -65,6 +65,7 @@ Methode:
 | Implement PR-2     | Arbeit    | 2026-11-26 12:31 | 2026-11-26 12:39 | 0:08  | T-12: Probe-Repos geprüft, drei Fehler in `cwk new` behoben (Tests zuerst), cwk-sample-no-code#6, Infra-Test für alle drei Repos, Direkt-Push-Probe, Protokoll                                                              |
 | Implement PR-2     | Arbeit    | 2026-11-26 14:40 | 2026-11-26 15:08 | 0:28  | T-14: `cwk-negative.test.ts`, drei echte Läufe in `cwk-sample` (#6–#15, #16–#25, #26–#39), Secret-Fall getrennt, Review 1 (🔴 drei fehlende Fälle) und Review 2 (✅) umgesetzt, Protokoll                                   |
 | Implement PR-2     | Arbeit    | 2026-11-26 16:49 | 2026-11-26 16:54 | 0:05  | T-13: Claude GitHub App geprüft, Entscheidung des Inhabers gegen den Live-Test, Nachweise gesammelt, Tasks und Protokoll. Kurze Wartezeiten ohne Ablesung dazwischen sind enthalten. Davor Pause ab 15:08 (zählt nicht)     |
+| Implement PR-2     | Arbeit    | 2026-11-26 17:11 | 2026-11-26 17:13 | 0:02  | T-15: `cwk-sample` geklont und geprüft, Anleitung für den Test; Ende geschätzt. Danach Pause bis 19:46 (zählt nicht), darin der Test des Inhabers                                                                           |
 
 ## Summen
 
@@ -76,7 +77,7 @@ Methode:
 | Plan               | 0:33   | 0:02      | 0:35   |
 | Tasks + Analyze    | 0:19   | 0:53      | 1:12   |
 | Implement PR-1     | 0:39   | 0:12      | 0:51   |
-| Implement PR-2     | 1:09   | 0:53      | 2:02   |
+| Implement PR-2     | 1:11   | 0:53      | 2:04   |
 | Dependabot #67–#71 | 0:17   | 0:33      | 0:50   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.
