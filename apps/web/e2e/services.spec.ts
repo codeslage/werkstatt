@@ -1,7 +1,7 @@
 import { expect, test } from '@playwright/test';
 
-// T-14 (AK-11, AK-1): Leistungen nach specs/06-webseite/leistungen.md – vier Bereiche, KI-Automatisierung als
-// „im Aufbau“, Ablauf, Pilotprojekte mit Preisen auf Anfrage, nirgends „kostenlos“, Abgrenzung, Kontakt-Aufruf.
+// T-14 (AK-11, AK-1): Leistungen nach specs/06-webseite/leistungen.md – vier Bereiche, KI-Automatisierung ohne
+// Kennzeichnung „im Aufbau“ (Entscheidung 6, 2026-11-26), Ablauf, Pilotprojekte mit Preisen auf Anfrage, nirgends „kostenlos“, Abgrenzung, Kontakt-Aufruf.
 
 const AREAS = ['Prototyp und MVP', 'Infrastruktur und CI', 'KI-Entwicklung einführen', 'KI-Automatisierung'];
 
@@ -9,7 +9,7 @@ test('Leistungen zeigt die vier Bereiche und die Rahmenbedingungen', async ({ pa
   await page.goto('/leistungen/');
   const main = page.locator('main');
   for (const area of AREAS) await expect(main.getByRole('heading', { level: 2, name: area })).toBeVisible();
-  await expect(main.getByRole('heading', { level: 2, name: /KI-Automatisierung/ })).toContainText('im Aufbau');
+  await expect(main.getByRole('heading', { level: 2, name: /KI-Automatisierung/ })).not.toContainText('im Aufbau');
   for (const section of ['So läuft es ab', 'Pilotprojekte und Preise', 'Nicht im Angebot']) {
     await expect(main.getByRole('heading', { level: 2, name: section })).toBeVisible();
   }

@@ -30,8 +30,8 @@ Kommen neue Ressourcen in `infra/tofu/live` dazu (zuerst Plan 06 T-24 zusammen m
 
 ## 3. Erneuern (je Token)
 
-1. Cloudflare → Manage Account → Account API Tokens → beim Token **⋯ → Roll**. Der alte Wert ist danach sofort ungültig.
-2. Beim Token **Edit** → TTL: neues Enddatum (bisher halbjährlich). Rechte dabei nicht ändern, sie stehen in `docs/secrets.md`.
+1. Cloudflare → Seitenleiste → Manage account → Settings bzw. „Account API tokens“ → beim Token **⋯ → Roll**. Der alte Wert ist danach sofort ungültig.
+2. Beim Token **Edit** → TTL: neues Enddatum (bisher halbjährlich). Rechte dabei nicht ändern, sie stehen in `docs/secrets.md`; im Dashboard sind sie Policies mit Geltungsbereich (Entire Account bzw. Zone `codeslage.de`).
 3. Neue Werte in den Passwortmanager, alten Eintrag überschreiben.
 4. Werte eintragen:
    - lokale Tokens: in der `.env` die betroffenen Zeilen ersetzen.

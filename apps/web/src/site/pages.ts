@@ -20,7 +20,7 @@ export const PAGES: readonly Page[] = [
     label: 'Start',
     title: 'codeslage – KI-getriebene Entwicklung für Startups',
     description:
-      'Prototypen, Infrastruktur und KI-Automatisierung für Startups in frühen Phasen: spec-driven, offen dokumentiert, ein Mensch gibt frei.',
+      'KI-Softwareentwicklung für Startups in frühen Phasen: Prototypen und Infrastruktur, spec-driven, nachvollziehbar dokumentiert, ein Mensch gibt frei.',
     nav: 'none',
   },
   {
@@ -52,7 +52,7 @@ export const PAGES: readonly Page[] = [
     label: 'Über mich',
     title: 'Über mich – codeslage',
     description:
-      'Wer hinter codeslage steht und wie gearbeitet wird: spec-driven mit KI, offen dokumentiert, und jeden Entwurf gibt ein Mensch frei.',
+      'Wer hinter codeslage steht und wie gearbeitet wird: spec-driven mit KI, nachvollziehbar dokumentiert, und jeden Entwurf gibt ein Mensch frei.',
     nav: 'main',
   },
   {

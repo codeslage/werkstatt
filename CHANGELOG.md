@@ -11,6 +11,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 ### Hinzugefügt
 
 - 2026-11-26 – Phase 2, Schritt 5 (PR-12, T-20 bis T-22, Entwurf bis T-25): `infra/tofu/live/web.tf` mit Pages-Projekt, Domains, CNAME für `@` und `www`, Weiterleitung `www` → Hauptdomain und Web Analytics; Test gegen Änderungen an MX und TXT; Live-Test `web.test.ts`; geplante Token-Rechte in `docs/secrets.md` (#76).
+- 2026-11-26 – Phase 2, T-23: Test „kein Platzhalter im gesamten Build“ (`e2e/build.spec.ts`), Protokoll der Livegang-Voraussetzungen; V4 erledigt, Frage 15 läuft noch (#79).
 - 2026-11-26 – Phase 2, Schritt 4 (PR-11, T-17 bis T-19, Text-PR): Datenschutzerklärung (Hosting, cookielose Besuchsmessung, Mail, Terminbuchung über Google Kalender) und Impressum mit den Angaben aus der Build-Umgebung; Cloudflare Pages und Web Analytics in `docs/dsgvo.md` und `docs/kosten.md` (#75).
 - 2026-11-26 – Phase 2, Schritt 3 (PR-7, T-13, Text-PR): Startseite mit Kernsatz, Erklärung, „Schreib mir“, vier Leistungen in Kurzform und Teaser der Case Study (#74).
 - 2026-11-26 – Phase 2, Schritt 3 (PR-9, T-15, Text-PR): Seite „Projekte“ und Case Study „Wir bauen erst, wenn wir es brauchen“ mit den Soll/Ist-Zahlen aus Phase 1 (#73).
@@ -39,6 +40,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Geändert
 
+- 2026-11-26 – Phase 2, Nachtrag Stufe 6 (Text-PR): Texte nach der Abnahme korrigiert. Schwerpunkt jetzt KI-Softwareentwicklung, „nachvollziehbar“ statt „offen dokumentiert“, neuer Prototyp-Satz, „mit niedrigen laufenden Kosten“ statt „günstig“. Kennzeichnung „im Aufbau“ entfernt, eigener Link „Case Study lesen →“; Ist von T-10 korrigiert (#77).
 - 2026-11-26 – Abhängigkeits-Updates per Dependabot (Sammeleintrag, Dependabot schreibt keinen Changelog): vitest 5.1.0 → 5.1.1 (#69), cspell 10.5.1 → 10.5.2 (#70), dependency-cruiser 18.7.2 → 18.9.0 (#68), knip 6.45.1 → 6.48.0 (#71), typescript-eslint 8.72.2 → 8.73.0 (#67); geprüft (CI, Release Notes, Lockfile), freigegeben und gemergt vom Inhaber.
 - 2026-11-19 – Zeiterfassung: Wartezeit auf den Inhaber steht in eigenen Zeilen (Spalte „Art“), `zeiten.md` hat Summen für Arbeit, Wartezeit und Gesamt, das Ist ist die Gesamtzeit (Vorlage `zeiten.md` und `retro.md`, `sdd-ablauf.md`, `/sdd-*`-Befehle; Wunsch des Inhabers, #50).
 - 2026-11-19 – `sdd-ablauf.md` und `/sdd-verify`: Abnahme auf `main`, solange es kein int gibt; Zeiterfassung zählt parallele Tasks nur einmal; Hinweise in `release.md`, `code-review.md` und `/release` (Retro 04, Entscheidung des Inhabers, #46).
