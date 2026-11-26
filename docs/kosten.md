@@ -1,6 +1,6 @@
 # Laufende Kosten
 
-> Stand: 2026-11-18 · Bezug: Constitution XI und XIV, `specs/04-fundament/spec.md` (AK-15), ADR 0009
+> Stand: 2026-11-26 · Bezug: Constitution XI und XIV, `specs/04-fundament/spec.md` (AK-15), ADR 0009
 > Ziel in Phase 1: **0 €/Monat** zusätzlich. Bestehende Kosten (Domain, Google Workspace, Claude-Abo) sind nicht Teil dieses Projekts; sie gehören zum Gesamtbudget von ca. 30 €/Monat aus `specs/01-vision.md` und stehen unten unter „Bestehende Kosten“.
 
 | Dienst                            | Tarif                     | Kosten/Monat | Hinweis                                                                                                                                    | Nachweis                                                                                                                                                       |
@@ -9,6 +9,8 @@
 | Cloudflare (DNS)                  | Free                      | 0 €          | Zone `codeslage.de` im Free-Plan                                                                                                           | ✅ Plan „Free Website“, 0 USD, per API (2026-11-18)                                                                                                            |
 | Cloudflare R2 (Tofu-State)        | Gratis-Kontingent (10 GB) | 0 €          | Zahlungsmethode hinterlegt (V8); State wenige KB                                                                                           | ✅ Nutzung November: 30 Class-A-, 36 Class-B-Zugriffe, 0 GB; berechnet 0,00 $ (2026-11-18)                                                                     |
 | Docker Desktop                    | Personal                  | 0 €          | kostenlos für private Nutzung und kleine Unternehmen (< 250 Mitarbeitende und < 10 Mio. $ Umsatz), ADR 0010; im Einsatz ab Schritt 3 (Mac) | –                                                                                                                                                              |
+| Cloudflare Pages (Webseite)       | Free                      | 0 €          | statische Seite `codeslage.de` (Phase 2, AK-15); Free-Plan mit 500 Builds/Monat, Upload aus der CI (ADR 0015)                              | ⬜ nach dem Anlegen des Projekts (T-20 ff.)                                                                                                                    |
+| Cloudflare Web Analytics          | Free                      | 0 €          | cookielose Besuchsmessung der Webseite (Phase 2, AK-15)                                                                                    | ⬜ nach dem Anlegen (T-20 ff.)                                                                                                                                 |
 | **Summe**                         |                           | **0 €**      |                                                                                                                                            |                                                                                                                                                                |
 
 ## Bestehende Kosten (außerhalb von AK-15)

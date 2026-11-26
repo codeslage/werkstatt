@@ -1,6 +1,7 @@
 ---
 import { getSecret } from 'astro:env/server';
 import PageShell from '../components/PageShell.astro';
+import { CONTACT_ADDRESS } from '../site/contact.ts';
 import { IMPRINT_VARIABLES, readImprint } from '../site/imprint.ts';
 
 // Angaben aus der Build-Umgebung (.env bzw. GitHub-Environment), geprüft; ohne gültige Angaben bricht der
@@ -9,6 +10,7 @@ const imprint = readImprint(Object.fromEntries(IMPRINT_VARIABLES.map((name) => [
 ---
 
 <PageShell path="/impressum/">
+  <h2>Angaben nach § 5 DDG</h2>
   <address>
     {imprint.name}
     <br />
@@ -16,5 +18,16 @@ const imprint = readImprint(Object.fromEntries(IMPRINT_VARIABLES.map((name) => [
     <br />
     {imprint.postalCodeCity}
   </address>
-  <p>[Inhalt]</p>
+  <h2>Kontakt</h2>
+  <p>
+    Mail: <span class="mono">{CONTACT_ADDRESS}</span>
+  </p>
+  <h2>Verantwortlich für den Inhalt nach § 18 Abs. 2 MStV</h2>
+  <p>{imprint.name}, Anschrift wie oben.</p>
+  <h2>Haftung für Links</h2>
+  <p>
+    Diese Seite verlinkt auf Angebote anderer, etwa GitHub und die Buchungsseite von Google Kalender. Für deren Inhalte
+    sind die jeweiligen Anbieter verantwortlich. Fällt mir ein rechtswidriger Inhalt hinter einem Link auf, entferne ich
+    den Link.
+  </p>
 </PageShell>
