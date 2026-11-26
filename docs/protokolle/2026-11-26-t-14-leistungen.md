@@ -17,4 +17,10 @@
    - Große Projekte stehen nicht unter „Nicht im Angebot“: „Preise auf Anfrage“ lässt sie im Einzelfall offen.
 3. **Test zuerst:** `e2e/services.spec.ts` war rot. Grün sind jetzt E2E 80, Lighthouse und alle Checks. Den Kontrast der Kennzeichnung prüft `contrast.spec.ts` in hell und dunkel mit.
 4. **Screenshots:** `docs/content/bilder/2026-11-26-t-14-leistungen/`
-5. **Freigabe:** steht aus.
+5. **Review (kein 🔴):** Der Satz „Ergebnisse und Code gehören dir“ ist ergänzt: Allgemeines Wissen und wiederverwendbare Bausteine bleiben nutzbar (Artikel XIII). Die Punkte 1, 2 und 6 stehen in `leistungen.md` als entschieden (`reviews/T-14.md`).
+6. **Wünsche des Inhabers:**
+   - Den Satz im Infrastruktur-Beispiel hat er nicht verstanden, er ist umformuliert.
+   - Neues Beispiel für die KI-Automatisierung: sein Social-Media-Agent.
+   - Beispiele mit dünner Linie und Label „Beispiel“ statt grauem Text.
+   - Die Beispiele sind gekürzt und jetzt kürzer als der Nutzen-Satz.
+7. **Freigabe:** Der Inhaber hat die Seite am 2026-11-26 im Chat freigegeben („dann gefällt es mir jetzt“).

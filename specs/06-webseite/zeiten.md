@@ -75,6 +75,10 @@ Methode:
 | T-16       | Arbeit    | 2026-11-23 13:50 | 2026-11-23 13:55 | 0:05  | Foto zugeschnitten (ohne Lanyard) und ohne Metadaten neu gerendert, `about.spec.ts` (rot), Seite, Lighthouse, Scan, Doku, PR                                |
 | T-16       | Arbeit    | 2026-11-23 13:56 | 2026-11-23 13:58 | 0:02  | Foto weniger eng (Wunsch des Inhabers), Review, Doku, Freigabe („besser :)“) eingetragen, Merge                                                             |
 | T-14       | Arbeit    | 2026-11-26 11:04 | 2026-11-26 11:10 | 0:06  | `services.spec.ts` (rot), Leistungsseite nach `leistungen.md`, Badge „im Aufbau“, Screenshots, Lighthouse, Doku, PR                                         |
+| T-14       | Arbeit    | 2026-11-26 11:10 | 2026-11-26 11:13 | 0:03  | Review, Satz zur Wiederverwendung, `leistungen.md` nachgezogen                                                                                              |
+| T-14       | Wartezeit | 2026-11-26 11:13 | 2026-11-26 11:14 | 0:01  | Rückmeldung des Inhabers zu Beispielen und Styling                                                                                                          |
+| T-14       | Arbeit    | 2026-11-26 11:14 | 2026-11-26 11:17 | 0:03  | Beispiele umformuliert, neu gestaltet, gekürzt (Wünsche des Inhabers)                                                                                       |
+| T-14       | Wartezeit | 2026-11-26 11:17 | 2026-11-26 11:20 | 0:03  | Freigabe („dann gefällt es mir jetzt“)                                                                                                                      |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -101,4 +105,4 @@ Die Sitzung „Gestaltung und Logo“ lief nach Stufe 2 weiter (Runden 3–7). I
 | T-12       | 0:30   | 0:17      | 0:47   |
 | T-11       | 0:07   | 0:00      | 0:07   |
 | T-16       | 0:07   | 0:00      | 0:07   |
-| T-14       | 0:06   | läuft     | läuft  |
+| T-14       | 0:12   | 0:04      | 0:16   |
