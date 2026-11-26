@@ -63,7 +63,7 @@ Methode:
 | Implement PR-2     | Arbeit    | 2026-11-26 12:24 | 2026-11-26 12:27 | 0:03  | Merge #7 geprüft, Nachweis Bypass im Protokoll, Zeiten                                                                                                                                                                      |
 | Implement PR-2     | Wartezeit | 2026-11-26 12:27 | 2026-11-26 12:31 | 0:04  | Freigabe T-12 und `cwk new cwk-sample` durch den Inhaber                                                                                                                                                                    |
 | Implement PR-2     | Arbeit    | 2026-11-26 12:31 | 2026-11-26 12:39 | 0:08  | T-12: Probe-Repos geprüft, drei Fehler in `cwk new` behoben (Tests zuerst), cwk-sample-no-code#6, Infra-Test für alle drei Repos, Direkt-Push-Probe, Protokoll                                                              |
-| Implement PR-2     | Arbeit    | 2026-11-26 14:40 | 2026-11-26 15:06 | 0:26  | T-14: `cwk-negative.test.ts`, drei echte Läufe in `cwk-sample` (#6–#15, #16–#25, #26–#39), Secret-Fall getrennt, Review 1 (🔴 drei fehlende Fälle) umgesetzt, Protokoll                                                     |
+| Implement PR-2     | Arbeit    | 2026-11-26 14:40 | 2026-11-26 15:08 | 0:28  | T-14: `cwk-negative.test.ts`, drei echte Läufe in `cwk-sample` (#6–#15, #16–#25, #26–#39), Secret-Fall getrennt, Review 1 (🔴 drei fehlende Fälle) und Review 2 (✅) umgesetzt, Protokoll                                   |
 
 ## Summen
 
@@ -75,7 +75,7 @@ Methode:
 | Plan               | 0:33   | 0:02      | 0:35   |
 | Tasks + Analyze    | 0:19   | 0:53      | 1:12   |
 | Implement PR-1     | 0:39   | 0:12      | 0:51   |
-| Implement PR-2     | 1:02   | 0:53      | 1:55   |
+| Implement PR-2     | 1:04   | 0:53      | 1:57   |
 | Dependabot #67–#71 | 0:17   | 0:33      | 0:50   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.
