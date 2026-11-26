@@ -1,6 +1,6 @@
 # 09 – Content-Pipeline (Building in Public): Spec
 
-> Status: **Entwurf** – wartet auf Freigabe
+> Status: **Freigegeben** am 2026-11-26 (Inhaber im Chat: „spec ist abgenommen“); offen für Stufe 2: Fragen 3, 20, 24
 > Stand: 2026-11-26 (Antworten des Inhabers eingearbeitet: Variante B „intern bis zum Post“, Anstoß durch den Inhaber, Redaktionskonferenz, Interview, Trend-Quellen, Rhythmus; AKs neu gefasst); 2026-11-25 (Stufe 1 Specify, Review 1 umgesetzt; Nummer 09 vorläufig, Frage 1)
 > Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md` (Werbekanäle, Prinzipien „Schaufenster first“ und „Mensch im Loop“), `02-architektur.md` (A7 KI-Automationen, A8 DSGVO), `03-roadmap.md` (Querschnitt „Content sammeln“, Phase 3), ADR 0009 (Server erst bei Bedarf), `docs/prozess/governance.md` (Öffentlich vs. intern), `docs/prozess/code-review.md` (Auto-Merge)
 > SDD-Stufe: 1 Specify · 2 Clarify
