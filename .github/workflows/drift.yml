@@ -63,3 +63,7 @@ jobs:
 
       - name: DNS über die öffentliche Auflösung (AK-3)
         run: pnpm test:infra dns.test.ts
+
+      # Plan 06, T-26: Ein Ausfall der Webseite fällt spätestens nach einer Woche per Mail auf (XVI).
+      - name: Webseite live (AK-2, AK-4, AK-9)
+        run: pnpm test:infra web.test.ts

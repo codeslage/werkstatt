@@ -3,3 +3,9 @@ packages:
   - packages/*
   - tools/*
   - infra/tests
+
+# wrangler (T-26) bringt esbuild und workerd mit. Für `wrangler pages deploy` ohne Functions braucht keines davon
+# sein Install-Skript; die Binärdateien kommen als optionale Plattform-Pakete.
+allowBuilds:
+  esbuild: false
+  workerd: false

@@ -1,6 +1,6 @@
 # Secrets & Tokens – Register
 
-> Stand: 2026-11-26 · Bezug: Constitution VI und VII, `specs/04-fundament/spec.md` (AK-14)
+> Stand: 2026-11-26 (Tokens für Plan 05 und 06 erweitert, T-24) · Bezug: Constitution VI und VII, `specs/04-fundament/spec.md` (AK-14)
 > **Hier stehen nie Werte**, nur wer, wofür, welche Rechte und bis wann. Die Werte liegen lokal in `.env` (gitignoriert), in GitHub Secrets oder im Passwort-Manager des Inhabers.
 
 | Name                                                                                      | Wo hinterlegt                                                                                                                                                                                             | Wofür                                                                                        | Rechte (minimal)                                                                                                                                                          | Verwaltet von | Angelegt                        | Läuft ab                                                              |
@@ -17,6 +17,27 @@
 | Claude GitHub App                                                                         | GitHub-App-Installation in der Organisation `codeslage` und im Konto des Inhabers                                                                                                                         | Claude-Code-Cloud-Sitzungen (Repos lesen, Branches und PRs)                                  | von der App festgelegt: u. a. Contents, Pull requests, Workflows, Webhooks Write; Repo-Auswahl in der Organisation: alle (bewusst, Entscheidung des Inhabers 2026-11-18)  | Inhaber       | –                               | – (Deinstallieren unter Settings → GitHub Apps)                       |
 
 Die Secrets stehen auch für Dependabot bereit, damit der Drift-Check bei dessen PRs auf `infra/` (Provider-Updates) laufen kann. Dependabot bekommt dabei nur die Lese-Tokens.
+
+## Erweiterung (Plan 05 V3/V4, Plan 06 T-21) – angelegt in T-24 am 2026-11-26, außer dem Upload-Token für `platform`
+
+Die Tokens werden **einmal** erweitert, für beide Vorhaben zusammen: in Plan 06 T-24, das damit auch die Rechte aus Plan 05 V3 mitnimmt (Plan 05 T-26 prüft dann nur noch und legt den Upload-Token für `platform` an). Anlegen und Erweitern macht der Inhaber, Claude leitet an. Die Bezeichnungen unten sind die aus dem Dashboard (Stand T-24).
+
+| Token                                   | Neu dazu                                                                                                                            | Wofür                                                      | Für          |
+| --------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------- | ---------------------------------------------------------- | ------------ |
+| `codeslage-tofu-rw`                     | Konto: Cloudflare Pages Edit, Account Settings Edit; Zone `codeslage.de`: Dynamic URL Redirects Edit                                | `web.tf`: Pages-Projekt, Domains, Weiterleitung, Analytics | Plan 06      |
+| `codeslage-tofu-rw`                     | Konto: Access: Apps Edit, Access: Policies Edit, Workers Scripts Edit                                                               | Docs-Portal: Access, Webhook-Worker                        | Plan 05 (V3) |
+| `codeslage-tofu-ro`                     | dieselben Bereiche nur lesend (Pages, Account Settings, Dynamic URL Redirects, Access: Apps und Policies, Workers Scripts, je Read) | Drift-Check liest die neuen Ressourcen                     | beide        |
+| `codeslage-pages-deploy` (neu)          | nur Konto: Cloudflare Pages Edit; Ablaufdatum wie die anderen Tokens                                                                | `deploy-web.yml`: `wrangler pages deploy` (Plan 06 T-26)   | Plan 06      |
+| `CF_PAGES_TOKEN` (neu, Wert des obigen) | nur im GitHub-Environment `production` von `werkstatt` (nur Branch `main`), kein Repo-Secret                                        | Deploy der Webseite                                        | Plan 06      |
+| Upload-Token für `platform` (neu)       | nur Konto: Cloudflare Pages Edit; eigener Token, nicht `codeslage-pages-deploy` (lässt sich getrennt widerrufen)                    | `portal.yml` in `platform`                                 | Plan 05 (V4) |
+
+`PUBLIC_CF_BEACON_TOKEN` (GitHub-Variable im Environment `production`, kein Secret, steht ohnehin im HTML) gibt es erst nach dem `apply` in Plan 06 T-25: Cloudflare vergibt ihn beim Anlegen der Web-Analytics-Seite. Der Inhaber liest ihn im Dashboard ab (Web Analytics → Site → Manage site → JS snippet, Wert `token`) und setzt die Variable vor T-26. Die Seite nicht vorher im Dashboard anlegen, sonst gäbe es sie zweimal.
+
+Der Drift-Lauf auf PR-12 (#76) zeigt: Mit dem heutigen `codeslage-tofu-ro` scheitert das Lesen der Rulesets mit `403`; Single Redirect Read ist also nötig.
+
+**Abweichung (T-24):** Ein Recht „Web Analytics“ bietet das Dashboard nicht. Die API für die Web-Analytics-Seite (RUM) verlangt **Account Settings Edit**. Das ist breiter als geplant, Cloudflare bietet nichts Engeres; der Token bleibt lokal (`.env`), der Read-only-Token hat nur Read.
+
+Ohne diese Rechte scheitern `tofu plan` (lokal) und der Drift-Check an `web.tf` mit `403`; bis zum `apply` in Plan 06 T-25 ist der Drift-Check bei PRs auf `web.tf` ohnehin rot (`drift.yml`).
 
 ## Abgleich (T-42, 2026-11-18)
 
