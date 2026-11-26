@@ -10,7 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
-- 2026-11-26 – Phase 2, T-23: Test „kein Platzhalter im gesamten Build“ (`e2e/build.spec.ts`), Protokoll der Livegang-Voraussetzungen; V4 erledigt, Frage 15 läuft noch (#PR).
+- 2026-11-26 – Phase 2, T-23: Test „kein Platzhalter im gesamten Build“ (`e2e/build.spec.ts`), Protokoll der Livegang-Voraussetzungen; V4 erledigt, Frage 15 läuft noch (#79).
 - 2026-11-26 – Phase 2, Schritt 4 (PR-11, T-17 bis T-19, Text-PR): Datenschutzerklärung (Hosting, cookielose Besuchsmessung, Mail, Terminbuchung über Google Kalender) und Impressum mit den Angaben aus der Build-Umgebung; Cloudflare Pages und Web Analytics in `docs/dsgvo.md` und `docs/kosten.md` (#75).
 - 2026-11-26 – Phase 2, Schritt 3 (PR-7, T-13, Text-PR): Startseite mit Kernsatz, Erklärung, „Schreib mir“, vier Leistungen in Kurzform und Teaser der Case Study (#74).
 - 2026-11-26 – Phase 2, Schritt 3 (PR-9, T-15, Text-PR): Seite „Projekte“ und Case Study „Wir bauen erst, wenn wir es brauchen“ mit den Soll/Ist-Zahlen aus Phase 1 (#73).
