@@ -40,6 +40,14 @@ export const PAGES: readonly Page[] = [
     nav: 'main',
   },
   {
+    path: '/projekte/wir-bauen-erst-wenn-wir-es-brauchen/',
+    label: 'Case Study',
+    title: 'Wir bauen erst, wenn wir es brauchen – codeslage',
+    description:
+      'Case Study zu Phase 1: Claude schätzte 50 Stunden fürs Fundament, gebraucht hat es gut 14 – ohne eigenen Server, mit 0 € zusätzlichen laufenden Kosten.',
+    nav: 'none',
+  },
+  {
     path: '/ueber-mich/',
     label: 'Über mich',
     title: 'Über mich – codeslage',

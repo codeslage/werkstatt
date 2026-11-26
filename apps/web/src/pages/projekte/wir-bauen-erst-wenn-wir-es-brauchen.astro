@@ -1,0 +1,87 @@
+---
+import Base from '../../layouts/Base.astro';
+import { pageByPath } from '../../site/page-by-path.ts';
+
+// Eigene Überschrift statt PageShell: Der Titel der Case Study ist länger als ein Navigations-Label.
+// Zahlen aus docs/content/2026-11-19-phase-1-fundament.md und specs/04-fundament/zeiten.md.
+const page = pageByPath('/projekte/wir-bauen-erst-wenn-wir-es-brauchen/');
+---
+
+<Base title={page.title} description={page.description}>
+  <p class="example-label">Case Study · Phase 1, November 2026</p>
+  <h1>Wir bauen erst, wenn wir es brauchen</h1>
+  <p>
+    Phase 1 von codeslage war das technische Fundament: ein öffentliches Monorepo mit CI, die die eigene Constitution
+    durchsetzt, DNS als Code mit Umzug der Mail, verschlüsselter State, eine lokale Umgebung mit Container-Images und
+    Alarme. Claude hat dafür rund 50 Stunden geschätzt. Gebraucht hat es gut 14.
+  </p>
+
+  <h2>Die Wette</h2>
+  <ul>
+    <li>Claude schätzte vorher rund 50 Stunden, also 2 bis 3 Wochen bei 20 Stunden pro Woche.</li>
+    <li>Ich wettete auf 2 bis 5 Arbeitstage.</li>
+    <li>
+      Am Ende waren es rund 14,4 Stunden gemeinsame Sitzungszeit: 13,8 bis zur Abnahme und eine halbe Stunde Retro. Das
+      ist gut ein Viertel der Schätzung, am Stück gerechnet etwa 2 Arbeitstage.
+    </li>
+    <li>Im Kalender waren es 2 Wochen, weil das Vorhaben nebenbei lief, mit Sitzungen an 7 Tagen.</li>
+  </ul>
+  <p>
+    Gezählt ist auch die Zeit, in der Claude auf mich gewartet hat. Ich lag näher dran als die KI. Sie hat sich selbst
+    unterschätzt, vermutlich weil sie in menschlichen Arbeitsstunden gerechnet hat.
+  </p>
+
+  <h2>Was „erst, wenn wir es brauchen“ heißt</h2>
+  <p>
+    Geplant war ein eigener Server, der rund um die Uhr läuft. Rund um die Uhr erreichbar sein muss heute aber nur diese
+    Webseite, und die braucht keinen Server. Also kommt der Server erst, wenn ihn eine echte Kunden-Demo oder eine
+    Funktion mit Backend braucht. Bis dahin wird lokal entwickelt, und jede App hat schon ein Container-Image, damit der
+    spätere Umzug kein Umbau wird.
+  </p>
+  <p>
+    Das Ergebnis: 0 € zusätzliche laufende Kosten. Dieselbe Regel gilt auch für Werkzeuge und Pakete: Was sich mit
+    wenigen Zeilen eigenem Code lösen lässt, braucht kein neues Paket.
+  </p>
+
+  <h2>Wer hat was gemacht?</h2>
+  <ul>
+    <li>
+      Ich habe entschieden, freigegeben und abgenommen. Dazu kam alles, was nur ein Mensch darf: Anmeldungen, Secrets
+      setzen, Schutzregeln eintragen, eine Testmail schicken. Eine Zeile Code habe ich nicht geschrieben.
+    </li>
+    <li>
+      Claude hat Specs, Pläne, Aufgaben, den gesamten Code mit Tests, CI, Infrastruktur als Code, Runbooks, Protokolle
+      und die Zeiterfassung erstellt. Ein zweiter Claude hat jeden Pull Request unabhängig geprüft.
+    </li>
+  </ul>
+  <p>
+    Diese Grenze ist gewollt: Wo Claude an Rechte stieß, blieb der Schritt bei mir. Das hat Wartezeit gekostet, und die
+    ist mitgezählt.
+  </p>
+
+  <h2>Die Zahlen</h2>
+  <ul>
+    <li>42 gemergte Pull Requests, davon 6 automatische Updates</li>
+    <li>
+      35 Review-Berichte mit 7 kritischen Befunden: 3 aus einem absichtlichen Test, die übrigen vor dem Merge behoben
+      oder bewusst freigegeben
+    </li>
+    <li>103 Unit-, 22 Infrastruktur- und 9 Smoke-Tests</li>
+    <li>25 Protokolle und 10 Architekturentscheidungen</li>
+  </ul>
+
+  <h2>Was ich daraus mitnehme</h2>
+  <p>
+    Die Spielregeln tragen. Bei einem absichtlich eingeschmuggelten Fehler haben CI und Review-Agent unabhängig
+    voneinander angeschlagen. Als eine neue Sitzung bei einer „Kleinigkeit“ eine Regel übersprang, wurde daraus eine
+    schärfere Regel, und der Wiederholungstest bestand. Offen ist noch, wie sich das Verhältnis zwischen Mensch und KI
+    verändert, wenn mehrere Aufgaben parallel laufen. Das zeigt die nächste Phase.
+  </p>
+
+  <p class="actions">
+    <a href="https://github.com/codeslage/werkstatt">Alle Zahlen und Protokolle auf GitHub</a>
+    <a class="button" href="/kontakt/">
+      Schreib mir
+    </a>
+  </p>
+</Base>
