@@ -57,4 +57,4 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Behoben
 
-- 2026-11-26 – `cwk new` und `cwk secrets` setzen `PUBLIC_BLOCKLIST` auch als Dependabot-Secret; ohne es war in neuen Projekt-Repos jeder Dependabot-PR im Scan rot (Review PR-2).
+- 2026-11-26 – `cwk new` und `cwk secrets` setzen `PUBLIC_BLOCKLIST` auch als Dependabot-Secret; ohne es war in neuen Projekt-Repos jeder Dependabot-PR im Scan rot (Review PR-2, #78).

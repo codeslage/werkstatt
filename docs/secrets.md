@@ -1,6 +1,6 @@
 # Secrets & Tokens – Register
 
-> Stand: 2026-11-18 · Bezug: Constitution VI und VII, `specs/04-fundament/spec.md` (AK-14)
+> Stand: 2026-11-26 · Bezug: Constitution VI und VII, `specs/04-fundament/spec.md` (AK-14)
 > **Hier stehen nie Werte**, nur wer, wofür, welche Rechte und bis wann. Die Werte liegen lokal in `.env` (gitignoriert), in GitHub Secrets oder im Passwort-Manager des Inhabers.
 
 | Name                                                                                      | Wo hinterlegt                                                                                                                                                                                             | Wofür                                                                                        | Rechte (minimal)                                                                                                                                                          | Verwaltet von | Angelegt                        | Läuft ab                                                              |
