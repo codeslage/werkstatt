@@ -1,7 +1,31 @@
 ---
 import PageShell from '../components/PageShell.astro';
+import { BOOKING_URL, CONTACT_ADDRESS, contactMailto } from '../site/contact.ts';
 ---
 
 <PageShell path="/kontakt/">
-  <p>[Inhalt]</p>
+  <p>Du hast eine Idee, ein Projekt oder eine Frage? Schreib mir eine Mail. Ein paar Sätze reichen.</p>
+  <p class="contact-address mono">{CONTACT_ADDRESS}</p>
+  <p class="actions">
+    <a class="button" href={contactMailto}>
+      Mail schreiben
+    </a>
+    <a class="button-secondary" href={BOOKING_URL}>
+      Erstgespräch buchen
+    </a>
+  </p>
+  <p class="muted">
+    Das Erstgespräch dauert 30 Minuten. Die Buchung läuft über Google Kalender; dabei gehen Name, Mail und Termin an
+    Google.
+  </p>
+  <h2>Was in die Mail gehört</h2>
+  <ul>
+    <li>was du vorhast, in ein, zwei Sätzen</li>
+    <li>wo du gerade stehst: Idee, Prototyp oder schon erste Nutzer</li>
+    <li>bis wann du etwas brauchst</li>
+  </ul>
+  <p>
+    Ich melde mich, sobald ich kann, meist innerhalb weniger Tage. Ein Formular gibt es bewusst nicht: Die Webseite
+    speichert nichts, deine Mail geht ganz normal an mein Postfach.
+  </p>
 </PageShell>

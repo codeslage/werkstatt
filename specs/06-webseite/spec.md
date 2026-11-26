@@ -1,7 +1,7 @@
 # 06 – Phase 2 Webseite (Klick-Dummy): Spec
 
 > Status: **Geklärt** am 2026-11-19 (Stufe 2, keine blockierende Frage offen); Freigegeben am 2026-11-19
-> Stand: 2026-11-19 (Stufe 2: Antworten, AK-18, Voraussetzungen, `leistungen.md`, `gestaltung.md`)
+> Stand: 2026-11-23 (A9 und Frage 14: Erstgespräch per Buchungslink, T-12); 2026-11-19 (Stufe 2: Antworten, AK-18, Voraussetzungen, `leistungen.md`, `gestaltung.md`)
 > Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md` (Erfolg 2 und 6), `02-architektur.md`, `03-roadmap.md` (Phase 2), ADR 0004 (Domain-Schema), ADR 0009 (Server erst bei Bedarf), `leistungen.md`, `gestaltung.md`
 > SDD-Stufe: 1 Specify · 2 Clarify
 
@@ -75,7 +75,7 @@ Leitsatz der ersten Case Study: **Wir bauen erst, wenn wir es brauchen.**
 - **A6:** „Klick-Dummy“ heißt: echte Inhalte, aber keine Funktion mit eigenem Backend. Platzhalter-Texte gehen nicht live.
 - **A7:** Die Seite entsteht zunächst lokal mit Vorschau. Live auf `codeslage.de` (AK-2, AK-5, AK-9, AK-13) geht sie erst nach ausdrücklichem OK des Inhabers.
 - **A8:** Die Datenschutzerklärung entsteht aus einem Generator als Grundlage; Claude gleicht sie mit den tatsächlich genutzten Diensten ab (Frage 5).
-- **A9:** Das Erstgespräch läuft per Mail, ein Videocall nach Absprache; Einzelheiten entstehen mit den Texten (Frage 14).
+- **A9:** Das Erstgespräch (30 Minuten) bucht man über einen Link auf der Kontaktseite auf die Buchungsseite in Google Kalender, alternativ per Mail. Nur verlinkt, nicht eingebettet (AK-4). Entschieden vom Inhaber am 2026-11-23 (Frage 14, T-12).
 
 ## Inhalte (Ergebnis Stufe 2)
 
@@ -84,12 +84,12 @@ Leitsatz der ersten Case Study: **Wir bauen erst, wenn wir es brauchen.**
 
 ## Voraussetzungen (erledigt der Inhaber selbst)
 
-| #   | Schritt                                                                                                     | Wann                     | Status |
-| --- | ----------------------------------------------------------------------------------------------------------- | ------------------------ | ------ |
-| V1  | Alias `kontakt@codeslage.de` in Google Workspace anlegen (Claude leitet an)                                 | vor dem Livegang         | offen  |
-| V2  | Foto für „Über mich“ liefern                                                                                | vor den Texten (Stufe 6) | offen  |
-| V3  | LinkedIn-Profil als PDF exportieren oder im Browser-Panel freigeben (Quelle für „Über mich“, „Projekte“)    | vor den Texten (Stufe 6) | offen  |
-| V4  | Angaben für das Impressum (Name, Anschrift) in `codeslage/internal` hinterlegen, nicht im öffentlichen Repo | vor dem Livegang         | offen  |
+| #   | Schritt                                                                                                     | Wann                     | Status        |
+| --- | ----------------------------------------------------------------------------------------------------------- | ------------------------ | ------------- |
+| V1  | Alias `kontakt@codeslage.de` in Google Workspace anlegen (Claude leitet an)                                 | vor dem Livegang         | offen         |
+| V2  | Foto für „Über mich“ liefern                                                                                | vor den Texten (Stufe 6) | ✅ 2026-11-23 |
+| V3  | LinkedIn-Profil als PDF exportieren oder im Browser-Panel freigeben (Quelle für „Über mich“, „Projekte“)    | vor den Texten (Stufe 6) | ✅ 2026-11-23 |
+| V4  | Angaben für das Impressum (Name, Anschrift) in `codeslage/internal` hinterlegen, nicht im öffentlichen Repo | vor dem Livegang         | offen         |
 
 ## Constitution-Check
 
@@ -142,6 +142,6 @@ Leitsatz der ersten Case Study: **Wir bauen erst, wenn wir es brauchen.**
 | 11  | **Case Study:** Erscheint die Case Study „Wir bauen erst, wenn wir es brauchen“ als eigene Seite unter „Projekte“, und darf sie die Zahlen der Soll/Ist-Wette aus Phase 1 nennen (≈ 14,4 h statt ≈ 50 h)?                                                                                                                                                                                                | –                       | 2026-11-19: ja, eigene Seite unter „Projekte“, mit den Zahlen der Soll/Ist-Wette                                                                                                                                                                            |
 | 12  | **Livegang:** Soll die Seite live gehen, sobald alle AKs erfüllt sind, oder gibt es einen Wunschtermin (z. B. zusammen mit einer Ankündigung)?                                                                                                                                                                                                                                                           | –                       | 2026-11-19: kein Termin; vorerst wird nur lokal gebaut. Live geht die Seite erst nach ausdrücklichem OK des Inhabers (A7)                                                                                                                                   |
 | 13  | **Vorschau:** Eine Online-Vorschau wäre öffentlich erreichbar und würde KI-Texte vor der Freigabe zeigen (Artikel IX). Wie soll die Vorschau aussehen?                                                                                                                                                                                                                                                   | –                       | 2026-11-19: nur lokal (AK-11)                                                                                                                                                                                                                               |
-| 14  | **Leistungen, Einzelheiten:** Beispiele je Bereich, Umgang mit großen Projekten und Gewährleistung, Kennzeichnung „im Aufbau“ für die KI-Automatisierung, Form des Erstgesprächs (`leistungen.md`, „Noch offen“ 1, 2, 4, 6)                                                                                                                                                                              | nein                    | entsteht mit den Texten in Stufe 6, Freigabe nach AK-11                                                                                                                                                                                                     |
+| 14  | **Leistungen, Einzelheiten:** Beispiele je Bereich, Umgang mit großen Projekten und Gewährleistung, Kennzeichnung „im Aufbau“ für die KI-Automatisierung, Form des Erstgesprächs (`leistungen.md`, „Noch offen“ 1, 2, 4, 6)                                                                                                                                                                              | nein                    | teilweise, 2026-11-23: Erstgespräch 30 Minuten, Buchung per Link auf Google Kalender oder per Mail (A9); Beispiele, große Projekte und „im Aufbau“ entstehen mit den Texten in Stufe 6                                                                      |
 | 15  | **Rechtliches zum Angebot:** Ist ein Angebot mit „Konditionen auf Anfrage“ auf der Seite eines Hobbyprojekts ohne Gewerbe unbedenklich (Haftung, Impressum, geschäftsmäßiges Angebot)?                                                                                                                                                                                                                   | nein (vor dem Livegang) | prüft der Inhaber vor dem Livegang, Claude ersetzt keine Rechtsberatung (AK-12, A3)                                                                                                                                                                         |
 | 16  | **Vision nachziehen:** Positionierung „AI-driven für frühe Startups“ und „bezahlte Aufträge erst nach Klärung der Voraussetzungen“ in `01-vision.md` übernehmen?                                                                                                                                                                                                                                         | nein                    | Vorschlag: eigene Änderung an der Vision nach diesem Vorhaben                                                                                                                                                                                               |
