@@ -134,6 +134,34 @@ a:focus-visible {
   border-radius: var(--radius);
 }
 
+/* Kennzeichnung wie „im Aufbau“ (Leistungen, leistungen.md). */
+.badge {
+  display: inline-block;
+  margin-left: 0.5rem;
+  padding: 0.1rem 0.5rem;
+  border: 1px solid var(--muted);
+  border-radius: var(--radius);
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+  font-weight: 500;
+  letter-spacing: 0;
+  vertical-align: middle;
+}
+
+/* Beispiele unter einer Leistung: normaler Text, dünne Linie links, kleines Label in Mono. */
+.example {
+  padding-left: 0.875rem;
+  border-left: 2px solid var(--line);
+}
+
+.example-label {
+  display: block;
+  color: var(--muted);
+  font-family: var(--mono);
+  font-size: 0.8125rem;
+}
+
 .contact-address {
   font-size: 1.375rem;
   font-weight: 600;
