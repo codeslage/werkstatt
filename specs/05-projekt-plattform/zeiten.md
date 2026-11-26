@@ -53,6 +53,7 @@ Methode:
 | Implement PR-2     | Arbeit    | 2026-11-21 19:02 | 2026-11-21 19:10 | 0:08  | T-09 `cwk new`/`cwk secrets`, T-11 Runbooks, T-08 im Code, PR #64; Anleitung T-07 und Freigabe T-08 angefragt. 19:10 (21.11.) bis 09:25 (23.11.) Pause über das Wochenende, zählt nicht                                     |
 | Implement PR-2     | Arbeit    | 2026-11-23 09:25 | 2026-11-23 09:27 | 0:02  | Team geprüft, Fragen zu Schreibrecht und Rulesets beantwortet                                                                                                                                                               |
 | Implement PR-2     | Wartezeit | 2026-11-23 09:27 | 2026-11-23 09:29 | 0:02  | Inhaber: Schreibrecht des Teams, Umbenennung zu `main-checks`                                                                                                                                                               |
+| Implement PR-2     | Arbeit    | 2026-11-23 09:29 | 2026-11-23 09:32 | 0:03  | `main-approval` angelegt, CI neu (grün), Bypass geprüft, Protokoll; Freigabe T-10 angefragt                                                                                                                                 |
 | Implement PR-2     | Arbeit    | 2026-11-23 09:33 | 2026-11-23 09:41 | 0:08  | T-10: Vorlage gebaut und geprüft, Repo angelegt und eingerichtet, `cwk-template.test.ts`, project-template#7, Protokoll. Die Wartezeit auf das Secret (09:36–09:37) ist darin enthalten, weil keine Ablesung dazwischen lag |
 | Implement PR-2     | Arbeit    | 2026-11-23 09:41 | 2026-11-23 09:45 | 0:04  | Worktree der Webseiten-Sitzung geprüft, Fragen zur Merge-Regel; Ende geschätzt. Danach Pause bis 2026-11-26 11:05 (zählt nicht)                                                                                             |
 | Dependabot #67–#71 | Arbeit    | 2026-11-26 11:05 | 2026-11-26 11:15 | 0:10  | Stand nach der Pause, Prüfung der fünf Dependabot-PRs (CI, Release Notes, Lockfile); Ende geschätzt. Gehört nicht zu Phase 1.5, steht hier, weil es in dieser Sitzung lief                                                  |
@@ -60,7 +61,8 @@ Methode:
 | Dependabot #67–#71 | Arbeit    | 2026-11-26 11:48 | 2026-11-26 11:55 | 0:07  | Neue Versionen nachgeprüft (dependency-cruiser 18.9.0, knip 6.48.0), CI auf `main`, Sammeleintrag im Changelog, `main` in #64 gemergt                                                                                       |
 | Implement PR-2     | Wartezeit | 2026-11-26 11:55 | 2026-11-26 12:24 | 0:29  | Merge von project-template#7 über den Bypass durch den Inhaber                                                                                                                                                              |
 | Implement PR-2     | Arbeit    | 2026-11-26 12:24 | 2026-11-26 12:27 | 0:03  | Merge #7 geprüft, Nachweis Bypass im Protokoll, Zeiten                                                                                                                                                                      |
-| Implement PR-2     | Arbeit    | 2026-11-23 09:29 | 2026-11-23 09:32 | 0:03  | `main-approval` angelegt, CI neu (grün), Bypass geprüft, Protokoll; Freigabe T-10 angefragt                                                                                                                                 |
+| Implement PR-2     | Wartezeit | 2026-11-26 12:27 | 2026-11-26 12:31 | 0:04  | Freigabe T-12 und `cwk new cwk-sample` durch den Inhaber                                                                                                                                                                    |
+| Implement PR-2     | Arbeit    | 2026-11-26 12:31 | 2026-11-26 12:39 | 0:08  | T-12: Probe-Repos geprüft, drei Fehler in `cwk new` behoben (Tests zuerst), cwk-sample-no-code#6, Infra-Test für alle drei Repos, Direkt-Push-Probe, Protokoll                                                              |
 
 ## Summen
 
@@ -72,7 +74,7 @@ Methode:
 | Plan               | 0:33   | 0:02      | 0:35   |
 | Tasks + Analyze    | 0:19   | 0:53      | 1:12   |
 | Implement PR-1     | 0:39   | 0:12      | 0:51   |
-| Implement PR-2     | 0:28   | 0:49      | 1:17   |
+| Implement PR-2     | 0:36   | 0:53      | 1:29   |
 | Dependabot #67–#71 | 0:17   | 0:33      | 0:50   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.
