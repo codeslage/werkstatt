@@ -162,6 +162,46 @@ a:focus-visible {
   font-size: 0.8125rem;
 }
 
+/* Startseite (gestaltung.md): Überzeile und Soll/Ist-Zahl in Mono, vier Leistungen im Raster 2 × 2, mobil einspaltig. */
+.overline,
+.figure {
+  font-family: var(--mono);
+  letter-spacing: 0;
+}
+
+.overline {
+  margin-bottom: 0;
+  color: var(--muted);
+  font-size: 0.9375rem;
+}
+
+.figure {
+  margin-bottom: 0;
+  font-size: 1.375rem;
+  font-variant-numeric: tabular-nums;
+}
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  gap: 0 2rem;
+  padding: 0;
+  list-style: none;
+}
+
+.cards li {
+  border-top: 1px solid var(--line);
+}
+
+.cards h3 {
+  margin-bottom: 0.25rem;
+  font-size: 1.125rem;
+}
+
+.cards p {
+  margin-top: 0;
+}
+
 .contact-address {
   font-size: 1.375rem;
   font-weight: 600;
