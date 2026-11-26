@@ -1,5 +1,5 @@
-import { randomBytes } from 'node:crypto';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
+import { CASES, type ProbeCase } from './cwk-negative-cases.ts';
 
 // Plan 05, T-14 (AK-3): Negativtest je PR-Prüfung des CWK im öffentlichen Probe-Repo cwk-sample. Je Fall ein Probe-PR
 // mit genau einem Verstoß; erwartet sind der passende Job rot, ci-ok rot und ein abgelehnter Merge. Danach werden die
@@ -9,27 +9,8 @@ import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 
 const REPO = 'codeslage/cwk-sample';
 const BRANCH_PREFIX = 'cwk-negative/';
-/** Älterer werkstatt-Stand mit derselben cwk-code.yml wie der Pin von cwk-sample, damit nur der Pin falsch ist. */
-const OTHER_CWK_COMMIT = 'b7c27bc75b5ead5419e5fec9e3c44778fc859646';
 const RUN_TIMEOUT_MS = 25 * 60_000;
 const POLL_MS = 15_000;
-
-type Edit = (files: Map<string, string>) => void;
-
-interface ProbeCase {
-  id: string;
-  /** Job, der rot werden muss; ci-ok kommt immer dazu. */
-  job: string;
-  /** Datei → neuer Inhalt, abgeleitet vom Stand auf main. */
-  edit: Edit;
-  /** Dateien von main, die edit braucht. */
-  reads: string[];
-  /**
-   * Erst nach allen anderen Fällen öffnen: Der Scan holt alle Branches (fetch-depth 0), ein Secret auf einem Probe-
-   * Branch macht sonst auch die Scans der anderen Probe-PRs rot.
-   */
-  last?: true;
-}
 
 interface Probe {
   probeCase: ProbeCase;
@@ -38,106 +19,6 @@ interface Probe {
   sha: string;
   failedJobs?: string[];
 }
-
-function replaceOnce(text: string, search: string, replacement: string): string {
-  if (!text.includes(search)) throw new Error(`Probe: „${search}“ nicht gefunden`);
-  return text.replace(search, replacement);
-}
-
-function change(path: string, search: string, replacement: string): Edit {
-  return (files) => files.set(path, replaceOnce(files.get(path) ?? '', search, replacement));
-}
-
-function add(path: string, content: string): Edit {
-  return (files) => files.set(path, content);
-}
-
-// Secret und Tippfehler entstehen erst zur Laufzeit: So enthält werkstatt selbst nichts, was der Scan oder die
-// Rechtschreibprüfung hier melden würde (wie tools/public-scan/test/fixtures.ts).
-function randomText(alphabet: string, length: number): string {
-  return Array.from(randomBytes(length), (byte) => alphabet[byte % alphabet.length]).join('');
-}
-
-const BASE62 = '0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
-const fakeSecret = (): string => randomText(BASE62, 48);
-const unknownWord = (): string => randomText(BASE62.slice(36), 12);
-
-const CASES: ProbeCase[] = [
-  {
-    id: 'format',
-    job: 'Regeln / Format',
-    reads: ['src/health.ts'],
-    edit: change('src/health.ts', 'response.end(JSON.stringify(', 'response.end(  JSON.stringify('),
-  },
-  {
-    id: 'spellcheck',
-    job: 'Regeln / Rechtschreibung',
-    reads: [],
-    edit: (files) => files.set('docs/probe-rechtschreibung.md', `# Probe\n\nUnbekanntes Wort: ${unknownWord()}\n`),
-  },
-  {
-    id: 'lint',
-    job: 'Code / Lint',
-    reads: ['src/health.ts'],
-    edit: change('src/health.ts', "request.url === '/health';\n", "request.url === '/health';\n  if (!ok) debugger;\n"),
-  },
-  {
-    id: 'typecheck',
-    job: 'Code / Typecheck',
-    reads: ['src/health.ts'],
-    edit: change('src/health.ts', 'const ok = ', 'const ok: string = '),
-  },
-  {
-    id: 'test',
-    job: 'Code / Tests',
-    reads: ['src/health.test.ts'],
-    edit: change('src/health.test.ts', 'expect(response.status).toBe(200);', 'expect(response.status).toBe(201);'),
-  },
-  {
-    id: 'knip',
-    job: 'Code / Knip',
-    reads: ['src/health.ts'],
-    edit: (files) => files.set('src/health.ts', `${files.get('src/health.ts') ?? ''}\nexport const probeUnused = 1;\n`),
-  },
-  {
-    id: 'spec-check',
-    job: 'Regeln / Spec-Check',
-    reads: [],
-    edit: add('specs/99-probe/spec.md', '# Probe\n\nDiese Spec hat absichtlich keine Pflichtteile.\n'),
-  },
-  {
-    id: 'constitution',
-    job: 'Regeln / CWK-Abgleich',
-    reads: ['CONSTITUTION.md'],
-    edit: change(
-      'CONSTITUTION.md',
-      'Die Artikel sind kurz und überprüfbar.',
-      'Die Artikel sind kurz und gut überprüfbar.',
-    ),
-  },
-  {
-    id: 'pin',
-    job: 'Regeln / CWK-Abgleich',
-    reads: ['.github/workflows/ci.yml', 'cwk.json'],
-    edit: (files) => {
-      const pin = (JSON.parse(files.get('cwk.json') ?? '{}') as { cwk?: unknown }).cwk;
-      if (typeof pin !== 'string' || pin === OTHER_CWK_COMMIT) throw new Error('Probe: Pin in cwk.json unerwartet');
-      change('.github/workflows/ci.yml', `cwk-code.yml@${pin}`, `cwk-code.yml@${OTHER_CWK_COMMIT}`)(files);
-    },
-  },
-  {
-    id: 'secret',
-    job: 'Regeln / Secret- und Öffentlich-Scan',
-    reads: [],
-    last: true,
-    // In docs/protokolle/, weil die Rechtschreibprüfung dort nicht prüft; so bleibt nur der Scan rot.
-    edit: (files) =>
-      files.set(
-        'docs/protokolle/probe-secret.md',
-        `# Probe\n\nFalsches Test-Secret aus T-14, kein echtes:\n\n\`\`\`text\nprobe_api_key = "${fakeSecret()}"\n\`\`\`\n`,
-      ),
-  },
-];
 
 interface Response {
   status: number;
@@ -250,8 +131,9 @@ async function closeProbe(probe: Probe): Promise<void> {
 
 /** Kann das Konto main-checks umgehen, würde der Merge-Versuch womöglich gelingen. */
 async function assertNoChecksBypass(): Promise<void> {
-  const rulesets = (await ok('GET', `/repos/${REPO}/rulesets`)) as { id: number; name: string }[];
-  const checks = rulesets.find((ruleset) => ruleset.name === 'main-checks');
+  const rulesets = await ok('GET', `/repos/${REPO}/rulesets`);
+  if (!Array.isArray(rulesets)) throw new Error('Unerwartete Antwort von GitHub: rulesets');
+  const checks = (rulesets as { id: number; name: string }[]).find((ruleset) => ruleset.name === 'main-checks');
   if (!checks) throw new Error('Ruleset main-checks fehlt');
   const bypass = field(await ok('GET', `/repos/${REPO}/rulesets/${checks.id}`), 'current_user_can_bypass', isString);
   if (bypass !== 'never') throw new Error(`Konto kann main-checks umgehen (${bypass}); Merge-Versuch wäre unsicher`);
@@ -300,6 +182,8 @@ describe.skipIf(process.env.CWK_NEGATIVE !== '1')(`${REPO}: Negativtest je PR-Pr
 
       const merge = await github('PUT', `/repos/${REPO}/pulls/${probe.number}/merge`, { sha: probe.sha });
       expect(merge.status, JSON.stringify(merge.body)).toBe(405);
+      // Abgelehnt wegen des Pflicht-Checks, nicht aus einem anderen Grund (z. B. fehlendes Review).
+      expect(JSON.stringify(merge.body)).toContain('ci-ok');
       expect(field(await ok('GET', `/repos/${REPO}/pulls/${probe.number}`), 'merged', (item) => item === false)).toBe(
         false,
       );
