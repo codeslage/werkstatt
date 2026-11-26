@@ -76,25 +76,13 @@ jobs:
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      # werkstatt prüft bis T-08 weiter mit repo.test.ts (Plan 05, Schritt 1); danach auch hier cwk settings.
-      - name: Node und Abhängigkeiten (werkstatt)
-        if: github.repository == 'codeslage/werkstatt'
-        uses: ./.github/actions/setup
-
-      - name: Sichtbarkeit und Schutz von main (werkstatt, AK-4)
-        if: github.repository == 'codeslage/werkstatt'
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: pnpm test:infra repo.test.ts
-
       - uses: actions/setup-node@949feb2413d6458794dcd2491c4babbbce0c15c1 # v7.1.0
         with:
           node-version: 24
 
       - uses: ./.github/actions/cwk-source
 
-      - name: Rulesets, Pflicht-Check und Code-Owner (Projekte, AK-4)
-        if: github.repository != 'codeslage/werkstatt'
+      - name: Rulesets, Pflicht-Check und Code-Owner (AK-4)
         env:
           GITHUB_TOKEN: ${{ github.token }}
         run: node "$CWK_DIR/tools/cwk/src/cli.ts" settings

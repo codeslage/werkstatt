@@ -83,23 +83,35 @@ export const CODEOWNERS_PATHS = ['.github/CODEOWNERS', 'CODEOWNERS', 'docs/CODEO
  * Nur die CWK-Datei im Wurzelverzeichnis ist erlaubt, sonst könnte eine andere Datei sie aushebeln. GitHub meldet
  * unter /codeowners/errors u. a. „Unknown owner“, wenn das Team kein Schreibrecht hat und deshalb kein Code-Owner ist.
  */
-async function codeownerErrors(get: GitHubGet, repo: string, present: string[]): Promise<string[]> {
+async function codeownerErrors(get: GitHubGet, repo: string, present: string[], ref?: string): Promise<string[]> {
   if (!present.includes('CODEOWNERS')) return ['CODEOWNERS fehlt'];
   const elsewhere = present.filter((path) => path !== 'CODEOWNERS');
   if (elsewhere.length > 0) {
     return elsewhere.map((path) => `${path}: nur CODEOWNERS im Wurzelverzeichnis ist erlaubt (CWK)`);
   }
-  const errors = ((await get(`/repos/${repo}/codeowners/errors`)) as { errors?: unknown } | null)?.errors;
+  const errors = (
+    (await get(`/repos/${repo}/codeowners/errors${ref === undefined ? '' : `?ref=${ref}`}`)) as {
+      errors?: unknown;
+    } | null
+  )?.errors;
   return expectArray(errors, 'CODEOWNERS').map((error) => `CODEOWNERS Zeile ${error.line}: ${error.message}`);
 }
 
-/** `codeowners`: die Pfade aus CODEOWNERS_PATHS, die es im Repo gibt. */
-export async function checkSettings(get: GitHubGet, repo: string, codeowners: string[]): Promise<SettingsResult> {
+/**
+ * `codeowners`: die Pfade aus CODEOWNERS_PATHS, die es im Repo gibt. `ref`: der geprüfte Commit; ohne ihn prüft
+ * GitHub CODEOWNERS auf dem Standard-Branch statt im PR.
+ */
+export async function checkSettings(
+  get: GitHubGet,
+  repo: string,
+  codeowners: string[],
+  ref?: string,
+): Promise<SettingsResult> {
   if ((await visibilityOf(get, repo)) !== 'public') return { errors: [], notes: [PRIVATE_NOTE] };
   const errors = [
     ...(await rulesetErrors(get, repo)),
     ...(await branchErrors(get, repo)),
-    ...(await codeownerErrors(get, repo, codeowners)),
+    ...(await codeownerErrors(get, repo, codeowners, ref)),
   ];
   return { errors, notes: [] };
 }

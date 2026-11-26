@@ -151,7 +151,7 @@
       "mode": "extendable"
     },
     {
-      "source": "cwk/files/CODEOWNERS",
+      "source": "CODEOWNERS",
       "target": "CODEOWNERS",
       "part": "rules",
       "mode": "exact"

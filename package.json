@@ -14,6 +14,7 @@
     "knip": "knip",
     "depcruise": "depcruise --config .dependency-cruiser.json --output-type err . && node tools/astro-imports/src/cli.ts",
     "spec-check": "node tools/spec-check/src/cli.ts specs",
+    "cwk": "node tools/cwk/src/cli.ts",
     "test:infra": "vitest run --project infra",
     "test:smoke": "vitest run --project smoke",
     "dev:up": "APP_VERSION=$(git rev-parse --short HEAD) docker compose up -d --build --wait",
