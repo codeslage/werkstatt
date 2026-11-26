@@ -45,10 +45,10 @@ test('die Startseite zeigt den Kernsatz, die vier Leistungen und den Teaser der 
   expect(services.slice(0, 4).map(normalize)).toEqual(teasers.map(normalize));
   await expect(main.getByRole('link', { name: /Alle Leistungen/ })).toHaveAttribute('href', '/leistungen/');
   await expect(main.getByRole('link', { name: /Projekte ansehen/ })).toHaveAttribute('href', '/projekte/');
-  await expect(main.getByRole('link', { name: /Wir bauen erst, wenn wir es brauchen/ })).toHaveAttribute(
-    'href',
-    CASE_STUDY,
-  );
+  // Abnahme 2026-11-26: eigener Link unter dem Teaser statt Link im Satz, keine Kennzeichnung „im Aufbau“.
+  await expect(main.getByRole('link', { name: 'Case Study lesen →' })).toHaveAttribute('href', CASE_STUDY);
+  await expect(main.getByRole('link', { name: /Wir bauen erst, wenn wir es brauchen/ })).toHaveCount(0);
+  await expect(main).not.toContainText('im Aufbau');
 });
 
 function normalize(text: string): string {

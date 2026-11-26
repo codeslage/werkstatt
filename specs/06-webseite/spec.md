@@ -79,14 +79,14 @@ Leitsatz der ersten Case Study: **Wir bauen erst, wenn wir es brauchen.**
 
 ## Inhalte (Ergebnis Stufe 2)
 
-- **Leistungen** (`leistungen.md`): Klammer „alles AI-driven“; vier Bereiche: KI-Automatisierung von Geschäftsprozessen (gekennzeichnet als „im Aufbau“ bis Phase 3), Prototyp/MVP, Infrastruktur & CI, KI-Entwicklung einführen. Zielgruppe: Startups in früher Phase (1–10 Personen) im DACH-Raum. Keine Preise und nirgends „kostenlos“: Pilotprojekte gegen Feedback und Case Study, Konditionen auf Anfrage, höchstens zwei gleichzeitig. Nicht im Angebot: Betrieb mit SLA, reines Betreiben fertiger Tools.
+- **Leistungen** (`leistungen.md`): Klammer „alles AI-driven“; vier Bereiche: KI-Automatisierung von Geschäftsprozessen (ohne Kennzeichnung „im Aufbau“, Nachtrag 2026-11-26, `leistungen.md` Entscheidung 6), Prototyp/MVP, Infrastruktur & CI, KI-Entwicklung einführen. Zielgruppe: Startups in früher Phase (1–10 Personen) im DACH-Raum. Keine Preise und nirgends „kostenlos“: Pilotprojekte gegen Feedback und Case Study, Konditionen auf Anfrage, höchstens zwei gleichzeitig. Nicht im Angebot: Betrieb mit SLA, reines Betreiben fertiger Tools.
 - **Gestaltung** (`gestaltung.md`): Richtung „Terminal“, technisch-schlicht, ohne Stockfotos und Verläufe (Ausnahme: das Relief im Logo-Zeichen, Entscheidung des Inhabers vom 2026-11-19, `gestaltung.md`); hell und dunkel nach Systemeinstellung; eine Akzentfarbe; nur Systemschriften (AK-4). Logo: Wortmarke `codeslage_` und Zeichen `>_` (Dateien in `gestaltung/`).
 
 ## Voraussetzungen (erledigt der Inhaber selbst)
 
 | #   | Schritt                                                                                                     | Wann                     | Status        |
 | --- | ----------------------------------------------------------------------------------------------------------- | ------------------------ | ------------- |
-| V1  | Alias `kontakt@codeslage.de` in Google Workspace anlegen (Claude leitet an)                                 | vor dem Livegang         | offen         |
+| V1  | Alias `kontakt@codeslage.de` in Google Workspace anlegen (Claude leitet an)                                 | vor dem Livegang         | ✅ 2026-11-26 |
 | V2  | Foto für „Über mich“ liefern                                                                                | vor den Texten (Stufe 6) | ✅ 2026-11-23 |
 | V3  | LinkedIn-Profil als PDF exportieren oder im Browser-Panel freigeben (Quelle für „Über mich“, „Projekte“)    | vor den Texten (Stufe 6) | ✅ 2026-11-23 |
 | V4  | Angaben für das Impressum (Name, Anschrift) in `codeslage/internal` hinterlegen, nicht im öffentlichen Repo | vor dem Livegang         | offen         |
