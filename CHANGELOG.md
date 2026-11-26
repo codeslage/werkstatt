@@ -38,7 +38,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Geändert
 
-- 2026-11-26 – Phase 2, Nachtrag Stufe 6 (Text-PR): Texte nach der Abnahme korrigiert. Schwerpunkt jetzt KI-Softwareentwicklung, „nachvollziehbar“ statt „offen dokumentiert“, neuer Prototyp-Satz, „mit niedrigen laufenden Kosten“ statt „günstig“. Kennzeichnung „im Aufbau“ entfernt, eigener Link „Case Study lesen →“; Ist von T-10 korrigiert (#PR).
+- 2026-11-26 – Phase 2, Nachtrag Stufe 6 (Text-PR): Texte nach der Abnahme korrigiert. Schwerpunkt jetzt KI-Softwareentwicklung, „nachvollziehbar“ statt „offen dokumentiert“, neuer Prototyp-Satz, „mit niedrigen laufenden Kosten“ statt „günstig“. Kennzeichnung „im Aufbau“ entfernt, eigener Link „Case Study lesen →“; Ist von T-10 korrigiert (#77).
 - 2026-11-26 – Abhängigkeits-Updates per Dependabot (Sammeleintrag, Dependabot schreibt keinen Changelog): vitest 5.1.0 → 5.1.1 (#69), cspell 10.5.1 → 10.5.2 (#70), dependency-cruiser 18.7.2 → 18.9.0 (#68), knip 6.45.1 → 6.48.0 (#71), typescript-eslint 8.72.2 → 8.73.0 (#67); geprüft (CI, Release Notes, Lockfile), freigegeben und gemergt vom Inhaber.
 - 2026-11-19 – Zeiterfassung: Wartezeit auf den Inhaber steht in eigenen Zeilen (Spalte „Art“), `zeiten.md` hat Summen für Arbeit, Wartezeit und Gesamt, das Ist ist die Gesamtzeit (Vorlage `zeiten.md` und `retro.md`, `sdd-ablauf.md`, `/sdd-*`-Befehle; Wunsch des Inhabers, #50).
 - 2026-11-19 – `sdd-ablauf.md` und `/sdd-verify`: Abnahme auf `main`, solange es kein int gibt; Zeiterfassung zählt parallele Tasks nur einmal; Hinweise in `release.md`, `code-review.md` und `/release` (Retro 04, Entscheidung des Inhabers, #46).
