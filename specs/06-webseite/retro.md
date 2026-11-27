@@ -46,3 +46,58 @@
 - **T-23 🔄, Frage 15:** Die rechtliche Prüfung des Angebots läuft noch. Der Inhaber hat den Livegang am 2026-11-26 als bewusst akzeptiertes Risiko freigegeben. Ergibt die Prüfung Korrekturen, kommen sie als Hotfix (`/hotfix`).
 
 Abgenommen durch den Inhaber am: 2026-11-27, im Chat („Ja, abgenommen“), ausdrücklich einschließlich AK-12 mit der Abweichung zu Frage 15
+
+## Soll/Ist
+
+|                   | Soll                                           | Ist                                                                                                                            |
+| ----------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
+| Zeit (gesamt)     | 35,75 h (Summe der Tasks, Claude, konservativ) | **12,0 h** (720 min laut `zeiten.md`, mit Retro); bis zur Abnahme 11:33 h                                                      |
+| davon Arbeit      | –                                              | 5,8 h                                                                                                                          |
+| davon Wartezeit   | –                                              | 6,2 h, davon allein 2:52 h bei T-15 (CI und Freigabe)                                                                          |
+| Zeit (Kalender)   | 1–2 Wochen bei ~20 h/Woche                     | 9 Tage (2026-11-19 bis 2026-11-27), gearbeitet an 6 Tagen, nebenbei und parallel zu Phase 1.5                                  |
+| Schätzung Inhaber | keine eigene Schätzung genannt                 | –                                                                                                                              |
+| Kosten/Monat      | 0 € zusätzlich (AK-15)                         | 0 € zusätzlich (Cloudflare Pages und Web Analytics im Free-Plan); laufend bestehen weiter Domain, Google Workspace, Claude-Abo |
+
+Die Zeit ist die gemeinsame Sitzungszeit von Inhaber und Claude, die Wartezeit auf den Inhaber eingeschlossen (Methode in `zeiten.md`). Alle 86 Zeilen haben wir auf Überlappungen geprüft und keine gefunden, die Dauern passen zu Start und Ende. Außerhalb der Sitzungen hat der Inhaber nichts für die Seite getan. Gespräche, in denen er die Seite gezeigt hat, zählen nicht als Arbeit.
+
+**Wartezeiten:** In der Retro sind wir die Wartezeit-Zeilen mit dem Inhaber einzeln durchgegangen. Entscheidung des Inhabers vom 2026-11-27: Alle bleiben stehen, ausgewertet wird später über die Spalte „Art“. Gestrichen ist nur die Pause bei T-10 (2026-11-20, 14:49–16:55). Sie steht als Hinweis unter der Tabelle.
+
+→ Übertragen in die Soll/Ist-Tabelle in `specs/03-roadmap.md`.
+
+**Umfang:** 22 PRs der Phase (#49 bis #85, ohne Phase 1.5), 27 Review-Berichte mit 10 🔴 und 53 🟡 (alle erledigt), 2 ADRs (0014, 0015), 95 E2E-Tests (Playwright, inklusive axe-Kontrast hell und dunkel), Lighthouse ≥ 0,9 auf 9 URLs, 15 Live-Tests gegen `codeslage.de` und das DNS. Die Seite ist seit dem 2026-11-26 live.
+
+## Was lief gut?
+
+- **Die Qualität der Seite.** Der Inhaber: Die Qualität der Webseite sei „wirklich gut“, das Design gefalle ihm. Lighthouse liegt auf jeder Seite bei mindestens 90, die Kontraste sind hell und dunkel nach WCAG AA geprüft, und die Seite setzt kein einziges Cookie.
+- **Weit unter dem Soll:** 12,0 h statt 35,75 h, gut ein Drittel. Ohne Wartezeit waren es 5,8 h Arbeit.
+- **Unterchats mit Koordination.** Der Inhaber arbeitet nur noch in Claude Code. Eine Koordinationssitzung steuert das Vorhaben, jede Task läuft in einer eigenen Sitzung mit frischem Kontext und meldet sich, wenn sie fertig ist. So liefen T-13, T-15 und T-17 parallel.
+- **Text-PRs mit Freigabe.** Kein KI-Text ging ungeprüft live (Artikel IX). Die lokale Vorschau und die Gesamtabnahme vor dem Livegang haben noch Korrekturen gebracht (#77).
+- **Livegang ohne Mail-Ausfall.** Plan geprüft, `apply`, Drift-Check und Testmail. MX, SPF, DKIM und DMARC sind unverändert (AK-13).
+
+## Was lief schlecht / was hat überrascht?
+
+- **`main` war gesperrt.** Das Ruleset wurde auf den Pflicht-Check `ci-ok` umgestellt, bevor der Job auf `main` lag. Bis dahin konnte kein PR mergen.
+- **„CI grün“ zu früh gemeldet.** Eine Sitzung hat „CI grün“ gemeldet, während `ci-ok` auf dem neuen Head noch lief. Die Merges mit `--match-head-commit` scheiterten.
+- **Fremder Server im lokalen Test.** Playwright hat mit `reuseExistingServer` die Vorschau einer anderen Sitzung auf Port 4321 getestet, mit den echten Impressumsangaben. Das ergab zwei falsch rote Tests. Genauso gut hätte ein veralteter Build falsch grün sein können.
+- **Lock-Datei nicht nachgezogen.** Der Dependabot-PR #22 hat den Cloudflare-Provider auf 5.29.0 gehoben, in `.terraform.lock.hcl` aber die alte Einschränkung und einen fehlenden Hash stehen lassen. Aufgefallen ist das erst beim lokalen `tofu init` in Stufe 7.
+- **Rebase eines Branches mit offenem PR.** Der Force-Push danach wurde zu Recht blockiert (Artikel V). Abhilfe war ein Merge von `main`.
+- **Ein Testschritt fehlte.** Der Test von T-24 (`tofu plan` mit erweitertem Token) lief erst in Stufe 7, obwohl die Task schon auf ✅ stand.
+- **Wartezeit ist der größte Posten.** Mit 6,2 h ist sie größer als die Arbeit, vor allem durch Freigaben von Text-PRs und durch CI-Läufe, auf die gewartet wurde.
+- **Token-Verbrauch.** Der Inhaber braucht aktuell einen großen Teil der Token aus seinem Abo. Ein Upgrade lohnt sich noch nicht, wird aber wohl die erste große Investition.
+
+## Was ändern wir? (ggf. Constitution, Vorlagen, Befehle)
+
+Nur Vorschläge. Jede Änderung an `docs/prozess/` kommt als eigener PR, den der Inhaber mergt (`governance.md`).
+
+| Vorschlag                                                                                                                                                        | Ort                                        | Entscheidung des Inhabers |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ | ------------------------- |
+| Merge-Regel festschreiben: eigene PRs mit `--squash --admin --match-head-commit <sha>` nur bei grünem `ci-ok` auf genau diesem Head (`gh pr checks`) und ohne 🔴 | `code-review.md` oder `release.md`         | offen                     |
+| Reihenfolge beim Ändern von Pflicht-Checks: zuerst den Job auf `main` mergen, danach das Ruleset umstellen                                                       | `governance.md` oder Runbook               | offen                     |
+| Orchestrierung als fester Ablauf: eine Koordinationssitzung je Vorhaben, je Task eine Sitzung mit frischem Kontext, die sich bei Abschluss meldet                | `sdd-ablauf.md`, Befehl `/sdd-implement`   | offen                     |
+| Lokale E2E-Läufe auf eigenen Ports oder ohne `reuseExistingServer`, damit kein fremder Server getestet wird                                                      | `apps/web/playwright.config.ts` (Klasse K) | offen                     |
+| Branches mit offenem PR per Merge von `main` aktualisieren, nicht per Rebase                                                                                     | `release.md`                               | offen                     |
+| Dependabot-PRs für OpenTofu: Lock-Datei mit `tofu providers lock` prüfen, die Lock-Datei auf `main` korrigieren                                                  | Klasse M, eigener PR                       | offen                     |
+
+## Content-Notizen
+
+→ `docs/content/2026-11-27-phase-2-webseite.md`

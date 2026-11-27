@@ -10,6 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
+- 2026-11-27 – Phase 2, Stufe 8 (Retro): `specs/06-webseite/retro.md` mit Soll/Ist (12,0 h gegen 35,75 h), Learnings und Vorschlägen; Content-Notiz `docs/content/2026-11-27-phase-2-webseite.md`; Roadmap und Spec auf Umgesetzt (#85).
 - 2026-11-27 – Phase 2, Stufe 7 (Verify): `specs/06-webseite/retro.md` mit Nachweis je AK auf `main` und an der Live-Seite; AK-12 mit Abweichung (Frage 15); Probelauf `tofu plan` mit erweitertem Token für T-24 nachgeholt (#84).
 - 2026-11-27 – Roadmap: Vorhaben Quiz-Plattform mit Verweis auf das eigene Repo `codeslage/quiz` (Spec dort freigegeben am 2026-11-26) und Soll/Ist-Zeile; T-45 nennt `quiz` ausdrücklich (#82).
 - 2026-11-26 – Phase 2, T-27 (PR-14): Nachweise nach dem Livegang (Testmail, erste Besuche und Kontaktseite in Web Analytics, 0 € Kosten, Drift-Check grün); T-26 abgeschlossen (#81).

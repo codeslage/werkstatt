@@ -1,7 +1,7 @@
 # 06 – Phase 2 Webseite (Klick-Dummy): Spec
 
-> Status: **Geklärt** am 2026-11-19 (Stufe 2, keine blockierende Frage offen); Freigegeben am 2026-11-19
-> Stand: 2026-11-23 (A9 und Frage 14: Erstgespräch per Buchungslink, T-12); 2026-11-19 (Stufe 2: Antworten, AK-18, Voraussetzungen, `leistungen.md`, `gestaltung.md`)
+> Status: **Umgesetzt** am 2026-11-27 (abgenommen am 2026-11-27, Retro `retro.md`); Geklärt am 2026-11-19 (Stufe 2, keine blockierende Frage offen); Freigegeben am 2026-11-19
+> Stand: 2026-11-27 (Status Umgesetzt); 2026-11-23 (A9 und Frage 14: Erstgespräch per Buchungslink, T-12); 2026-11-19 (Stufe 2: Antworten, AK-18, Voraussetzungen, `leistungen.md`, `gestaltung.md`)
 > Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md` (Erfolg 2 und 6), `02-architektur.md`, `03-roadmap.md` (Phase 2), ADR 0004 (Domain-Schema), ADR 0009 (Server erst bei Bedarf), `leistungen.md`, `gestaltung.md`
 > SDD-Stufe: 1 Specify · 2 Clarify
 
