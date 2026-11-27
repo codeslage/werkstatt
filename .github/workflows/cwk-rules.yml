@@ -27,11 +27,18 @@ jobs:
       - name: gitleaks installieren
         run: sh "$CWK_DIR/.github/scripts/install-gitleaks.sh"
 
-      # Ebene 2 (governance.md): gesamte Historie inkl. dieses PRs, Sperrliste aus dem Secret.
+      # Ebene 2 (governance.md): gesamte Historie inkl. dieses PRs, Sperrliste aus dem Secret. Private Repos wie
+      # internal enthalten Internes mit Absicht; dort sucht der Scan nur nach Secrets (Plan 05 v4.6).
       - name: Scan
         env:
+          VISIBILITY: ${{ github.event.repository.visibility }}
           PUBLIC_BLOCKLIST: ${{ secrets.PUBLIC_BLOCKLIST }}
-        run: node "$CWK_DIR/tools/public-scan/src/cli.ts" git . --require-blocklist
+        run: |
+          if [ "$VISIBILITY" = private ]; then
+            node "$CWK_DIR/tools/public-scan/src/cli.ts" git . --secrets-only
+          else
+            node "$CWK_DIR/tools/public-scan/src/cli.ts" git . --require-blocklist
+          fi
 
   spec-check:
     name: Spec-Check

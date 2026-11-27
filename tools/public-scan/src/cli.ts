@@ -5,7 +5,9 @@ import { parseArgs } from 'node:util';
 import { blocklistRule, readBlocklist } from './blocklist.ts';
 
 const REPO_ROOT = join(import.meta.dirname, '..', '..', '..');
-const USAGE = 'Aufruf: cli.ts <dir|git|staged> [Pfad] [--report <Datei>] [--require-blocklist]';
+const USAGE = 'Aufruf: cli.ts <dir|git|staged> [Pfad] [--report <Datei>] [--require-blocklist | --secrets-only]';
+/** Nur die Secret-Regeln von gitleaks, ohne eigene Regeln und Sperrliste: für private Repos (Plan 05 v4.6). */
+const SECRETS_ONLY = '[extend]\nuseDefault = true\n';
 
 /** Grundkonfiguration plus Sperrlisten-Regel, als Inhalt für GITLEAKS_CONFIG_TOML. */
 function buildConfig(requireBlocklist: boolean): string {
@@ -31,14 +33,25 @@ function gitleaksArgs(mode: string, path: string): string[] {
 function main(): void {
   const { positionals, values } = parseArgs({
     allowPositionals: true,
-    options: { report: { type: 'string' }, 'require-blocklist': { type: 'boolean', default: false } },
+    options: {
+      report: { type: 'string' },
+      'require-blocklist': { type: 'boolean', default: false },
+      'secrets-only': { type: 'boolean', default: false },
+    },
   });
+  if (values['secrets-only'] && values['require-blocklist']) {
+    console.error(USAGE);
+    process.exit(2);
+  }
   const [mode = '', path = REPO_ROOT] = positionals;
   const report = values.report ? ['--report-format', 'json', '--report-path', values.report] : [];
   const args = [...gitleaksArgs(mode, path), '--no-banner', '--redact', '--exit-code', '1', ...report];
   const result = spawnSync('gitleaks', args, {
     stdio: 'inherit',
-    env: { ...process.env, GITLEAKS_CONFIG_TOML: buildConfig(values['require-blocklist']) },
+    env: {
+      ...process.env,
+      GITLEAKS_CONFIG_TOML: values['secrets-only'] ? SECRETS_ONLY : buildConfig(values['require-blocklist']),
+    },
   });
   if (result.error) {
     console.error(`public-scan: gitleaks konnte nicht gestartet werden: ${result.error.message}`);

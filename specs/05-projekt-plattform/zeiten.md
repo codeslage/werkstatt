@@ -82,6 +82,11 @@ Methode:
 | Implement PR-3     | Arbeit    | 2026-11-27 20:33 | 2026-11-27 20:36 | 0:03  | 14:13–20:33 nicht gezählt (T-17 beim Inhaber, Rückfragen ohne Ablesung). Apps geprüft, erster Lauf `sync.yml` (rot: `cwk sync` noch nicht auf `main`), Teilung PR-3a/3b, Doku `secrets.md` und `cwk-sync.md`, Merge von `main`, Checks                                                                          |
 | Implement PR-3     | Arbeit    | 2026-11-27 20:36 | 2026-11-27 20:43 | 0:07  | Review-Agent PR-3a, Bericht abgelegt, Befunde 1 und 4 mit Test zuerst behoben, 5 behoben, 2 und 3 in Plan, Runbook und Register                                                                                                                                                                                 |
 | Implement PR-3     | Arbeit    | 2026-11-27 20:43 | 2026-11-27 20:47 | 0:04  | PR #87 geöffnet; Entscheidung zu Befund 2 eingetragen (T-48, Plan v4.5, Runbook, Protokoll Punkt 8)                                                                                                                                                                                                             |
+| Implement PR-3     | Arbeit    | 2026-11-27 20:55 | 2026-11-27 20:59 | 0:04  | PR-3a gemergt (Bypass nur per CLI geprüft), Branch PR-3b, erster echter Lauf `sync.yml`, T-48 (Tests zuerst), Probelauf cwk-sample-no-code#9                                                                                                                                                                    |
+| Implement PR-3     | Arbeit    | 2026-11-27 21:03 | 2026-11-27 21:08 | 0:05  | 21:00–21:03 Wartezeit nicht abgelesen, nicht gezählt. T-45 geprüft, zweiter Lauf `sync.yml`, Scan privat nur Secrets (Tests zuerst), `governance.md`, Plan v4.6                                                                                                                                                 |
+| Implement PR-3     | Arbeit    | 2026-11-27 21:08 | 2026-11-27 21:09 | 0:01  | T-20: Probe-Dateien (Test zuerst), Infra-Test `cwk-sync.test.ts`, erster Lauf, Runbook Abschnitt 5                                                                                                                                                                                                              |
+| Implement PR-3     | Arbeit    | 2026-11-27 22:12 | 2026-11-27 22:44 | 0:32  | 21:09–22:12 nicht gezählt (Sitzung neu gestartet, Review abgebrochen). Review PR-3b neu, 🔴 1 und 🟡 2 mit Test zuerst, Infra-Test robuster, dritter Lauf `sync.yml`, Doku                                                                                                                                      |
+| Implement PR-3     | Arbeit    | 2026-11-27 22:44 | 2026-11-27 23:30 | 0:46  | Ende ohne Ablesung (geschätzt), 23:30–00:34 nicht gezählt. Nachreview PR-3b abgewartet, PR #89 geöffnet, 🟡 (zwei Umbenennungen) mit Test zuerst, Doku                                                                                                                                                          |
 
 ## Summen
 
@@ -94,7 +99,7 @@ Methode:
 | Tasks + Analyze    | 0:19   | 0:53      | 1:12   |
 | Implement PR-1     | 0:39   | 0:12      | 0:51   |
 | Implement PR-2     | 1:36   | 1:03      | 2:39   |
-| Implement PR-3     | 0:41   | 0:02      | 0:43   |
+| Implement PR-3     | 2:09   | 0:02      | 2:11   |
 | Dependabot #67–#71 | 0:17   | 0:33      | 0:50   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.

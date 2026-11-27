@@ -10,6 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
+- 2026-11-27 – Phase 1.5, Schritt 3 (PR-3b, T-19, T-45, T-48, T-20): erster echter Lauf von `sync.yml` mit Sync-PRs in `project-template`, `cwk-sample` und `quiz`; `cwk sync` löscht gestrichene CWK-Dateien; Probe-Dateien und Infra-Test `cwk-sync.test.ts`; Öffentlich-Scan in privaten Repos nur auf Secrets (`public-scan --secrets-only`); `governance.md`: Sync automatisch nur in öffentliche Repos.
 - 2026-11-27 – Phase 1.5, Schritt 3 (PR-3a, T-16 bis T-19): Repo `codeslage/platform`, GitHub Apps `codeslage-cwk-read` und `codeslage-cwk`, `cwk sync` (Sync-PR auf `cwk/sync` ohne Force-Push, Projektblock und eigene Commits bleiben), `sync.yml` in `platform`, Runbook `cwk-sync.md`; `cwk new` lässt `platform` zu und streicht ohne Code den docker-Eintrag in `dependabot.yml`; Claude GitHub App ohne `platform` (P1 c).
 - 2026-11-27 – Phase 2, Stufe 8 (Retro): `specs/06-webseite/retro.md` mit Soll/Ist (12,0 h gegen 35,75 h), Learnings und Vorschlägen; Content-Notiz `docs/content/2026-11-27-phase-2-webseite.md`; Roadmap und Spec auf Umgesetzt (#85).
 - 2026-11-27 – Phase 2, Stufe 7 (Verify): `specs/06-webseite/retro.md` mit Nachweis je AK auf `main` und an der Live-Seite; AK-12 mit Abweichung (Frage 15); Probelauf `tofu plan` mit erweitertem Token für T-24 nachgeholt (#84).

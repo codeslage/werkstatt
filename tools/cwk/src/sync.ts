@@ -2,11 +2,11 @@
 // werkstatt per PR auf Branch `cwk/sync` in jedes Repo der Soll-Menge. Nie Force-Push: Gibt es den Branch schon,
 // setzt der Sync darauf auf. So bleiben eigene Commits und der Projektblock aus dem Stand des Branches erhalten.
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { BLOCK_END, BLOCK_START, PLACEHOLDER } from './check.ts';
 import { must, ORG, type Run } from './gh.ts';
-import { isRecord, type Manifest, parseConfig } from './schema.ts';
+import { isRecord, type Manifest, type ManifestFile, parseConfig } from './schema.ts';
 import { listTargets, type SyncScope, type SyncTarget } from './sync-targets.ts';
 
 export type { SyncScope } from './sync-targets.ts';
@@ -20,6 +20,8 @@ export interface SyncDeps {
   sha: string;
   /** Datei aus werkstatt im Stand `sha`; undefined, wenn sie fehlt. */
   readSource: (path: string) => string | undefined;
+  /** Manifest aus werkstatt in einem früheren Stand; undefined, wenn es dort nicht lesbar ist. */
+  readManifest: (sha: string) => Manifest | undefined;
 }
 
 export interface SyncResult {
@@ -68,22 +70,69 @@ function checkoutBranch(run: Run, dir: string): void {
 
 const readIfExists = (path: string) => (existsSync(path) ? readFileSync(path, 'utf8') : undefined);
 
-/** Schreibt jede CWK-Datei des Teils im Stand `sha`, nur wo sie abweicht; gibt die geänderten Ziele zurück. */
-function writeCwkFiles(dir: string, deps: SyncDeps, code: boolean): string[] {
+/**
+ * Inhalt des alten Ziels bei einer Umbenennung. Bei offenem Sync-PR kann die Datei schon zweimal umbenannt sein; es
+ * zählt das alte Ziel, das es im ausgecheckten Stand noch gibt (Nachreview PR-3b).
+ */
+function renamedContent(dir: string, file: ManifestFile, previous: ManifestFile[]): string | undefined {
+  return previous
+    .filter((entry) => entry.source === file.source && entry.target !== file.target)
+    .map((entry) => readIfExists(join(dir, entry.target)))
+    .find((text) => text !== undefined);
+}
+
+/**
+ * Schreibt jede CWK-Datei des Teils im Stand `sha`, nur wo sie abweicht; gibt die geänderten Ziele zurück. Fehlt das
+ * Ziel, weil der CWK die Datei umbenannt hat, kommt der Projektblock aus dem alten Ziel (Review PR-3b).
+ */
+function writeCwkFiles(dir: string, deps: SyncDeps, code: boolean, previous: ManifestFile[]): string[] {
   const changed: string[] = [];
   for (const file of deps.manifest.files.filter((entry) => entry.part === 'rules' || code)) {
     const source = deps.readSource(file.source);
     if (source === undefined) throw new Error(`Quelle ${file.source} fehlt im CWK-Stand ${short(deps.sha)}`);
     const path = join(dir, file.target);
     const current = readIfExists(path);
+    const blockFrom = current ?? renamedContent(dir, file, previous);
     const fresh = source.replaceAll(PLACEHOLDER, `@${deps.sha}`);
-    const expected = file.mode === 'extendable' && current !== undefined ? keepProjectBlock(fresh, current) : fresh;
+    const expected = file.mode === 'extendable' && blockFrom !== undefined ? keepProjectBlock(fresh, blockFrom) : fresh;
     if (expected === current) continue;
     mkdirSync(dirname(path), { recursive: true });
     writeFileSync(path, expected);
     changed.push(file.target);
   }
   return changed;
+}
+
+/**
+ * Ziele der bisherigen Stände: der Pin auf main und, bei offenem Sync-PR, der Pin auf `cwk/sync`. Der Branch kann schon
+ * Dateien eines Zwischenstands enthalten, die der neue Stand wieder streicht (Review PR-3b). Ohne Code nur Regel-Teil.
+ */
+function previousFiles(deps: SyncDeps, pins: string[], code: boolean): ManifestFile[] {
+  return [...new Set(pins)].flatMap((pin) => {
+    const manifest = deps.readManifest(pin);
+    if (manifest === undefined) throw new Error(`cwk/manifest.json im bisherigen Stand ${short(pin)} nicht lesbar`);
+    return manifest.files.filter((file) => file.part === 'rules' || code);
+  });
+}
+
+/**
+ * Löscht Ziele der bisherigen Stände, die im neuen fehlen (gestrichen oder umbenannt, T-48). Nur Dateien, die der CWK
+ * selbst ausgerollt hat, nie andere Dateien des Projekts.
+ */
+function removeDroppedFiles(dir: string, deps: SyncDeps, previous: ManifestFile[]): string[] {
+  const current = new Set(deps.manifest.files.map((file) => file.target));
+  const dropped = [...new Set(previous.map((file) => file.target))].filter(
+    (target) => !current.has(target) && existsSync(join(dir, target)),
+  );
+  for (const target of dropped) rmSync(join(dir, target));
+  return dropped;
+}
+
+/** `cwk` aus der cwk.json im ausgecheckten Stand (auf `cwk/sync` ggf. ein späterer als auf main). */
+function pinOf(dir: string, visibility: SyncTarget['visibility']): string {
+  const text = readIfExists(join(dir, CONFIG));
+  if (text === undefined) throw new Error(`${CONFIG} fehlt auf ${BRANCH}`);
+  return parseConfig(text, visibility).cwk;
 }
 
 /** Setzt nur den Wert von `cwk`, damit Format und übrige Felder des Projekts bleiben. */
@@ -144,7 +193,10 @@ function syncRepo(target: SyncTarget, deps: SyncDeps): string {
   if (configText === undefined) throw new Error(`nicht angebunden, ${CONFIG} fehlt`);
   const config = parseConfig(configText, target.visibility);
   checkoutBranch(run, dir);
-  const changed = [...writeCwkFiles(dir, deps, config.code), ...writeConfig(dir, deps.sha)];
+  const previous = previousFiles(deps, [config.cwk, pinOf(dir, target.visibility)], config.code);
+  // Erst schreiben, dann löschen: Bei einer Umbenennung braucht das neue Ziel den Projektblock des alten.
+  const written = writeCwkFiles(dir, deps, config.code, previous);
+  const changed = [...written, ...removeDroppedFiles(dir, deps, previous), ...writeConfig(dir, deps.sha)];
   const text = pullRequestText(config.cwk, deps.sha);
   if (changed.length === 0) return publishPending(run, dir, repo, text);
   must(run, 'git', ['-C', dir, 'add', '--', ...changed]);
