@@ -76,6 +76,7 @@ Methode:
 | Implement PR-2     | Arbeit    | 2026-11-27 09:44 | 2026-11-27 09:49 | 0:05  | T-13a: Secrets geprüft, `@dependabot recreate` in cwk-sample#1, CI abgewartet, Protokoll Punkt 13                                                                                                                                                                                                               |
 | Implement PR-3     | Arbeit    | 2026-11-27 10:42 | 2026-11-27 10:44 | 0:02  | Runbook `platform-setup.md`: Abschnitt GitHub Apps (V2) für T-17                                                                                                                                                                                                                                                |
 | Implement PR-3     | Arbeit    | 2026-11-27 12:06 | 2026-11-27 12:08 | 0:02  | Pause 10:44–12:06 nicht gezählt. P1 c entschieden: Runbooks, Plan v4.4, Protokoll Punkt 2                                                                                                                                                                                                                       |
+| Implement PR-3     | Arbeit    | 2026-11-27 12:08 | 2026-11-27 12:15 | 0:07  | T-18: `cwk sync`, Tests zuerst (12 Fälle), Probelauf cwk-sample-no-code#8, Protokoll Punkt 3                                                                                                                                                                                                                    |
 
 ## Summen
 
@@ -88,7 +89,7 @@ Methode:
 | Tasks + Analyze    | 0:19   | 0:53      | 1:12   |
 | Implement PR-1     | 0:39   | 0:12      | 0:51   |
 | Implement PR-2     | 1:36   | 1:03      | 2:39   |
-| Implement PR-3     | 0:13   | 0:02      | 0:15   |
+| Implement PR-3     | 0:20   | 0:02      | 0:22   |
 | Dependabot #67–#71 | 0:17   | 0:33      | 0:50   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.
