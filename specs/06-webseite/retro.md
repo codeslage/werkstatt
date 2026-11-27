@@ -89,14 +89,14 @@ Die Zeit ist die gemeinsame Sitzungszeit von Inhaber und Claude, die Wartezeit a
 
 Nur Vorschläge. Jede Änderung an `docs/prozess/` kommt als eigener PR, den der Inhaber mergt (`governance.md`).
 
-| Vorschlag                                                                                                                                                        | Ort                                        | Entscheidung des Inhabers |
-| ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ | ------------------------- |
-| Merge-Regel festschreiben: eigene PRs mit `--squash --admin --match-head-commit <sha>` nur bei grünem `ci-ok` auf genau diesem Head (`gh pr checks`) und ohne 🔴 | `code-review.md` oder `release.md`         | offen                     |
-| Reihenfolge beim Ändern von Pflicht-Checks: zuerst den Job auf `main` mergen, danach das Ruleset umstellen                                                       | `governance.md` oder Runbook               | offen                     |
-| Orchestrierung als fester Ablauf: eine Koordinationssitzung je Vorhaben, je Task eine Sitzung mit frischem Kontext, die sich bei Abschluss meldet                | `sdd-ablauf.md`, Befehl `/sdd-implement`   | offen                     |
-| Lokale E2E-Läufe auf eigenen Ports oder ohne `reuseExistingServer`, damit kein fremder Server getestet wird                                                      | `apps/web/playwright.config.ts` (Klasse K) | offen                     |
-| Branches mit offenem PR per Merge von `main` aktualisieren, nicht per Rebase                                                                                     | `release.md`                               | offen                     |
-| Dependabot-PRs für OpenTofu: Lock-Datei mit `tofu providers lock` prüfen, die Lock-Datei auf `main` korrigieren                                                  | Klasse M, eigener PR                       | offen                     |
+| Vorschlag                                                                                                                                                        | Ort                                        | Entscheidung des Inhabers                                                                |
+| ---------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------ | ---------------------------------------------------------------------------------------- |
+| Merge-Regel festschreiben: eigene PRs mit `--squash --admin --match-head-commit <sha>` nur bei grünem `ci-ok` auf genau diesem Head (`gh pr checks`) und ohne 🔴 | `code-review.md` oder `release.md`         | offen                                                                                    |
+| Reihenfolge beim Ändern von Pflicht-Checks: zuerst den Job auf `main` mergen, danach das Ruleset umstellen                                                       | `governance.md` oder Runbook               | offen                                                                                    |
+| Orchestrierung als fester Ablauf: eine Koordinationssitzung je Vorhaben, je Task eine Sitzung mit frischem Kontext, die sich bei Abschluss meldet                | `sdd-ablauf.md`, Befehl `/sdd-implement`   | offen                                                                                    |
+| Lokale E2E-Läufe auf eigenen Ports oder ohne `reuseExistingServer`, damit kein fremder Server getestet wird                                                      | `apps/web/playwright.config.ts` (Klasse K) | offen                                                                                    |
+| Branches mit offenem PR per Merge von `main` aktualisieren, nicht per Rebase                                                                                     | `release.md`                               | offen                                                                                    |
+| Dependabot-PRs für OpenTofu: Lock-Datei mit `tofu providers lock` prüfen, die Lock-Datei auf `main` korrigieren                                                  | Klasse M, eigener PR                       | Inhaber: „Ja, korrigieren“ (2026-11-27), Lock-Datei in #86; Prüfung bei Dependabot offen |
 
 ## Content-Notizen
 

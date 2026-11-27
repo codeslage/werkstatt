@@ -64,4 +64,5 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Behoben
 
+- 2026-11-27 – Lock-Dateien in `infra/tofu/live` und `infra/tofu/bootstrap`: Einschränkung auf 5.29.0 nachgezogen und fehlenden `zh:`-Hash ergänzt; der Dependabot-PR #22 hatte nur die Version gehoben (Retro Phase 2, Vorschlag 6, #86).
 - 2026-11-26 – `cwk new` und `cwk secrets` setzen `PUBLIC_BLOCKLIST` auch als Dependabot-Secret; ohne es war in neuen Projekt-Repos jeder Dependabot-PR im Scan rot (Review PR-2, #78).
