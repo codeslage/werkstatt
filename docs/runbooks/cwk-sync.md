@@ -54,7 +54,7 @@ pnpm cwk secrets
 
 - **„nicht angebunden, cwk.json fehlt“:** Das Repo hat keine `cwk.json`. Anbinden per PR mit `cwk.json` (`neues-projekt.md`) oder archivieren, wenn es nicht mehr gebraucht wird.
 - **„ist die CWK-Quelle, kein Ziel für den Sync“:** `--repo werkstatt` ist nicht vorgesehen.
-- **Datei aus dem CWK gestrichen oder umbenannt:** Bis T-48 löscht der Sync nichts. Bis dahin die alte Datei im Projekt per Hand entfernen, gern als eigener Commit auf `cwk/sync` (Plan 05, Risiken).
+- **Datei aus dem CWK gestrichen oder umbenannt:** Der Sync löscht die alte Datei selbst, wenn sie im bisherigen Manifest stand (T-48). Dateien, die nur das Projekt hat, fasst er nicht an.
 - **Sync-PR ohne Merge geschlossen:** Liegt `cwk/sync` weiter vor `main`, legt der nächste Lauf wieder einen PR an. Einen CWK-Stand lehnt man deshalb nicht durch Schließen ab, sondern durch eine Änderung in `werkstatt`.
 - **Merge-Konflikt auf `cwk/sync`:** Ein eigener Commit auf dem Branch widerspricht `main`. Den Konflikt auf dem Branch per Hand lösen und pushen, danach den Sync erneut starten.
 - **„CWK_READ_TOKEN fehlt“:** `cwk sync` ohne Option braucht das Token der Lese-App. Lokal `--private` oder `--repo` verwenden.

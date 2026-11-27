@@ -2,7 +2,7 @@
 // werkstatt per PR auf Branch `cwk/sync` in jedes Repo der Soll-Menge. Nie Force-Push: Gibt es den Branch schon,
 // setzt der Sync darauf auf. So bleiben eigene Commits und der Projektblock aus dem Stand des Branches erhalten.
 
-import { existsSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { BLOCK_END, BLOCK_START, PLACEHOLDER } from './check.ts';
 import { must, ORG, type Run } from './gh.ts';
@@ -20,6 +20,8 @@ export interface SyncDeps {
   sha: string;
   /** Datei aus werkstatt im Stand `sha`; undefined, wenn sie fehlt. */
   readSource: (path: string) => string | undefined;
+  /** Manifest aus werkstatt in einem früheren Stand; undefined, wenn es dort nicht lesbar ist. */
+  readManifest: (sha: string) => Manifest | undefined;
 }
 
 export interface SyncResult {
@@ -86,6 +88,22 @@ function writeCwkFiles(dir: string, deps: SyncDeps, code: boolean): string[] {
   return changed;
 }
 
+/**
+ * Löscht Ziele des bisherigen Manifests, die im neuen fehlen (gestrichen oder umbenannt, T-48). Nur Dateien, die der
+ * CWK selbst ausgerollt hat, nie andere Dateien des Projekts; ohne Code auch nicht die des bisherigen Code-Teils.
+ */
+function removeDroppedFiles(dir: string, deps: SyncDeps, old: string, code: boolean): string[] {
+  const previous = deps.readManifest(old);
+  if (previous === undefined) throw new Error(`cwk/manifest.json im bisherigen Stand ${short(old)} nicht lesbar`);
+  const current = new Set(deps.manifest.files.map((file) => file.target));
+  const dropped = previous.files
+    .filter((file) => (file.part === 'rules' || code) && !current.has(file.target))
+    .map((file) => file.target)
+    .filter((target) => existsSync(join(dir, target)));
+  for (const target of dropped) rmSync(join(dir, target));
+  return dropped;
+}
+
 /** Setzt nur den Wert von `cwk`, damit Format und übrige Felder des Projekts bleiben. */
 function writeConfig(dir: string, sha: string): string[] {
   const text = readIfExists(join(dir, CONFIG));
@@ -144,7 +162,11 @@ function syncRepo(target: SyncTarget, deps: SyncDeps): string {
   if (configText === undefined) throw new Error(`nicht angebunden, ${CONFIG} fehlt`);
   const config = parseConfig(configText, target.visibility);
   checkoutBranch(run, dir);
-  const changed = [...writeCwkFiles(dir, deps, config.code), ...writeConfig(dir, deps.sha)];
+  const changed = [
+    ...removeDroppedFiles(dir, deps, config.cwk, config.code),
+    ...writeCwkFiles(dir, deps, config.code),
+    ...writeConfig(dir, deps.sha),
+  ];
   const text = pullRequestText(config.cwk, deps.sha);
   if (changed.length === 0) return publishPending(run, dir, repo, text);
   must(run, 'git', ['-C', dir, 'add', '--', ...changed]);

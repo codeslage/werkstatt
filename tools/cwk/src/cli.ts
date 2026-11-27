@@ -156,7 +156,9 @@ function showSource(source: string, sha: string, path: string): string | undefin
 
 /** Neuester Stand von werkstatt/main, auch wenn der Checkout auf einem anderen Branch steht. */
 function latestCwk(source: string): string {
-  const fetched = git(source, ['fetch', '-q', 'origin', 'main']);
+  // Mit voller Historie: Für gestrichene Dateien liest der Sync auch das Manifest früherer Stände (T-48).
+  const shallow = git(source, ['rev-parse', '--is-shallow-repository']).stdout.trim() === 'true';
+  const fetched = git(source, ['fetch', '-q', ...(shallow ? ['--unshallow'] : []), 'origin', 'main']);
   if (fetched.status !== 0) throw new Error(`git fetch in ${source}: ${fetched.stderr.trim()}`);
   const sha = git(source, ['rev-parse', 'origin/main']).stdout.trim();
   if (!/^[0-9a-f]{40}$/.test(sha)) throw new Error(`origin/main in ${source} nicht lesbar`);
@@ -182,6 +184,10 @@ function sync(args: string[]): string[] {
       manifest: parseManifest(manifestText),
       sha,
       readSource: (path) => showSource(source, sha, path),
+      readManifest: (old) => {
+        const text = showSource(source, old, 'cwk/manifest.json');
+        return text === undefined ? undefined : parseManifest(text);
+      },
     });
     printNotes(result.notes);
     return result.errors;

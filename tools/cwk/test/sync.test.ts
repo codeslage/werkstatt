@@ -1,4 +1,4 @@
-import { mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
+import { existsSync, mkdirSync, mkdtempSync, readFileSync, rmSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { dirname, join } from 'node:path';
 import { afterEach, describe, expect, it } from 'vitest';
@@ -80,7 +80,15 @@ function setup(repos: Record<string, FakeRepo>, listing: Parameters<typeof fakeR
     ['git -C', (call) => gitReply(call.line, byDir(call.line))],
     ['gh pr list', (call) => ({ stdout: JSON.stringify(prList(repos[repoOf(call.line)])) })],
   ]);
-  const deps: SyncDeps = { run: fake.run, workDir, manifest, sha: NEW, readSource: (path) => SOURCE[path] };
+  const deps: SyncDeps = {
+    run: fake.run,
+    workDir,
+    manifest,
+    sha: NEW,
+    readSource: (path) => SOURCE[path],
+    // Ohne eigene Angabe des Tests war das Manifest im bisherigen Stand dasselbe.
+    readManifest: () => manifest,
+  };
   return { ...fake, deps };
 }
 
@@ -272,5 +280,63 @@ describe('cwk sync: ohne neue Änderung (AK-7, AK-25)', () => {
     const { lines, deps } = setup({ demo: { main: CURRENT } }, only);
     expect(sync(repo, deps)).toEqual({ errors: [], notes: ['demo: aktuell'] });
     expect(lines().filter((line) => / (commit|push) |^gh pr (create|edit)/.test(line))).toEqual([]);
+  });
+});
+
+const rules = (target: string) => ({ source: `alt/${target}`, target, part: 'rules', mode: 'exact' }) as const;
+const exists = (path: string) => existsSync(join(workDir, 'demo', path));
+const added = (lines: string[]) =>
+  lines
+    .find((line) => line.includes(' add -- '))
+    ?.split(' -- ')[1]
+    ?.split(' ') ?? [];
+
+describe('cwk sync: gestrichene CWK-Dateien (AK-7, T-48)', () => {
+  const only = [['gh api /repos/codeslage/demo', { stdout: 'public\n' }] as const];
+  const repo = { kind: 'repo', name: 'demo' } as const;
+  it('löscht eine Datei, die im neuen Manifest fehlt, und nimmt die Löschung in den Commit', () => {
+    const { lines, deps } = setup({ demo: { main: { ...OUTDATED, 'docs/alt.md': 'alt\n' } } }, only);
+    deps.readManifest = (sha) => (sha === OLD ? { files: [...manifest.files, rules('docs/alt.md')] } : undefined);
+    expect(sync(repo, deps).errors).toEqual([]);
+    expect(exists('docs/alt.md')).toBe(false);
+    expect(added(lines())).toContain('docs/alt.md');
+  });
+
+  it('löscht bei einer Umbenennung das alte Ziel und schreibt das neue', () => {
+    const before = { ...OUTDATED, 'CLAUDE-alt.md': 'alt\n' };
+    delete (before as Record<string, string>)['CLAUDE.md'];
+    const { deps } = setup({ demo: { main: before } }, only);
+    const renamed = manifest.files.map((file) =>
+      file.target === 'CLAUDE.md' ? { ...file, target: 'CLAUDE-alt.md' } : file,
+    );
+    deps.readManifest = () => ({ files: renamed });
+    sync(repo, deps);
+    expect(exists('CLAUDE-alt.md')).toBe(false);
+    expect(read('demo', 'CLAUDE.md')).toBe(`# Basis neu\n${BLOCK('')}`);
+  });
+
+  it('lässt Dateien des Projekts außerhalb des bisherigen Manifests stehen', () => {
+    const { lines, deps } = setup({ demo: { main: { ...OUTDATED, 'notes.md': 'eigen\n' } } }, only);
+    sync(repo, deps);
+    expect(exists('notes.md')).toBe(true);
+    expect(added(lines())).not.toContain('notes.md');
+  });
+
+  it('fasst ohne Code die Ziele des bisherigen Code-Teils nicht an', () => {
+    const noCode = { ...OUTDATED, 'cwk.json': `{ "cwk": "${OLD}", "code": false }\n`, 'alt.config.js': 'eigen\n' };
+    const { deps } = setup({ demo: { main: noCode } }, only);
+    const oldCode = { source: 'alt.config.js', target: 'alt.config.js', part: 'code', mode: 'exact' } as const;
+    deps.readManifest = () => ({ files: [...manifest.files, oldCode] });
+    sync(repo, deps);
+    expect(exists('alt.config.js')).toBe(true);
+  });
+
+  it('ist rot, wenn das Manifest im bisherigen Stand nicht lesbar ist', () => {
+    const { lines, deps } = setup({ demo: { main: OUTDATED } }, only);
+    deps.readManifest = () => undefined;
+    expect(sync(repo, deps).errors).toEqual([
+      `demo: cwk/manifest.json im bisherigen Stand ${OLD.slice(0, 7)} nicht lesbar`,
+    ]);
+    expect(lines().some((line) => / push /.test(line))).toBe(false);
   });
 });
