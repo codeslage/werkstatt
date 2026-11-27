@@ -1,6 +1,6 @@
 # Governance
 
-> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-18 (lokaler Pfad zu `codeslage/internal` für den Mac)
+> Status: **Freigegeben** am 2026-11-05 · Stand: 2026-11-27 (CWK-Sync automatisch nur in öffentliche Repos; Scan in privaten Repos nur auf Secrets, Plan 05); 2026-11-18 (lokaler Pfad zu `codeslage/internal` für den Mac)
 > Verbindlich über `CONSTITUTION.md`, Abschnitt „Verbindliche Prozesse“.
 
 ## Rangfolge
@@ -30,7 +30,7 @@ Nach einer Änderung werden die Constitution-Bezüge (`vX.Y.Z`) in offenen Specs
 ## Geltungsbereich
 
 - Gilt für alle Repos der Organisation `codeslage` (auch `codeslage/internal`) und für alle KI-Sitzungen darin.
-- Projekt-Repos übernehmen Constitution und Prozessdokumente aus der Projekt-Vorlage und werden bei Änderungen automatisch per PR aktualisiert (Phase 1.5).
+- Projekt-Repos übernehmen Constitution und Prozessdokumente aus der Projekt-Vorlage. Öffentliche Repos werden bei Änderungen automatisch per Sync-PR aktualisiert. In private Repos rollt der Inhaber selbst aus (`cwk sync --private`, Runbook `cwk-sync.md`), weil GitHub Free sie nicht schützen kann (Plan 05, P1).
 - Projektspezifische Ergänzungen sind erlaubt, Abschwächungen nicht.
 
 ## Öffentlich vs. intern
@@ -54,6 +54,8 @@ Diese Angaben gehören nach `codeslage/internal` (lokal `~/Developer/codeslage/i
 | 3   | **Review-Agent** | bei jedem PR                      | Checklistenpunkt 5 in `code-review.md`                                               |
 
 Zusätzlich: **Scan der gesamten Git-Historie** vor dem ersten Veröffentlichen eines Repos und danach monatlich.
+
+**Private Repos** (z. B. `codeslage/internal`) enthalten Internes mit Absicht. Dort sucht Ebene 2 nur nach Secrets, ohne eigene Regeln und ohne Sperrliste (Plan 05). Wird ein privates Repo öffentlich, gilt vorher der Scan der gesamten Historie mit allen Regeln und der Sperrliste.
 
 Die **Sperrliste** (konkrete Begriffe wie Kontonamen oder der Registrar) ist selbst vertraulich: Sie liegt lokal in einer gitignorierten Datei und in der CI als Secret, nie im öffentlichen Repo.
 

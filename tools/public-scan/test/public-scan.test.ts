@@ -18,14 +18,14 @@ interface ScanResult {
   ruleIds: string[];
 }
 
-function scanText(content: string): ScanResult {
+function scanText(content: string, options: string[] = []): ScanResult {
   const dir = mkdtempSync(join(tmpdir(), 'public-scan-'));
   tempDirs.push(dir);
   const target = join(dir, 'ziel');
   const report = join(dir, 'report.json');
   spawnSync('git', ['init', '-q', target]);
   writeFileSync(join(target, 'fixture.txt'), `${content}\n`);
-  const result = spawnSync(process.execPath, [CLI, 'dir', target, '--report', report], {
+  const result = spawnSync(process.execPath, [CLI, 'dir', target, '--report', report, ...options], {
     env: { ...process.env, PUBLIC_BLOCKLIST: TEST_BLOCK_TERM },
     encoding: 'utf8',
   });
@@ -51,6 +51,24 @@ describe('public-scan meldet Verstöße (AK-2, AK-24)', () => {
 describe('public-scan lässt Erlaubtes durch', () => {
   it.each(Object.entries(allowed))('%s', (_name, content) => {
     expect(scanText(content)).toEqual({ exitCode: 0, ruleIds: [] });
+  });
+});
+
+// Private Repos wie internal enthalten Internes mit Absicht: dort nur Secrets, ohne Sperrliste (Plan 05 v4.6).
+describe('public-scan --secrets-only für private Repos', () => {
+  it('findet weiter Tokens', () => {
+    const result = scanText(violations.token, ['--secrets-only']);
+    expect(result.exitCode).toBe(1);
+    expect(result.ruleIds.length).toBeGreaterThan(0);
+    expect(result.ruleIds.some((id) => id.startsWith('codeslage-'))).toBe(false);
+  });
+
+  it.each(['ipv4', 'ipv6', 'email', 'blockTerm'] as const)('lässt %s durch', (name) => {
+    expect(scanText(violations[name], ['--secrets-only'])).toEqual({ exitCode: 0, ruleIds: [] });
+  });
+
+  it('lehnt --secrets-only zusammen mit --require-blocklist ab', () => {
+    expect(scanText(allowed.versions, ['--secrets-only', '--require-blocklist']).exitCode).toBe(2);
   });
 });
 

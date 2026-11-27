@@ -63,6 +63,15 @@ describe('cwk-rules.yml: Regel-Teil (AK-3, AK-9)', () => {
     ]);
   });
 
+  // Plan 05 v4.6: Private Repos (z. B. internal) prüfen nur auf Secrets, alle anderen mit Pflicht-Sperrliste.
+  it('scannt private Repos nur auf Secrets, alle anderen mit Sperrliste', () => {
+    const scan = steps(jobs(rules).get('scan') ?? '').find((step) => step.startsWith('name: Scan')) ?? '';
+    expect(scan).toContain('VISIBILITY: ${{ github.event.repository.visibility }}');
+    expect(scan).toMatch(
+      /if \[ "\$VISIBILITY" = private \]; then\n\s+node "\$CWK_DIR\/tools\/public-scan\/src\/cli\.ts" git \. --secrets-only\n\s+else\n\s+node "\$CWK_DIR\/tools\/public-scan\/src\/cli\.ts" git \. --require-blocklist/,
+    );
+  });
+
   it('nimmt die Werkzeuge aus der CWK-Quelle, Projekte also aus dem gepinnten Stand', () => {
     expect(rules).toMatch(/node "\$CWK_DIR\/tools\/public-scan\/src\/cli\.ts" git \. --require-blocklist/);
     expect(rules).toMatch(/node "\$CWK_DIR\/tools\/spec-check\/src\/cli\.ts" specs/);
