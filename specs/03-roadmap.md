@@ -100,7 +100,7 @@ Spec-Ordner: `specs/08-portal/`
 
 ### Vorhaben Quiz-Plattform
 
-Repo: `codeslage/quiz`, Spec `specs/01-quiz/spec.md` dort; das erste Projekt aus der Vorlage (Phase 1.5)
+Repo: `codeslage/quiz`, Spec `specs/01-quiz/spec.md` dort; das erste echte Projekt aus der Vorlage (Phase 1.5; vorher nur die Probe-Repos `cwk-sample` und `cwk-sample-no-code`)
 
 - Quizze mit Einzeldurchgängen wie die KI-Kompetenz-Quest, anonyme Speicherung, Auswertung über viele Spielende, Admin-Oberfläche mit Versionen
 - Spec jetzt, Bau nach Phase 2; Entwicklung lokal, öffentlich erst mit Phase S
