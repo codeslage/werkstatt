@@ -39,7 +39,7 @@ Diese Änderung schreibt keine Software, sie hält die Abnahme der Webseite fest
 
 ## Nachtrag (Claude)
 
-- Befund 1 🟡: T-24 steht in `tasks.md` wieder auf 🔄, die Retro führt den Probelauf als offen. Der Inhaber wird gebeten, `tofu plan` vor der Abnahme lokal auszuführen. Ergebnis und Statuswechsel kommen danach in diesen PR.
+- Befund 1 🟡: T-24 steht in `tasks.md` wieder auf 🔄, die Retro führt den Probelauf als offen. Der Inhaber wird gebeten, `tofu plan` vor der Abnahme lokal auszuführen. Ergebnis und Statuswechsel kommen danach in diesen PR. Erledigt am 2026-11-27: Der Inhaber hat `tofu plan` ausgeführt, ohne Rechtefehler und ohne Änderungen; T-24 steht wieder auf ✅.
 - Befund 2 ⚪: Branch auf `main` mit #82 und #83 aktualisiert, die Retro nennt beide als ohne Einfluss auf die AKs.
 - Befund 3 ⚪: Die Abnahmezeile bittet ausdrücklich um Bestätigung von AK-12 mit der Abweichung.
 - Befund 4 ⚪: CHANGELOG-Eintrag ergänzt.

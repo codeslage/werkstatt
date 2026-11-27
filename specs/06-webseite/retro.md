@@ -13,6 +13,7 @@
 - CI auf `f01e31a` (Push nach `main`): alle Jobs grün, `ci-ok` grün ([Lauf](https://github.com/codeslage/werkstatt/actions/runs/45967999966)).
 - Drift-Check auf `main` neu gestartet, grün, mit `dns.test.ts` und `web.test.ts` ([Lauf](https://github.com/codeslage/werkstatt/actions/runs/45968336349)).
 - Historien-Scan auf `main` neu gestartet, grün ([Lauf](https://github.com/codeslage/werkstatt/actions/runs/45968340852)).
+- Probelauf `tofu plan` in `infra/tofu/live` mit dem erweiterten Token `codeslage-tofu-rw`, vom Inhaber lokal ausgeführt (Test von T-24, zugesagt in Protokoll T-27, Punkt 6): kein Rechtefehler, „No changes. Your infrastructure matches the configuration.“ T-24 ist damit wieder ✅.
 - Abruf der Live-Seite mit `curl`: `http://` und `www.` → 301 auf `https://codeslage.de/`; alle sieben Hauptseiten und `favicon.svg` liefern 200, ein unbekannter Pfad 404; HSTS, Content-Security-Policy und `X-Frame-Options: DENY` sind gesetzt, kein `Set-Cookie`.
 
 **Hinweis zum lokalen E2E-Lauf:** Der erste Lauf hatte zwei Fehler (`build.spec.ts`, `legal.spec.ts`). Auf Port 4321 lief noch die Vorschau einer anderen Sitzung mit den echten Impressumsangaben, und Playwright hat sie lokal wiederverwendet (`reuseExistingServer`). Mit freien Ports (nur lokal geändert, nicht im Commit) liefen alle 95 Tests grün. In der CI tritt das nicht auf, weil dort immer neu gebaut wird.
@@ -43,6 +44,5 @@
 **Offen:**
 
 - **T-23 🔄, Frage 15:** Die rechtliche Prüfung des Angebots läuft noch. Der Inhaber hat den Livegang am 2026-11-26 als bewusst akzeptiertes Risiko freigegeben. Ergibt die Prüfung Korrekturen, kommen sie als Hotfix (`/hotfix`).
-- **T-24 🔄, Probelauf `tofu plan` mit `codeslage-tofu-rw`** (Test von T-24, zugesagt in Protokoll T-27, Punkt 6): Die erweiterten Rechte (Account Settings) sind bisher nur per Screenshot belegt. T-24 steht deshalb wieder auf 🔄. Den Lauf mit dem lokalen Token startet der Inhaber, weil diese Sitzung die `.env` nicht liest. Läuft er ohne Rechtefehler, kommt das Ergebnis hierher und T-24 auf ✅.
 
 Abgenommen durch den Inhaber am: _steht aus_ (AK-12 mit der Abweichung zu Frage 15 ausdrücklich bestätigen)
