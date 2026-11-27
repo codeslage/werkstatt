@@ -1,6 +1,6 @@
 # Runbook: Neues Projekt-Repo anlegen
 
-> Stand: 2026-11-26 · Bezug: `specs/05-projekt-plattform/` (AK-1, AK-4, AK-6, AK-27), Plan 05 Schritt 2, ADR 0011, `platform-setup.md`
+> Stand: 2026-11-27 · Bezug: `specs/05-projekt-plattform/` (AK-1, AK-4, AK-6, AK-27), Plan 05 Schritt 2, ADR 0011, `platform-setup.md`
 > Wer: der Inhaber, lokal in einem Checkout von `werkstatt` auf aktuellem `main`
 
 ## 1. Voraussetzungen
@@ -47,6 +47,7 @@ Fehlen die Schreib-App oder `platform` noch, meldet `cwk new` einen Hinweis und 
 - **Secrets für Deployments nur in Environments, die auf `main` beschränkt sind** (Settings → Environments → Deployment branches: `main`). Repo-Secrets stehen jedem Workflow offen, auch dem eines PR-Branches.
 - CWK-Dateien (Liste in `cwk/manifest.json`) werden im Projekt nicht geändert, außer im Projektblock. Änderungen gehören nach `werkstatt`, sie kommen dann per Sync-PR.
 - Private Repos bekommen keinen automatischen Sync. Der Inhaber rollt neue CWK-Stände selbst aus (Schritt 3, `cwk sync --private`).
+- **Claude GitHub App:** Sie ist nur für ausgewählte Repos installiert, damit sie `platform` nicht erreicht (`platform-setup.md`, P1 c). Soll eine Cloud-Sitzung im neuen Repo arbeiten, nimmt der Inhaber es dort in die Auswahl auf.
 
 ## 5. Wenn etwas schiefgeht
 

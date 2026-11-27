@@ -74,6 +74,8 @@ Methode:
 | Implement PR-3     | Wartezeit | 2026-11-27 10:32 | 2026-11-27 10:34 | 0:02  | Rückfrage des Inhabers zu `quiz` und Freigabe für T-16                                                                                                                                                                                                                                                          |
 | Implement PR-3     | Arbeit    | 2026-11-27 10:34 | 2026-11-27 10:42 | 0:08  | T-16: `platform` reserviert (Test zuerst), Repo angelegt und geprüft, docker-Eintrag in `dependabot.yml` (Test zuerst), platform#6, cwk-sample-no-code#7, Infra-Test, Protokoll                                                                                                                                 |
 | Implement PR-2     | Arbeit    | 2026-11-27 09:44 | 2026-11-27 09:49 | 0:05  | T-13a: Secrets geprüft, `@dependabot recreate` in cwk-sample#1, CI abgewartet, Protokoll Punkt 13                                                                                                                                                                                                               |
+| Implement PR-3     | Arbeit    | 2026-11-27 10:42 | 2026-11-27 10:44 | 0:02  | Runbook `platform-setup.md`: Abschnitt GitHub Apps (V2) für T-17                                                                                                                                                                                                                                                |
+| Implement PR-3     | Arbeit    | 2026-11-27 12:06 | 2026-11-27 12:08 | 0:02  | Pause 10:44–12:06 nicht gezählt. P1 c entschieden: Runbooks, Plan v4.4, Protokoll Punkt 2                                                                                                                                                                                                                       |
 
 ## Summen
 
@@ -86,7 +88,7 @@ Methode:
 | Tasks + Analyze    | 0:19   | 0:53      | 1:12   |
 | Implement PR-1     | 0:39   | 0:12      | 0:51   |
 | Implement PR-2     | 1:36   | 1:03      | 2:39   |
-| Implement PR-3     | 0:09   | 0:02      | 0:11   |
+| Implement PR-3     | 0:13   | 0:02      | 0:15   |
 | Dependabot #67–#71 | 0:17   | 0:33      | 0:50   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.
