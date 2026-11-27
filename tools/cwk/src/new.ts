@@ -27,7 +27,8 @@ export interface NewDeps {
 
 const TEMPLATE = `${ORG}/project-template`;
 const WRITE_APP = 'codeslage-cwk';
-const RESERVED = ['werkstatt', 'project-template', 'platform', 'internal'];
+/** Bestehende Repos mit eigener Rolle. platform fehlt hier, weil es selbst mit `cwk new` entsteht (Plan 05, T-16). */
+const RESERVED = ['werkstatt', 'project-template', 'internal'];
 /**
  * Beispiel-App der Vorlage (codeslage/project-template), die in Repos ohne Code wegfällt, zusätzlich zum Code-Teil des
  * CWK. package.json bleibt: Format und Rechtschreibung brauchen Prettier und cspell auch ohne Code.
@@ -49,10 +50,25 @@ function waitForContent(deps: NewDeps, repo: string): void {
   throw new Error(`${repo}: Inhalt aus der Vorlage nach 20 s noch nicht da`);
 }
 
+const DEPENDABOT = '.github/dependabot.yml';
+const DOCKER_UPDATES = /\n* {2}- package-ecosystem: docker\n(?:(?: {4}.*)?\n)*/;
+
+/** Ohne Dockerfile bricht der docker-Lauf von Dependabot bei jedem Termin mit einem Fehler ab (T-16). */
+function removeDockerUpdates(deps: NewDeps, dir: string): void {
+  const path = join(dir, DEPENDABOT);
+  if (!existsSync(path)) return;
+  const text = readFileSync(path, 'utf8');
+  const without = text.replace(DOCKER_UPDATES, '\n');
+  if (without === text) return;
+  writeFileSync(path, without);
+  must(deps.run, 'git', ['-C', dir, 'add', DEPENDABOT]);
+}
+
 function removeCode(deps: NewDeps, dir: string): void {
   const codeTargets = deps.manifest.files.filter((file) => file.part === 'code').map((file) => file.target);
   const present = [...codeTargets, ...TEMPLATE_CODE].filter((path) => existsSync(join(dir, path)));
   if (present.length > 0) must(deps.run, 'git', ['-C', dir, 'rm', '-r', '-q', '--', ...present]);
+  removeDockerUpdates(deps, dir);
 }
 
 /**

@@ -23,7 +23,7 @@ Varianten:
 | `pnpm cwk new <name> --no-code` | „ohne Code“: Code-Teil des CWK und Beispiel-App werden entfernt |
 | `pnpm cwk new <name> --private` | privat: ohne Rulesets und ohne Schreib-App (GitHub Free, P1)    |
 
-Der Name besteht aus Kleinbuchstaben, Ziffern und Bindestrichen. `werkstatt`, `project-template`, `platform` und `internal` sind vergeben.
+Der Name besteht aus Kleinbuchstaben, Ziffern und Bindestrichen. `werkstatt`, `project-template` und `internal` sind vergeben. `platform` entsteht selbst mit `cwk new platform --private --no-code` (Plan 05, T-16); danach lehnt GitHub den Namen ab, weil es das Repo gibt.
 
 `cwk new` macht nacheinander:
 

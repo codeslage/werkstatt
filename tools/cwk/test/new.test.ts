@@ -31,8 +31,26 @@ function cloneTemplate(dir: string) {
   for (const file of ['eslint.config.js', 'tsconfig.json', 'Dockerfile', '.dockerignore', 'package.json']) {
     writeFileSync(join(dir, file), '');
   }
+  mkdirSync(join(dir, '.github'));
+  writeFileSync(join(dir, '.github', 'dependabot.yml'), DEPENDABOT);
   return {};
 }
+
+const DEPENDABOT_NPM = `version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    ignore:
+      - dependency-name: typescript
+`;
+const DEPENDABOT_DOCKER = `
+  - package-ecosystem: docker
+    directory: /
+    ignore:
+      # Node 24
+      - dependency-name: node
+`;
+const DEPENDABOT = DEPENDABOT_NPM + DEPENDABOT_DOCKER;
 
 const INSTALLATIONS = JSON.stringify({ installations: [{ id: 77, app_slug: 'codeslage-cwk' }] });
 
@@ -121,6 +139,18 @@ describe('cwk new: privat und ohne Code (AK-27, P1)', () => {
     expect(readFileSync(join(workDir, 'demo', 'cwk.json'), 'utf8')).toBe(`{ "cwk": "${SHA}", "code": false }\n`);
   });
 
+  // T-16: Ohne Dockerfile schlug der docker-Lauf von Dependabot in platform und cwk-sample-no-code jedes Mal fehl.
+  it('streicht ohne Code den docker-Eintrag aus dependabot.yml, mit Code bleibt er', () => {
+    const { lines, deps } = setup();
+    createProject({ name: 'demo', isPrivate: true, code: false }, deps);
+    expect(readFileSync(join(workDir, 'demo', '.github', 'dependabot.yml'), 'utf8')).toBe(DEPENDABOT_NPM);
+    expect(lines()).toContain(`git -C ${join(workDir, 'demo')} add .github/dependabot.yml`);
+    rmSync(workDir, { recursive: true, force: true });
+    const withCode = setup();
+    createProject({ name: 'demo', isPrivate: true, code: true }, withCode.deps);
+    expect(readFileSync(join(workDir, 'demo', '.github', 'dependabot.yml'), 'utf8')).toBe(DEPENDABOT);
+  });
+
   // Probelauf T-12: Ein privates Repo erbte "docs": "public" aus der Vorlage; seine Doku wäre öffentlich geworden.
   it('lässt docs weg, damit der Standard nach Sichtbarkeit gilt (AK-14)', () => {
     const { lines, deps } = setup();
@@ -141,6 +171,13 @@ describe('cwk new: fehlende Bausteine und Eingaben (AK-1)', () => {
       'Schreib-App codeslage-cwk ist noch nicht installiert: Repo später aufnehmen (T-45)',
       'platform fehlt noch: Datum der Sperrliste später eintragen (T-45)',
     ]);
+  });
+
+  // T-16: platform entsteht laut Plan 05 (Schritt 3) selbst mit `cwk new --private --no-code`.
+  it('lässt platform zu, privat und ohne Code (T-16)', () => {
+    const { lines, deps } = setup([['gh api /repos/codeslage/platform/contents/blocklist-status.json', notFound]]);
+    createProject({ name: 'platform', isPrivate: true, code: false }, deps);
+    expect(lines()[0]).toBe('gh repo create codeslage/platform --template codeslage/project-template --private');
   });
 
   it.each(['Demo', '-demo', 'a b', 'werkstatt', 'project-template', ''])('lehnt den Namen „%s“ ab', (name) => {

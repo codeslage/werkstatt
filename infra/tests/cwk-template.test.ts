@@ -2,7 +2,7 @@ import { readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { beforeAll, describe, expect, it } from 'vitest';
 
-// Plan 05, T-10/T-12 (AK-1, AK-2, AK-4, AK-6, AK-27): Vorlage und Probe-Repos bei GitHub. Pflichtdateien laut
+// Plan 05, T-10/T-12/T-16 (AK-1, AK-2, AK-4, AK-6, AK-27): Vorlage und Probe-Repos bei GitHub. Pflichtdateien laut
 // Manifest, bei öffentlichen Repos beide Rulesets mit ci-ok aus GitHub Actions und das Team maintainers als gültiger
 // Code-Owner, letzte CI auf main grün; ohne Code nur Regel-Jobs. Läuft auf Anforderung, nicht in jeder CI von
 // werkstatt. Das private Probe-Repo braucht GITHUB_TOKEN mit Lesezugriff (gh auth token). Die Bypass-Liste zeigt die
@@ -29,6 +29,8 @@ const REPOS: Expected[] = [
   { repo: 'codeslage/project-template', visibility: 'public', template: true, code: true },
   { repo: 'codeslage/cwk-sample', visibility: 'public', template: false, code: true },
   { repo: 'codeslage/cwk-sample-no-code', visibility: 'private', template: false, code: false },
+  // T-16: platform selbst, angelegt mit `cwk new platform --private --no-code`.
+  { repo: 'codeslage/platform', visibility: 'private', template: false, code: false },
 ];
 
 async function github(path: string): Promise<unknown> {
@@ -125,5 +127,17 @@ describe.each(REPOS)('$repo: Code-Owner und CI (T-10, T-12)', (expected) => {
     const codeJobs = jobs.filter((job) => job.name.startsWith('Code / ') && job.name !== 'Code / Festlegungen');
     expect(codeJobs.length).toBeGreaterThan(0);
     for (const job of codeJobs) expect(job.conclusion, job.name).toBe(expected.code ? 'success' : 'skipped');
+  });
+});
+
+describe.each(REPOS.filter((expected) => !expected.code))('$repo: ohne Code (T-16)', ({ repo }) => {
+  // T-16: Ohne Dockerfile bricht der docker-Lauf von Dependabot bei jedem Termin ab.
+  it('hat ohne Code keinen docker-Eintrag in dependabot.yml', async () => {
+    const file = field<string>(
+      await github(`/repos/${repo}/contents/.github/dependabot.yml`),
+      'content',
+      (item) => typeof item === 'string',
+    );
+    expect(Buffer.from(file, 'base64').toString('utf8')).not.toMatch(/package-ecosystem: docker/);
   });
 });

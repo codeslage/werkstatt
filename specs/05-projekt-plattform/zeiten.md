@@ -70,6 +70,9 @@ Methode:
 | Implement PR-2     | Arbeit    | 2026-11-26 22:27 | 2026-11-26 22:27 | 0:00  | Nachtrag: Merge-Konflikte mit `main` (#76, #79, #80) in `CHANGELOG.md` und `docs/secrets.md` gelöst, Prüfungen. Davor Pause ab 20:01 (zählt nicht)                                                                                                                                                              |
 | Implement PR-2     | Arbeit    | 2026-11-27 09:29 | 2026-11-27 09:34 | 0:05  | T-13a: Merge von #78 geprüft, Worktree auf `main` für `cwk secrets` vorbereitet. Davor Pause ab 22:27 (zählt nicht), darin der Merge durch den Inhaber                                                                                                                                                          |
 | Implement PR-2     | Wartezeit | 2026-11-27 09:34 | 2026-11-27 09:44 | 0:10  | `cwk secrets` durch den Inhaber, dann seine Zustimmung zum Kommentar `@dependabot recreate`                                                                                                                                                                                                                     |
+| Implement PR-3     | Arbeit    | 2026-11-27 10:31 | 2026-11-27 10:32 | 0:01  | Schritt 3: Tasks und Plan gelesen, Worktree vom `main`; Ende ohne Ablesung                                                                                                                                                                                                                                      |
+| Implement PR-3     | Wartezeit | 2026-11-27 10:32 | 2026-11-27 10:34 | 0:02  | Rückfrage des Inhabers zu `quiz` und Freigabe für T-16                                                                                                                                                                                                                                                          |
+| Implement PR-3     | Arbeit    | 2026-11-27 10:34 | 2026-11-27 10:42 | 0:08  | T-16: `platform` reserviert (Test zuerst), Repo angelegt und geprüft, docker-Eintrag in `dependabot.yml` (Test zuerst), platform#6, cwk-sample-no-code#7, Infra-Test, Protokoll                                                                                                                                 |
 | Implement PR-2     | Arbeit    | 2026-11-27 09:44 | 2026-11-27 09:49 | 0:05  | T-13a: Secrets geprüft, `@dependabot recreate` in cwk-sample#1, CI abgewartet, Protokoll Punkt 13                                                                                                                                                                                                               |
 
 ## Summen
@@ -83,6 +86,7 @@ Methode:
 | Tasks + Analyze    | 0:19   | 0:53      | 1:12   |
 | Implement PR-1     | 0:39   | 0:12      | 0:51   |
 | Implement PR-2     | 1:36   | 1:03      | 2:39   |
+| Implement PR-3     | 0:09   | 0:02      | 0:11   |
 | Dependabot #67–#71 | 0:17   | 0:33      | 0:50   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.
