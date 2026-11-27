@@ -51,7 +51,7 @@ Abgenommen durch den Inhaber am: 2026-11-27, im Chat („Ja, abgenommen“), aus
 
 |                   | Soll                                           | Ist                                                                                                                            |
 | ----------------- | ---------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------ |
-| Zeit (gesamt)     | 35,75 h (Summe der Tasks, Claude, konservativ) | **12,0 h** (720 min laut `zeiten.md`, mit Retro); bis zur Abnahme 11:33 h                                                      |
+| Zeit (gesamt)     | 35,75 h (Summe der Tasks, Claude, konservativ) | **12,0 h** (720 min laut `zeiten.md`, mit Retro); bis zur Abnahme 11 h 33 min                                                  |
 | davon Arbeit      | –                                              | 5,8 h                                                                                                                          |
 | davon Wartezeit   | –                                              | 6,2 h, davon allein 2:52 h bei T-15 (CI und Freigabe)                                                                          |
 | Zeit (Kalender)   | 1–2 Wochen bei ~20 h/Woche                     | 9 Tage (2026-11-19 bis 2026-11-27), gearbeitet an 6 Tagen, nebenbei und parallel zu Phase 1.5                                  |
@@ -60,11 +60,11 @@ Abgenommen durch den Inhaber am: 2026-11-27, im Chat („Ja, abgenommen“), aus
 
 Die Zeit ist die gemeinsame Sitzungszeit von Inhaber und Claude, die Wartezeit auf den Inhaber eingeschlossen (Methode in `zeiten.md`). Alle 86 Zeilen haben wir auf Überlappungen geprüft und keine gefunden, die Dauern passen zu Start und Ende. Außerhalb der Sitzungen hat der Inhaber nichts für die Seite getan. Gespräche, in denen er die Seite gezeigt hat, zählen nicht als Arbeit.
 
-**Wartezeiten:** In der Retro sind wir die Wartezeit-Zeilen mit dem Inhaber einzeln durchgegangen. Entscheidung des Inhabers vom 2026-11-27: Alle bleiben stehen, ausgewertet wird später über die Spalte „Art“. Gestrichen ist nur die Pause bei T-10 (2026-11-20, 14:49–16:55). Sie steht als Hinweis unter der Tabelle.
+**Wartezeiten:** In der Retro sind wir die Wartezeit-Zeilen mit dem Inhaber einzeln durchgegangen. Entscheidung des Inhabers vom 2026-11-27: Alle bleiben stehen, ausgewertet wird später über die Spalte „Art“. Gestrichen ist nur die Pause bei T-10 (2026-11-20, 14:49–16:55; gestrichen am 2026-11-26). Sie steht als Hinweis unter der Tabelle.
 
 → Übertragen in die Soll/Ist-Tabelle in `specs/03-roadmap.md`.
 
-**Umfang:** 22 PRs der Phase (#49 bis #85, ohne Phase 1.5), 27 Review-Berichte mit 10 🔴 und 53 🟡 (alle erledigt), 2 ADRs (0014, 0015), 95 E2E-Tests (Playwright, inklusive axe-Kontrast hell und dunkel), Lighthouse ≥ 0,9 auf 9 URLs, 15 Live-Tests gegen `codeslage.de` und das DNS. Die Seite ist seit dem 2026-11-26 live.
+**Umfang:** 22 PRs der Phase (#49 bis #85, ohne Phase 1.5, Dependabot, #50 und #82), 27 Review-Berichte mit 10 🔴 und 53 🟡 (alle erledigt), 2 ADRs (0014, 0015), 95 E2E-Tests (Playwright, inklusive axe-Kontrast hell und dunkel), Lighthouse ≥ 0,9 auf 9 URLs, 15 Live-Tests gegen `codeslage.de` und das DNS. Die Seite ist seit dem 2026-11-26 live.
 
 ## Was lief gut?
 

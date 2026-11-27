@@ -34,7 +34,7 @@ Wie in Phase 1 hat sich Claude deutlich überschätzt. Neu ist, dass die Warteze
 
 ## Zahlen
 
-- 22 PRs der Phase, 27 Review-Berichte mit 10 🔴 und 53 🟡, alle erledigt
+- 22 PRs der Phase (#49 bis #85, ohne Phase 1.5, Dependabot, #50 und #82), 27 Review-Berichte mit 10 🔴 und 53 🟡, alle erledigt
 - 95 E2E-Tests, Lighthouse ≥ 90 in allen vier Kategorien auf jeder Seite, Kontrast WCAG AA hell und dunkel
 - 0 Cookies, 0 Formulare, 0 € laufende Kosten
 - 12,0 h Ist gegen 35,75 h Soll, davon 5,8 h Arbeit und 6,2 h Wartezeit

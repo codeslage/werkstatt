@@ -99,7 +99,7 @@ Methode:
 | Verify     | Arbeit    | 2026-11-27 10:05 | 2026-11-27 10:06 | 0:01  | Ergebnis T-24 eingetragen, Abnahme des Inhabers (keine Wartezeit, Antwort sofort)                                                                                                                                  |
 | Retro      | Arbeit    | 2026-11-27 10:06 | 2026-11-27 10:25 | 0:19  | Stufe 8: Wartezeit-Zeilen einzeln mit dem Inhaber durchgegangen (alle bleiben), Summen nachgerechnet, Fragen an den Inhaber (Wartezeit auf die Antworten zu den Zeilen nicht getrennt messbar, als Arbeit gezählt) |
 | Retro      | Wartezeit | 2026-11-27 10:25 | 2026-11-27 10:31 | 0:06  | Antworten des Inhabers zu Überraschungen und Learnings                                                                                                                                                             |
-| Retro      | Arbeit    | 2026-11-27 10:31 | 2026-11-27 10:33 | 0:02  | `retro.md`, Roadmap, Content-Notiz, Spec auf Umgesetzt, PR                                                                                                                                                         |
+| Retro      | Arbeit    | 2026-11-27 10:31 | 2026-11-27 10:36 | 0:05  | `retro.md`, Roadmap, Content-Notiz, Spec auf Umgesetzt, PR                                                                                                                                                         |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -139,4 +139,4 @@ Bei T-10 lag am 2026-11-20 von 14:49 bis 16:55 eine Pause, keine Wartezeit auf e
 | T-26       | 0:07   | 0:00      | 0:07   |
 | T-27       | 0:10   | 0:07      | 0:17   |
 | Verify     | 0:17   | 0:03      | 0:20   |
-| Retro      | 0:21   | 0:06      | 0:27   |
+| Retro      | 0:24   | 0:06      | 0:30   |
