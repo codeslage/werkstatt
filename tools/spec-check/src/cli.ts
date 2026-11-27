@@ -7,6 +7,8 @@ const KINDS = new Map<string, DocumentKind>([
   ['spec.md', 'spec'],
   ['plan.md', 'plan'],
 ]);
+// Vorlagen sind keine Vorhaben; Reviews dürfen nach ihrer Stufe heißen (reviews/plan.md).
+const SKIPPED_DIRS = new Set(['_vorlagen', 'reviews']);
 
 /** Die Artikelnummern aus den Überschriften der Constitution („## I. …“). */
 function constitutionNumerals(): string[] {
@@ -14,10 +16,10 @@ function constitutionNumerals(): string[] {
   return [...text.matchAll(/^## ([IVXL]+)\. /gm)].map((match) => match[1] ?? '');
 }
 
-/** Alle spec.md und plan.md unterhalb von dir, ohne die Vorlagen. */
+/** Alle spec.md und plan.md unterhalb von dir, ohne Vorlagen und Reviews. */
 function documents(dir: string): string[] {
   return readdirSync(dir, { recursive: true, encoding: 'utf8' })
-    .filter((path) => KINDS.has(basename(path)) && !path.split(/[\\/]/).includes('_vorlagen'))
+    .filter((path) => KINDS.has(basename(path)) && !path.split(/[\\/]/).some((part) => SKIPPED_DIRS.has(part)))
     .map((path) => join(dir, path));
 }
 

@@ -62,4 +62,24 @@ describe('Spec-Check über das Repo', () => {
       rmSync(dir, { recursive: true, force: true });
     }
   });
+
+  it('übergeht Review-Dateien unter reviews/, prüft aber den echten Plan', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'spec-check-'));
+    const withoutStatus = validPlan.replace(/^> Status:.*$/m, '');
+    try {
+      mkdirSync(join(dir, '99-beispiel', 'reviews'), { recursive: true });
+      writeFileSync(join(dir, '99-beispiel', 'reviews', 'plan.md'), withoutStatus);
+      const reviewOnly = spawnSync(process.execPath, [CLI, dir], { encoding: 'utf8' });
+      expect(reviewOnly.stderr).toBe('');
+      expect(reviewOnly.status).toBe(0);
+
+      writeFileSync(join(dir, '99-beispiel', 'plan.md'), withoutStatus);
+      const withPlan = spawnSync(process.execPath, [CLI, dir], { encoding: 'utf8' });
+      expect(withPlan.status).toBe(1);
+      expect(withPlan.stderr).toContain(`${join(dir, '99-beispiel', 'plan.md')}: status-fehlt`);
+      expect(withPlan.stderr).not.toContain('reviews');
+    } finally {
+      rmSync(dir, { recursive: true, force: true });
+    }
+  });
 });
