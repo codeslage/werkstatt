@@ -71,6 +71,17 @@ function checkoutBranch(run: Run, dir: string): void {
 const readIfExists = (path: string) => (existsSync(path) ? readFileSync(path, 'utf8') : undefined);
 
 /**
+ * Inhalt des alten Ziels bei einer Umbenennung. Bei offenem Sync-PR kann die Datei schon zweimal umbenannt sein; es
+ * zählt das alte Ziel, das es im ausgecheckten Stand noch gibt (Nachreview PR-3b).
+ */
+function renamedContent(dir: string, file: ManifestFile, previous: ManifestFile[]): string | undefined {
+  return previous
+    .filter((entry) => entry.source === file.source && entry.target !== file.target)
+    .map((entry) => readIfExists(join(dir, entry.target)))
+    .find((text) => text !== undefined);
+}
+
+/**
  * Schreibt jede CWK-Datei des Teils im Stand `sha`, nur wo sie abweicht; gibt die geänderten Ziele zurück. Fehlt das
  * Ziel, weil der CWK die Datei umbenannt hat, kommt der Projektblock aus dem alten Ziel (Review PR-3b).
  */
@@ -80,9 +91,8 @@ function writeCwkFiles(dir: string, deps: SyncDeps, code: boolean, previous: Man
     const source = deps.readSource(file.source);
     if (source === undefined) throw new Error(`Quelle ${file.source} fehlt im CWK-Stand ${short(deps.sha)}`);
     const path = join(dir, file.target);
-    const renamedFrom = previous.find((entry) => entry.source === file.source && entry.target !== file.target);
     const current = readIfExists(path);
-    const blockFrom = current ?? (renamedFrom === undefined ? undefined : readIfExists(join(dir, renamedFrom.target)));
+    const blockFrom = current ?? renamedContent(dir, file, previous);
     const fresh = source.replaceAll(PLACEHOLDER, `@${deps.sha}`);
     const expected = file.mode === 'extendable' && blockFrom !== undefined ? keepProjectBlock(fresh, blockFrom) : fresh;
     if (expected === current) continue;

@@ -38,6 +38,24 @@ describe('cwk sync: gestrichene CWK-Dateien (AK-7, T-48)', () => {
     expect(read('demo', 'CLAUDE.md')).toBe(`# Basis neu\n${BLOCK('Eigene Regel\n')}`);
   });
 
+  // Nachreview PR-3b: zweimal umbenannt, während der Sync-PR offen war (A → B auf cwk/sync, jetzt B → neu).
+  it('übernimmt den Projektblock auch nach zwei Umbenennungen bei offenem Sync-PR', () => {
+    const MID = 'c'.repeat(40);
+    const main = { ...OUTDATED, 'CLAUDE.md': null, 'CLAUDE-a.md': `# Basis alt\n${BLOCK('Eigene Regel\n')}` };
+    const branch = {
+      'cwk.json': `{ "cwk": "${MID}", "code": true }\n`,
+      'CLAUDE-a.md': null,
+      'CLAUDE-b.md': `# Basis zwischen\n${BLOCK('Eigene Regel\n')}`,
+    };
+    const { deps } = setup({ demo: { main, branch, pr: 5 } }, only);
+    const named = (target: string) =>
+      manifest.files.map((file) => (file.target === 'CLAUDE.md' ? { ...file, target } : file));
+    deps.readManifest = (sha) => ({ files: named(sha === MID ? 'CLAUDE-b.md' : 'CLAUDE-a.md') });
+    expect(sync(repo, deps).errors).toEqual([]);
+    expect(read('demo', 'CLAUDE.md')).toBe(`# Basis neu\n${BLOCK('Eigene Regel\n')}`);
+    expect(exists('CLAUDE-b.md')).toBe(false);
+  });
+
   // Review PR-3b, Befund 1: Ein offener Sync-PR kann schon auf einem späteren Stand stehen als main.
   it('löscht eine Datei, die erst ein Zwischenstand auf dem offenen cwk/sync gebracht hat', () => {
     const MID = 'c'.repeat(40);

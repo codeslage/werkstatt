@@ -42,9 +42,9 @@ export const OUTDATED: Record<string, string> = {
 };
 
 interface FakeRepo {
-  main: Record<string, string>;
-  /** Stand von `cwk/sync`, falls es den Branch schon gibt. */
-  branch?: Record<string, string>;
+  main: Record<string, string | null>;
+  /** Stand von `cwk/sync`, falls es den Branch schon gibt; `null` heißt: auf dem Branch gelöscht. */
+  branch?: Record<string, string | null>;
   /** Nummer des offenen Sync-PR. */
   pr?: number;
   /** `cwk/sync` unterscheidet sich von `main` (git diff). */
@@ -57,8 +57,12 @@ let workDir = '';
 export const cleanup = () => rmSync(workDir, { recursive: true, force: true });
 export const exists = (repo: string, path: string) => existsSync(join(workDir, repo, path));
 
-function writeFiles(dir: string, files: Record<string, string>) {
+function writeFiles(dir: string, files: Record<string, string | null>) {
   for (const [path, text] of Object.entries(files)) {
+    if (text === null) {
+      rmSync(join(dir, path), { force: true });
+      continue;
+    }
     mkdirSync(dirname(join(dir, path)), { recursive: true });
     writeFileSync(join(dir, path), text);
   }
