@@ -1,7 +1,7 @@
 # 03 – Roadmap
 
 > Status: **Entwurf** – wartet auf Freigabe
-> Stand: 2026-11-19 (Start Phase 2, Spec `specs/06-webseite/`; Frage 3 beantwortet, Kit-Sync; Start Phase 1.5, Spec `specs/05-projekt-plattform/`; Ist und Ende für Phase 1: Abnahme 2026-11-18, Retro 2026-11-19); 2026-11-05 (Server erst bei Bedarf, ADR 0009; Webseite zuerst als Klick-Dummy auf Cloudflare Pages)
+> Stand: 2026-11-27 (Vorhaben Quiz-Plattform im eigenen Repo `codeslage/quiz`, Spec freigegeben am 2026-11-26, Bau nach Phase 2); 2026-11-19 (Start Phase 2, Spec `specs/06-webseite/`; Frage 3 beantwortet, Kit-Sync; Start Phase 1.5, Spec `specs/05-projekt-plattform/`; Ist und Ende für Phase 1: Abnahme 2026-11-18, Retro 2026-11-19); 2026-11-05 (Server erst bei Bedarf, ADR 0009; Webseite zuerst als Klick-Dummy auf Cloudflare Pages)
 > Bezug: `CONSTITUTION.md` (v1.1.0), `01-vision.md`, `02-architektur.md`
 
 ## Ziel
@@ -21,6 +21,7 @@ Claude hat konservativ geschätzt (bei ~20 h/Woche). Der Inhaber wettet, dass es
 | S – Server & Betrieb (bei Bedarf) | ~1 Woche                                                                                    |                                                                                        |            |            |
 | 3 – Erste KI-Automation           | 2–4 Wochen                                                                                  |                                                                                        |            |            |
 | 4 – Demo-Kundenportal             | 3–4 Wochen                                                                                  |                                                                                        |            |            |
+| Quiz-Plattform (`codeslage/quiz`) | nach dem Plan                                                                               |                                                                                        | 2026-11-26 |            |
 
 Die Soll-Werte für Phase 1 und 2 wurden am 2026-11-05 wegen des geänderten Umfangs angepasst; die ursprünglichen Werte stehen in Klammern. Phase 1 wurde vor dem Start ein zweites Mal korrigiert: Die Summe der Tasks (≈ 50 h) passte nicht zur Schätzung „~1 Woche“. Der Inhaber wettet ausdrücklich dagegen. Phase 1.5 wurde am 2026-11-20 nach der Analyse genauso korrigiert: Die Summe der 47 Tasks (58,25 h) passte nicht zu „~1 Woche“ (Entscheidung des Inhabers).
 
@@ -96,6 +97,14 @@ Spec-Ordner: `specs/08-portal/`
 - Klick-/Interessenmessung: Nutzen Besucher die Demo? Fragen sie danach an?
 - Öffentliche Demo für Kunden → setzt Phase S voraus
 - **Fertig, wenn:** Friendly User die Demo nutzen und Feedback geben können.
+
+### Vorhaben Quiz-Plattform
+
+Repo: `codeslage/quiz`, Spec `specs/01-quiz/spec.md` dort; das erste echte Projekt aus der Vorlage (Phase 1.5; vorher nur die Probe-Repos `cwk-sample` und `cwk-sample-no-code`)
+
+- Quizze mit Einzeldurchgängen wie die KI-Kompetenz-Quest, anonyme Speicherung, Auswertung über viele Spielende, Admin-Oberfläche mit Versionen
+- Spec jetzt, Bau nach Phase 2; Entwicklung lokal, öffentlich erst mit Phase S
+- **Fertig, wenn:** die Akzeptanzkriterien der Spec nachgewiesen sind und die KI-Kompetenz-Quest als erstes Quiz läuft.
 
 ### Später (nach Bedarf, Reihenfolge offen)
 

@@ -10,6 +10,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 
 ### Hinzugefügt
 
+- 2026-11-27 – Roadmap: Vorhaben Quiz-Plattform mit Verweis auf das eigene Repo `codeslage/quiz` (Spec dort freigegeben am 2026-11-26) und Soll/Ist-Zeile; T-45 nennt `quiz` ausdrücklich (#82).
 - 2026-11-26 – Phase 2, T-27 (PR-14): Nachweise nach dem Livegang (Testmail, erste Besuche und Kontaktseite in Web Analytics, 0 € Kosten, Drift-Check grün); T-26 abgeschlossen (#81).
 - 2026-11-26 – Phase 1.5, Schritt 2 (PR-2, T-07 bis T-15): Vorlage `codeslage/project-template`, `cwk new` und `cwk secrets`, Team `maintainers` als Code-Owner, Rulesets `main-checks` und `main-approval`, Probe-Repos `cwk-sample` und `cwk-sample-no-code`, Negativtest je PR-Prüfung (#64); Nachweise T-13 und T-15 im Nachtrag.
 - 2026-11-26 – Phase 2, T-26 (PR-13): `deploy-web.yml` (Environment `production`, Build, `wrangler pages deploy`, Live-Test `web.test.ts`), `web.test.ts` im wöchentlichen Drift-Check; T-25 abgeschlossen, Drift-Check grün (#80).
