@@ -94,7 +94,7 @@ Methode:
 | T-27       | Arbeit    | 2026-11-26 22:15 | 2026-11-26 22:17 | 0:02  | Branch, Drift-Check gestartet, Fragen an den Inhaber                                                                                                        |
 | T-27       | Wartezeit | 2026-11-26 22:17 | 2026-11-26 22:24 | 0:07  | Testmail, Screenshots und Abrechnung durch den Inhaber                                                                                                      |
 | T-27       | Arbeit    | 2026-11-26 22:24 | 2026-11-26 22:32 | 0:08  | Screenshots geprüft, Metadaten entfernt, Protokoll, PR, Review                                                                                              |
-| Verify     | Arbeit    | 2026-11-27 09:46 | 2026-11-27 09:58 | 0:12  | Tests lokal und in der CI, Drift-Check und Historien-Scan auf `main` neu gestartet, Live-Abruf, `retro.md` (Abnahme), PR, Review                            |
+| Verify     | Arbeit    | 2026-11-27 09:46 | 2026-11-27 10:02 | 0:16  | Tests lokal und in der CI, Drift-Check und Historien-Scan auf `main` neu gestartet, Live-Abruf, `retro.md` (Abnahme), PR, Review                            |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -133,4 +133,4 @@ Bei T-10 lag am 2026-11-20 von 14:49 bis 16:55 eine Pause, keine Wartezeit auf e
 | T-25       | 0:07   | 0:00      | 0:07   |
 | T-26       | 0:07   | 0:00      | 0:07   |
 | T-27       | 0:10   | 0:07      | 0:17   |
-| Verify     | 0:12   | 0:00      | 0:12   |
+| Verify     | 0:16   | 0:00      | 0:16   |

@@ -5,7 +5,7 @@
 
 ## Abnahme (Stufe 7)
 
-**Wo nachgewiesen:** Es gibt int und prod noch nicht (ADR 0009, Regel „Verify ohne int“ in `docs/prozess/sdd-ablauf.md`). `/release` entfällt. Nachgewiesen wird auf dem aktuellen `main` (`f01e31a`, PR #81) und, wo die Spec es verlangt, an der Live-Seite `https://codeslage.de`.
+**Wo nachgewiesen:** Es gibt int und prod noch nicht (ADR 0009, Regel „Verify ohne int“ in `docs/prozess/sdd-ablauf.md`). `/release` entfällt. Nachgewiesen wird auf `main` mit Stand `f01e31a` (PR #81, letzter PR der Phase; die späteren #82 und #83 ändern nur Roadmap, Phase 1.5 und CHANGELOG und berühren kein AK der Webseite) und, wo die Spec es verlangt, an der Live-Seite `https://codeslage.de`.
 
 **Läufe am 2026-11-27:**
 
@@ -43,6 +43,6 @@
 **Offen:**
 
 - **T-23 🔄, Frage 15:** Die rechtliche Prüfung des Angebots läuft noch. Der Inhaber hat den Livegang am 2026-11-26 als bewusst akzeptiertes Risiko freigegeben. Ergibt die Prüfung Korrekturen, kommen sie als Hotfix (`/hotfix`).
-- **Probelauf `tofu plan` mit `codeslage-tofu-rw`** (Protokoll T-27, Punkt 6): Die erweiterten Rechte (Account Settings) sind bisher nur per Screenshot belegt. Den Lauf mit dem lokalen Token kann nur der Inhaber starten; diese Sitzung liest die `.env` nicht.
+- **T-24 🔄, Probelauf `tofu plan` mit `codeslage-tofu-rw`** (Test von T-24, zugesagt in Protokoll T-27, Punkt 6): Die erweiterten Rechte (Account Settings) sind bisher nur per Screenshot belegt. T-24 steht deshalb wieder auf 🔄. Den Lauf mit dem lokalen Token startet der Inhaber, weil diese Sitzung die `.env` nicht liest. Läuft er ohne Rechtefehler, kommt das Ergebnis hierher und T-24 auf ✅.
 
-Abgenommen durch den Inhaber am: _steht aus_
+Abgenommen durch den Inhaber am: _steht aus_ (AK-12 mit der Abweichung zu Frage 15 ausdrücklich bestätigen)
