@@ -68,6 +68,9 @@ Methode:
 | Implement PR-2     | Arbeit    | 2026-11-26 17:11 | 2026-11-26 17:13 | 0:02  | T-15: `cwk-sample` geklont und geprüft, Anleitung für den Test; Ende ohne Ablesung (letzte Ablesung 17:11). Danach Pause bis 19:46 (zählt nicht). Darin lag auch der Test des Inhabers; wie lange er dauerte, ist unbekannt, deshalb keine Wartezeit-Zeile (Review PR-2, Befund 5)                              |
 | Implement PR-2     | Arbeit    | 2026-11-26 19:46 | 2026-11-26 20:01 | 0:15  | Nachtrag: Abschluss-Review (❌, #64 schon gemergt), Branch vom `main` mit T-13/T-15, Dependabot-Secret behoben (Tests zuerst), Plan v4.3, Runbooks, Protokoll, Changelog                                                                                                                                        |
 | Implement PR-2     | Arbeit    | 2026-11-26 22:27 | 2026-11-26 22:27 | 0:00  | Nachtrag: Merge-Konflikte mit `main` (#76, #79, #80) in `CHANGELOG.md` und `docs/secrets.md` gelöst, Prüfungen. Davor Pause ab 20:01 (zählt nicht)                                                                                                                                                              |
+| Implement PR-2     | Arbeit    | 2026-11-27 09:29 | 2026-11-27 09:34 | 0:05  | T-13a: Merge von #78 geprüft, Worktree auf `main` für `cwk secrets` vorbereitet. Davor Pause ab 22:27 (zählt nicht), darin der Merge durch den Inhaber                                                                                                                                                          |
+| Implement PR-2     | Wartezeit | 2026-11-27 09:34 | 2026-11-27 09:44 | 0:10  | `cwk secrets` und Kommentar `@dependabot recreate` durch den Inhaber                                                                                                                                                                                                                                            |
+| Implement PR-2     | Arbeit    | 2026-11-27 09:44 | 2026-11-27 09:49 | 0:05  | T-13a: Secrets geprüft, `@dependabot recreate` in cwk-sample#1, CI abgewartet, Protokoll Punkt 13                                                                                                                                                                                                               |
 
 ## Summen
 
@@ -79,7 +82,7 @@ Methode:
 | Plan               | 0:33   | 0:02      | 0:35   |
 | Tasks + Analyze    | 0:19   | 0:53      | 1:12   |
 | Implement PR-1     | 0:39   | 0:12      | 0:51   |
-| Implement PR-2     | 1:26   | 0:53      | 2:19   |
+| Implement PR-2     | 1:36   | 1:03      | 2:39   |
 | Dependabot #67–#71 | 0:17   | 0:33      | 0:50   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.
