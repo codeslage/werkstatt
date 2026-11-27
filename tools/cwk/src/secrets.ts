@@ -18,8 +18,11 @@ export function requireBlocklist(blocklist: string): void {
   if (blocklist.trim() === '') throw new Error('Sperrliste fehlt oder ist leer (.sperrliste), Abbruch');
 }
 
+/** Läufe, die Dependabot auslöst, sehen nur Dependabot-Secrets; ohne das zweite wäre jeder Update-PR im Scan rot. */
 export function setBlocklist(run: Run, repo: string, blocklist: string): void {
-  must(run, 'gh', ['secret', 'set', 'PUBLIC_BLOCKLIST', '-R', repo], { input: blocklist });
+  for (const app of ['actions', 'dependabot']) {
+    must(run, 'gh', ['secret', 'set', 'PUBLIC_BLOCKLIST', '-R', repo, '--app', app], { input: blocklist });
+  }
 }
 
 function parseStatus(value: unknown): { sha?: string; dates: Record<string, string> } {

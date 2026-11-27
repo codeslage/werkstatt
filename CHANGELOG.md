@@ -11,6 +11,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 ### Hinzugefügt
 
 - 2026-11-26 – Phase 2, T-27 (PR-14): Nachweise nach dem Livegang (Testmail, erste Besuche und Kontaktseite in Web Analytics, 0 € Kosten, Drift-Check grün); T-26 abgeschlossen (#81).
+- 2026-11-26 – Phase 1.5, Schritt 2 (PR-2, T-07 bis T-15): Vorlage `codeslage/project-template`, `cwk new` und `cwk secrets`, Team `maintainers` als Code-Owner, Rulesets `main-checks` und `main-approval`, Probe-Repos `cwk-sample` und `cwk-sample-no-code`, Negativtest je PR-Prüfung (#64); Nachweise T-13 und T-15 im Nachtrag.
 - 2026-11-26 – Phase 2, T-26 (PR-13): `deploy-web.yml` (Environment `production`, Build, `wrangler pages deploy`, Live-Test `web.test.ts`), `web.test.ts` im wöchentlichen Drift-Check; T-25 abgeschlossen, Drift-Check grün (#80).
 - 2026-11-26 – Phase 2, Schritt 5 (PR-12, T-20 bis T-22, Entwurf bis T-25): `infra/tofu/live/web.tf` mit Pages-Projekt, Domains, CNAME für `@` und `www`, Weiterleitung `www` → Hauptdomain und Web Analytics; Test gegen Änderungen an MX und TXT; Live-Test `web.test.ts`; Token-Rechte in `docs/secrets.md`; T-25: `tofu apply` (7 hinzugefügt, 0 geändert, 0 gelöscht), Frage 15 als bewusst akzeptiertes Risiko (#76).
 - 2026-11-26 – Phase 2, T-23: Test „kein Platzhalter im gesamten Build“ (`e2e/build.spec.ts`), Protokoll der Livegang-Voraussetzungen; V4 erledigt, Frage 15 läuft noch (#79).
@@ -57,3 +58,7 @@ Alle nennenswerten Änderungen an `codeslage/werkstatt`. Neue Einträge stehen o
 - 2026-11-10 – Schreibweise „Klick-Dummy“ einheitlich in Architektur, Roadmap, Spec 04 und ADR 0009; Protokolle bleiben unverändert (#7).
 - 2026-11-10 – Roadmap: Phase 2 heißt „Webseite (Klick-Dummy)“ (#4).
 - 2026-11-10 – `CLAUDE.md`: Einstufung und eigener Branch vor jeder Dateiänderung, auch bei Kleinigkeiten (#3, Change `changes/2026-11-10-claude-md-einstufung-branch.md`).
+
+### Behoben
+
+- 2026-11-26 – `cwk new` und `cwk secrets` setzen `PUBLIC_BLOCKLIST` auch als Dependabot-Secret; ohne es war in neuen Projekt-Repos jeder Dependabot-PR im Scan rot (Review PR-2, #78).

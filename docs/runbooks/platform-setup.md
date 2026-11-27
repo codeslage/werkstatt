@@ -20,4 +20,4 @@ Das Team ist Code-Owner aller Dateien in jedem öffentlichen Projekt-Repo und in
 
    Erwartet: `closed 1` (`closed` heißt bei GitHub „sichtbar“).
 
-Schreibrecht je Repo setzt `cwk new`. In `werkstatt` setzt es Claude mit Freigabe des Inhabers (T-08). Ob es wirkt, zeigt der Job „Repo-Einstellungen“: Hat das Team kein Schreibrecht, meldet GitHub für `CODEOWNERS` „Unknown owner“.
+Schreibrecht je Repo setzt `cwk new`. In `werkstatt` setzt es der Inhaber selbst (T-08, am 2026-11-23). Ob es wirkt, zeigt der Job „Repo-Einstellungen“: Hat das Team kein Schreibrecht, meldet GitHub für `CODEOWNERS` „Unknown owner“.
