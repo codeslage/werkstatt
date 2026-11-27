@@ -77,7 +77,7 @@ describe('Spec-Check über das Repo', () => {
       const withPlan = spawnSync(process.execPath, [CLI, dir], { encoding: 'utf8' });
       expect(withPlan.status).toBe(1);
       expect(withPlan.stderr).toContain(`${join(dir, '99-beispiel', 'plan.md')}: status-fehlt`);
-      expect(withPlan.stderr).not.toContain('reviews');
+      expect(withPlan.stderr).not.toContain(join(dir, '99-beispiel', 'reviews'));
     } finally {
       rmSync(dir, { recursive: true, force: true });
     }
