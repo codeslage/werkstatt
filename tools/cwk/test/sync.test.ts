@@ -48,6 +48,8 @@ interface FakeRepo {
   branch?: Record<string, string>;
   /** Nummer des offenen Sync-PR. */
   pr?: number;
+  /** `cwk/sync` unterscheidet sich von `main` (git diff). */
+  ahead?: boolean;
 }
 
 let workDir = '';
@@ -87,6 +89,7 @@ const prList = (repo: FakeRepo | undefined) => (repo?.pr === undefined ? [] : [{
 /** git im Klon: ls-remote kennt den Branch nur, wenn es ihn gibt; checkout holt seinen Stand. */
 function gitReply(line: string, repo: FakeRepo | undefined) {
   if (line.includes(' ls-remote ')) return { status: repo?.branch === undefined ? 2 : 0 };
+  if (line.includes(' diff --quiet origin/main HEAD')) return { status: repo?.ahead === true ? 1 : 0 };
   if (line.includes(' checkout -q --track origin/cwk/sync')) writeFiles(dirOf(line), repo?.branch ?? {});
   return {};
 }
@@ -138,6 +141,10 @@ describe('cwk sync: Soll-Menge (AK-7)', () => {
     expect(sync({ kind: 'repo', name: 'internal' }, deps).errors).toEqual([]);
     expect(clones(lines())).toEqual(['internal']);
     expect(sync({ kind: 'repo', name: 'werkstatt' }, deps).errors).toEqual([
+      'werkstatt: ist die CWK-Quelle, kein Ziel für den Sync',
+    ]);
+    // GitHub unterscheidet bei Repo-Namen nicht nach Groß- und Kleinschreibung (Review PR-3a, Befund 4).
+    expect(sync({ kind: 'repo', name: 'Werkstatt' }, deps).errors).toEqual([
       'werkstatt: ist die CWK-Quelle, kein Ziel für den Sync',
     ]);
   });
@@ -239,6 +246,26 @@ describe('cwk sync: Branch und PR (AK-8, AK-25)', () => {
     sync(repo, deps);
     expect(read('demo', 'CLAUDE.md')).toBe(`# Basis neu\n${BLOCK('Eigene Regel\n')}`);
     expect(read('demo', 'eigenes.md')).toBe('vom Inhaber\n');
+  });
+});
+
+describe('cwk sync: ohne neue Änderung (AK-7, AK-25)', () => {
+  const only = [['gh api /repos/codeslage/demo', { stdout: 'public\n' }] as const];
+  const repo = { kind: 'repo', name: 'demo' } as const;
+
+  // Review PR-3a, Befund 1: Push geklappt, PR nicht angelegt (oder ohne Merge geschlossen) – sonst bliebe das still.
+  it('legt ohne Änderung einen PR an, wenn der Branch vor main liegt und keiner offen ist', () => {
+    const { lines, deps } = setup({ demo: { main: OUTDATED, branch: CURRENT, ahead: true } }, only);
+    expect(sync(repo, deps)).toEqual({ errors: [], notes: ['demo: Sync-PR angelegt'] });
+    expect(lines().some((line) => / commit /.test(line))).toBe(false);
+    expect(lines().some((line) => line.endsWith(' push -q origin cwk/sync'))).toBe(true);
+    expect(lines().some((line) => line.startsWith('gh pr create -R codeslage/demo'))).toBe(true);
+  });
+
+  it('meldet ohne Änderung „aktuell“, wenn für den Branch schon ein PR offen ist', () => {
+    const { lines, deps } = setup({ demo: { main: OUTDATED, branch: CURRENT, ahead: true, pr: 5 } }, only);
+    expect(sync(repo, deps)).toEqual({ errors: [], notes: ['demo: aktuell'] });
+    expect(lines().filter((line) => / (commit|push) |^gh pr (create|edit)/.test(line))).toEqual([]);
   });
 
   it('macht ohne Änderung nichts: kein Commit, kein Push, kein PR', () => {

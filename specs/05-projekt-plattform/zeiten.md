@@ -80,6 +80,7 @@ Methode:
 | Implement PR-3     | Arbeit    | 2026-11-27 12:15 | 2026-11-27 12:17 | 0:02  | T-19: `sync.yml` in platform#7, CI angestoßen                                                                                                                                                                                                                                                                   |
 | Implement PR-3     | Arbeit    | 2026-11-27 14:08 | 2026-11-27 14:13 | 0:05  | Pause 12:17–14:08 nicht gezählt. CI geprüft, platform#7 und cwk-sample-no-code#8 gemergt, Protokoll Punkt 4                                                                                                                                                                                                     |
 | Implement PR-3     | Arbeit    | 2026-11-27 20:33 | 2026-11-27 20:36 | 0:03  | 14:13–20:33 nicht gezählt (T-17 beim Inhaber, Rückfragen ohne Ablesung). Apps geprüft, erster Lauf `sync.yml` (rot: `cwk sync` noch nicht auf `main`), Teilung PR-3a/3b, Doku `secrets.md` und `cwk-sync.md`, Merge von `main`, Checks                                                                          |
+| Implement PR-3     | Arbeit    | 2026-11-27 20:36 | 2026-11-27 20:43 | 0:07  | Review-Agent PR-3a, Bericht abgelegt, Befunde 1 und 4 mit Test zuerst behoben, 5 behoben, 2 und 3 in Plan, Runbook und Register                                                                                                                                                                                 |
 
 ## Summen
 
@@ -92,7 +93,7 @@ Methode:
 | Tasks + Analyze    | 0:19   | 0:53      | 1:12   |
 | Implement PR-1     | 0:39   | 0:12      | 0:51   |
 | Implement PR-2     | 1:36   | 1:03      | 2:39   |
-| Implement PR-3     | 0:30   | 0:02      | 0:32   |
+| Implement PR-3     | 0:37   | 0:02      | 0:39   |
 | Dependabot #67–#71 | 0:17   | 0:33      | 0:50   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.

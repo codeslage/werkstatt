@@ -11,6 +11,7 @@ export interface SyncTarget {
   visibility: Visibility;
 }
 
+/** GitHub unterscheidet bei Repo-Namen nicht nach Groß- und Kleinschreibung, deshalb wird klein verglichen. */
 const SOURCE_REPO = 'werkstatt';
 const REPO_NAME = /^[A-Za-z0-9_][A-Za-z0-9._-]*$/;
 const SHAPE_ERROR = 'Soll-Menge: unerwartete Antwort von GitHub';
@@ -47,7 +48,7 @@ function publicTargets(run: Run, readToken: string): SyncTarget[] {
     .map(parseJson);
   if (!entries.every(isInstallationEntry)) throw new Error(SHAPE_ERROR);
   return entries
-    .filter((entry) => entry.visibility === 'public' && !entry.archived && entry.name !== SOURCE_REPO)
+    .filter((entry) => entry.visibility === 'public' && !entry.archived && entry.name.toLowerCase() !== SOURCE_REPO)
     .map((entry) => ({ name: entry.name, visibility: 'public' }));
 }
 
@@ -61,7 +62,7 @@ function privateTargets(run: Run): SyncTarget[] {
 }
 
 function singleTarget(run: Run, name: string): SyncTarget {
-  if (name === SOURCE_REPO) throw new Error(`${SOURCE_REPO}: ist die CWK-Quelle, kein Ziel für den Sync`);
+  if (name.toLowerCase() === SOURCE_REPO) throw new Error(`${SOURCE_REPO}: ist die CWK-Quelle, kein Ziel für den Sync`);
   if (!isName(name)) throw new Error(`Repo-Name „${name}“ ungültig`);
   const visibility = must(run, 'gh', ['api', `/repos/${ORG}/${name}`, '--jq', '.visibility']).trim();
   if (visibility !== 'public' && visibility !== 'private') throw new Error(SHAPE_ERROR);

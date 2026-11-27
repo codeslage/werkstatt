@@ -145,12 +145,28 @@ function syncRepo(target: SyncTarget, deps: SyncDeps): string {
   const config = parseConfig(configText, target.visibility);
   checkoutBranch(run, dir);
   const changed = [...writeCwkFiles(dir, deps, config.code), ...writeConfig(dir, deps.sha)];
-  if (changed.length === 0) return 'aktuell';
   const text = pullRequestText(config.cwk, deps.sha);
+  if (changed.length === 0) return publishPending(run, dir, repo, text);
   must(run, 'git', ['-C', dir, 'add', '--', ...changed]);
   must(run, 'git', ['-C', dir, 'commit', '-q', '-m', text.title]);
+  return publish(run, dir, repo, text);
+}
+
+function publish(run: Run, dir: string, repo: string, text: { title: string; body: string }): string {
   must(run, 'git', ['-C', dir, 'push', '-q', 'origin', BRANCH]);
   return upsertPullRequest(run, repo, text);
+}
+
+/**
+ * Ohne neue Änderung fehlt trotzdem ein PR, wenn der Branch vor main liegt und keiner offen ist: Push geklappt, PR
+ * nicht angelegt, oder ohne Merge geschlossen. Sonst bliebe das bis zur nächsten CWK-Änderung still (Review PR-3a).
+ */
+function publishPending(run: Run, dir: string, repo: string, text: { title: string; body: string }): string {
+  if (openPullRequest(run, repo) !== undefined) return 'aktuell';
+  const diff = run('git', ['-C', dir, 'diff', '--quiet', 'origin/main', 'HEAD']);
+  if (diff.status === 0) return 'aktuell';
+  if (diff.status !== 1) throw new Error(`git diff: ${diff.stderr.trim()}`);
+  return publish(run, dir, repo, text);
 }
 
 /** Jedes Repo für sich: Ein Fehler wird gemeldet, die übrigen Repos laufen weiter. */

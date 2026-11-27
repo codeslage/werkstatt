@@ -2,7 +2,7 @@
 // GitHub; die Logik steckt in check.ts, ci-ok.ts, settings.ts, new.ts, secrets.ts und sync.ts.
 
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';
@@ -174,15 +174,21 @@ function sync(args: string[]): string[] {
   const sha = latestCwk(source);
   const manifestText = showSource(source, sha, 'cwk/manifest.json');
   if (manifestText === undefined) return [`cwk/manifest.json fehlt im Stand ${sha}`];
-  const result = syncProjects(scope, {
-    run: spawnRun,
-    workDir: mkdtempSync(join(tmpdir(), 'cwk-sync-')),
-    manifest: parseManifest(manifestText),
-    sha,
-    readSource: (path) => showSource(source, sha, path),
-  });
-  printNotes(result.notes);
-  return result.errors;
+  const workDir = mkdtempSync(join(tmpdir(), 'cwk-sync-'));
+  try {
+    const result = syncProjects(scope, {
+      run: spawnRun,
+      workDir,
+      manifest: parseManifest(manifestText),
+      sha,
+      readSource: (path) => showSource(source, sha, path),
+    });
+    printNotes(result.notes);
+    return result.errors;
+  } finally {
+    // Klone privater Repos sollen nicht im Temp-Ordner liegen bleiben (Review PR-3a, Befund 5).
+    rmSync(workDir, { recursive: true, force: true });
+  }
 }
 
 const COMMANDS: Record<string, (args: string[]) => string[] | Promise<string[]>> = {
