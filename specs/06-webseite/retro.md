@@ -45,4 +45,4 @@
 
 - **T-23 🔄, Frage 15:** Die rechtliche Prüfung des Angebots läuft noch. Der Inhaber hat den Livegang am 2026-11-26 als bewusst akzeptiertes Risiko freigegeben. Ergibt die Prüfung Korrekturen, kommen sie als Hotfix (`/hotfix`).
 
-Abgenommen durch den Inhaber am: _steht aus_ (AK-12 mit der Abweichung zu Frage 15 ausdrücklich bestätigen)
+Abgenommen durch den Inhaber am: 2026-11-27, im Chat („Ja, abgenommen“), ausdrücklich einschließlich AK-12 mit der Abweichung zu Frage 15
