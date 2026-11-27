@@ -57,7 +57,7 @@ gh api /orgs/codeslage/installations --jq '.installations[] | .app_slug + " " + 
 gh secret list -R codeslage/platform
 ```
 
-Erwartet: `codeslage-cwk-read all`, `codeslage-cwk selected` und die vier Secrets. Welche Repos `codeslage-cwk` erreicht, prüft `infra/tests/cwk-sync.test.ts`.
+Erwartet: `codeslage-cwk-read all`, `codeslage-cwk selected` und die vier Secrets. Welche Repos `codeslage-cwk` erreicht, prüft ab T-20 `infra/tests/cwk-sync.test.ts`.
 
 **Claude GitHub App ohne `platform` (P1 c, Entscheidung vom 2026-11-27):** Über sie ließen sich sonst die Ersatzprüfung oder die Zeitpläne in `platform` ändern, wo GitHub Free keinen Schutz für `main` bietet. Lokale Sitzungen arbeiten dort weiter mit dem gh-Login des Inhabers, Cloud-Sitzungen nicht.
 
