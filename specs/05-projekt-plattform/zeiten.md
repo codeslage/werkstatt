@@ -85,6 +85,7 @@ Methode:
 | Implement PR-3     | Arbeit    | 2026-11-27 20:55 | 2026-11-27 20:59 | 0:04  | PR-3a gemergt (Bypass nur per CLI geprüft), Branch PR-3b, erster echter Lauf `sync.yml`, T-48 (Tests zuerst), Probelauf cwk-sample-no-code#9                                                                                                                                                                    |
 | Implement PR-3     | Arbeit    | 2026-11-27 21:03 | 2026-11-27 21:08 | 0:05  | 21:00–21:03 Wartezeit nicht abgelesen, nicht gezählt. T-45 geprüft, zweiter Lauf `sync.yml`, Scan privat nur Secrets (Tests zuerst), `governance.md`, Plan v4.6                                                                                                                                                 |
 | Implement PR-3     | Arbeit    | 2026-11-27 21:08 | 2026-11-27 21:09 | 0:01  | T-20: Probe-Dateien (Test zuerst), Infra-Test `cwk-sync.test.ts`, erster Lauf, Runbook Abschnitt 5                                                                                                                                                                                                              |
+| Implement PR-3     | Arbeit    | 2026-11-27 22:12 | 2026-11-27 22:44 | 0:32  | 21:09–22:12 nicht gezählt (Sitzung neu gestartet, Review abgebrochen). Review PR-3b neu, 🔴 1 und 🟡 2 mit Test zuerst, Infra-Test robuster, dritter Lauf `sync.yml`, Doku                                                                                                                                      |
 
 ## Summen
 
@@ -97,7 +98,7 @@ Methode:
 | Tasks + Analyze    | 0:19   | 0:53      | 1:12   |
 | Implement PR-1     | 0:39   | 0:12      | 0:51   |
 | Implement PR-2     | 1:36   | 1:03      | 2:39   |
-| Implement PR-3     | 0:51   | 0:02      | 0:53   |
+| Implement PR-3     | 1:23   | 0:02      | 1:25   |
 | Dependabot #67–#71 | 0:17   | 0:33      | 0:50   |
 
 `M #50` ist die Klasse-M-Änderung an der Zeiterfassung, die aus Stufe 1 entstand.
