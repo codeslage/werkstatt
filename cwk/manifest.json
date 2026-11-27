@@ -233,6 +233,18 @@
       "target": ".tflint.hcl",
       "part": "code",
       "mode": "exact"
+    },
+    {
+      "source": "cwk/files/.cwk/probe.md",
+      "target": ".cwk/probe.md",
+      "part": "rules",
+      "mode": "exact"
+    },
+    {
+      "source": "cwk/files/.cwk/probe-code.md",
+      "target": ".cwk/probe-code.md",
+      "part": "code",
+      "mode": "exact"
     }
   ]
 }

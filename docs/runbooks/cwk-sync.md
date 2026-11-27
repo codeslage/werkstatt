@@ -42,7 +42,20 @@ Der gh-Login kann einen Sync-PR auch selbst mergen. Das ist bewusst so (P1): Auf
 - In öffentlichen Repos braucht der Merge ein Code-Owner-Review des Teams `maintainers` zum neuesten Push. Die Schreib-App kann nicht mergen. Kommt nach der Freigabe ein neuer Sync-Commit, verfällt die Freigabe.
 - Eigene Anpassungen gehören in den Projektblock. Ein eigener Commit auf `cwk/sync` bleibt beim nächsten Sync erhalten.
 
-## 5. Sperrliste geändert
+## 5. Sync-Test (T-20)
+
+Auf Anforderung, z. B. nach Änderungen an `cwk sync` oder `sync.yml`. Er prüft den Zustand nach einem Lauf: je öffentlichem Projekt-Repo genau ein offener Sync-PR der Schreib-App, `cwk.json` auf `cwk/sync` mit dem Stand von `werkstatt/main`, die Probe je Teil (`.cwk/probe.md`, `.cwk/probe-code.md` nur mit Code), jeder Sync-PR gesperrt, keine App auf einer Bypass-Liste, keine Sync-PRs in `werkstatt` und privaten Repos.
+
+1. In `werkstatt` per PR die Zeile „Stand der Probe“ in `cwk/files/.cwk/probe.md` und `probe-code.md` hochzählen und mergen.
+2. `sync.yml` starten (Abschnitt 2) und abwarten.
+3. Prüfen:
+   ```bash
+   GITHUB_TOKEN=$(gh auth token) pnpm test:infra infra/tests/cwk-sync.test.ts
+   ```
+4. Zwei Änderungen ergeben einen PR: Schritte 1 bis 3 wiederholen, ohne die Sync-PRs zu mergen. Der Test verlangt weiter genau einen PR je Repo.
+5. Eigener Commit bleibt: einen Commit auf `cwk/sync` eines Repos pushen, Schritte 1 und 2 wiederholen, dann mit `CWK_OWN_COMMIT=<repo>:<sha>` prüfen.
+
+## 6. Sperrliste geändert
 
 Nach jeder Änderung an `.sperrliste` setzt `cwk secrets` das Secret `PUBLIC_BLOCKLIST` in allen Repos neu und trägt das Datum in `platform/blocklist-status.json` ein:
 
@@ -50,7 +63,7 @@ Nach jeder Änderung an `.sperrliste` setzt `cwk secrets` das Secret `PUBLIC_BLO
 pnpm cwk secrets
 ```
 
-## 6. Wenn etwas schiefgeht
+## 7. Wenn etwas schiefgeht
 
 - **„nicht angebunden, cwk.json fehlt“:** Das Repo hat keine `cwk.json`. Anbinden per PR mit `cwk.json` (`neues-projekt.md`) oder archivieren, wenn es nicht mehr gebraucht wird.
 - **„ist die CWK-Quelle, kein Ziel für den Sync“:** `--repo werkstatt` ist nicht vorgesehen.
