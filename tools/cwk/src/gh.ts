@@ -1,4 +1,4 @@
-// Schnittstelle zu gh und git für `cwk new` und `cwk secrets` (Plan 05, Schritt 2): Tests ersetzen `Run`.
+// Schnittstelle zu gh und git für `cwk new`, `cwk secrets` und `cwk sync` (Plan 05): Tests ersetzen `Run`.
 
 import { spawnSync } from 'node:child_process';
 
@@ -10,16 +10,24 @@ export interface RunResult {
   stderr: string;
 }
 
-export type Run = (cmd: string, args: string[], options?: { cwd?: string; input?: string }) => RunResult;
+/** `env` ergänzt die Umgebung, z. B. `GH_TOKEN` der Lese-App für einen einzelnen Aufruf. */
+export interface RunOptions {
+  cwd?: string;
+  input?: string;
+  env?: Record<string, string>;
+}
+
+export type Run = (cmd: string, args: string[], options?: RunOptions) => RunResult;
 
 export const spawnRun: Run = (cmd, args, options = {}) => {
-  const result = spawnSync(cmd, args, { encoding: 'utf8', cwd: options.cwd, input: options.input });
+  const env = options.env === undefined ? undefined : { ...process.env, ...options.env };
+  const result = spawnSync(cmd, args, { encoding: 'utf8', cwd: options.cwd, input: options.input, env });
   if (result.error) throw new Error(`${cmd}: ${result.error.message}`);
   return { status: result.status ?? 1, stdout: result.stdout, stderr: result.stderr };
 };
 
 /** Führt einen Befehl aus und bricht mit Befehlszeile und Fehlerausgabe ab, nie mit der Eingabe (Sperrliste). */
-export function must(run: Run, cmd: string, args: string[], options: { cwd?: string; input?: string } = {}): string {
+export function must(run: Run, cmd: string, args: string[], options: RunOptions = {}): string {
   const result = run(cmd, args, options);
   if (result.status !== 0) throw new Error(`${[cmd, ...args].join(' ')}: ${result.stderr.trim()}`);
   return result.stdout;

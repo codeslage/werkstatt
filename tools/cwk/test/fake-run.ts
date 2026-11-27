@@ -1,12 +1,13 @@
 import type { Run, RunResult } from '../src/gh.ts';
 
-// Ersetzt gh und git in den Tests von `cwk new` und `cwk secrets`: zeichnet jeden Aufruf auf und antwortet
+// Ersetzt gh und git in den Tests von `cwk new`, `cwk secrets` und `cwk sync`: zeichnet jeden Aufruf auf und antwortet
 // nach Regeln „Anfang der Befehlszeile → Antwort“. Ohne passende Regel ist der Aufruf erfolgreich und leer.
 
 interface Call {
   line: string;
   input?: string;
   cwd?: string;
+  env?: Record<string, string>;
 }
 
 type Reply = Partial<RunResult> | ((call: Call) => Partial<RunResult>);

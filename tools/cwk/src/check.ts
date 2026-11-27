@@ -21,10 +21,10 @@ export interface CheckInput {
   isAncestor: (older: string, newer: string) => boolean;
 }
 
-const PLACEHOLDER = '@CWK_REF';
+export const PLACEHOLDER = '@CWK_REF';
 /** Start- und Endzeile eines Projektblocks, in Markdown als HTML-Kommentar, in YAML als `#`-Kommentar. */
-const BLOCK_START = /^\s*(<!-- cwk:project:start -->|# cwk:project:start)\s*$/;
-const BLOCK_END = /^\s*(<!-- cwk:project:end -->|# cwk:project:end)\s*$/;
+export const BLOCK_START = /^\s*(<!-- cwk:project:start -->|# cwk:project:start)\s*$/;
+export const BLOCK_END = /^\s*(<!-- cwk:project:end -->|# cwk:project:end)\s*$/;
 // GitHub löst Owner und Repo ohne Rücksicht auf Groß-/Kleinschreibung auf, deshalb `i`.
 const WERKSTATT_USES = /uses:\s*['"]?codeslage\/werkstatt\/[^@\s'"]+@([^\s'"]+)/gi;
 

@@ -1,8 +1,8 @@
 // Einstieg für `cwk` (Plan 05, Unterbefehle). Hier liegen nur die Zugriffe auf Dateien, Git, Umgebung und
-// GitHub; die Prüflogik steckt in check.ts, ci-ok.ts und settings.ts.
+// GitHub; die Logik steckt in check.ts, ci-ok.ts, settings.ts, new.ts, secrets.ts und sync.ts.
 
 import { spawnSync } from 'node:child_process';
-import { existsSync, mkdtempSync, readdirSync, readFileSync } from 'node:fs';
+import { existsSync, mkdtempSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import { parseArgs } from 'node:util';
@@ -13,6 +13,7 @@ import { createProject } from './new.ts';
 import { parseConfig, parseManifest, type Visibility } from './schema.ts';
 import { syncSecrets } from './secrets.ts';
 import { checkSettings, CODEOWNERS_PATHS } from './settings.ts';
+import { type SyncScope, syncProjects } from './sync.ts';
 
 const readIfExists = (path: string) => (existsSync(path) ? readFileSync(path, 'utf8') : undefined);
 const visibility = (): Visibility => (process.env.CWK_VISIBILITY === 'public' ? 'public' : 'private');
@@ -134,12 +135,69 @@ function newProject(args: string[]): string[] {
 
 const secrets = (): string[] => printNotes(syncSecrets({ run: spawnRun, blocklist: blocklist(), today: today() }));
 
+const SYNC_USAGE = 'Aufruf: cwk sync [--private | --repo <name>] [--source <werkstatt>]';
+
+/** Ohne --private und --repo: öffentliche Repos mit dem Token der Lese-App (sync.yml in platform). */
+function syncScope(values: { private?: boolean; repo?: string }): SyncScope | string {
+  if (values.private === true && values.repo !== undefined) return SYNC_USAGE;
+  if (values.private === true) return { kind: 'private' };
+  if (values.repo !== undefined) return { kind: 'repo', name: values.repo };
+  const readToken = process.env.CWK_READ_TOKEN;
+  return readToken ? { kind: 'public', readToken } : 'CWK_READ_TOKEN fehlt: Token der Lese-App codeslage-cwk-read';
+}
+
+/** Datei aus werkstatt im Stand `sha`, unabhängig vom Arbeitsverzeichnis; undefined, wenn sie dort fehlt. */
+function showSource(source: string, sha: string, path: string): string | undefined {
+  const result = git(source, ['show', `${sha}:${path}`]);
+  if (result.status === 0) return result.stdout;
+  if (/does not exist|exists on disk, but not in/.test(result.stderr)) return undefined;
+  throw new Error(`git show ${sha}:${path}: ${result.stderr.trim()}`);
+}
+
+/** Neuester Stand von werkstatt/main, auch wenn der Checkout auf einem anderen Branch steht. */
+function latestCwk(source: string): string {
+  const fetched = git(source, ['fetch', '-q', 'origin', 'main']);
+  if (fetched.status !== 0) throw new Error(`git fetch in ${source}: ${fetched.stderr.trim()}`);
+  const sha = git(source, ['rev-parse', 'origin/main']).stdout.trim();
+  if (!/^[0-9a-f]{40}$/.test(sha)) throw new Error(`origin/main in ${source} nicht lesbar`);
+  return sha;
+}
+
+function sync(args: string[]): string[] {
+  const { values } = parseArgs({
+    args,
+    options: { private: { type: 'boolean' }, repo: { type: 'string' }, source: { type: 'string' } },
+  });
+  const scope = syncScope(values);
+  if (typeof scope === 'string') return [scope];
+  const source = values.source ?? process.cwd();
+  const sha = latestCwk(source);
+  const manifestText = showSource(source, sha, 'cwk/manifest.json');
+  if (manifestText === undefined) return [`cwk/manifest.json fehlt im Stand ${sha}`];
+  const workDir = mkdtempSync(join(tmpdir(), 'cwk-sync-'));
+  try {
+    const result = syncProjects(scope, {
+      run: spawnRun,
+      workDir,
+      manifest: parseManifest(manifestText),
+      sha,
+      readSource: (path) => showSource(source, sha, path),
+    });
+    printNotes(result.notes);
+    return result.errors;
+  } finally {
+    // Klone privater Repos sollen nicht im Temp-Ordner liegen bleiben (Review PR-3a, Befund 5).
+    rmSync(workDir, { recursive: true, force: true });
+  }
+}
+
 const COMMANDS: Record<string, (args: string[]) => string[] | Promise<string[]>> = {
   check,
   'ci-ok': ciOk,
   new: newProject,
   secrets,
   settings,
+  sync,
 };
 
 async function main(): Promise<void> {

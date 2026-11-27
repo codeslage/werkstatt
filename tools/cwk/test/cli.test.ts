@@ -5,7 +5,7 @@ import { dirname, join } from 'node:path';
 import { afterAll, beforeAll, describe, expect, it } from 'vitest';
 import { parseManifest } from '../src/schema.ts';
 
-// Verdrahtung des CLI (AK-3, AK-9): echte Dateien, echter Prozess, Exit-Code wie in der CI.
+// Verdrahtung des CLI (AK-3, AK-7, AK-9): echte Dateien, echter Prozess, Exit-Code wie in der CI.
 
 const REPO_ROOT = join(import.meta.dirname, '..', '..', '..');
 const CLI = join(import.meta.dirname, '..', 'src', 'cli.ts');
@@ -59,6 +59,16 @@ describe('cwk CLI', () => {
     expect(run(project, ['ci-ok'], { NEEDS: skipped }).status).toBe(1);
     writeFileSync(join(project, 'cwk.json'), JSON.stringify({ cwk: SHA, code: false }));
     expect(run(project, ['ci-ok'], { NEEDS: skipped }).status).toBe(0);
+  });
+
+  // Vor jedem Zugriff auf Git oder GitHub (T-18): falscher Aufruf und fehlendes Token der Lese-App.
+  it('sync lehnt --private zusammen mit --repo ab und verlangt ohne beides das Token der Lese-App', () => {
+    const both = run(project, ['sync', '--private', '--repo', 'demo']);
+    expect(both.status).toBe(1);
+    expect(both.stderr).toContain('Aufruf: cwk sync [--private | --repo <name>]');
+    const noToken = run(project, ['sync'], { CWK_READ_TOKEN: '' });
+    expect(noToken.status).toBe(1);
+    expect(noToken.stderr).toContain('CWK_READ_TOKEN fehlt');
   });
 
   it('kennt nur die eigenen Befehle', () => {
