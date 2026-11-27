@@ -91,6 +91,9 @@ Methode:
 | T-23       | Arbeit    | 2026-11-26 20:43 | 2026-11-26 20:47 | 0:04  | Test „kein Platzhalter im gesamten Build“ (rot, dann grün), Protokoll, V4, PR, Review                                                                       |
 | T-25       | Arbeit    | 2026-11-26 21:44 | 2026-11-26 21:51 | 0:07  | Merge von main in #76, Frage 15, Mail-Einträge, plan, apply, Analyse 403 (Token-Rechte)                                                                     |
 | T-26       | Arbeit    | 2026-11-26 21:56 | 2026-11-26 22:03 | 0:07  | Test (rot), deploy-web.yml, drift.yml, wrangler, Drift neu, PR, Review mit Nachtrag                                                                         |
+| T-27       | Arbeit    | 2026-11-26 22:15 | 2026-11-26 22:17 | 0:02  | Branch, Drift-Check gestartet, Fragen an den Inhaber                                                                                                        |
+| T-27       | Wartezeit | 2026-11-26 22:17 | 2026-11-26 22:24 | 0:07  | Testmail, Screenshots und Abrechnung durch den Inhaber                                                                                                      |
+| T-27       | Arbeit    | 2026-11-26 22:24 | 2026-11-26 22:32 | 0:08  | Screenshots geprüft, Metadaten entfernt, Protokoll, PR, Review                                                                                              |
 
 Die Sitzungen „Leistungen“ sowie „Gestaltung und Logo“ (Stufe 2) haben ihre Zeiten sekundengenau nach der Systemuhr erfasst. Übernommen sind sie hier auf die Minute und nur dort, wo keine Zeile dieser Sitzung schon läuft, damit nichts doppelt zählt. Für sich genommen kamen sie auf 2:36 min Arbeit und 7:28 min Wartezeit (Leistungen) bzw. 5:28 min Arbeit und 6:10 min Wartezeit (Gestaltung), überwiegend parallel zur Zeile „Spec“.
 
@@ -128,3 +131,4 @@ Bei T-10 lag am 2026-11-20 von 14:49 bis 16:55 eine Pause, keine Wartezeit auf e
 | T-23       | 0:04   | 0:00      | 0:04   |
 | T-25       | 0:07   | 0:00      | 0:07   |
 | T-26       | 0:07   | 0:00      | 0:07   |
+| T-27       | 0:10   | 0:07      | 0:17   |
